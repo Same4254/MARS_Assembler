@@ -58,16 +58,14 @@ public class SyscallConfirmDialog extends AbstractSyscall {
         //   1: No
         //   2: Cancel
 
-        String message = "";
+        StringBuilder message = new StringBuilder();
         int byteAddress = RegisterFile.getValue(4);
-        char[] ch = {' '}; // Need an array to convert to String
         try {
-            ch[0] = (char) Globals.memory.getByte(byteAddress);
-            while (ch[0] != 0) // only uses single location ch[0]
-            {
-                message = message + new String(ch); // parameter to String constructor is a char[] array
-                byteAddress++;
-                ch[0] = (char) Globals.memory.getByte(byteAddress);
+            byte aByte = (byte)Globals.memory.getByte(byteAddress);
+            while (aByte != 0) {
+                message.append(aByte);
+                ++byteAddress;
+                aByte = (byte)Globals.memory.getByte(byteAddress);
             }
         } catch (AddressErrorException e) {
             throw new ProcessingException(statement, e);
@@ -79,7 +77,6 @@ public class SyscallConfirmDialog extends AbstractSyscall {
         //    1 ---> meaning No
         //    2 ---> meaning Cancel
         RegisterFile.updateRegister(4, JOptionPane.showConfirmDialog(null, message));
-
     }
 
 }
