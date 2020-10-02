@@ -56,7 +56,6 @@ public class MainPane extends JTabbedPane {
 
     public MainPane(VenusUI appFrame, Editor editor, RegistersWindow regs,
                     Coprocessor1Window cop1Regs, Coprocessor0Window cop0Regs) {
-        super();
         this.mainUI = appFrame;
         this.setTabPlacement(JTabbedPane.TOP); //LEFT);
         if (this.getUI() instanceof BasicTabbedPaneUI) {

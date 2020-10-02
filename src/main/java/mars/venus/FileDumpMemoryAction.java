@@ -272,7 +272,6 @@ public class FileDumpMemoryAction extends GuiAction {
         private JComboBox myMaster;
 
         public DumpFormatComboBoxRenderer(JComboBox myMaster) {
-            super();
             this.myMaster = myMaster;
         }
 

@@ -59,7 +59,6 @@ public class EditTabbedPane extends JTabbedPane {
      **/
 
     public EditTabbedPane(VenusUI appFrame, Editor editor, MainPane mainPane) {
-        super();
         this.mainUI = appFrame;
         this.editor = editor;
         this.fileOpener = new FileOpener(editor);

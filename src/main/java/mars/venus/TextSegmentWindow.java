@@ -888,7 +888,6 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
         javax.swing.border.Border focusBorder;
 
         public CheckBoxTableCellRenderer() {
-            super();
             setContentAreaFilled(true);
             setBorderPainted(true);
             setHorizontalAlignment(SwingConstants.CENTER);

@@ -50,7 +50,6 @@ public class RegistersPane extends JTabbedPane {
 
     public RegistersPane(VenusUI appFrame, RegistersWindow regs, Coprocessor1Window cop1,
                          Coprocessor0Window cop0) {
-        super();
         this.mainUI = appFrame;
         regsTab = regs;
         cop1Tab = cop1;

@@ -316,7 +316,6 @@ public class Coprocessor1Window extends JPanel implements ActionListener, Observ
         private int alignment;
 
         public RegisterCellRenderer(Font font, int alignment) {
-            super();
             this.font = font;
             this.alignment = alignment;
         }

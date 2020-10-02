@@ -76,7 +76,6 @@ public class RepeatButton extends JButton
      * Creates a button with no set text or icon.
      */
     public RepeatButton() {
-        super();
         init();
     }
 

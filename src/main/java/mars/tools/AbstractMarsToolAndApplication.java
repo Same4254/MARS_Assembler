@@ -644,7 +644,6 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
         private static final String disconnectText = "Disconnect from MIPS";
 
         public ConnectButton() {
-            super();
             disconnect();
         }
 

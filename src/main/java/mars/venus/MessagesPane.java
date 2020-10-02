@@ -66,7 +66,6 @@ public class MessagesPane extends JTabbedPane {
      **/
 
     public MessagesPane() {
-        super();
         this.setMinimumSize(new Dimension(0, 0));
         assemble = new JTextArea();
         run = new JTextArea();

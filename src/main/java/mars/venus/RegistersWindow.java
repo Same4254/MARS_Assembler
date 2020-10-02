@@ -238,7 +238,6 @@ public class RegistersWindow extends JPanel implements Observer {
         private int alignment;
 
         public RegisterCellRenderer(Font font, int alignment) {
-            super();
             this.font = font;
             this.alignment = alignment;
         }
