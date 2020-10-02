@@ -74,7 +74,7 @@ public class FilePrintAction extends GuiAction {
             while (line != null) {
                 if (editPane.showingLineNumbers()) {
                     lineNumber++;
-                    lineNumberString = Integer.toString(lineNumber) + ": ";
+                    lineNumberString = lineNumber + ": ";
                     while (lineNumberString.length() < lineNumberDigits) {
                         lineNumberString = lineNumberString + " ";
                     }
