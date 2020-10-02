@@ -150,7 +150,7 @@ public class HelpHelpAction extends GuiAction {
         JScrollPane marsCopyrightScrollPane;
         JEditorPane marsCopyrightDisplay;
         try {
-            InputStream is = this.getClass().getResourceAsStream("/MARSlicense.txt");
+            InputStream is = this.getClass().getResourceAsStream("/LICENSE");
             BufferedReader in = new BufferedReader(new InputStreamReader(is));
             String line;
             StringBuffer text = new StringBuffer("<pre>");
