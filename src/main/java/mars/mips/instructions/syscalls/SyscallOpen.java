@@ -80,7 +80,7 @@ public class SyscallOpen extends AbstractSyscall {
             ch[0] = (char) Globals.memory.getByte(byteAddress);
             while (ch[0] != 0) // only uses single location ch[0]
             {
-                filename = filename.concat(new String(ch)); // parameter to String constructor is a char[] array
+                filename = filename + new String(ch); // parameter to String constructor is a char[] array
                 byteAddress++;
                 ch[0] = (char) Globals.memory.getByte(
                         byteAddress);

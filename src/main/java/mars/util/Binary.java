@@ -288,9 +288,9 @@ public class Binary {
         String leadingX = "0x";
         String t = Integer.toHexString(d);
         while (t.length() < 8)
-            t = leadingZero.concat(t);
+            t = leadingZero + t;
 
-        t = leadingX.concat(t);
+        t = leadingX + t;
         return t;
     }
 
@@ -312,9 +312,9 @@ public class Binary {
             t = t.substring(t.length() - 4);
         }
         while (t.length() < 4)
-            t = leadingZero.concat(t);
+            t = leadingZero + t;
 
-        t = leadingX.concat(t);
+        t = leadingX + t;
         return t;
     }
 

@@ -335,7 +335,7 @@ public class DefaultInputHandler extends InputHandler {
             int ch;
 
             try {
-                ch = KeyEvent.class.getField("VK_".concat(key))
+                ch = KeyEvent.class.getField("VK_" + key)
                         .getInt(null);
             } catch (Exception e) {
                 System.err.println("Invalid key stroke: "
