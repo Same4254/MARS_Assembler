@@ -65,7 +65,7 @@ public class ErrorList {
      *
      * @return ArrayList of ErrorMessage objects
      */
-    public ArrayList getErrorMessages() {
+    public ArrayList<ErrorMessage> getErrorMessages() {
         return messages;
     }
 

@@ -82,11 +82,11 @@ public class DumpFormatLoader {
         return formatList;
     }
 
-    public static DumpFormat findDumpFormatGivenCommandDescriptor(ArrayList formatList, String formatCommandDescriptor) {
+    public static DumpFormat findDumpFormatGivenCommandDescriptor(ArrayList<DumpFormat> formatList, String formatCommandDescriptor) {
         DumpFormat match = null;
         for (int i = 0; i < formatList.size(); i++) {
-            if (((DumpFormat) formatList.get(i)).getCommandDescriptor().equals(formatCommandDescriptor)) {
-                match = (DumpFormat) formatList.get(i);
+            if (formatList.get(i).getCommandDescriptor().equals(formatCommandDescriptor)) {
+                match = formatList.get(i);
                 break;
             }
         }

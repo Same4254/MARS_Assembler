@@ -29,6 +29,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 package mars.venus.editors.jeditsyntax;
 
+import java.util.ArrayList;
+
 /**
  * Handly little class to contain help information for a popupMenu or
  * tool tip item.
@@ -133,14 +135,12 @@ public class PopupHelpItem {
 
     // Utility method.  Traverse ArrayList of PopupHelpItem objects
     // and return String length of longest example.
-    public static int maxExampleLength(java.util.ArrayList matches) {
+    public static int maxExampleLength(ArrayList<PopupHelpItem> matches) {
         int length = 0;
         if (matches != null) {
             for (int i = 0; i < matches.size(); i++) {
-                Object match = matches.get(i);
-                if (match instanceof PopupHelpItem) {
-                    length = Math.max(length, ((PopupHelpItem) match).exampleLength);
-                }
+                PopupHelpItem match = matches.get(i);
+                length = Math.max(length, match.exampleLength);
             }
         }
         return length;

@@ -182,16 +182,16 @@ public class FilenameFinder {
      *                       extension null or empty, all files are added.
      * @return array list of matching file names as Strings.  If none, list is empty.
      */
-    public static ArrayList getFilenameList(ClassLoader classLoader,
+    public static ArrayList<String> getFilenameList(ClassLoader classLoader,
                                             String directoryPath,
-                                            ArrayList fileExtensions) {
+                                            ArrayList<String> fileExtensions) {
         ArrayList<String> filenameList = new ArrayList<>();
         String fileExtension;
         if (fileExtensions == null || fileExtensions.size() == 0) {
             filenameList = getFilenameList(classLoader, directoryPath, "");
         } else {
             for (int i = 0; i < fileExtensions.size(); i++) {
-                fileExtension = checkFileExtension((String) fileExtensions.get(i));
+                fileExtension = checkFileExtension(fileExtensions.get(i));
                 filenameList.addAll(getFilenameList(classLoader, directoryPath, fileExtension));
             }
         }
@@ -241,14 +241,14 @@ public class FilenameFinder {
      *                       extension null or empty, all files are added.
      * @return array list of matching file names (absolute path).  If none, list is empty.
      */
-    public static ArrayList<String> getFilenameList(String directoryPath, ArrayList fileExtensions) {
+    public static ArrayList<String> getFilenameList(String directoryPath, ArrayList<String> fileExtensions) {
         ArrayList<String> filenameList = new ArrayList<>();
         String fileExtension;
         if (fileExtensions == null || fileExtensions.size() == 0) {
             filenameList = getFilenameList(directoryPath, "");
         } else {
             for (int i = 0; i < fileExtensions.size(); i++) {
-                fileExtension = checkFileExtension((String) fileExtensions.get(i));
+                fileExtension = checkFileExtension(fileExtensions.get(i));
                 filenameList.addAll(getFilenameList(directoryPath, fileExtension));
             }
         }
@@ -266,12 +266,12 @@ public class FilenameFinder {
      *                      If null or empty string, all files are added.  Do NOT include "." in extension.
      * @return array list of matching file names (absolute path).  If none, list is empty.
      */
-    public static ArrayList<String> getFilenameList(ArrayList nameList, String fileExtension) {
+    public static ArrayList<String> getFilenameList(ArrayList<String> nameList, String fileExtension) {
         fileExtension = checkFileExtension(fileExtension);
         ArrayList<String> filenameList = new ArrayList<>();
         FileFilter filter = getFileFilter(fileExtension, "", NO_DIRECTORIES);
         for (int i = 0; i < nameList.size(); i++) {
-            File file = new File((String) nameList.get(i));
+            File file = new File(nameList.get(i));
             if (filter.accept(file)) {
                 filenameList.add(file.getAbsolutePath());
             }
@@ -292,14 +292,14 @@ public class FilenameFinder {
      *                       extension null or empty, all files are added.
      * @return array list of matching file names (absolute path).  If none, list is empty.
      */
-    public static ArrayList<String> getFilenameList(ArrayList nameList, ArrayList fileExtensions) {
+    public static ArrayList<String> getFilenameList(ArrayList<String> nameList, ArrayList<String> fileExtensions) {
         ArrayList<String> filenameList = new ArrayList<>();
         String fileExtension;
         if (fileExtensions == null || fileExtensions.size() == 0) {
             filenameList = getFilenameList(nameList, "");
         } else {
             for (int i = 0; i < fileExtensions.size(); i++) {
-                fileExtension = checkFileExtension((String) fileExtensions.get(i));
+                fileExtension = checkFileExtension(fileExtensions.get(i));
                 filenameList.addAll(getFilenameList(nameList, fileExtension));
             }
         }

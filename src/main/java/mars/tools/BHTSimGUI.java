@@ -280,7 +280,7 @@ public class BHTSimGUI extends JPanel {
      *
      * @return the reference to the combo box
      */
-    public JComboBox getCbBHTentries() {
+    public JComboBox<Integer> getCbBHTentries() {
         return m_cbBHTentries;
     }
 
@@ -290,7 +290,7 @@ public class BHTSimGUI extends JPanel {
      *
      * @return the reference to the combo box
      */
-    public JComboBox getCbBHThistory() {
+    public JComboBox<Integer> getCbBHThistory() {
         return m_cbBHThistory;
     }
 
@@ -300,7 +300,7 @@ public class BHTSimGUI extends JPanel {
      *
      * @return the reference to the combo box
      */
-    public JComboBox getCbBHTinitVal() {
+    public JComboBox<String> getCbBHTinitVal() {
         return m_cbBHTinitVal;
     }
 

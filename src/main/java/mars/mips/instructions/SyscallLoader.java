@@ -64,7 +64,7 @@ class SyscallLoader {
     void loadSyscalls() {
         syscallList = new ArrayList<>();
         // grab all class files in the same directory as Syscall
-        ArrayList candidates = FilenameFinder.getFilenameList(this.getClass().getClassLoader(),
+        ArrayList<String> candidates = FilenameFinder.getFilenameList(this.getClass().getClassLoader(),
                 SYSCALLS_DIRECTORY_PATH, CLASS_EXTENSION);
         HashMap<String, String> syscalls = new HashMap<>();
         for (int i = 0; i < candidates.size(); i++) {
@@ -104,11 +104,11 @@ class SyscallLoader {
     // Will get any syscall number override specifications from MARS config file and
     // process them.  This will alter syscallList entry for affected names.
     private ArrayList<Syscall> processSyscallNumberOverrides(ArrayList<Syscall> syscallList) {
-        ArrayList overrides = new Globals().getSyscallOverrides();
+        ArrayList<SyscallNumberOverride> overrides = new Globals().getSyscallOverrides();
         SyscallNumberOverride override;
         Syscall syscall;
         for (int index = 0; index < overrides.size(); index++) {
-            override = (SyscallNumberOverride) overrides.get(index);
+            override = overrides.get(index);
             boolean match = false;
             for (int i = 0; i < syscallList.size(); i++) {
                 syscall = syscallList.get(i);

@@ -54,7 +54,7 @@ public class MemoryReferenceVisualization extends AbstractMarsToolAndApplication
     private static String heading = "Visualizing memory reference patterns";
 
     // Major GUI components
-    private JComboBox wordsPerUnitSelector, visualizationUnitPixelWidthSelector, visualizationUnitPixelHeightSelector,
+    private JComboBox<String> wordsPerUnitSelector, visualizationUnitPixelWidthSelector, visualizationUnitPixelHeightSelector,
             visualizationPixelWidthSelector, visualizationPixelHeightSelector, displayBaseAddressSelector;
     private JCheckBox drawHashMarksSelector;
     private Graphics drawingArea;

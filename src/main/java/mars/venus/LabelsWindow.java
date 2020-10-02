@@ -167,11 +167,10 @@ public class LabelsWindow extends JInternalFrame {
     private JScrollPane generateLabelScrollPane() {
         listOfLabelsForSymbolTable = new ArrayList<>();
         listOfLabelsForSymbolTable.add(new LabelsForSymbolTable(null));// global symtab
-        ArrayList MIPSprogramsAssembled = RunAssembleAction.getMIPSprogramsToAssemble();
+        ArrayList<MIPSprogram> MIPSprogramsAssembled = RunAssembleAction.getMIPSprogramsToAssemble();
         Box allSymtabTables = Box.createVerticalBox();
         for (int i = 0; i < MIPSprogramsAssembled.size(); i++) {
-            listOfLabelsForSymbolTable.add(new LabelsForSymbolTable(
-                    (MIPSprogram) MIPSprogramsAssembled.get(i)));
+            listOfLabelsForSymbolTable.add(new LabelsForSymbolTable(MIPSprogramsAssembled.get(i)));
         }
         ArrayList<Box> tableNames = new ArrayList<>();
         JTableHeader tableHeader = null;
@@ -508,9 +507,9 @@ public class LabelsWindow extends JInternalFrame {
     ////////////////////////////////////////////////////////////////////////////
     //
     //  Comparator class used to sort in ascending order a List of symbols alphabetically by name
-    private class LabelNameAscendingComparator implements java.util.Comparator {
-        public int compare(Object a, Object b) {
-            return ((Symbol) a).getName().toLowerCase().compareTo(((Symbol) b).getName().toLowerCase());
+    private class LabelNameAscendingComparator implements java.util.Comparator<Symbol> {
+        public int compare(Symbol a, Symbol b) {
+            return a.getName().toLowerCase().compareTo(b.getName().toLowerCase());
         }
     }
 
@@ -524,10 +523,10 @@ public class LabelsWindow extends JInternalFrame {
     //  Remember, if not equal then any value with correct sign will work.
     //  If both have same sign, a-b will yield correct result.
     //  If signs differ, b will yield correct result (think about it).
-    private class LabelAddressAscendingComparator implements java.util.Comparator {
-        public int compare(Object a, Object b) {
-            int addrA = ((Symbol) a).getAddress();
-            int addrB = ((Symbol) b).getAddress();
+    private class LabelAddressAscendingComparator implements java.util.Comparator<Symbol> {
+        public int compare(Symbol a, Symbol b) {
+            int addrA = a.getAddress();
+            int addrB = b.getAddress();
             return (addrA >= 0 && addrB >= 0 || addrA < 0 && addrB < 0) ? addrA - addrB : addrB;
         }
     }

@@ -161,7 +161,7 @@ public final class Directives {
      *
      * @return MIPS Directive
      **/
-    public static ArrayList getDirectiveList() {
+    public static ArrayList<Directives> getDirectiveList() {
         return directiveList;
     }
 

@@ -175,7 +175,7 @@ public class TokenList implements Cloneable {
     public Object clone() {
         try {
             TokenList t = (TokenList) super.clone();
-            t.tokenList = (ArrayList) tokenList.clone();
+            t.tokenList = (ArrayList<Token>) tokenList.clone();
             return t;
         } catch (CloneNotSupportedException e) {
             return null;

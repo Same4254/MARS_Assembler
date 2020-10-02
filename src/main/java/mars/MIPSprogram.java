@@ -54,7 +54,7 @@ public class MIPSprogram {
     private ArrayList<String> sourceList;
     private ArrayList tokenList;
     private ArrayList<ProgramStatement> parsedList;
-    private ArrayList machineList;
+    private ArrayList<ProgramStatement> machineList;
     private BackStepper backStepper;
     private SymbolTable localSymbolTable;
     private MacroPool macroPool;
@@ -67,7 +67,7 @@ public class MIPSprogram {
      * @return ArrayList of String.  Each String is one line of MIPS source code.
      **/
 
-    public ArrayList getSourceList() {
+    public ArrayList<String> getSourceList() {
         return sourceList;
     }
 
@@ -150,7 +150,7 @@ public class MIPSprogram {
      * @see ProgramStatement
      **/
 
-    public ArrayList getParsedList() {
+    public ArrayList<ProgramStatement> getParsedList() {
         return parsedList;
     }
 
@@ -162,7 +162,7 @@ public class MIPSprogram {
      * @see ProgramStatement
      **/
 
-    public ArrayList getMachineList() {
+    public ArrayList<ProgramStatement> getMachineList() {
         return machineList;
     }
 
@@ -270,7 +270,7 @@ public class MIPSprogram {
      * @throws ProcessingException Will throw exception if errors occured while reading or tokenizing.
      **/
 
-    public ArrayList prepareFilesForAssembly(ArrayList<String> filenames, String leadFilename, String exceptionHandler) throws ProcessingException {
+    public ArrayList<MIPSprogram> prepareFilesForAssembly(ArrayList<String> filenames, String leadFilename, String exceptionHandler) throws ProcessingException {
         ArrayList<MIPSprogram> MIPSprogramsToAssemble = new ArrayList<>();
         int leadFilePosition = 0;
         if (exceptionHandler != null && exceptionHandler.length() > 0) {

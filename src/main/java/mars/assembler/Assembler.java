@@ -160,7 +160,7 @@ public class Assembler {
      * statement. Returns null if incoming array list is null or empty.
      * @see ProgramStatement
      **/
-    public ArrayList assemble(ArrayList tokenizedProgramFiles, boolean extendedAssemblerEnabled,
+    public ArrayList<ProgramStatement> assemble(ArrayList tokenizedProgramFiles, boolean extendedAssemblerEnabled,
                               boolean warningsAreErrors) throws ProcessingException {
 
         if (tokenizedProgramFiles == null || tokenizedProgramFiles.size() == 0)
@@ -389,7 +389,7 @@ public class Assembler {
             throw new ProcessingException(errors);
         }
         return this.machineList;
-    } // assemble()
+    }
 
     // //////////////////////////////////////////////////////////////////////
     // Will check for duplicate text addresses, which can happen inadvertantly when using
@@ -581,7 +581,7 @@ public class Assembler {
             }
         }
         return null;
-    } // parseLine()
+    }
 
     private void detectLabels(TokenList tokens, Macro current) {
         if (tokenListBeginsWithLabel(tokens))
@@ -614,7 +614,7 @@ public class Assembler {
             tokens.remove(last);
         }
         return tokens;
-    } // stripComment()
+    }
 
     /**
      * Pre-process the token list for a statement by stripping off any label, if
@@ -651,7 +651,7 @@ public class Assembler {
                 return false;
             }
         }
-    } // parseLabel()
+    }
 
     private boolean tokenListBeginsWithLabel(TokenList tokens) {
         // 2-July-2010. DPS. Remove prohibition of operator names as labels
@@ -842,7 +842,7 @@ public class Assembler {
                     .getStartPos(), "\"" + token.getValue()
                     + "\" directive recognized but not yet implemented."));
         }
-    } // executeDirective()
+    }
 
     // //////////////////////////////////////////////////////////////////////////////
     // Process the list of .globl labels, if any, declared and defined in this file.
@@ -886,7 +886,7 @@ public class Assembler {
                 storeStrings(tokens, direct, errors);
             }
         }
-    } // executeDirectiveContinuation()
+    }
 
     // //////////////////////////////////////////////////////////////////////////////////
     // Given token, find the corresponding Instruction object. If token was not
@@ -904,14 +904,14 @@ public class Assembler {
                         + "\" is not a recognized operator"));
             return null;
         }
-        ArrayList inst = Globals.instructionSet.matchOperator(token.getValue());
+        ArrayList<Instruction> inst = Globals.instructionSet.matchOperator(token.getValue());
         if (inst == null) { // This should NEVER happen...
             this.errors.add(new ErrorMessage(token.getSourceMIPSprogram(), token.getSourceLine(),
                     token.getStartPos(), "Internal Assembler error: \"" + token.getValue()
                     + "\" tokenized OPERATOR then not recognized"));
         }
         return inst;
-    } // matchInstruction()
+    }
 
     // //////////////////////////////////////////////////////////////////////////////////
     // Processes the .word/.half/.byte/.float/.double directive.
@@ -1005,7 +1005,7 @@ public class Assembler {
                 storeRealNumber(token, directive, errors);
             }
         }
-    } // storeNumeric()
+    }
 
     // //////////////////////////////////////////////////////////////////////////////
     // Store integer value given integer (word, half, byte) directive.
@@ -1082,7 +1082,7 @@ public class Assembler {
                     .getStartPos(), "\"" + token.getValue()
                     + "\" is not a valid integer constant or label"));
         }
-    }// storeInteger
+    }
 
     // //////////////////////////////////////////////////////////////////////////////
     // Store real (fixed or floating point) value given floating (float, double) directive.
@@ -1123,7 +1123,7 @@ public class Assembler {
             writeDoubleToDataSegment(value, token, errors);
         }
 
-    } // storeRealNumber
+    }
 
     // //////////////////////////////////////////////////////////////////////////////////
     // Use directive argument to distinguish between ASCII and ASCIIZ. The
@@ -1206,7 +1206,7 @@ public class Assembler {
                 }
             }
         }
-    } // storeStrings()
+    }
 
     // //////////////////////////////////////////////////////////////////////////////////
     // Simply check to see if we are in data segment. Generate error if not.
