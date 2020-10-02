@@ -249,7 +249,7 @@ class UnitAnimation extends JPanel
         loadHashMapValues();
 
 
-    } // end of ImagesTests()
+    }
 
     //set the binnary opcode value of the basic instructions of MIPS instruction set
     public void loadHashMapValues() {

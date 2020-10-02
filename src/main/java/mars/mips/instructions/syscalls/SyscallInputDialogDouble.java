@@ -104,9 +104,7 @@ public class SyscallInputDialogDouble extends AbstractSyscall {
 
             }
 
-        } // end try block
-
-        catch (InvalidRegisterAccessException e)   // register ID error in this method
+        } catch (InvalidRegisterAccessException e)   // register ID error in this method
         {
             RegisterFile.updateRegister(5, -1);  // set $a1 to -1 flag
             throw new ProcessingException(statement,

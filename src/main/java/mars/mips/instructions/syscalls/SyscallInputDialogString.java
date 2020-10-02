@@ -113,10 +113,9 @@ public class SyscallInputDialogString extends AbstractSyscall {
                 } else {
                     RegisterFile.updateRegister(5, 0);  // set $a1 to 0 flag
                 }
-            } // end else
+            }
 
-        } // end try
-        catch (AddressErrorException e) {
+        } catch (AddressErrorException e) {
             throw new ProcessingException(statement, e);
         }
 

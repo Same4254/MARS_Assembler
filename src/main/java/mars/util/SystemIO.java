@@ -299,7 +299,7 @@ public class SystemIO {
 
         return lengthRequested;
 
-    } // end writeToFile
+    }
 
 
     /**
@@ -349,7 +349,7 @@ public class SystemIO {
         }
         return retValue;
 
-    } // end readFromFile
+    }
 
 
     /**

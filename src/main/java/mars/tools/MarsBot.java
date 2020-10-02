@@ -138,7 +138,7 @@ public class MarsBot implements Observer, MarsTool {
 
         } // end run method of BotRunnable class
 
-    } // end BotRunnable class
+    }
 
     /* ------------------------------------------------------------------------- */
     private class MarsBotDisplay extends JPanel {

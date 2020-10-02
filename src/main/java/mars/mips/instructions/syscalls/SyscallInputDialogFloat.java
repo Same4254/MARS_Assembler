@@ -105,10 +105,7 @@ public class SyscallInputDialogFloat extends AbstractSyscall {
 
             }
 
-        } // end try block
-
-
-        catch (NumberFormatException e)    // Unsuccessful parse of input data
+        } catch (NumberFormatException e)    // Unsuccessful parse of input data
         {
             RegisterFile.updateRegister(5, -1);  // set $a1 to -1 flag
 

@@ -73,8 +73,7 @@ public class SyscallWrite extends AbstractSyscall {
             }
 
             myBuffer[index] = 0; // Add string termination
-        } // end try
-        catch (AddressErrorException e) {
+        } catch (AddressErrorException e) {
             throw new ProcessingException(statement, e);
         }
         int retValue = SystemIO.writeToFile(

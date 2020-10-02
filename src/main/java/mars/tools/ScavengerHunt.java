@@ -177,7 +177,7 @@ public class ScavengerHunt implements Observer, MarsTool {
             return energy;
         }
         //public int getLocationID() {  return locID; }
-    } // end class PlayerData
+    }
 
     private static PlayerData[] pd = new PlayerData[NUM_PLAYERS];
     private static Location[] loc = new Location[NUM_LOCATIONS];
@@ -456,7 +456,7 @@ public class ScavengerHunt implements Observer, MarsTool {
             System.exit(0);
         }
 
-    } // end ScavengerHunt.action()
+    }
 
     /*
      * This method observes MIPS memory for directives to modify ScavengerHunt activity (that is,
@@ -713,7 +713,7 @@ public class ScavengerHunt implements Observer, MarsTool {
         }
 
 
-    } // end ScavengerHunt.update()
+    }
 
 
     // Write one word to MIPS memory. This is a wrapper to isolate the try..catch blocks.
@@ -756,7 +756,7 @@ public class ScavengerHunt implements Observer, MarsTool {
                         " verified as " + Binary.intToHexString(data));
         }
 
-    } // end toolSetWord
+    }
 
 
     // Read one word from MIPS memory. This is a wrapper to isolate the try..catch blocks.
@@ -795,7 +795,7 @@ public class ScavengerHunt implements Observer, MarsTool {
         }
 
         return 0; // Must have return statement
-    } // end toolGetWord
+    }
 
 
     // Read player's data field.
@@ -827,7 +827,7 @@ public class ScavengerHunt implements Observer, MarsTool {
         }
 
         return returnValue;
-    } // end toolReadPlayerData
+    }
 
     // Write player's data field.
     private void toolWritePlayerData(int p, int offset, int data) {
@@ -855,7 +855,7 @@ public class ScavengerHunt implements Observer, MarsTool {
                         " verified as " + Binary.intToHexString(data));
         }
 
-    } // end toolWritePlayerData
+    }
 
 
     private void initializeScavengerData() {
@@ -909,7 +909,7 @@ public class ScavengerHunt implements Observer, MarsTool {
             }
         }
 
-    } // end initializeScavengerData
+    }
 
-} // end ScavengerHunt
+}
 

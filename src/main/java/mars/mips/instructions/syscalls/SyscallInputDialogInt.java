@@ -105,7 +105,7 @@ public class SyscallInputDialogInt extends AbstractSyscall {
 
             }
 
-        } // end else
+        }
 
     }
 

@@ -388,7 +388,7 @@ public class FloatRepresentation extends AbstractMarsToolAndApplication {
         registerPanel.add(new JLabel(" "), BorderLayout.NORTH); // just for padding
         mainPanel.add(registerPanel);
         return mainPanel;
-    } // end of buildDisplayArea()
+    }
 
 
     // If display is attached to a register then update the register value.
