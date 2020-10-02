@@ -285,7 +285,7 @@ public class HelpHelpAction extends GuiAction {
         Iterator it = Directives.getDirectiveList().iterator();
         while (it.hasNext()) {
             direct = (Directives) it.next();
-            exampleList.add(direct.toString()
+            exampleList.add(direct
                     + blanks.substring(0, Math.max(0, blanks.length() - direct.toString().length()))
                     + direct.getDescription());
         }
