@@ -136,7 +136,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
             data[i][CODE_COLUMN] = NumberDisplayBaseChooser.formatNumber(statement.getBinaryStatement(), 16);
             data[i][BASIC_COLUMN] = statement.getPrintableBasicAssemblyStatement();
             String sourceString = "";
-            if (!statement.getSource().equals("")) {
+            if (!statement.getSource().isEmpty()) {
                 leadingSpaces = sourceLineDigits - ("" + statement.getSourceLine()).length();
                 String lineNumber = "          ".substring(0, leadingSpaces)
                         + statement.getSourceLine() + ": ";
