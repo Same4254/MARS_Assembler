@@ -1174,7 +1174,7 @@ public class Settings extends Observable {
      * @param rate blink rate in milliseconds
      */
     public void setCaretBlinkRate(int rate) {
-        setStringSetting(CARET_BLINK_RATE, "" + rate);
+        setStringSetting(CARET_BLINK_RATE, String.valueOf(rate));
     }
 
     /**
@@ -1183,7 +1183,7 @@ public class Settings extends Observable {
      * @param size tab size in characters.
      */
     public void setEditorTabSize(int size) {
-        setStringSetting(EDITOR_TAB_SIZE, "" + size);
+        setStringSetting(EDITOR_TAB_SIZE, String.valueOf(size));
     }
 
     /**
@@ -1194,7 +1194,7 @@ public class Settings extends Observable {
      * @param length of letters (should be 1 or 2).
      */
     public void setEditorPopupPrefixLength(int length) {
-        setStringSetting(EDITOR_POPUP_PREFIX_LENGTH, "" + length);
+        setStringSetting(EDITOR_POPUP_PREFIX_LENGTH, String.valueOf(length));
     }
 
     /**

@@ -342,14 +342,14 @@ public class KeyboardAndDisplaySimulator extends AbstractMarsToolAndApplication 
                         caretPosition++;
                         display.setCaretPosition(caretPosition);
                     }
-                    display.replaceRange("" + characterToDisplay, caretPosition, caretPosition + 1);
+                    display.replaceRange(String.valueOf(characterToDisplay), caretPosition, caretPosition + 1);
                 } catch (IllegalArgumentException e) {
                     // tried to write off the end of the defined grid.  
                     display.setCaretPosition(display.getCaretPosition() - 1);
-                    display.replaceRange("" + characterToDisplay, display.getCaretPosition(), display.getCaretPosition() + 1);
+                    display.replaceRange(String.valueOf(characterToDisplay), display.getCaretPosition(), display.getCaretPosition() + 1);
                 }
             } else {
-                display.append("" + characterToDisplay);
+                display.append(String.valueOf(characterToDisplay));
             }
         }
     }
@@ -433,7 +433,7 @@ public class KeyboardAndDisplaySimulator extends AbstractMarsToolAndApplication 
                 stringCaretPosition = "(0," + ((caretPosition / (columns + 1)) + 1) + ")";
             }
         } else {
-            stringCaretPosition = "" + caretPosition;
+            stringCaretPosition = String.valueOf(caretPosition);
         }
         String title = displayPanelTitle + ", cursor " + stringCaretPosition + ", area " + cols + " x " + rows;
         ((TitledBorder) displayPanel.getBorder()).setTitle(title);

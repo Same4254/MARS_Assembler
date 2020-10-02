@@ -191,7 +191,7 @@ public class ErrorMessage {
             this.macroExpansionHistory = "";
         } else {
             this.line = defineLine.get(0);
-            this.macroExpansionHistory = "" + statement.getSourceLine();
+            this.macroExpansionHistory = String.valueOf(statement.getSourceLine());
         }
     }
 

@@ -124,7 +124,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
                 maxSourceLineNumber = statement.getSourceLine();
             }
         }
-        int sourceLineDigits = ("" + maxSourceLineNumber).length();
+        int sourceLineDigits = (String.valueOf(maxSourceLineNumber)).length();
         int leadingSpaces = 0;
         int lastLine = -1;
         for (int i = 0; i < sourceStatementList.size(); i++) {
@@ -137,7 +137,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
             data[i][BASIC_COLUMN] = statement.getPrintableBasicAssemblyStatement();
             String sourceString = "";
             if (!statement.getSource().isEmpty()) {
-                leadingSpaces = sourceLineDigits - ("" + statement.getSourceLine()).length();
+                leadingSpaces = sourceLineDigits - (String.valueOf(statement.getSourceLine())).length();
                 String lineNumber = "          ".substring(0, leadingSpaces)
                         + statement.getSourceLine() + ": ";
                 if (statement.getSourceLine() == lastLine)

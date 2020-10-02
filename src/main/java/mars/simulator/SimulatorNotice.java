@@ -90,7 +90,7 @@ public class SimulatorNotice {
     public String toString() {
         return ((this.action == SIMULATOR_START) ? "START " : "STOP  ") +
                 "Max Steps " + this.maxSteps + " " +
-                "Speed " + ((this.runSpeed == mars.venus.RunSpeedPanel.UNLIMITED_SPEED) ? "unlimited " : "" + this.runSpeed + " inst/sec") +
+                "Speed " + ((this.runSpeed == mars.venus.RunSpeedPanel.UNLIMITED_SPEED) ? "unlimited " : this.runSpeed + " inst/sec") +
                 "Prog Ctr " + this.programCounter;
     }
 }

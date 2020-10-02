@@ -211,7 +211,7 @@ public class BHTSimulator extends AbstractMarsToolAndApplication implements Acti
         // update the GUI
         m_gui.getTfInstruction().setText(strStmt);
         m_gui.getTfAddress().setText("0x" + Integer.toHexString(address));
-        m_gui.getTfIndex().setText("" + idx);
+        m_gui.getTfIndex().setText(String.valueOf(idx));
 
         // mark the affected BHT row
         m_gui.getTabBHT().setSelectionBackground(BHTSimGUI.COLOR_PREPREDICTION);

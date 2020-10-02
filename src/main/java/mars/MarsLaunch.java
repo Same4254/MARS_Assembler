@@ -658,7 +658,7 @@ public class MarsLaunch {
         String strValue;
         switch (displayFormat) {
             case DECIMAL:
-                strValue = "" + value;
+                strValue = String.valueOf(value);
                 break;
             case ASCII:
                 strValue = Binary.intToAscii(value);

@@ -512,12 +512,12 @@ public class MIPSTokenMarker extends TokenMarker {
         boolean result = false;
         String str = "";
         while (token != null) {
-            str += "" + token.id + "(" + token.length + ") ";
+            str += token.id + "(" + token.length + ") ";
             if (token.id == Token.KEYWORD1 || token.id == Token.KEYWORD2 || token.id == Token.KEYWORD3)
                 result = true;
             token = token.next;
         }
-        System.out.println("" + result + " " + str);
+        System.out.println(result + " " + str);
         return result;
     }
 }
