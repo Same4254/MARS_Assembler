@@ -4,10 +4,7 @@ import mars.Globals;
 import mars.mips.hardware.AddressErrorException;
 import mars.mips.hardware.Memory;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 
 /**
  * Intel's Hex memory initialization format
@@ -38,7 +35,7 @@ public class IntelHexDumpFormat extends AbstractDumpFormat {
      * @throws IOException           if error occurs during file output.
      */
     public void dumpMemoryRange(File file, int firstAddress, int lastAddress)
-            throws AddressErrorException, IOException {
+            throws AddressErrorException, FileNotFoundException {
         PrintStream out = new PrintStream(new FileOutputStream(file));
         String string = null;
         try {
