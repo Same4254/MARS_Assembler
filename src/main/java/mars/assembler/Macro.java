@@ -129,7 +129,7 @@ public class Macro {
     public boolean equals(Object obj) {
         if (obj instanceof Macro) {
             Macro macro = (Macro) obj;
-            return macro.getName().equals(name) && (macro.args.size() == args.size());
+            return macro.name.equals(name) && (macro.args.size() == args.size());
         }
         return super.equals(obj);
     }

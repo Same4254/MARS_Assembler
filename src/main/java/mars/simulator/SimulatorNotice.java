@@ -88,7 +88,7 @@ public class SimulatorNotice {
      * String representation indicates access type, address and length in bytes
      */
     public String toString() {
-        return ((this.getAction() == SIMULATOR_START) ? "START " : "STOP  ") +
+        return ((this.action == SIMULATOR_START) ? "START " : "STOP  ") +
                 "Max Steps " + this.maxSteps + " " +
                 "Speed " + ((this.runSpeed == mars.venus.RunSpeedPanel.UNLIMITED_SPEED) ? "unlimited " : "" + this.runSpeed + " inst/sec") +
                 "Prog Ctr " + this.programCounter;

@@ -563,7 +563,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
      * If any steps are highlighted, this erases the highlighting.
      */
     public void unhighlightAllSteps() {
-        boolean saved = this.getCodeHighlighting();
+        boolean saved = this.codeHighlighting;
         this.setCodeHighlighting(false);
         table.tableChanged(new TableModelEvent(tableModel, 0, data.length - 1, BASIC_COLUMN));
         table.tableChanged(new TableModelEvent(tableModel, 0, data.length - 1, SOURCE_COLUMN));

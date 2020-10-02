@@ -139,7 +139,7 @@ public class PopupHelpItem {
             for (int i = 0; i < matches.size(); i++) {
                 Object match = matches.get(i);
                 if (match instanceof PopupHelpItem) {
-                    length = Math.max(length, ((PopupHelpItem) match).getExampleLength());
+                    length = Math.max(length, ((PopupHelpItem) match).exampleLength);
                 }
             }
         }

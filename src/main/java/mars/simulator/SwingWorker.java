@@ -96,7 +96,7 @@ public abstract class SwingWorker {
         while (true) {
             Thread t = threadVar.get();
             if (t == null) {
-                return getValue();
+                return value;
             }
             try {
                 t.join();

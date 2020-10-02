@@ -253,7 +253,7 @@ public class RepeatButton extends JButton
      */
     public void mousePressed(MouseEvent me) {
         // process events only from this components
-        if (me.getSource() == this && this.isEnabled() && this.isRepeatEnabled()) {
+        if (me.getSource() == this && this.isEnabled() && this.repeatEnabled) {
             this.pressed = true;
             if (!this.timer.isRunning()) {
                 this.modifiers = me.getModifiers();
@@ -285,7 +285,7 @@ public class RepeatButton extends JButton
      */
     public void mouseEntered(MouseEvent me) {
         // process events only from this components
-        if (me.getSource() == this && this.isEnabled() && this.isRepeatEnabled()) {
+        if (me.getSource() == this && this.isEnabled() && this.repeatEnabled) {
             if (this.pressed && !this.timer.isRunning()) {
                 this.modifiers = me.getModifiers();
                 this.timer.setInitialDelay(this.delay);
