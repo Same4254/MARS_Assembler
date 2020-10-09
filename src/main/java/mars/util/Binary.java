@@ -135,9 +135,9 @@ public class Binary {
      **/
 
     public static long binaryStringToLong(String value) {
-        long result = value.charAt(0) - 48;
+        long result = value.charAt(0) - '0';
         for (int i = 1; i < value.length(); i++) {
-            result = (result << 1) | (value.charAt(i) - 48);
+            result = (result << 1) | (value.charAt(i) - '0');
         }
         return result;
     }
