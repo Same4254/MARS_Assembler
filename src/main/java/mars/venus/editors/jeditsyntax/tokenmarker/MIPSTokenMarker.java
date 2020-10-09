@@ -217,10 +217,10 @@ public class MIPSTokenMarker extends TokenMarker {
      * @param tokenText the source String that matched to the token
      * @return ArrayList of PopupHelpItem objects, one per match.
      */
-    public ArrayList getTokenExactMatchHelp(Token token, String tokenText) {
+    public ArrayList<PopupHelpItem> getTokenExactMatchHelp(Token token, String tokenText) {
         ArrayList<PopupHelpItem> matches = null;
         if (token != null && token.id == Token.KEYWORD1) {
-            ArrayList instrMatches = mars.Globals.instructionSet.matchOperator(tokenText);
+            ArrayList<Instruction> instrMatches = mars.Globals.instructionSet.matchOperator(tokenText);
             if (instrMatches.size() > 0) {
                 int realMatches = 0;
                 matches = new ArrayList<>();
@@ -258,8 +258,7 @@ public class MIPSTokenMarker extends TokenMarker {
      * @return ArrayList of PopupHelpItem objects, one per match.
      */
 
-    public ArrayList getTokenPrefixMatchHelp(String line, Token tokenList, Token token, String tokenText) {
-        ArrayList matches = null;
+    public ArrayList<PopupHelpItem> getTokenPrefixMatchHelp(String line, Token tokenList, Token token, String tokenText) {
 
         // CASE:  Unlikely boundary case...
         if (tokenList == null || tokenList.id == Token.END) {
@@ -366,7 +365,7 @@ public class MIPSTokenMarker extends TokenMarker {
     // Return ArrayList of PopupHelpItem for match of directives.  If second argument
     // true, will do exact match.  If false, will do prefix match.  Returns null
     // if no matches.
-    private ArrayList getTextFromDirectiveMatch(String tokenText, boolean exact) {
+    private ArrayList<PopupHelpItem> getTextFromDirectiveMatch(String tokenText, boolean exact) {
         ArrayList<PopupHelpItem> matches = null;
         ArrayList<Directives> directiveMatches = null;
         if (exact) {
@@ -391,9 +390,9 @@ public class MIPSTokenMarker extends TokenMarker {
     // Return text for match of instruction mnemonic.  If second argument true, will
     // do exact match.  If false, will do prefix match.   Text is returned as ArrayList
     // of PopupHelpItem objects. If no matches, returns null.
-    private ArrayList getTextFromInstructionMatch(String tokenText, boolean exact) {
+    private ArrayList<PopupHelpItem> getTextFromInstructionMatch(String tokenText, boolean exact) {
         String text = null;
-        ArrayList matches = null;
+        ArrayList<Instruction> matches = null;
         ArrayList<PopupHelpItem> results = new ArrayList<>();
         if (exact) {
             matches = mars.Globals.instructionSet.matchOperator(tokenText);
@@ -453,12 +452,12 @@ public class MIPSTokenMarker extends TokenMarker {
         if (cKeywords == null) {
             cKeywords = new KeywordMap(false);
             // add Instruction mnemonics
-            java.util.ArrayList instructionSet = mars.Globals.instructionSet.getInstructionList();
+            ArrayList<Instruction> instructionSet = mars.Globals.instructionSet.getInstructionList();
             for (int i = 0; i < instructionSet.size(); i++) {
                 cKeywords.add(((mars.mips.instructions.Instruction) instructionSet.get(i)).getName(), Token.KEYWORD1);
             }
             // add assembler directives
-            java.util.ArrayList directiveSet = mars.assembler.Directives.getDirectiveList();
+            ArrayList<Directives> directiveSet = mars.assembler.Directives.getDirectiveList();
             for (int i = 0; i < directiveSet.size(); i++) {
                 cKeywords.add(((mars.assembler.Directives) directiveSet.get(i)).getName(), Token.KEYWORD2);
             }

@@ -2024,7 +2024,7 @@ public class JEditTextArea extends JComponent {
     public String getSyntaxSensitiveToolTipText(int x, int y) {
         String result = null;
         int line = this.yToLine(y);
-        ArrayList matches = getSyntaxSensitiveHelpAtLineOffset(line, this.xToOffset(line, x), true);
+        ArrayList<PopupHelpItem> matches = getSyntaxSensitiveHelpAtLineOffset(line, this.xToOffset(line, x), true);
         if (matches == null) {
             return null;
         }

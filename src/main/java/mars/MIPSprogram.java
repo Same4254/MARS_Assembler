@@ -52,7 +52,7 @@ public class MIPSprogram {
 
     private String filename;
     private ArrayList<String> sourceList;
-    private ArrayList tokenList;
+    private ArrayList<TokenList> tokenList;
     private ArrayList<ProgramStatement> parsedList;
     private ArrayList<ProgramStatement> machineList;
     private BackStepper backStepper;
@@ -115,7 +115,7 @@ public class MIPSprogram {
      * @see TokenList
      **/
 
-    public ArrayList getTokenList() {
+    public ArrayList<TokenList> getTokenList() {
         return tokenList;
     }
 
@@ -303,7 +303,7 @@ public class MIPSprogram {
      * @throws ProcessingException Will throw exception if errors occured while assembling.
      **/
 
-    public ErrorList assemble(ArrayList MIPSprogramsToAssemble, boolean extendedAssemblerEnabled)
+    public ErrorList assemble(ArrayList<MIPSprogram> MIPSprogramsToAssemble, boolean extendedAssemblerEnabled)
             throws ProcessingException {
         return assemble(MIPSprogramsToAssemble, extendedAssemblerEnabled, false);
     }
@@ -321,7 +321,7 @@ public class MIPSprogram {
      * @throws ProcessingException Will throw exception if errors occured while assembling.
      **/
 
-    public ErrorList assemble(ArrayList MIPSprogramsToAssemble, boolean extendedAssemblerEnabled,
+    public ErrorList assemble(ArrayList<MIPSprogram> MIPSprogramsToAssemble, boolean extendedAssemblerEnabled,
                               boolean warningsAreErrors) throws ProcessingException {
         this.backStepper = null;
         Assembler asm = new Assembler();

@@ -61,7 +61,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 public class InstructionSet {
     private ArrayList<Instruction> instructionList;
-    private ArrayList opcodeMatchMaps;
+    private ArrayList<MatchMap> opcodeMatchMaps;
     private SyscallLoader syscallLoader;
 
     /**
@@ -75,7 +75,7 @@ public class InstructionSet {
     /**
      * Retrieve the current instruction set.
      */
-    public ArrayList getInstructionList() {
+    public ArrayList<Instruction> getInstructionList() {
         return instructionList;
 
     }
@@ -2705,7 +2705,7 @@ public class InstructionSet {
     }
 
     public BasicInstruction findByBinaryCode(int binaryInstr) {
-        ArrayList matchMaps = this.opcodeMatchMaps;
+        ArrayList<MatchMap> matchMaps = this.opcodeMatchMaps;
         for (int i = 0; i < matchMaps.size(); i++) {
             MatchMap map = (MatchMap) matchMaps.get(i);
             BasicInstruction ret = map.find(binaryInstr);

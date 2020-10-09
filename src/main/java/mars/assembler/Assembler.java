@@ -81,7 +81,7 @@ public class Assembler {
      * statement.
      * @see ProgramStatement
      **/
-    public ArrayList assemble(MIPSprogram p, boolean extendedAssemblerEnabled)
+    public ArrayList<ProgramStatement> assemble(MIPSprogram p, boolean extendedAssemblerEnabled)
             throws ProcessingException {
         return assemble(p, extendedAssemblerEnabled, false);
     }
@@ -104,7 +104,7 @@ public class Assembler {
      * statement.
      * @see ProgramStatement
      **/
-    public ArrayList assemble(MIPSprogram p, boolean extendedAssemblerEnabled,
+    public ArrayList<ProgramStatement> assemble(MIPSprogram p, boolean extendedAssemblerEnabled,
                               boolean warningsAreErrors) throws ProcessingException {
         ArrayList<MIPSprogram> programFiles = new ArrayList<>();
         programFiles.add(p);
@@ -136,7 +136,7 @@ public class Assembler {
      * statement. Returns null if incoming array list is null or empty.
      * @see ProgramStatement
      **/
-    public ArrayList assemble(ArrayList tokenizedProgramFiles, boolean extendedAssemblerEnabled)
+    public ArrayList<ProgramStatement> assemble(ArrayList<MIPSprogram> tokenizedProgramFiles, boolean extendedAssemblerEnabled)
             throws ProcessingException {
         return assemble(tokenizedProgramFiles, extendedAssemblerEnabled, false);
     }
@@ -160,7 +160,7 @@ public class Assembler {
      * statement. Returns null if incoming array list is null or empty.
      * @see ProgramStatement
      **/
-    public ArrayList<ProgramStatement> assemble(ArrayList tokenizedProgramFiles, boolean extendedAssemblerEnabled,
+    public ArrayList<ProgramStatement> assemble(ArrayList<MIPSprogram> tokenizedProgramFiles, boolean extendedAssemblerEnabled,
                               boolean warningsAreErrors) throws ProcessingException {
 
         if (tokenizedProgramFiles == null || tokenizedProgramFiles.size() == 0)
@@ -204,7 +204,7 @@ public class Assembler {
             // tokenList is an ArrayList of TokenList objects, one per source line;
             // each ArrayList in tokenList consists of Token objects.
             ArrayList<SourceLine> sourceLineList = fileCurrentlyBeingAssembled.getSourceLineList();
-            ArrayList tokenList = fileCurrentlyBeingAssembled.getTokenList();
+            ArrayList<TokenList> tokenList = fileCurrentlyBeingAssembled.getTokenList();
             ArrayList<ProgramStatement> parsedList = fileCurrentlyBeingAssembled.createParsedList();
             // each file keeps its own macro definitions
             MacroPool macroPool = fileCurrentlyBeingAssembled.createMacroPool();
@@ -264,7 +264,7 @@ public class Assembler {
             if (errors.errorLimitExceeded())
                 break;
             this.fileCurrentlyBeingAssembled = (MIPSprogram) tokenizedProgramFiles.get(fileIndex);
-            ArrayList parsedList = fileCurrentlyBeingAssembled.getParsedList();
+            ArrayList<ProgramStatement> parsedList = fileCurrentlyBeingAssembled.getParsedList();
             ProgramStatement statement;
             for (int i = 0; i < parsedList.size(); i++) {
                 statement = (ProgramStatement) parsedList.get(i);
@@ -304,7 +304,7 @@ public class Assembler {
 
                     // ////////////////////////////////////////////////////////////////////////////
                     // If we are using compact memory config and there is a compact expansion, use it
-                    ArrayList templateList;
+                    ArrayList<String> templateList;
                     if (compactTranslationCanBeApplied(statement)) {
                         templateList = inst.getCompactBasicIntructionTemplateList();
                     } else {
@@ -332,7 +332,7 @@ public class Assembler {
                             // statement, add to list.
                             TokenList newTokenList = new Tokenizer().tokenizeLine(sourceLine,
                                     instruction, errors, false);
-                            ArrayList instrMatches = this.matchInstruction(newTokenList.get(0));
+                            ArrayList<Instruction> instrMatches = this.matchInstruction(newTokenList.get(0));
                             Instruction instr = OperandFormat.bestOperandMatch(newTokenList,
                                     instrMatches);
                             // Only first generated instruction is linked to original source
@@ -394,7 +394,7 @@ public class Assembler {
     // //////////////////////////////////////////////////////////////////////
     // Will check for duplicate text addresses, which can happen inadvertantly when using
     // operand on .text directive. Will generate error message for each one that occurs.
-    private void catchDuplicateAddresses(ArrayList instructions, ErrorList errors) {
+    private void catchDuplicateAddresses(ArrayList<ProgramStatement> instructions, ErrorList errors) {
         for (int i = 0; i < instructions.size() - 1; i++) {
             ProgramStatement ps1 = (ProgramStatement) instructions.get(i);
             ProgramStatement ps2 = (ProgramStatement) instructions.get(i + 1);
@@ -553,7 +553,7 @@ public class Assembler {
         // is not
         // yet implemented.
         if (!this.inDataSegment) {
-            ArrayList instrMatches = this.matchInstruction(token);
+            ArrayList<Instruction> instrMatches = this.matchInstruction(token);
             if (instrMatches == null)
                 return ret;
             // OK, we've got an operator match, let's check the operands.
@@ -891,7 +891,7 @@ public class Assembler {
     // //////////////////////////////////////////////////////////////////////////////////
     // Given token, find the corresponding Instruction object. If token was not
     // recognized as OPERATOR, there is a problem.
-    private ArrayList matchInstruction(Token token) {
+    private ArrayList<Instruction> matchInstruction(Token token) {
         if (token.getType() != TokenTypes.OPERATOR) {
             if (token.getSourceMIPSprogram().getLocalMacroPool()
                     .matchesAnyMacroName(token.getValue()))
