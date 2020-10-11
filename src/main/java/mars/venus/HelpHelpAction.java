@@ -126,7 +126,7 @@ public class HelpHelpAction extends GuiAction {
             String line;
             StringBuffer text = new StringBuffer();
             while ((line = in.readLine()) != null) {
-                text.append(line + "\n");
+                text.append(line).append("\n");
             }
             in.close();
             helpDisplay = new JEditorPane("text/html", text.toString());
@@ -155,7 +155,7 @@ public class HelpHelpAction extends GuiAction {
             String line;
             StringBuffer text = new StringBuffer("<pre>");
             while ((line = in.readLine()) != null) {
-                text.append(line + "\n");
+                text.append(line).append("\n");
             }
             in.close();
             text.append("</pre>");

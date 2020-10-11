@@ -398,7 +398,7 @@ public class KeyboardAndDisplaySimulator extends AbstractMarsToolAndApplication 
             String row = new String(charArray);
             StringBuffer str = new StringBuffer(row);
             for (int i = 1; i < rows; i++) {
-                str.append("\n" + row);
+                str.append("\n").append(row);
             }
             initialText = str.toString();
         }

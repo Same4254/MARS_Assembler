@@ -618,7 +618,7 @@ public class EditTabbedPane extends JTabbedPane {
                 int lineNumber = 1;
                 String line = Globals.program.getSourceLine(lineNumber++);
                 while (line != null) {
-                    fileContents.append(line + "\n");
+                    fileContents.append(line).append("\n");
                     line = Globals.program.getSourceLine(lineNumber++);
                 }
                 editPane.setSourceCode(fileContents.toString(), true);
