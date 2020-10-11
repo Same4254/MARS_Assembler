@@ -2730,7 +2730,11 @@ public class InstructionSet {
             System.exit(0);
         }
         try {
-            String line, pseudoOp, template, firstTemplate, token;
+            String line;
+            String pseudoOp;
+            StringBuilder template;
+            String firstTemplate;
+            String token;
             String description;
             StringTokenizer tokenizer;
             while ((line = in.readLine()) != null) {
@@ -2740,7 +2744,7 @@ public class InstructionSet {
                     description = "";
                     tokenizer = new StringTokenizer(line, "\t");
                     pseudoOp = tokenizer.nextToken();
-                    template = "";
+                    template = new StringBuilder();
                     firstTemplate = null;
                     while (tokenizer.hasMoreTokens()) {
                         token = tokenizer.nextToken();
@@ -2751,18 +2755,18 @@ public class InstructionSet {
                         }
                         if (token.startsWith("COMPACT")) {
                             // has second template for Compact (16-bit) memory config -- added DPS 3 Aug 2009
-                            firstTemplate = template;
-                            template = "";
+                            firstTemplate = template.toString();
+                            template = new StringBuilder();
                             continue;
                         }
-                        template = template + token;
+                        template.append(token);
                         if (tokenizer.hasMoreTokens()) {
-                            template = template + "\n";
+                            template.append("\n");
                         }
                     }
                     ExtendedInstruction inst = (firstTemplate == null)
-                            ? new ExtendedInstruction(pseudoOp, template, description)
-                            : new ExtendedInstruction(pseudoOp, firstTemplate, template, description);
+                            ? new ExtendedInstruction(pseudoOp, template.toString(), description)
+                            : new ExtendedInstruction(pseudoOp, firstTemplate, template.toString(), description);
                     instructionList.add(inst);
                     //if (firstTemplate != null) System.out.println("\npseudoOp: "+pseudoOp+"\ndefault template:\n"+firstTemplate+"\ncompact template:\n"+template);
                 }

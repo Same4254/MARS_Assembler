@@ -509,9 +509,9 @@ public class MIPSTokenMarker extends TokenMarker {
     private boolean tokenListContainsKeyword() {
         Token token = firstToken;
         boolean result = false;
-        String str = "";
+        StringBuilder str = new StringBuilder();
         while (token != null) {
-            str += token.id + "(" + token.length + ") ";
+            str.append(token.id).append("(").append(token.length).append(") ");
             if (token.id == Token.KEYWORD1 || token.id == Token.KEYWORD2 || token.id == Token.KEYWORD3)
                 result = true;
             token = token.next;

@@ -73,14 +73,14 @@ public class SyscallOpen extends AbstractSyscall {
         // NO MODES IMPLEMENTED  -- MODE IS IGNORED
         // Returns in $v0: a "file descriptor" in the range 0 to SystemIO.SYSCALL_MAXFILES-1,
         // or -1 if error
-        String filename = "";
+        StringBuilder filename = new StringBuilder();
         int byteAddress = RegisterFile.getValue(4);
         char[] ch = {' '}; // Need an array to convert to String
         try {
             ch[0] = (char) Globals.memory.getByte(byteAddress);
             while (ch[0] != 0) // only uses single location ch[0]
             {
-                filename = filename + new String(ch); // parameter to String constructor is a char[] array
+                filename.append(new String(ch)); // parameter to String constructor is a char[] array
                 byteAddress++;
                 ch[0] = (char) Globals.memory.getByte(
                         byteAddress);
@@ -88,7 +88,7 @@ public class SyscallOpen extends AbstractSyscall {
         } catch (AddressErrorException e) {
             throw new ProcessingException(statement, e);
         }
-        int retValue = SystemIO.openFile(filename,
+        int retValue = SystemIO.openFile(filename.toString(),
                 RegisterFile.getValue(5));
         RegisterFile.updateRegister(2, retValue); // set returned fd value in register
 

@@ -1238,11 +1238,11 @@ public class Settings extends Observable {
      */
 
     public void setTextColumnOrder(int[] columnOrder) {
-        String stringifiedOrder = "";
+        StringBuilder stringifiedOrder = new StringBuilder();
         for (int i = 0; i < columnOrder.length; i++) {
-            stringifiedOrder += columnOrder[i] + " ";
+            stringifiedOrder.append(columnOrder[i]).append(" ");
         }
-        setStringSetting(TEXT_COLUMN_ORDER, stringifiedOrder);
+        setStringSetting(TEXT_COLUMN_ORDER, stringifiedOrder.toString());
     }
 
     /**

@@ -460,20 +460,20 @@ public class FilenameFinder {
         // given are s and asm and the description is "Assembler Programs" the full description
         // generated here will be "Assembler Programs (*.s; *.asm)"
         private String buildFullDescription(String description, ArrayList extensions) {
-            String result = (description == null) ? "" : description;
+            StringBuilder result = new StringBuilder((description == null) ? "" : description);
             if (extensions.size() > 0) {
-                result += "  (";
+                result.append("  (");
             }
             for (int i = 0; i < extensions.size(); i++) {
                 String extension = (String) extensions.get(i);
                 if (extension != null && extension.length() > 0) {
-                    result += ((i == 0) ? "" : "; ") + "*" + ((extension.charAt(0) == '.') ? "" : ".") + extension;
+                    result.append((i == 0) ? "" : "; ").append("*").append((extension.charAt(0) == '.') ? "" : ".").append(extension);
                 }
             }
             if (extensions.size() > 0) {
-                result += ")";
+                result.append(")");
             }
-            return result;
+            return result.toString();
         }
 
         // required by the abstract superclass

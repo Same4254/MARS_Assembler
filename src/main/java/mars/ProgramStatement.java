@@ -163,7 +163,7 @@ public class ProgramStatement {
     public void buildBasicStatementFromBasicInstruction(ErrorList errors) {
         Token token = strippedTokenList.get(0);
         String basicStatementElement = token.getValue() + " ";
-        String basic = basicStatementElement;
+        StringBuilder basic = new StringBuilder(basicStatementElement);
         basicStatementList.addString(basicStatementElement); // the operator
         TokenTypes tokenType, nextTokenType;
         String tokenValue;
@@ -175,7 +175,7 @@ public class ProgramStatement {
             tokenValue = token.getValue();
             if (tokenType == TokenTypes.REGISTER_NUMBER) {
                 basicStatementElement = tokenValue;
-                basic += basicStatementElement;
+                basic.append(basicStatementElement);
                 basicStatementList.addString(basicStatementElement);
                 try {
                     registerNumber = RegisterFile.getUserRegister(tokenValue).getNumber();
@@ -188,7 +188,7 @@ public class ProgramStatement {
             } else if (tokenType == TokenTypes.REGISTER_NAME) {
                 registerNumber = RegisterFile.getNumber(tokenValue);
                 basicStatementElement = "$" + registerNumber;
-                basic += basicStatementElement;
+                basic.append(basicStatementElement);
                 basicStatementList.addString(basicStatementElement);
                 if (registerNumber < 0) {
                     // should never happen; should be caught before now...
@@ -199,7 +199,7 @@ public class ProgramStatement {
             } else if (tokenType == TokenTypes.FP_REGISTER_NAME) {
                 registerNumber = Coprocessor1.getRegisterNumber(tokenValue);
                 basicStatementElement = "$f" + registerNumber;
-                basic += basicStatementElement;
+                basic.append(basicStatementElement);
                 basicStatementList.addString(basicStatementElement);
                 if (registerNumber < 0) {
                     // should never happen; should be caught before now...
@@ -242,7 +242,7 @@ public class ProgramStatement {
                     }
                 }
                 //////////////////////////////////////////////////////////////////////
-                basic += address;
+                basic.append(address);
                 if (absoluteAddress) { // record as address if absolute, value if relative
                     basicStatementList.addAddress(address);
                 } else {
@@ -295,13 +295,13 @@ public class ProgramStatement {
                  *        }
                  **************************  END DPS 3-July-2008 COMMENTS *******************************/
 
-                basic += tempNumeric;
+                basic.append(tempNumeric);
                 basicStatementList.addValue(tempNumeric);
                 this.operands[this.numOperands++] = tempNumeric;
                 ///// End modification 1/7/05 KENV   ///////////////////////////////////////////
             } else {
                 basicStatementElement = tokenValue;
-                basic += basicStatementElement;
+                basic.append(basicStatementElement);
                 basicStatementList.addString(basicStatementElement);
             }
             // add separator if not at end of token list AND neither current nor 
@@ -311,12 +311,12 @@ public class ProgramStatement {
                 if (tokenType != TokenTypes.LEFT_PAREN && tokenType != TokenTypes.RIGHT_PAREN &&
                         nextTokenType != TokenTypes.LEFT_PAREN && nextTokenType != TokenTypes.RIGHT_PAREN) {
                     basicStatementElement = ",";
-                    basic += basicStatementElement;
+                    basic.append(basicStatementElement);
                     basicStatementList.addString(basicStatementElement);
                 }
             }
         }
-        this.basicAssemblyStatement = basic;
+        this.basicAssemblyStatement = basic.toString();
     } //buildBasicStatementFromBasicInstruction()
 
 
@@ -379,27 +379,25 @@ public class ProgramStatement {
     public String toString() {
         // a crude attempt at string formatting.  Where's C when you need it?
         String blanks = "                               ";
-        String result = "[" + this.textAddress + "]";
+        StringBuilder result = new StringBuilder("[" + this.textAddress + "]");
         if (this.basicAssemblyStatement != null) {
             int firstSpace = this.basicAssemblyStatement.indexOf(" ");
-            result += blanks.substring(0, 16 - result.length()) + this.basicAssemblyStatement.substring(0, firstSpace);
-            result += blanks.substring(0, 24 - result.length()) + this.basicAssemblyStatement.substring(firstSpace + 1);
+            result.append(blanks.substring(0, 16 - result.length())).append(this.basicAssemblyStatement.substring(0, firstSpace));
+            result.append(blanks.substring(0, 24 - result.length())).append(this.basicAssemblyStatement.substring(firstSpace + 1));
         } else {
-            result += blanks.substring(0, 16 - result.length()) + "0x" + Integer.toString(this.binaryStatement, 16);
+            result.append(blanks.substring(0, 16 - result.length())).append("0x").append(Integer.toString(this.binaryStatement, 16));
         }
-        result += blanks.substring(0, 40 - result.length()) + ";  "; // this.source;
+        result.append(blanks.substring(0, 40 - result.length())).append(";  "); // this.source;
         if (operands != null) {
             for (int i = 0; i < this.numOperands; i++)
                 // result += operands[i] + " ";
-                result += Integer.toString(operands[i], 16) + " ";
+                result.append(Integer.toString(operands[i], 16)).append(" ");
         }
         if (this.machineStatement != null) {
-            result += "[" + Binary.binaryStringToHexString(this.machineStatement) + "]";
-            result += "  " + this.machineStatement.substring(0, 6) + "|" + this.machineStatement.substring(6, 11) + "|" +
-                    this.machineStatement.substring(11, 16) + "|" + this.machineStatement.substring(16, 21) + "|" +
-                    this.machineStatement.substring(21, 26) + "|" + this.machineStatement.substring(26, 32);
+            result.append("[").append(Binary.binaryStringToHexString(this.machineStatement)).append("]");
+            result.append("  ").append(this.machineStatement.substring(0, 6)).append("|").append(this.machineStatement.substring(6, 11)).append("|").append(this.machineStatement.substring(11, 16)).append("|").append(this.machineStatement.substring(16, 21)).append("|").append(this.machineStatement.substring(21, 26)).append("|").append(this.machineStatement.substring(26, 32));
         }
-        return result;
+        return result.toString();
     } // toString()
 
     /**

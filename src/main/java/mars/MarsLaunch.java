@@ -743,19 +743,19 @@ public class MarsLaunch {
 
     private void displayHelp() {
         String[] segmentNames = MemoryDump.getSegmentNames();
-        String segments = "";
+        StringBuilder segments = new StringBuilder();
         for (int i = 0; i < segmentNames.length; i++) {
-            segments += segmentNames[i];
+            segments.append(segmentNames[i]);
             if (i < segmentNames.length - 1) {
-                segments += ", ";
+                segments.append(", ");
             }
         }
         ArrayList dumpFormats = (new DumpFormatLoader()).loadDumpFormats();
-        String formats = "";
+        StringBuilder formats = new StringBuilder();
         for (int i = 0; i < dumpFormats.size(); i++) {
-            formats += ((DumpFormat) dumpFormats.get(i)).getCommandDescriptor();
+            formats.append(((DumpFormat) dumpFormats.get(i)).getCommandDescriptor());
             if (i < dumpFormats.size() - 1) {
-                formats += ", ";
+                formats.append(", ");
             }
         }
         out.println("Usage:  Mars  [options] filename [additional filenames]");

@@ -187,12 +187,12 @@ public class MacroPool {
 
 
     public String getExpansionHistory() {
-        String ret = "";
+        StringBuilder ret = new StringBuilder();
         for (int i = 0; i < callStackOrigLines.size(); i++) {
             if (i > 0)
-                ret += "->";
-            ret += callStackOrigLines.get(i).toString();
+                ret.append("->");
+            ret.append(callStackOrigLines.get(i).toString());
         }
-        return ret;
+        return ret.toString();
     }
 }

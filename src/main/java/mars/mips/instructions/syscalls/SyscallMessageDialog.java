@@ -62,14 +62,14 @@ public class SyscallMessageDialog extends AbstractSyscall {
         //       other: plain message
         // Output: none
 
-        String message = "";
+        StringBuilder message = new StringBuilder();
         int byteAddress = RegisterFile.getValue(4);
         char[] ch = {' '}; // Need an array to convert to String
         try {
             ch[0] = (char) Globals.memory.getByte(byteAddress);
             while (ch[0] != 0) // only uses single location ch[0]
             {
-                message = message + new String(ch); // parameter to String constructor is a char[] array
+                message.append(new String(ch)); // parameter to String constructor is a char[] array
                 byteAddress++;
                 ch[0] = (char) Globals.memory.getByte(byteAddress);
             }
@@ -82,7 +82,7 @@ public class SyscallMessageDialog extends AbstractSyscall {
         int msgType = RegisterFile.getValue(5);
         if (msgType < 0 || msgType > 3)
             msgType = -1; // See values in http://java.sun.com/j2se/1.5.0/docs/api/constant-values.html
-        JOptionPane.showMessageDialog(null, message, null, msgType);
+        JOptionPane.showMessageDialog(null, message.toString(), null, msgType);
 
 
     }

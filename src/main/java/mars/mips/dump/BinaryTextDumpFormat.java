@@ -70,15 +70,15 @@ public class BinaryTextDumpFormat extends AbstractDumpFormat {
     public void dumpMemoryRange(File file, int firstAddress, int lastAddress)
             throws AddressErrorException, FileNotFoundException {
         PrintStream out = new PrintStream(new FileOutputStream(file));
-        String string = null;
+        StringBuilder string = null;
         try {
             for (int address = firstAddress; address <= lastAddress; address += Memory.WORD_LENGTH_BYTES) {
                 Integer temp = Globals.memory.getRawWordOrNull(address);
                 if (temp == null)
                     break;
-                string = Integer.toBinaryString(temp);
+                string = new StringBuilder(Integer.toBinaryString(temp));
                 while (string.length() < 32) {
-                    string = '0' + string;
+                    string.insert(0, '0');
                 }
                 out.println(string);
             }

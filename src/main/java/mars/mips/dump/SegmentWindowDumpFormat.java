@@ -90,23 +90,22 @@ public class SegmentWindowDumpFormat extends AbstractDumpFormat {
         if (Memory.inDataSegment(firstAddress)) {
             boolean hexValues = Globals.getSettings().getBooleanSetting(Settings.DISPLAY_VALUES_IN_HEX);
             int offset = 0;
-            String string = "";
+            StringBuilder string = new StringBuilder();
             try {
                 for (int address = firstAddress; address <= lastAddress; address += Memory.WORD_LENGTH_BYTES) {
                     if (offset % 8 == 0) {
-                        string = ((hexAddresses) ? Binary.intToHexString(address) : Binary.unsignedIntToIntString(address)) + "    ";
+                        string = new StringBuilder(((hexAddresses) ? Binary.intToHexString(address) : Binary.unsignedIntToIntString(address)) + "    ");
                     }
                     offset++;
                     Integer temp = Globals.memory.getRawWordOrNull(address);
                     if (temp == null)
                         break;
-                    string += ((hexValues)
+                    string.append((hexValues)
                             ? Binary.intToHexString(temp)
-                            : ("           " + temp).substring(temp.toString().length())
-                    ) + " ";
+                            : ("           " + temp).substring(temp.toString().length())).append(" ");
                     if (offset % 8 == 0) {
                         out.println(string);
-                        string = "";
+                        string = new StringBuilder();
                     }
                 }
             } finally {

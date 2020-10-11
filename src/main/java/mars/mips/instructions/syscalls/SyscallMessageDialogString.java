@@ -57,14 +57,14 @@ public class SyscallMessageDialogString extends AbstractSyscall {
         //   $a1 = address of null-terminated string to display after the first message
         // Output: none
 
-        String message = "";
+        StringBuilder message = new StringBuilder();
         int byteAddress = RegisterFile.getValue(4);
         char[] ch = {' '}; // Need an array to convert to String
         try {
             ch[0] = (char) Globals.memory.getByte(byteAddress);
             while (ch[0] != 0) // only uses single location ch[0]
             {
-                message = message + new String(ch); // parameter to String constructor is a char[] array
+                message.append(new String(ch)); // parameter to String constructor is a char[] array
                 byteAddress++;
                 ch[0] = (char) Globals.memory.getByte(byteAddress);
             }
@@ -73,13 +73,13 @@ public class SyscallMessageDialogString extends AbstractSyscall {
         }
 
 
-        String message2 = "";
+        StringBuilder message2 = new StringBuilder();
         byteAddress = RegisterFile.getValue(5);
         try {
             ch[0] = (char) Globals.memory.getByte(byteAddress);
             while (ch[0] != 0) // only uses single location ch[0]
             {
-                message2 = message2 + new String(ch); // parameter to String constructor is a char[] array
+                message2.append(new String(ch)); // parameter to String constructor is a char[] array
                 byteAddress++;
                 ch[0] = (char) Globals.memory.getByte(byteAddress);
             }
@@ -90,7 +90,7 @@ public class SyscallMessageDialogString extends AbstractSyscall {
 
         // Display the dialog.
         JOptionPane.showMessageDialog(null,
-                message + message2,
+                message.toString() + message2,
                 null,
                 JOptionPane.INFORMATION_MESSAGE);
 

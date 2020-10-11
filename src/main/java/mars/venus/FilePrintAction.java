@@ -65,23 +65,23 @@ public class FilePrintAction extends GuiAction {
         }
         BufferedReader in = new BufferedReader(new StringReader(editPane.getSource()));
         int lineNumberDigits = Integer.toString(editPane.getSourceLineCount()).length();
-        String line;
-        String lineNumberString = "";
+        StringBuilder line;
+        StringBuilder lineNumberString = new StringBuilder();
         int lineNumber = 0;
         int numchars;
         try {
-            line = in.readLine();
+            line = new StringBuilder(in.readLine());
             while (line != null) {
                 if (editPane.showingLineNumbers()) {
                     lineNumber++;
-                    lineNumberString = lineNumber + ": ";
+                    lineNumberString = new StringBuilder(lineNumber + ": ");
                     while (lineNumberString.length() < lineNumberDigits) {
-                        lineNumberString = lineNumberString + " ";
+                        lineNumberString.append(" ");
                     }
                 }
-                line = lineNumberString + line + "\n";
-                out.write(line.toCharArray(), 0, line.length());
-                line = in.readLine();
+                line = new StringBuilder(lineNumberString.toString() + line + "\n");
+                out.write(line.toString().toCharArray(), 0, line.length());
+                line = new StringBuilder(in.readLine());
             }
             in.close();
             out.close();

@@ -174,13 +174,19 @@ public class BHTEntry {
      * @return a string representation of the BHT entry's history
      */
     public String getHistoryAsStr() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < m_history.length; i++) {
-            if (i > 0) result = result + ", ";
-            result += m_history[i] ? "T" : "NT";
+            if (i > 0) {
+                result.append(", ");
+            }
+            if (m_history[i]) {
+                result.append("T");
+            } else {
+                result.append("NT");
+            }
         }
-        return result;
+        return result.toString();
     }
 
 

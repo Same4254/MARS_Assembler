@@ -37,19 +37,19 @@ public class IntelHexDumpFormat extends AbstractDumpFormat {
     public void dumpMemoryRange(File file, int firstAddress, int lastAddress)
             throws AddressErrorException, FileNotFoundException {
         PrintStream out = new PrintStream(new FileOutputStream(file));
-        String string = null;
+        StringBuilder string = null;
         try {
             for (int address = firstAddress; address <= lastAddress; address += Memory.WORD_LENGTH_BYTES) {
                 Integer temp = Globals.memory.getRawWordOrNull(address);
                 if (temp == null)
                     break;
-                string = Integer.toHexString(temp);
+                string = new StringBuilder(Integer.toHexString(temp));
                 while (string.length() < 8) {
-                    string = '0' + string;
+                    string.insert(0, '0');
                 }
-                String addr = Integer.toHexString(address - firstAddress);
+                StringBuilder addr = new StringBuilder(Integer.toHexString(address - firstAddress));
                 while (addr.length() < 4) {
-                    addr = '0' + addr;
+                    addr.insert(0, '0');
                 }
                 String chksum;
                 int tmp_chksum = 0;

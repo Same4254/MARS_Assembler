@@ -64,14 +64,14 @@ public class SyscallInputDialogString extends AbstractSyscall {
         //       -3: OK was chosen but no data had been input into field
 
 
-        String message = "";
+        StringBuilder message = new StringBuilder();
         int byteAddress = RegisterFile.getValue(4); // byteAddress of string is in $a0
         char[] ch = {' '}; // Need an array to convert to String
         try {
             ch[0] = (char) Globals.memory.getByte(byteAddress);
             while (ch[0] != 0) // only uses single location ch[0]
             {
-                message = message + new String(ch); // parameter to String constructor is a char[] array
+                message.append(new String(ch)); // parameter to String constructor is a char[] array
                 byteAddress++;
                 ch[0] = (char) Globals.memory.getByte(byteAddress);
             }
@@ -84,7 +84,7 @@ public class SyscallInputDialogString extends AbstractSyscall {
         // An empty string returned (that is, inputString.length() of zero)
         // means that OK was chosen but no string was input.
         String inputString = null;
-        inputString = JOptionPane.showInputDialog(message);
+        inputString = JOptionPane.showInputDialog(message.toString());
         byteAddress = RegisterFile.getValue(5); // byteAddress of string is in $a1
         int maxLength = RegisterFile.getValue(6); // input buffer size for input string is in $a2
 
