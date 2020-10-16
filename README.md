@@ -22,9 +22,6 @@ If you want to contribute to the original project, you should talk with [them][8
 - In order to **compile** MARS v4.XX, you must **install Java SE 8 (or later) SDK** 
  
  Note: This project makes use of the [Intellij IDEA IDE][10]
- 
- ## Documentation (included in the repo)
- - Go to the [documentation][7].
 
 ## License
 [MIT][2]. Check the [LICENSE][3] file. All the credits go to the original developers.
