@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MARS_Assembler.iml" filepath="$PROJECT_DIR$/MARS_Assembler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MARS_Assembler.iml" filepath="$PROJECT_DIR$/.idea/MARS_Assembler.iml" />
     </modules>
   </component>
 </project>
