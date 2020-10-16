@@ -242,7 +242,7 @@ public final class TokenTypes {
     }
 
     /**
-     * Lets you know if given tokentype is for integers (INTGER_5, INTEGER_16, INTEGER_32).
+     * Lets you know if given tokentype is for integers (INTEGER_5, INTEGER_16, INTEGER_32).
      *
      * @param type the TokenType of interest
      * @return true if type is an integer type, false otherwise.
@@ -265,7 +265,7 @@ public final class TokenTypes {
 
 
     // COD2, A-51:  "Identifiers are a sequence of alphanumeric characters,
-    //               underbars (_), and dots (.) that do not begin with a number."
+    //               underscores (_), and dots (.) that do not begin with a number."
     // Ideally this would be in a separate Identifier class but I did not see an immediate
     // need beyond this method (refactoring effort would probably identify other uses
     // related to symbol table).

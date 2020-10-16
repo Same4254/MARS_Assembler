@@ -33,7 +33,7 @@ package mars.tools;//.bhtsim;
  * The entry holds the information about former branch predictions and outcomes.
  * The number of past branch outcomes can be configured and is called the history.
  * The semantics of the history of size <i>n</i> is as follows.
- * The entry will change its prediction, if it mispredicts the branch <i>n</i> times in series.
+ * The entry will change its prediction, if it mis-predicts the branch <i>n</i> times in series.
  * The prediction of the entry can be obtained by the {@link BHTEntry#getPrediction()} method.
  * Feedback of taken or not taken branches is provided to the entry via the {@link BHTEntry#updatePrediction(boolean)} method.
  * This causes the history and the prediction to be updated.
@@ -137,9 +137,9 @@ public class BHTEntry {
 
 
     /**
-     * Get the absolute number of mispredictions.
+     * Get the absolute number of mis-predictions.
      *
-     * @return number of incorrect predictions (mispredictions)
+     * @return number of incorrect predictions (mis-predictions)
      */
     public int getStatsPredIncorrect() {
         return m_incorrect;

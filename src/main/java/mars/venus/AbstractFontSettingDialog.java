@@ -213,7 +213,7 @@ public abstract class AbstractFontSettingDialog extends JDialog {
 
     private static String SEPARATOR = "___SEPARATOR____";
 
-    // Given an array of string arrays, will produce a Vector contenating
+    // Given an array of string arrays, will produce a Vector containing
     // the arrays with a separator between each.
     private Vector<String> makeVectorData(String[][] str) {
         boolean needSeparator = false;

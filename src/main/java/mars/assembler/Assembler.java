@@ -380,7 +380,7 @@ public class Assembler {
         // (1) the addresses may not be ordered at this point. Requires unsigned int
         // sort because kernel addresses are negative. See special Comparator.
         // (2) It is possible for two instructions to be placed at the same address.
-        // Such occurances will be flagged as errors.
+        // Such occurrences will be flagged as errors.
         // Yes, I would not have to sort here if I used SortedSet rather than ArrayList
         // but in case of duplicate I like having both statements handy for error message.
         Collections.sort(this.machineList, new ProgramStatementComparator());

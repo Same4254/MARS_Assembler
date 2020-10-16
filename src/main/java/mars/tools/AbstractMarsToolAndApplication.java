@@ -135,7 +135,7 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
      * file open dialog, a text field to display status messages, the run-speed slider
      * to control execution rate when running a MIPS program, a button that assembles and
      * runs the current MIPS program, a reset button, and an exit button.
-     * This method calls 3 methods that can be defined/overriden in the subclass: initializePreGUI()
+     * This method calls 3 methods that can be defined/overridden in the subclass: initializePreGUI()
      * for any special initialization that must be completed before building the user
      * interface (e.g. data structures whose properties determine default GUI settings),
      * initializePostGUI() for any special initialization that cannot be
@@ -178,7 +178,7 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
      * generic definitions for interactively controlling the tool.  The generic controls
      * for MarsTools are 3 buttons:  connect/disconnect to MIPS resource (memory and/or
      * registers), reset, and close (exit).  Like "go()" above, this default version
-     * calls 3 methods that can be defined/overriden in the subclass: initializePreGUI()
+     * calls 3 methods that can be defined/overridden in the subclass: initializePreGUI()
      * for any special initialization that must be completed before building the user
      * interface (e.g. data structures whose properties determine default GUI settings),
      * initializePostGUI() for any special initialization that cannot be
@@ -519,7 +519,7 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
      * that this method is not invoked automatically like the no-argument version, but
      * if you use this method, you can still take advantage of provided default deleteAsObserver()
      * since it will remove the app as a memory observer regardless of the subrange
-     * or number of subranges it is registered for.
+     * or number of sub-ranges it is registered for.
      *
      * @param lowEnd  low end of memory address range.
      * @param highEnd high end of memory address range; must be >= lowEnd

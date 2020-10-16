@@ -68,7 +68,7 @@ public class BHTSimulator extends AbstractMarsToolAndApplication implements Acti
     public static final int BHT_DEFAULT_HISTORY = 1;
 
     /**
-     * constant for the default inital value
+     * constant for the default initial value
      */
     public static final boolean BHT_DEFAULT_INITVAL = false;
 
@@ -157,7 +157,7 @@ public class BHTSimulator extends AbstractMarsToolAndApplication implements Acti
 
     /**
      * Performs a reset of the simulator.
-     * This causes the BHT to be reseted and the log messages to be cleared.
+     * This causes the BHT to be reset and the log messages to be cleared.
      */
     protected void reset() {
         resetSimulator();
