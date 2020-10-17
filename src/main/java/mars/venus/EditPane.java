@@ -225,7 +225,7 @@ public class EditPane extends JPanel implements Observer {
             if (leadingSpaces == 0) {
                 lineNumberList.append(lineStr).append("&nbsp;<br>");
             } else {
-                lineNumberList.append(spaces.substring(0, leadingSpaces * 6))
+                lineNumberList.append(spaces, 0, leadingSpaces * 6)
                         .append(lineStr)
                         .append("&nbsp;<br>");
             }

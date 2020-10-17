@@ -382,12 +382,12 @@ public class ProgramStatement {
         StringBuilder result = new StringBuilder("[" + this.textAddress + "]");
         if (this.basicAssemblyStatement != null) {
             int firstSpace = this.basicAssemblyStatement.indexOf(" ");
-            result.append(blanks.substring(0, 16 - result.length())).append(this.basicAssemblyStatement.substring(0, firstSpace));
-            result.append(blanks.substring(0, 24 - result.length())).append(this.basicAssemblyStatement.substring(firstSpace + 1));
+            result.append(blanks, 0, 16 - result.length()).append(this.basicAssemblyStatement, 0, firstSpace);
+            result.append(blanks, 0, 24 - result.length()).append(this.basicAssemblyStatement.substring(firstSpace + 1));
         } else {
-            result.append(blanks.substring(0, 16 - result.length())).append("0x").append(Integer.toString(this.binaryStatement, 16));
+            result.append(blanks, 0, 16 - result.length()).append("0x").append(Integer.toString(this.binaryStatement, 16));
         }
-        result.append(blanks.substring(0, 40 - result.length())).append(";  "); // this.source;
+        result.append(blanks, 0, 40 - result.length()).append(";  "); // this.source;
         if (operands != null) {
             for (int i = 0; i < this.numOperands; i++)
                 // result += operands[i] + " ";
@@ -395,7 +395,7 @@ public class ProgramStatement {
         }
         if (this.machineStatement != null) {
             result.append("[").append(Binary.binaryStringToHexString(this.machineStatement)).append("]");
-            result.append("  ").append(this.machineStatement.substring(0, 6)).append("|").append(this.machineStatement.substring(6, 11)).append("|").append(this.machineStatement.substring(11, 16)).append("|").append(this.machineStatement.substring(16, 21)).append("|").append(this.machineStatement.substring(21, 26)).append("|").append(this.machineStatement.substring(26, 32));
+            result.append("  ").append(this.machineStatement, 0, 6).append("|").append(this.machineStatement, 6, 11).append("|").append(this.machineStatement, 11, 16).append("|").append(this.machineStatement, 16, 21).append("|").append(this.machineStatement, 21, 26).append("|").append(this.machineStatement, 26, 32);
         }
         return result.toString();
     } // toString()
