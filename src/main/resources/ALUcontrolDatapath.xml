@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- TODO: use XML Schema instead of DTD-->
 <!DOCTYPE register_data [
-        <!ELEMENT register_data (equivalence, function_equivalence, register_equivalence, datapath_map)>
+        <!ELEMENT register_data (equivalence*, function_equivalence, register_equivalence*, datapath_map)>
         <!ELEMENT equivalence (bits+, mnemonic+)>
         <!ELEMENT bits (#PCDATA)>
         <!ELEMENT mnemonic (#PCDATA)>
         <!ELEMENT function_equivalence (bits+, mnemonic+)>
-        <!ELEMENT bits (#PCDATA)>
-        <!ELEMENT mnemonic (#PCDATA)>
         <!ELEMENT register_equivalence (bits+, mnemonic+)>
-        <!ELEMENT bits (#PCDATA)>
-        <!ELEMENT mnemonic (#PCDATA)>
-        <!ELEMENT datapath_map (num_vertex+, name+, init+, end+, color_Itype+, color_Rtype+, color_Jtype+, color_LOADtype+, color_STOREtype, color_BRANCHtype, other_axis+, isMovingXaxis+, target_vertex+, is_text+)>
+        <!ELEMENT datapath_map (num_vertex+, name+, init+, end+, ALU_out010+, ALU_out110+, ALU_out000+, ALU_out001+, ALU_out111+, color_Itype+, color_Rtype+, color_Jtype+, color_LOADtype+, color_STOREtype, color_BRANCHtype, other_axis+, isMovingXaxis+, target_vertex+, is_text+)>
         <!ELEMENT num_vertex (#PCDATA)>
+        <!ELEMENT name (#PCDATA)>
         <!ELEMENT init (#PCDATA)>
         <!ELEMENT end (#PCDATA)>
+        <!ELEMENT ALU_out010 (#PCDATA)>
+        <!ELEMENT ALU_out110 (#PCDATA)>
+        <!ELEMENT ALU_out000 (#PCDATA)>
+        <!ELEMENT ALU_out001 (#PCDATA)>
+        <!ELEMENT ALU_out111 (#PCDATA)>
         <!ELEMENT color_Itype (#PCDATA)>
         <!ELEMENT color_Rtype (#PCDATA)>
         <!ELEMENT color_Jtype (#PCDATA)>

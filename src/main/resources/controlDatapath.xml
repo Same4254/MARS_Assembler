@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- TODO: use XML Schema instead of DTD-->
 <!DOCTYPE register_data [
-        <!ELEMENT register_data (equivalence, function_equivalence, register_equivalence, datapath_map)>
+        <!ELEMENT register_data (equivalence*, function_equivalence*, register_equivalence, datapath_map)>
         <!ELEMENT equivalence (bits+, mnemonic+)>
         <!ELEMENT bits (#PCDATA)>
         <!ELEMENT mnemonic (#PCDATA)>
         <!ELEMENT function_equivalence (bits+, mnemonic+)>
-        <!ELEMENT bits (#PCDATA)>
-        <!ELEMENT mnemonic (#PCDATA)>
         <!ELEMENT register_equivalence (bits+, mnemonic+)>
-        <!ELEMENT bits (#PCDATA)>
-        <!ELEMENT mnemonic (#PCDATA)>
         <!ELEMENT datapath_map (num_vertex+, name+, init+, end+, color_Itype+, color_Rtype+, color_Jtype+, color_LOADtype+, color_STOREtype, color_BRANCHtype, other_axis+, isMovingXaxis+, target_vertex+, is_text+)>
         <!ELEMENT num_vertex (#PCDATA)>
+        <!ELEMENT name (#PCDATA)>
         <!ELEMENT init (#PCDATA)>
         <!ELEMENT end (#PCDATA)>
         <!ELEMENT color_Itype (#PCDATA)>
