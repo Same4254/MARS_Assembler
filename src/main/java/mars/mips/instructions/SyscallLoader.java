@@ -68,7 +68,7 @@ class SyscallLoader {
                 SYSCALLS_DIRECTORY_PATH, CLASS_EXTENSION);
         HashMap<String, String> syscalls = new HashMap<>();
         for (int i = 0; i < candidates.size(); i++) {
-            String file = (String) candidates.get(i);
+            String file = candidates.get(i);
             // Do not add class if already encountered (happens if run in MARS development directory)
             if (syscalls.containsKey(file)) {
                 continue;

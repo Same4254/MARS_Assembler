@@ -114,7 +114,7 @@ public class ToolLoader {
         //candidates.addAll(mars.Globals.getExternalTools());  // this by itself is not enough...
         HashMap<String, String> tools = new HashMap<>();
         for (int i = 0; i < candidates.size(); i++) {
-            String file = (String) candidates.get(i);
+            String file = candidates.get(i);
             // Do not add class if already encountered (happens if run in MARS development directory)
             if (tools.containsKey(file)) {
                 continue;

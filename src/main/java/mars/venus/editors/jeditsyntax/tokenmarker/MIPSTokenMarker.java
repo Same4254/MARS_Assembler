@@ -225,7 +225,7 @@ public class MIPSTokenMarker extends TokenMarker {
                 int realMatches = 0;
                 matches = new ArrayList<>();
                 for (int i = 0; i < instrMatches.size(); i++) {
-                    Instruction inst = (Instruction) instrMatches.get(i);
+                    Instruction inst = instrMatches.get(i);
                     if (mars.Globals.getSettings().getBooleanSetting(Settings.EXTENDED_ASSEMBLER_ENABLED) || inst instanceof BasicInstruction) {
                         matches.add(new PopupHelpItem(tokenText, inst.getExampleFormat(), inst.getDescription()));
                         realMatches++;
@@ -406,7 +406,7 @@ public class MIPSTokenMarker extends TokenMarker {
         HashMap<String, String> insts = new HashMap<>();
         TreeSet<String> mnemonics = new TreeSet<>();
         for (int i = 0; i < matches.size(); i++) {
-            Instruction inst = (Instruction) matches.get(i);
+            Instruction inst = matches.get(i);
             if (mars.Globals.getSettings().getBooleanSetting(Settings.EXTENDED_ASSEMBLER_ENABLED) || inst instanceof BasicInstruction) {
                 if (exact) {
                     results.add(new PopupHelpItem(tokenText, inst.getExampleFormat(), inst.getDescription(), exact));
@@ -454,12 +454,12 @@ public class MIPSTokenMarker extends TokenMarker {
             // add Instruction mnemonics
             ArrayList<Instruction> instructionSet = mars.Globals.instructionSet.getInstructionList();
             for (int i = 0; i < instructionSet.size(); i++) {
-                cKeywords.add(((mars.mips.instructions.Instruction) instructionSet.get(i)).getName(), Token.KEYWORD1);
+                cKeywords.add(instructionSet.get(i).getName(), Token.KEYWORD1);
             }
             // add assembler directives
             ArrayList<Directives> directiveSet = mars.assembler.Directives.getDirectiveList();
             for (int i = 0; i < directiveSet.size(); i++) {
-                cKeywords.add(((mars.assembler.Directives) directiveSet.get(i)).getName(), Token.KEYWORD2);
+                cKeywords.add(directiveSet.get(i).getName(), Token.KEYWORD2);
             }
             // add integer register file
             mars.mips.hardware.Register[] registerFile = mars.mips.hardware.RegisterFile.getRegisters();

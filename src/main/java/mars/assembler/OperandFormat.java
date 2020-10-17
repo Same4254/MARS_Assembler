@@ -75,7 +75,7 @@ public class OperandFormat {
         if (instrMatches == null)
             return null;
         if (instrMatches.size() == 1)
-            return (Instruction) instrMatches.get(0);
+            return instrMatches.get(0);
         for (int i = 0; i < instrMatches.size(); i++) {
             Instruction potentialMatch = instrMatches.get(i);
             if (tokenOperandMatch(tokenList, potentialMatch, new ErrorList()))

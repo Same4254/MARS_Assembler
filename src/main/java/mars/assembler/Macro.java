@@ -152,7 +152,7 @@ public class Macro {
      */
 
     public String getSubstitutedLine(int line, TokenList args, long counter, ErrorList errors) {
-        TokenList tokens = (TokenList) program.getTokenList().get(line - 1);
+        TokenList tokens = program.getTokenList().get(line - 1);
         String s = program.getSourceLine(line);
 
         for (int i = tokens.size() - 1; i >= 0; i--) {

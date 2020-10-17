@@ -2031,7 +2031,7 @@ public class JEditTextArea extends JComponent {
         int length = PopupHelpItem.maxExampleLength(matches) + 2;
         result = new StringBuilder("<html>");
         for (int i = 0; i < matches.size(); i++) {
-            PopupHelpItem match = (PopupHelpItem) matches.get(i);
+            PopupHelpItem match = matches.get(i);
             result.append((i == 0) ? "" : "<br>").append("<tt>").append(match.getExamplePaddedToLength(length).replaceAll(" ", "&nbsp;")).append("</tt>").append(match.getDescription());
         }
         return result + "</html>";
@@ -2147,7 +2147,7 @@ public class JEditTextArea extends JComponent {
             popupMenu = new JPopupMenu();
             int length = PopupHelpItem.maxExampleLength(helpItems) + 2;
             for (int i = 0; i < helpItems.size(); i++) {
-                PopupHelpItem item = (PopupHelpItem) helpItems.get(i);
+                PopupHelpItem item = helpItems.get(i);
                 JMenuItem menuItem = new JMenuItem("<html><tt>" + item.getExamplePaddedToLength(length).replaceAll(" ", "&nbsp;") + "</tt>" + item.getDescription() + "</html>");
                 if (item.getExact()) {
                     // The instruction name is completed so the role of the popup changes

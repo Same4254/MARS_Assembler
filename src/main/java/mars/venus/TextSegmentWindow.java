@@ -119,7 +119,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
         // source lines from all files.  DPS 3-Oct-10
         int maxSourceLineNumber = 0;
         for (int i = sourceStatementList.size() - 1; i >= 0; i--) {
-            ProgramStatement statement = (ProgramStatement) sourceStatementList.get(i);
+            ProgramStatement statement = sourceStatementList.get(i);
             if (statement.getSourceLine() > maxSourceLineNumber) {
                 maxSourceLineNumber = statement.getSourceLine();
             }
@@ -128,7 +128,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
         int leadingSpaces = 0;
         int lastLine = -1;
         for (int i = 0; i < sourceStatementList.size(); i++) {
-            ProgramStatement statement = (ProgramStatement) sourceStatementList.get(i);
+            ProgramStatement statement = sourceStatementList.get(i);
             intAddresses[i] = statement.getAddress();
             addressRows.put(intAddresses[i], i);
             data[i][BREAK_COLUMN] = Boolean.FALSE;
@@ -273,7 +273,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
             // modified at runtime, construct a ProgramStatement from the current address and binary code
             // then display its basic code.  DPS 11-July-2013
             if (executeMods.get(i) == null) { // not modified, so use original logic.
-                ProgramStatement statement = (ProgramStatement) sourceStatementList.get(i);
+                ProgramStatement statement = sourceStatementList.get(i);
                 table.getModel().setValueAt(statement.getPrintableBasicAssemblyStatement(), i, BASIC_COLUMN);
             } else {
                 try {

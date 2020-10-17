@@ -2707,7 +2707,7 @@ public class InstructionSet {
     public BasicInstruction findByBinaryCode(int binaryInstr) {
         ArrayList<MatchMap> matchMaps = this.opcodeMatchMaps;
         for (int i = 0; i < matchMaps.size(); i++) {
-            MatchMap map = (MatchMap) matchMaps.get(i);
+            MatchMap map = matchMaps.get(i);
             BasicInstruction ret = map.find(binaryInstr);
             if (ret != null) return ret;
         }

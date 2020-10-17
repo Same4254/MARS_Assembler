@@ -126,7 +126,7 @@ public class Tokenizer {
         ArrayList<String> source = program.getSourceList();
         ArrayList<SourceLine> result = new ArrayList<>(source.size());
         for (int i = 0; i < source.size(); i++) {
-            String line = (String) source.get(i);
+            String line = source.get(i);
             TokenList tl = tokenizeLine(program, i + 1, line, false);
             boolean hasInclude = false;
             for (int ii = 0; ii < tl.size(); ii++) {

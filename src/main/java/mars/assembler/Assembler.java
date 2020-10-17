@@ -185,7 +185,7 @@ public class Assembler {
         for (int fileIndex = 0; fileIndex < tokenizedProgramFiles.size(); fileIndex++) {
             if (errors.errorLimitExceeded())
                 break;
-            this.fileCurrentlyBeingAssembled = (MIPSprogram) tokenizedProgramFiles.get(fileIndex);
+            this.fileCurrentlyBeingAssembled = tokenizedProgramFiles.get(fileIndex);
             // List of labels declared ".globl". new list for each file assembled
             this.globalDeclarationList = new TokenList();
             // Parser begins by default in text segment until directed otherwise.
@@ -214,12 +214,12 @@ public class Assembler {
             for (int i = 0; i < tokenList.size(); i++) {
                 if (errors.errorLimitExceeded())
                     break;
-                for (int z = 0; z < ((TokenList) tokenList.get(i)).size(); z++) {
-                    Token t = ((TokenList) tokenList.get(i)).get(z);
+                for (int z = 0; z < tokenList.get(i).size(); z++) {
+                    Token t = tokenList.get(i).get(z);
                     // record this token's original source program and line #. Differs from final, if .include used
                     t.setOriginal(sourceLineList.get(i).getMIPSprogram(), sourceLineList.get(i).getLineNumber());
                 }
-                statements = this.parseLine((TokenList) tokenList.get(i),
+                statements = this.parseLine(tokenList.get(i),
                         sourceLineList.get(i).getSource(),
                         sourceLineList.get(i).getLineNumber(),
                         extendedAssemblerEnabled);
@@ -263,11 +263,11 @@ public class Assembler {
         for (int fileIndex = 0; fileIndex < tokenizedProgramFiles.size(); fileIndex++) {
             if (errors.errorLimitExceeded())
                 break;
-            this.fileCurrentlyBeingAssembled = (MIPSprogram) tokenizedProgramFiles.get(fileIndex);
+            this.fileCurrentlyBeingAssembled = tokenizedProgramFiles.get(fileIndex);
             ArrayList<ProgramStatement> parsedList = fileCurrentlyBeingAssembled.getParsedList();
             ProgramStatement statement;
             for (int i = 0; i < parsedList.size(); i++) {
-                statement = (ProgramStatement) parsedList.get(i);
+                statement = parsedList.get(i);
                 statement.buildBasicStatementFromBasicInstruction(errors);
                 if (errors.errorsOccurred()) {
                     throw new ProcessingException(errors);
@@ -317,7 +317,7 @@ public class Assembler {
                     for (int instrNumber = 0; instrNumber < templateList.size(); instrNumber++) {
                         String instruction = ExtendedInstruction.makeTemplateSubstitutions(
                                 this.fileCurrentlyBeingAssembled,
-                                (String) templateList.get(instrNumber), theTokenList);
+                                templateList.get(instrNumber), theTokenList);
                         // 23 Jan 2008 by DPS. Template substitution may result in no instruction.
                         // If this is the case, skip remainder of loop iteration. This should only
                         // happen if template substitution was for "nop" instruction but delayed branching
@@ -396,8 +396,8 @@ public class Assembler {
     // operand on .text directive. Will generate error message for each one that occurs.
     private void catchDuplicateAddresses(ArrayList<ProgramStatement> instructions, ErrorList errors) {
         for (int i = 0; i < instructions.size() - 1; i++) {
-            ProgramStatement ps1 = (ProgramStatement) instructions.get(i);
-            ProgramStatement ps2 = (ProgramStatement) instructions.get(i + 1);
+            ProgramStatement ps1 = instructions.get(i);
+            ProgramStatement ps2 = instructions.get(i + 1);
             if (ps1.getAddress() == ps2.getAddress()) {
                 errors.add(new ErrorMessage(ps2.getSourceMIPSprogram(), ps2.getSourceLine(), 0,
                         "Duplicate text segment address: "
