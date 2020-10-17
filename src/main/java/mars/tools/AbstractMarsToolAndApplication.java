@@ -97,6 +97,7 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
      * Simple constructor
      *
      * @param title String containing title bar text
+     * @param heading String displayed at the top of the windows. If the heading is null nothing is set.
      */
     protected AbstractMarsToolAndApplication(String title, String heading) {
         thisMarsApp = this;
@@ -160,7 +161,9 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
         JPanel contentPane = new JPanel(new BorderLayout(5, 5));
         contentPane.setBorder(emptyBorder);
         contentPane.setOpaque(true);
-        contentPane.add(buildHeadingArea(), BorderLayout.NORTH);
+        if (heading != null) {
+            contentPane.add(buildHeadingArea(), BorderLayout.NORTH);
+        }
         contentPane.add(buildMainDisplayArea(), BorderLayout.CENTER);
         contentPane.add(buildButtonAreaStandAlone(), BorderLayout.SOUTH);
 
@@ -202,7 +205,9 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
         JPanel contentPane = new JPanel(new BorderLayout(5, 5));
         contentPane.setBorder(emptyBorder);
         contentPane.setOpaque(true);
-        contentPane.add(buildHeadingArea(), BorderLayout.NORTH);
+        if (heading != null) {
+            contentPane.add(buildHeadingArea(), BorderLayout.NORTH);
+        }
         contentPane.add(buildMainDisplayArea(), BorderLayout.CENTER);
         contentPane.add(buildButtonAreaMarsTool(), BorderLayout.SOUTH);
         initializePostGUI();

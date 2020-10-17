@@ -53,16 +53,6 @@ public class InstructionStatistics extends AbstractMarsToolAndApplication {
      */
     private static String NAME = "Instruction Statistics";
 
-    /**
-     * version and author information of the tool
-     */
-    private static String VERSION = "Version 1.0 (Ingo Kofler)";
-
-    /**
-     * heading of the tool
-     */
-    private static String HEADING = "";
-
 
     /**
      * number of instruction categories used by this tool
@@ -151,7 +141,7 @@ public class InstructionStatistics extends AbstractMarsToolAndApplication {
      * Simple construction, likely used by the MARS Tools menu mechanism.
      */
     public InstructionStatistics() {
-        super(InstructionStatistics.NAME + ", " + InstructionStatistics.VERSION, InstructionStatistics.HEADING);
+        super(InstructionStatistics.NAME, null);
     }
 
 

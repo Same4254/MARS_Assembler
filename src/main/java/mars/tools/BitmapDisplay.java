@@ -47,7 +47,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class BitmapDisplay extends AbstractMarsToolAndApplication {
 
-    private static String version = "Version 1.0";
     private static String heading = "Bitmap Display";
 
     // Major GUI components
@@ -103,7 +102,7 @@ public class BitmapDisplay extends AbstractMarsToolAndApplication {
      * Simple constructor, likely used by the MARS Tools menu mechanism
      */
     public BitmapDisplay() {
-        super("Bitmap Display, " + version, heading);
+        super(heading, null);
     }
 
 
@@ -114,7 +113,7 @@ public class BitmapDisplay extends AbstractMarsToolAndApplication {
      * is no driver program to invoke the application.
      */
     public static void main(String[] args) {
-        new BitmapDisplay("Bitmap Display stand-alone, " + version, heading).go();
+        new BitmapDisplay("Bitmap Display stand-alone ", heading).go();
     }
 
 

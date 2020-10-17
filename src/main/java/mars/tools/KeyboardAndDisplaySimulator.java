@@ -74,7 +74,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 public class KeyboardAndDisplaySimulator extends AbstractMarsToolAndApplication {
 
-    private static String version = "Version 1.4";
     private static String heading = "Keyboard and Display MMIO Simulator";
     private static String displayPanelTitle, keyboardPanelTitle;
     private static char VT_FILL = ' ';  // fill character for virtual terminal (random access mode)
@@ -141,7 +140,7 @@ public class KeyboardAndDisplaySimulator extends AbstractMarsToolAndApplication 
      * Simple constructor, likely used by the MARS Tools menu mechanism
      */
     public KeyboardAndDisplaySimulator() {
-        super(heading + ", " + version, heading);
+        super(heading, null);
         simulator = this;
     }
 
@@ -153,7 +152,7 @@ public class KeyboardAndDisplaySimulator extends AbstractMarsToolAndApplication 
      * is no driver program to invoke the application.
      */
     public static void main(String[] args) {
-        new KeyboardAndDisplaySimulator(heading + " stand-alone, " + version, heading).go();
+        new KeyboardAndDisplaySimulator(heading + " stand-alone", null).go();
     }
 
 

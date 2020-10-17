@@ -49,7 +49,6 @@ import java.util.Observable;
 //@SuppressWarnings("serial")
 public class InstructionCounter extends AbstractMarsToolAndApplication {
     private static String name = "Instruction Counter";
-    private static String version = "Version 1.0 (Felipe Lessa)";
     private static String heading = "Counting the number of instructions executed";
 
     /**
@@ -101,7 +100,7 @@ public class InstructionCounter extends AbstractMarsToolAndApplication {
      * Simple construction, likely used by the MARS Tools menu mechanism.
      */
     public InstructionCounter() {
-        super(name + ", " + version, heading);
+        super(name, heading);
     }
 
     //	@Override

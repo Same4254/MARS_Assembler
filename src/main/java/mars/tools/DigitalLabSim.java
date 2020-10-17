@@ -26,7 +26,6 @@ import java.util.Observable;
  */
 public class DigitalLabSim extends AbstractMarsToolAndApplication {
     private static String heading = "Digital Lab Sim";
-    private static String version = " Version 1.0 (Didier Teifreto)";
     private static final int IN_ADRESS_DISPLAY_1 = Memory.memoryMapBaseAddress + 0x10;
     private static final int IN_ADRESS_DISPLAY_2 = Memory.memoryMapBaseAddress + 0x11;
     private static final int IN_ADRESS_HEXA_KEYBOARD = Memory.memoryMapBaseAddress + 0x12;
@@ -55,11 +54,11 @@ public class DigitalLabSim extends AbstractMarsToolAndApplication {
     }
 
     public DigitalLabSim() {
-        super(heading + ", " + version, heading);
+        super(heading, null);
     }
 
     public static void main(String[] args) {
-        new DigitalLabSim(heading + ", " + version, heading).go();
+        new DigitalLabSim(heading, null).go();
     }
 
     public String getName() {

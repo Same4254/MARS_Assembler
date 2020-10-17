@@ -35,7 +35,6 @@ import java.util.Vector;
 public class MipsXray extends AbstractMarsToolAndApplication {
     private static final long serialVersionUID = -1L;
     private static String heading = "MIPS X-Ray - Animation of MIPS Datapath";
-    private static String version = " Version 2.0";
 
     protected Graphics g;
     protected int lastAddress = -1; //address of instruction in memory
@@ -63,7 +62,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
      * Simple constructor, likely used by the MipsXray menu mechanism
      */
     public MipsXray() {
-        super(heading + ", " + version, heading);
+        super(heading, null);
     }
 
 
@@ -112,8 +111,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
      * in the SOUTH area.
      */
     protected JComponent buildAnimationSequence() {
-        JPanel image = new JPanel(new GridBagLayout());
-        return image;
+        return new JPanel(new GridBagLayout());
     }
 
     // Insert image in the panel and configure the parameters to run animation.
@@ -122,7 +120,6 @@ public class MipsXray extends AbstractMarsToolAndApplication {
         this.createActionObjects();
         toolbar = this.setUpToolBar();
 
-//   	   JPanel jp = new JPanel(new FlowLayout(FlowLayout.LEFT));
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
         try {
@@ -159,7 +156,6 @@ public class MipsXray extends AbstractMarsToolAndApplication {
         this.createActionObjects();
         toolbar = this.setUpToolBar();
 
-//      	   JPanel jp = new JPanel(new FlowLayout(FlowLayout.LEFT));
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
         try {
@@ -201,15 +197,15 @@ public class MipsXray extends AbstractMarsToolAndApplication {
         if (!notice.accessIsFromMIPS()) return;
         if (notice.getAccessType() != AccessNotice.READ) return;
         MemoryAccessNotice man = (MemoryAccessNotice) notice;
-        int currentAdress = man.getAddress();
+        int currentAddress = man.getAddress();
 
-        if (currentAdress == lastAddress) return;
-        lastAddress = currentAdress;
+        if (currentAddress == lastAddress) return;
+        lastAddress = currentAddress;
         ProgramStatement stmt;
 
         try {
             BasicInstruction instr = null;
-            stmt = Memory.getInstance().getStatement(currentAdress);
+            stmt = Memory.getInstance().getStatement(currentAddress);
             if (stmt == null) {
                 return;
             }
@@ -296,7 +292,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
         public int oppositeAxis;
         private boolean isMovingXaxis;
         private Color color;
-        private boolean first_interaction;
+        private boolean firstInteraction;
         private boolean active;
         private boolean isText;
         private ArrayList<Integer> targetVertex;
@@ -310,7 +306,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
             this.name = name;
             this.oppositeAxis = oppositeAxis;
             this.isMovingXaxis = isMovingXaxis;
-            this.first_interaction = true;
+            this.firstInteraction = true;
             this.active = false;
             this.isText = isText;
             this.color = new Color(0, 153, 0);
@@ -413,12 +409,12 @@ public class MipsXray extends AbstractMarsToolAndApplication {
             this.color = color;
         }
 
-        public boolean isFirst_interaction() {
-            return first_interaction;
+        public boolean isFirstInteraction() {
+            return firstInteraction;
         }
 
-        public void setFirst_interaction(boolean first_interaction) {
-            this.first_interaction = first_interaction;
+        public void setFirstInteraction(boolean first_interaction) {
+            this.firstInteraction = first_interaction;
         }
 
         public boolean isActive() {
@@ -529,7 +525,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
 
         }
 
-        //set the binnary opcode value of the basic instructions of MIPS instruction set
+        //set the binary opcode value of the basic instructions of MIPS instruction set
         public void loadHashMapValues() {
             importXmlStringData("/MipsXRayOpcode.xml", opcodeEquivalenceTable, "equivalence", "bits", "mnemonic");
             importXmlStringData("/MipsXRayOpcode.xml", functionEquivalenceTable, "function_equivalence", "bits", "mnemonic");
@@ -1135,7 +1131,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
             for (int i = 0; i < size; i++)
                 track[i] = v.getInit() + i;
             if (v.isActive()) {
-                v.setFirst_interaction(false);
+                v.setFirstInteraction(false);
                 for (int i = 0; i < size; i++) {
                     if (track[i] <= v.getCurrent()) {
                         g2d.setColor(v.getColor());
@@ -1145,7 +1141,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
                 if (v.getCurrent() == track[size - 1])
                     v.setActive(false);
                 v.setCurrent(v.getCurrent() + 1);
-            } else if (!v.isFirst_interaction()) {
+            } else if (!v.isFirstInteraction()) {
                 for (int i = 0; i < size; i++) {
                     g2d.setColor(v.getColor());
                     g2d.fillRect(track[i], v.getOppositeAxis(), 3, 3);
@@ -1167,7 +1163,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
                 track[i] = v.getInit() - i;
 
             if (v.isActive()) {
-                v.setFirst_interaction(false);
+                v.setFirstInteraction(false);
                 for (int i = 0; i < size; i++) {
                     if (track[i] >= v.getCurrent()) {
                         g2d.setColor(v.getColor());
@@ -1178,7 +1174,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
                     v.setActive(false);
 
                 v.setCurrent(v.getCurrent() - 1);
-            } else if (!v.isFirst_interaction()) {
+            } else if (!v.isFirstInteraction()) {
                 for (int i = 0; i < size; i++) {
                     g2d.setColor(v.getColor());
                     g2d.fillRect(track[i], v.getOppositeAxis(), 3, 3);
@@ -1206,7 +1202,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
             }
 
             if (v.isActive()) {
-                v.setFirst_interaction(false);
+                v.setFirstInteraction(false);
                 for (int i = 0; i < size; i++) {
                     if (track[i] >= v.getCurrent()) {
                         g2d.setColor(v.getColor());
@@ -1217,7 +1213,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
                     v.setActive(false);
                 v.setCurrent(v.getCurrent() - 1);
 
-            } else if (!v.isFirst_interaction()) {
+            } else if (!v.isFirstInteraction()) {
                 for (int i = 0; i < size; i++) {
                     g2d.setColor(v.getColor());
                     g2d.fillRect(v.getOppositeAxis(), track[i], 3, 3);
@@ -1239,7 +1235,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
                 track[i] = v.getInit() + i;
 
             if (v.isActive()) {
-                v.setFirst_interaction(false);
+                v.setFirstInteraction(false);
                 for (int i = 0; i < size; i++) {
                     if (track[i] <= v.getCurrent()) {
                         g2d.setColor(v.getColor());
@@ -1250,7 +1246,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
                 if (v.getCurrent() == track[size - 1])
                     v.setActive(false);
                 v.setCurrent(v.getCurrent() + 1);
-            } else if (!v.isFirst_interaction()) {
+            } else if (!v.isFirstInteraction()) {
                 for (int i = 0; i < size; i++) {
                     g2d.setColor(v.getColor());
                     g2d.fillRect(v.getOppositeAxis(), track[i], 3, 3);
@@ -1286,7 +1282,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
                     actionInFunctionalBlock = new TextLayout(" ", new Font("Verdana", Font.BOLD, 13), frc);
             }
             if (v.isActive()) {
-                v.setFirst_interaction(false);
+                v.setFirstInteraction(false);
                 actionInFunctionalBlock.draw(g2d, v.getOppositeAxis(), v.getCurrent());
                 if (v.getCurrent() == v.getEnd())
                     v.setActive(false);

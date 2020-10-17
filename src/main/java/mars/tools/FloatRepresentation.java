@@ -51,9 +51,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * changing a few constants.
  */
 public class FloatRepresentation extends AbstractMarsToolAndApplication {
-    private static String version = "Version 1.1";
-    private static String heading = "32-bit IEEE 754 Floating Point Representation";
-    private static final String title = "Floating Point Representation, ";
+    private static final String title = "Floating Point Representation";
 
     private static final String defaultHex = "00000000";
     private static final String defaultDecimal = "0.0";
@@ -111,7 +109,7 @@ public class FloatRepresentation extends AbstractMarsToolAndApplication {
      * Simple constructor, likely used by the MARS Tools menu mechanism
      */
     public FloatRepresentation() {
-        this(title + version, heading);
+        this(title, null);
     }
 
     /**
@@ -121,7 +119,7 @@ public class FloatRepresentation extends AbstractMarsToolAndApplication {
      * is no driver program to invoke the application.
      */
     public static void main(String[] args) {
-        new FloatRepresentation(title + version, heading).go();
+        new FloatRepresentation(title, null).go();
     }
 
     /**

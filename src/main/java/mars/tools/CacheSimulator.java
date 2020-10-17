@@ -55,7 +55,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class CacheSimulator extends AbstractMarsToolAndApplication {
     private static boolean debug = false; // controls display of debugging info
-    private static String version = "Version 1.2";
     private static String heading = "Simulate and illustrate data cache performance";
     // Major GUI components
     private JComboBox<String> cacheBlockSizeSelector, cacheBlockCountSelector,
@@ -114,7 +113,7 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
      * Simple constructor, likely used by the MARS Tools menu mechanism
      */
     public CacheSimulator() {
-        super("Data Cache Simulation Tool, " + version, heading);
+        super("Data Cache Simulation Tool", heading);
     }
 
 
@@ -125,7 +124,7 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
      * is no driver program to invoke the Cache Simulator.
      */
     public static void main(String[] args) {
-        new CacheSimulator("Data Cache Simulator stand-alone, " + version, heading).go();
+        new CacheSimulator("Data Cache Simulator stand-alone", heading).go();
     }
 
 

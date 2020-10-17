@@ -38,7 +38,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 public class IntroToTools extends AbstractMarsToolAndApplication {
 
     private static String heading = "Introduction to MARS Tools and Applications";
-    private static String version = " Version 1.0";
 
     /**
      * Simple constructor, likely used to run a stand-alone memory reference visualizer.
@@ -54,7 +53,7 @@ public class IntroToTools extends AbstractMarsToolAndApplication {
      * Simple constructor, likely used by the MARS Tools menu mechanism
      */
     public IntroToTools() {
-        super(heading + ", " + version, heading);
+        super(heading, null);
     }
 
 
@@ -65,7 +64,7 @@ public class IntroToTools extends AbstractMarsToolAndApplication {
      * is no driver program to invoke the application.
      */
     public static void main(String[] args) {
-        new IntroToTools(heading + ", " + version, heading).go();
+        new IntroToTools(heading, null).go();
     }
 
 

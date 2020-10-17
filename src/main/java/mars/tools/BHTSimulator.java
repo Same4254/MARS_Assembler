@@ -75,17 +75,7 @@ public class BHTSimulator extends AbstractMarsToolAndApplication implements Acti
     /**
      * the name of the tool
      */
-    public static final String BHT_NAME = "BHT Simulator";
-
-    /**
-     * the version of the tool
-     */
-    public static final String BHT_VERSION = "Version 1.0 (Ingo Kofler)";
-
-    /**
-     * the heading of the tool
-     */
-    public static final String BHT_HEADING = "Branch History Table Simulator";
+    public static final String BHT_NAME = "Branch History Table Simulator";
 
     /**
      * the GUI of the BHT simulator
@@ -112,7 +102,7 @@ public class BHTSimulator extends AbstractMarsToolAndApplication implements Acti
      * Creates a BHT Simulator with given name and heading.
      */
     public BHTSimulator() {
-        super(BHTSimulator.BHT_NAME + ", " + BHTSimulator.BHT_VERSION, BHTSimulator.BHT_HEADING);
+        super(BHTSimulator.BHT_NAME, null);
     }
 
 

@@ -50,7 +50,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class MemoryReferenceVisualization extends AbstractMarsToolAndApplication {
 
-    private static String version = "Version 1.0";
     private static String heading = "Visualizing memory reference patterns";
 
     // Major GUI components
@@ -134,7 +133,7 @@ public class MemoryReferenceVisualization extends AbstractMarsToolAndApplication
      * Simple constructor, likely used by the MARS Tools menu mechanism
      */
     public MemoryReferenceVisualization() {
-        super("Memory Reference Visualization, " + version, heading);
+        super("Memory Reference Visualization", heading);
     }
 
 
@@ -145,7 +144,7 @@ public class MemoryReferenceVisualization extends AbstractMarsToolAndApplication
      * is no driver program to invoke the application.
      */
     public static void main(String[] args) {
-        new MemoryReferenceVisualization("Memory Reference Visualization stand-alone, " + version, heading).go();
+        new MemoryReferenceVisualization("Memory Reference Visualization stand-alone", heading).go();
     }
 
 
