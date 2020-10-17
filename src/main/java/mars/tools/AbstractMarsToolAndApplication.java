@@ -131,7 +131,7 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
      * Run the simulator as stand-alone application.  For this default implementation,
      * the user-defined main display of the user interface is identical for both stand-alone
      * and MARS Tools menu use, but the control buttons are different because the stand-alone
-     * must include a mechansim for controlling the opening, assembling, and executing of
+     * must include a mechanism for controlling the opening, assembling, and executing of
      * an underlying MIPS program.  The generic controls include: a button that triggers a
      * file open dialog, a text field to display status messages, the run-speed slider
      * to control execution rate when running a MIPS program, a button that assembles and
