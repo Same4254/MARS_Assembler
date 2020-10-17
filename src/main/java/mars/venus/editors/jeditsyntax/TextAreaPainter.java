@@ -90,7 +90,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
      * Returns the syntax styles used to paint colorized text. Entry <i>n</i>
      * will be used to paint tokens with id = <i>n</i>.
      *
-     * @see org.syntax.jedit.Token
+     * see org.syntax.jedit.Token
      */
     public final SyntaxStyle[] getStyles() {
         return styles;
@@ -99,9 +99,10 @@ public class TextAreaPainter extends JComponent implements TabExpander {
     /**
      * Sets the syntax styles used to paint colorized text. Entry <i>n</i>
      * will be used to paint tokens with id = <i>n</i>.
+     * <p>
+     * see org.syntax.jedit.Token
      *
-     * @param styles The syntax styles
-     * @see org.syntax.jedit.Token
+     * @param styles The syntax styles     *
      */
     public final void setStyles(SyntaxStyle[] styles) {
         this.styles = styles;

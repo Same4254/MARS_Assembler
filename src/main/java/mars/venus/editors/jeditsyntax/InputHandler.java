@@ -27,12 +27,11 @@ import java.util.Hashtable;
  * This class provides all the necessary support code for an input
  * handler, but doesn't actually do any key binding logic. It is up
  * to the implementations of this class to do so.
+ * <p>
+ * see org.syntax.jedit.DefaultInputHandler
  *
  * @author Slava Pestov
  * @version $Id: InputHandler.java,v 1.14 1999/12/13 03:40:30 sp Exp $
- * @see org.syntax.jedit.DefaultInputHandler
- * <p>
- * 08/12/2002	Clipboard actions	(Oliver Henning)
  */
 public abstract class InputHandler extends KeyAdapter {
     /**
