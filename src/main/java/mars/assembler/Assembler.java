@@ -308,7 +308,7 @@ public class Assembler {
                     if (compactTranslationCanBeApplied(statement)) {
                         templateList = inst.getCompactBasicIntructionTemplateList();
                     } else {
-                        templateList = inst.getBasicIntructionTemplateList();
+                        templateList = inst.getBasicInstructionTemplateList();
                     }
 
                     // subsequent ProgramStatement constructor needs the correct text segment address.

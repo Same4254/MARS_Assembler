@@ -40,10 +40,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
- * Bitmapp display simulator.  It can be run either as a stand-alone Java application having
+ * Bitmap display simulator.  It can be run either as a stand-alone Java application having
  * access to the mars package, or through MARS as an item in its Tools menu.  It makes
  * maximum use of methods inherited from its abstract superclass AbstractMarsToolAndApplication.
- * Pete Sanderson, verison 1.0, 23 December 2010.
+ * Pete Sanderson, version 1.0, 23 December 2010.
  */
 public class BitmapDisplay extends AbstractMarsToolAndApplication {
 

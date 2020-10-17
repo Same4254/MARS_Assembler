@@ -129,7 +129,7 @@ public class ExtendedInstruction extends Instruction {
      * @return ArrayList of Strings.
      */
 
-    public ArrayList<String> getBasicIntructionTemplateList() {
+    public ArrayList<String> getBasicInstructionTemplateList() {
         return translationStrings;
     }
 
@@ -202,7 +202,7 @@ public class ExtendedInstruction extends Instruction {
      * <LI>VHnPm (m=1,2,3,4) means substitute high order 16 bits from 32 bit value in source token n, after adding m. Must then add 1 if bit 15 is 1. See VHn.
      * <LI>LLP is similar to LLn, but is needed for "label+100000" address offset. Immediate is added before taking low order 16.
      * <LI>LLPU is similar to LLnU, but is needed for "label+100000" address offset. Immediate is added before taking low order 16 (unsigned).
-     * <LI>LLPPm (m=1,2,3,4) is similar to LLP except m is added along with mmediate before taking low order 16.
+     * <LI>LLPPm (m=1,2,3,4) is similar to LLP except m is added along with immediate before taking low order 16.
      * <LI>LHPA is similar to LHn, but is needed for "label+100000" address offset. Immediate is added before taking high order 16.
      * <LI>LHPN is similar to LHPA, used only by "la" instruction. Address resolved by "ori" so do not add 1 if bit 15 is 1.
      * <LI>LHPAPm (m=1,2,3,4) is similar to LHPA except value m is added along with immediate before taking high order 16.

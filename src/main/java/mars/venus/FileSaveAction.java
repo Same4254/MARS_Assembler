@@ -42,7 +42,7 @@ public class FileSaveAction extends GuiAction {
     }
 
     /**
-     * saves the file, if not alredy saved it will do a saveAs
+     * saves the file, if not already saved it will do a saveAs
      */
 
     public void actionPerformed(ActionEvent e) {

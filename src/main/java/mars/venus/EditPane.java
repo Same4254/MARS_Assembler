@@ -185,12 +185,11 @@ public class EditPane extends JPanel implements Observer {
 
 
     /**
-     * For initalizing the source code when opening an ASM file
+     * For initializing the source code when opening an ASM file
      *
      * @param s        String containing text
      * @param editable set true if code is editable else false
      */
-
     public void setSourceCode(String s, boolean editable) {
         sourceCode.setSourceCode(s, editable);
     }
@@ -579,7 +578,7 @@ public class EditPane extends JPanel implements Observer {
      * @return Returns TEXT_FOUND if not initially at end of selected match and matching
      * occurrence is found.  Returns TEXT_NOT_FOUND if the text is not matched.
      * Returns TEXT_REPLACED_NOT_FOUND_NEXT if replacement is successful but there are
-     * no additional matches.  Returns TEXT_REPLACED_FOUND_NEXT if reaplacement is
+     * no additional matches.  Returns TEXT_REPLACED_FOUND_NEXT if replacement is
      * successful and there is at least one additional match.
      */
     public int doReplace(String find, String replace, boolean caseSensitive) {

@@ -62,7 +62,7 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
             cachePlacementSelector, cacheReplacementSelector;
     private JComboBox<String> cacheSetSizeSelector;
     private JTextField memoryAccessCountDisplay, cacheHitCountDisplay, cacheMissCountDisplay,
-            replacementPolicyDisplay, cachableAddressesDisplay,
+            replacementPolicyDisplay, cacheableAddressesDisplay,
             cacheSizeDisplay;
     private JProgressBar cacheHitRateDisplay;
     private Animation animations;
@@ -266,16 +266,16 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
         cacheSetSizeRow.add(new JLabel("Set size (blocks) "), BorderLayout.WEST);
         cacheSetSizeRow.add(cacheSetSizeSelector, BorderLayout.EAST);
 
-        // Cachable address range "selection" removed for now...
+        // Cacheable address range "selection" removed for now...
       /*
-         JPanel cachableAddressesRow = getPanelWithBorderLayout();
-         cachableAddressesRow.setBorder(emptyBorder);
-         cachableAddressesRow.add(new JLabel("Cachable Addresses "),BorderLayout.WEST);
-         cachableAddressesDisplay = new JTextField("all data segment");
-         cachableAddressesDisplay.setEditable(false);
-         cachableAddressesDisplay.setBackground(backgroundColor);
-         cachableAddressesDisplay.setHorizontalAlignment(JTextField.RIGHT);
-         cachableAddressesRow.add(cachableAddressesDisplay, BorderLayout.EAST);
+         JPanel cacheableAddressesRow = getPanelWithBorderLayout();
+         cacheableAddressesRow.setBorder(emptyBorder);
+         cacheableAddressesRow.add(new JLabel("Cacheable Addresses "),BorderLayout.WEST);
+         cacheableAddressesDisplay = new JTextField("all data segment");
+         cacheableAddressesDisplay.setEditable(false);
+         cacheableAddressesDisplay.setBackground(backgroundColor);
+         cacheableAddressesDisplay.setHorizontalAlignment(JTextField.RIGHT);
+         cacheableAddressesRow.add(cacheableAddressesDisplay, BorderLayout.EAST);
       */
         JPanel cacheNumberBlocksRow = getPanelWithBorderLayout();
         cacheNumberBlocksRow.setBorder(emptyBorder);

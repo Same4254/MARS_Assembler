@@ -32,7 +32,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
- * Represents occurrance of an error detected during tokenizing, assembly or simulation.
+ * Represents occurrence of an error detected during tokenizing, assembly or simulation.
  *
  * @author Pete Sanderson
  * @version August 2003

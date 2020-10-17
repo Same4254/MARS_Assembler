@@ -895,7 +895,7 @@ interface CaptureDisplayAlignmentStrategy {
 }
 
 /**
- * Captured and scaled image should be displayed centerd in the panel.
+ * Captured and scaled image should be displayed centered in the panel.
  */
 class CaptureDisplayCentered implements CaptureDisplayAlignmentStrategy {
     /**
