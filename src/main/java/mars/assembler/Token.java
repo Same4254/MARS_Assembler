@@ -42,10 +42,10 @@ public class Token {
 
     private TokenTypes type;
     private String value;
-    private MIPSprogram sourceMIPSprogram;
+    private MipsProgram sourceMipsProgram;
     private int sourceLine, sourcePos;
     // original program and line will differ from the above if token was defined in an included file
-    private MIPSprogram originalMIPSprogram;
+    private MipsProgram originalMipsProgram;
     private int originalSourceLine;
 
     /**
@@ -53,19 +53,19 @@ public class Token {
      *
      * @param type              The token type that this token has. (e.g. REGISTER_NAME)
      * @param value             The source value for this token (e.g. $t3)
-     * @param sourceMIPSprogram The MIPSprogram object containing this token
+     * @param sourceMipsProgram The MIPSprogram object containing this token
      * @param line              The line number in source program in which this token appears.
      * @param start             The starting position in that line number of this token's source value.
      * @see TokenTypes
      **/
 
-    public Token(TokenTypes type, String value, MIPSprogram sourceMIPSprogram, int line, int start) {
+    public Token(TokenTypes type, String value, MipsProgram sourceMipsProgram, int line, int start) {
         this.type = type;
         this.value = value;
-        this.sourceMIPSprogram = sourceMIPSprogram;
+        this.sourceMipsProgram = sourceMipsProgram;
         this.sourceLine = line;
         this.sourcePos = start;
-        this.originalMIPSprogram = sourceMIPSprogram;
+        this.originalMipsProgram = sourceMipsProgram;
         this.originalSourceLine = line;
     }
 
@@ -79,8 +79,8 @@ public class Token {
      * @param origProgram    MIPS program containing this token.
      * @param origSourceLine Line within that program of this token.
      **/
-    public void setOriginal(MIPSprogram origProgram, int origSourceLine) {
-        this.originalMIPSprogram = origProgram;
+    public void setOriginal(MipsProgram origProgram, int origSourceLine) {
+        this.originalMipsProgram = origProgram;
         this.originalSourceLine = origSourceLine;
     }
 
@@ -89,8 +89,8 @@ public class Token {
      *
      * @return MIPSprogram of origin for this token.
      **/
-    public MIPSprogram getOriginalProgram() {
-        return this.originalMIPSprogram;
+    public MipsProgram getOriginalProgram() {
+        return this.originalMipsProgram;
     }
 
     /**
@@ -150,8 +150,8 @@ public class Token {
      * @return MIPSprogram object associated with this token.
      **/
 
-    public MIPSprogram getSourceMIPSprogram() {
-        return sourceMIPSprogram;
+    public MipsProgram getSourceMIPSprogram() {
+        return sourceMipsProgram;
     }
 
     /**

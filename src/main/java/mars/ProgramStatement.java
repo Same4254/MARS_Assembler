@@ -46,7 +46,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 public class ProgramStatement {
-    private MIPSprogram sourceMIPSprogram;
+    private MipsProgram sourceMipsProgram;
     private String source, basicAssemblyStatement, machineStatement;
     private TokenList originalTokenList, strippedTokenList;
     private BasicStatementList basicStatementList;
@@ -65,7 +65,7 @@ public class ProgramStatement {
      * Constructor for ProgramStatement when there are links back to all source and token
      * information.  These can be used by a debugger later on.
      *
-     * @param sourceMIPSprogram The MIPSprogram object that contains this statement
+     * @param sourceMipsProgram The MIPSprogram object that contains this statement
      * @param source            The corresponding MIPS source statement.
      * @param origTokenList     Complete list of Token objects (includes labels, comments, parentheses, etc)
      * @param strippedTokenList List of Token objects with all but operators and operands removed.
@@ -73,9 +73,9 @@ public class ProgramStatement {
      * @param textAddress       The Text Segment address in memory where the binary machine code for this statement
      *                          is stored.
      **/
-    public ProgramStatement(MIPSprogram sourceMIPSprogram, String source, TokenList origTokenList, TokenList strippedTokenList,
+    public ProgramStatement(MipsProgram sourceMipsProgram, String source, TokenList origTokenList, TokenList strippedTokenList,
                             Instruction inst, int textAddress, int sourceLine) {
-        this.sourceMIPSprogram = sourceMIPSprogram;
+        this.sourceMipsProgram = sourceMipsProgram;
         this.source = source;
         this.originalTokenList = origTokenList;
         this.strippedTokenList = strippedTokenList;
@@ -106,7 +106,7 @@ public class ProgramStatement {
      *                        is stored.
      **/
     public ProgramStatement(int binaryStatement, int textAddress) {
-        this.sourceMIPSprogram = null;
+        this.sourceMipsProgram = null;
         this.binaryStatement = binaryStatement;
         this.textAddress = textAddress;
         this.originalTokenList = this.strippedTokenList = null;
@@ -181,7 +181,7 @@ public class ProgramStatement {
                     registerNumber = RegisterFile.getUserRegister(tokenValue).getNumber();
                 } catch (Exception e) {
                     // should never happen; should be caught before now...
-                    errors.add(new ErrorMessage(this.sourceMIPSprogram, token.getSourceLine(), token.getStartPos(), "invalid register name"));
+                    errors.add(new ErrorMessage(this.sourceMipsProgram, token.getSourceLine(), token.getStartPos(), "invalid register name"));
                     return;
                 }
                 this.operands[this.numOperands++] = registerNumber;
@@ -192,7 +192,7 @@ public class ProgramStatement {
                 basicStatementList.addString(basicStatementElement);
                 if (registerNumber < 0) {
                     // should never happen; should be caught before now...
-                    errors.add(new ErrorMessage(this.sourceMIPSprogram, token.getSourceLine(), token.getStartPos(), "invalid register name"));
+                    errors.add(new ErrorMessage(this.sourceMipsProgram, token.getSourceLine(), token.getStartPos(), "invalid register name"));
                     return;
                 }
                 this.operands[this.numOperands++] = registerNumber;
@@ -203,14 +203,14 @@ public class ProgramStatement {
                 basicStatementList.addString(basicStatementElement);
                 if (registerNumber < 0) {
                     // should never happen; should be caught before now...
-                    errors.add(new ErrorMessage(this.sourceMIPSprogram, token.getSourceLine(), token.getStartPos(), "invalid FPU register name"));
+                    errors.add(new ErrorMessage(this.sourceMipsProgram, token.getSourceLine(), token.getStartPos(), "invalid FPU register name"));
                     return;
                 }
                 this.operands[this.numOperands++] = registerNumber;
             } else if (tokenType == TokenTypes.IDENTIFIER) {
-                int address = this.sourceMIPSprogram.getLocalSymbolTable().getAddressLocalOrGlobal(tokenValue);
+                int address = this.sourceMipsProgram.getLocalSymbolTable().getAddressLocalOrGlobal(tokenValue);
                 if (address == SymbolTable.NOT_FOUND) { // symbol used without being defined
-                    errors.add(new ErrorMessage(this.sourceMIPSprogram, token.getSourceLine(), token.getStartPos(),
+                    errors.add(new ErrorMessage(this.sourceMipsProgram, token.getSourceLine(), token.getStartPos(),
                             "Symbol \"" + tokenValue + "\" not found in symbol table."));
                     return;
                 }
@@ -337,7 +337,7 @@ public class ProgramStatement {
         // pseudo-instruction (expansion must be to all basic instructions).
         // This is an error on the part of the pseudo-instruction author.
         catch (ClassCastException cce) {
-            errors.add(new ErrorMessage(this.sourceMIPSprogram, this.sourceLine, 0,
+            errors.add(new ErrorMessage(this.sourceMipsProgram, this.sourceLine, 0,
                     "INTERNAL ERROR: pseudo-instruction expansion contained a pseudo-instruction"));
             return;
         }
@@ -347,7 +347,7 @@ public class ProgramStatement {
             if ((this.textAddress & 0xF0000000) != (this.operands[0] & 0xF0000000)) {
                 // attempt to jump beyond 28-bit byte (26-bit word) address range.
                 // SPIM flags as warning, I'll flag as error b/c MARS text segment not long enough for it to be OK.
-                errors.add(new ErrorMessage(this.sourceMIPSprogram, this.sourceLine, 0,
+                errors.add(new ErrorMessage(this.sourceMipsProgram, this.sourceLine, 0,
                         "Jump target word address beyond 26-bit range"));
                 return;
             }
@@ -449,8 +449,8 @@ public class ProgramStatement {
      *
      * @return The MIPSprogram object.  May be null...
      **/
-    public MIPSprogram getSourceMIPSprogram() {
-        return sourceMIPSprogram;
+    public MipsProgram getSourceMIPSprogram() {
+        return sourceMipsProgram;
     }
 
     /**
@@ -459,7 +459,7 @@ public class ProgramStatement {
      * @return The file name.
      **/
     public String getSourceFile() {
-        return (sourceMIPSprogram == null) ? "" : sourceMIPSprogram.getFilename();
+        return (sourceMipsProgram == null) ? "" : sourceMipsProgram.getFilename();
     }
 
 
@@ -593,7 +593,7 @@ public class ProgramStatement {
         int startPos = this.machineStatement.indexOf(mask);
         int endPos = this.machineStatement.lastIndexOf(mask);
         if (startPos == -1 || endPos == -1) { // should NEVER occur
-            errors.add(new ErrorMessage(this.sourceMIPSprogram, this.sourceLine, 0,
+            errors.add(new ErrorMessage(this.sourceMipsProgram, this.sourceLine, 0,
                     "INTERNAL ERROR: mismatch in number of operands in statement vs mask"));
             return;
         }

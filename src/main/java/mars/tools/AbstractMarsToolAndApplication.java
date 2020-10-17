@@ -1,7 +1,7 @@
 package mars.tools;
 
 import mars.Globals;
-import mars.MIPSprogram;
+import mars.MipsProgram;
 import mars.Settings;
 import mars.mips.hardware.*;
 import mars.util.FilenameFinder;
@@ -712,7 +712,7 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
 
             Thread.currentThread().setPriority(Thread.NORM_PRIORITY - 1);
             Thread.yield();
-            MIPSprogram program = new MIPSprogram();
+            MipsProgram program = new MipsProgram();
             mars.Globals.program = program; // Shouldn't have to do this...
             String fileToAssemble = mostRecentlyOpenedFile.getPath();
             ArrayList<String> filesToAssemble = null;
@@ -723,7 +723,7 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
                 filesToAssemble = new ArrayList<>();
                 filesToAssemble.add(fileToAssemble);
             }
-            ArrayList<MIPSprogram> programsToAssemble = null;
+            ArrayList<MipsProgram> programsToAssemble = null;
             try {
                 operationStatusMessages.displayNonTerminatingMessage("Assembling " + fileToAssemble);
                 programsToAssemble = program.prepareFilesForAssembly(filesToAssemble, fileToAssemble, exceptionHandler);

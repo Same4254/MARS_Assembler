@@ -45,7 +45,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @version August 2003
  **/
 
-public class MIPSprogram {
+public class MipsProgram {
 
     // See explanation of method inSteppedExecution() below.
     private boolean steppedExecution = false;
@@ -237,7 +237,7 @@ public class MIPSprogram {
             }
         } catch (Exception e) {
             errors = new ErrorList();
-            errors.add(new ErrorMessage((MIPSprogram) null, 0, 0, e.toString()));
+            errors.add(new ErrorMessage((MipsProgram) null, 0, 0, e.toString()));
             throw new ProcessingException(errors);
         }
     }
@@ -270,8 +270,8 @@ public class MIPSprogram {
      * @throws ProcessingException Will throw exception if errors occured while reading or tokenizing.
      **/
 
-    public ArrayList<MIPSprogram> prepareFilesForAssembly(ArrayList<String> filenames, String leadFilename, String exceptionHandler) throws ProcessingException {
-        ArrayList<MIPSprogram> MIPSprogramsToAssemble = new ArrayList<>();
+    public ArrayList<MipsProgram> prepareFilesForAssembly(ArrayList<String> filenames, String leadFilename, String exceptionHandler) throws ProcessingException {
+        ArrayList<MipsProgram> MIPSprogramsToAssemble = new ArrayList<>();
         int leadFilePosition = 0;
         if (exceptionHandler != null && exceptionHandler.length() > 0) {
             filenames.add(0, exceptionHandler);
@@ -279,7 +279,7 @@ public class MIPSprogram {
         }
         for (int i = 0; i < filenames.size(); i++) {
             String filename = filenames.get(i);
-            MIPSprogram preparee = (filename.equals(leadFilename)) ? this : new MIPSprogram();
+            MipsProgram preparee = (filename.equals(leadFilename)) ? this : new MipsProgram();
             preparee.readSource(filename);
             preparee.tokenize();
             // I want "this" MIPSprogram to be the first in the list...except for exception handler
@@ -303,7 +303,7 @@ public class MIPSprogram {
      * @throws ProcessingException Will throw exception if errors occured while assembling.
      **/
 
-    public ErrorList assemble(ArrayList<MIPSprogram> MIPSprogramsToAssemble, boolean extendedAssemblerEnabled)
+    public ErrorList assemble(ArrayList<MipsProgram> MIPSprogramsToAssemble, boolean extendedAssemblerEnabled)
             throws ProcessingException {
         return assemble(MIPSprogramsToAssemble, extendedAssemblerEnabled, false);
     }
@@ -321,7 +321,7 @@ public class MIPSprogram {
      * @throws ProcessingException Will throw exception if errors occured while assembling.
      **/
 
-    public ErrorList assemble(ArrayList<MIPSprogram> MIPSprogramsToAssemble, boolean extendedAssemblerEnabled,
+    public ErrorList assemble(ArrayList<MipsProgram> MIPSprogramsToAssemble, boolean extendedAssemblerEnabled,
                               boolean warningsAreErrors) throws ProcessingException {
         this.backStepper = null;
         Assembler asm = new Assembler();
@@ -405,7 +405,7 @@ public class MIPSprogram {
 
     /**
      * Instantiates a new {@link MacroPool} and sends reference of this
-     * {@link MIPSprogram} to it
+     * {@link MipsProgram} to it
      *
      * @return instatiated MacroPool
      * @author M.H.Sekhavat <sekhavat17@gmail.com>

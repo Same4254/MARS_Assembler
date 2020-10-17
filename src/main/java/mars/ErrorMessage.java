@@ -116,15 +116,15 @@ public class ErrorMessage {
      * Constructor for ErrorMessage.  Assumes line number is calculated after any .include files expanded, and
      * if there were, it will adjust filename and line number so message reflects original file and line number.
      *
-     * @param sourceMIPSprogram MIPSprogram object of source file in which this error appears.
+     * @param sourceMipsProgram MIPSprogram object of source file in which this error appears.
      * @param line              Line number in source program being processed when error occurred.
      * @param position          Position within line being processed when error occurred.  Normally is starting
      *                          position of source token.
      * @param message           String containing appropriate error message.
      **/
 
-    public ErrorMessage(MIPSprogram sourceMIPSprogram, int line, int position, String message) {
-        this(ERROR, sourceMIPSprogram, line, position, message);
+    public ErrorMessage(MipsProgram sourceMipsProgram, int line, int position, String message) {
+        this(ERROR, sourceMipsProgram, line, position, message);
     }
 
 
@@ -133,31 +133,31 @@ public class ErrorMessage {
      * if there were, it will adjust filename and line number so message reflects original file and line number.
      *
      * @param isWarning         set to WARNING if message is a warning not error, else set to ERROR or omit.
-     * @param sourceMIPSprogram MIPSprogram object of source file in which this error appears.
+     * @param sourceMipsProgram MIPSprogram object of source file in which this error appears.
      * @param line              Line number in source program being processed when error occurred.
      * @param position          Position within line being processed when error occurred.  Normally is starting
      *                          position of source token.
      * @param message           String containing appropriate error message.
      **/
 
-    public ErrorMessage(boolean isWarning, MIPSprogram sourceMIPSprogram, int line, int position, String message) {
+    public ErrorMessage(boolean isWarning, MipsProgram sourceMipsProgram, int line, int position, String message) {
         this.isWarning = isWarning;
-        if (sourceMIPSprogram == null) {
+        if (sourceMipsProgram == null) {
             this.filename = "";
             this.line = line;
         } else {
-            if (sourceMIPSprogram.getSourceLineList() == null) {
-                this.filename = sourceMIPSprogram.getFilename();
+            if (sourceMipsProgram.getSourceLineList() == null) {
+                this.filename = sourceMipsProgram.getFilename();
                 this.line = line;
             } else {
-                mars.assembler.SourceLine sourceLine = sourceMIPSprogram.getSourceLineList().get(line - 1);
+                mars.assembler.SourceLine sourceLine = sourceMipsProgram.getSourceLineList().get(line - 1);
                 this.filename = sourceLine.getFilename();
                 this.line = sourceLine.getLineNumber();
             }
         }
         this.position = position;
         this.message = message;
-        this.macroExpansionHistory = getExpansionHistory(sourceMIPSprogram);
+        this.macroExpansionHistory = getExpansionHistory(sourceMipsProgram);
     }
 
     /**
@@ -280,10 +280,10 @@ public class ErrorMessage {
     }
 
     // Added by Mohammad Sekavat Dec 2012
-    private static String getExpansionHistory(MIPSprogram sourceMIPSprogram) {
-        if (sourceMIPSprogram == null || sourceMIPSprogram.getLocalMacroPool() == null)
+    private static String getExpansionHistory(MipsProgram sourceMipsProgram) {
+        if (sourceMipsProgram == null || sourceMipsProgram.getLocalMacroPool() == null)
             return "";
-        return sourceMIPSprogram.getLocalMacroPool().getExpansionHistory();
+        return sourceMipsProgram.getLocalMacroPool().getExpansionHistory();
     }
 
 }  // ErrorMessage

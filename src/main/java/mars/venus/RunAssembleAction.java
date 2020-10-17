@@ -43,7 +43,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class RunAssembleAction extends GuiAction {
 
-    private static ArrayList<MIPSprogram> MIPSprogramsToAssemble;
+    private static ArrayList<MipsProgram> MIPSprogramsToAssemble;
     private static boolean extendedAssemblerEnabled;
     private static boolean warningsAreErrors;
     // Threshold for adding filename to printed message of files being assembled.
@@ -55,7 +55,7 @@ public class RunAssembleAction extends GuiAction {
     }
 
     // These are both used by RunResetAction to re-assemble under identical conditions.
-    static ArrayList<MIPSprogram> getMIPSprogramsToAssemble() {
+    static ArrayList<MipsProgram> getMIPSprogramsToAssemble() {
         return MIPSprogramsToAssemble;
     }
 
@@ -79,7 +79,7 @@ public class RunAssembleAction extends GuiAction {
                 mainUI.editor.save();
             }
             try {
-                Globals.program = new MIPSprogram();
+                Globals.program = new MipsProgram();
                 ArrayList<String> filesToAssemble;
                 if (Globals.getSettings().getBooleanSetting(Settings.ASSEMBLE_ALL_ENABLED)) {// setting calls for multiple file assembly
                     filesToAssemble = FilenameFinder.getFilenameList(
@@ -160,7 +160,7 @@ public class RunAssembleAction extends GuiAction {
 
     // Handy little utility for building comma-separated list of filenames
     // while not letting line length get out of hand.
-    private String buildFileNameList(String preamble, ArrayList<MIPSprogram> programList) {
+    private String buildFileNameList(String preamble, ArrayList<MipsProgram> programList) {
         StringBuilder result = new StringBuilder(preamble);
         int lineLength = result.length();
         for (int i = 0; i < programList.size(); i++) {

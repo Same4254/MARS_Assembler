@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import mars.ErrorList;
 import mars.ErrorMessage;
-import mars.MIPSprogram;
+import mars.MipsProgram;
 import mars.mips.hardware.RegisterFile;
 import mars.mips.hardware.Coprocessor0;
 import mars.mips.hardware.Coprocessor1;
@@ -42,7 +42,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class Macro {
     private String name;
-    private MIPSprogram program;
+    private MipsProgram program;
     private ArrayList<String> labels;
 
     /**
@@ -73,11 +73,11 @@ public class Macro {
         this.name = name;
     }
 
-    public MIPSprogram getProgram() {
+    public MipsProgram getProgram() {
         return program;
     }
 
-    public void setProgram(MIPSprogram program) {
+    public void setProgram(MipsProgram program) {
         this.program = program;
     }
 

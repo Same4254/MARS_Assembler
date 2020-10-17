@@ -1,7 +1,7 @@
 package mars.mips.instructions;
 
 import mars.Globals;
-import mars.MIPSprogram;
+import mars.MipsProgram;
 import mars.Settings;
 import mars.assembler.Symbol;
 import mars.assembler.TokenList;
@@ -218,7 +218,7 @@ public class ExtendedInstruction extends Instruction {
      * @return String representing basic assembler statement.
      */
 
-    public static String makeTemplateSubstitutions(MIPSprogram program, String template, TokenList theTokenList) {
+    public static String makeTemplateSubstitutions(MipsProgram program, String template, TokenList theTokenList) {
         String instruction = template;
         int index;
         // Added 22 Jan 2008 by DPS.  The DBNOP template means to generate a "nop" instruction if delayed branching

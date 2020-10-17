@@ -116,7 +116,7 @@ public class MarsLaunch {
     private ArrayList<String> registerDisplayList;
     private ArrayList<String> memoryDisplayList;
     private ArrayList<String> filenameList;
-    private MIPSprogram code;
+    private MipsProgram code;
     private int maxSteps;
     private int instructionCount;
     private PrintStream out; // stream for display of command line output
@@ -151,7 +151,7 @@ public class MarsLaunch {
             filenameList = new ArrayList<>();
             MemoryConfigurations.setCurrentConfiguration(MemoryConfigurations.getDefaultConfiguration());
             // do NOT use Globals.program for command line MARS -- it triggers 'backstep' log.
-            code = new MIPSprogram();
+            code = new MipsProgram();
             maxSteps = -1;
             out = System.out;
             if (parseCommandArgs(args)) {

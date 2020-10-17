@@ -60,7 +60,7 @@ public class Assembler {
     private boolean autoAlign;
     private Directives currentDirective;
     private Directives dataDirective;
-    private MIPSprogram fileCurrentlyBeingAssembled;
+    private MipsProgram fileCurrentlyBeingAssembled;
     private TokenList globalDeclarationList;
     private UserKernelAddressSpace textAddress;
     private UserKernelAddressSpace dataAddress;
@@ -81,7 +81,7 @@ public class Assembler {
      * statement.
      * @see ProgramStatement
      **/
-    public ArrayList<ProgramStatement> assemble(MIPSprogram p, boolean extendedAssemblerEnabled)
+    public ArrayList<ProgramStatement> assemble(MipsProgram p, boolean extendedAssemblerEnabled)
             throws ProcessingException {
         return assemble(p, extendedAssemblerEnabled, false);
     }
@@ -104,9 +104,9 @@ public class Assembler {
      * statement.
      * @see ProgramStatement
      **/
-    public ArrayList<ProgramStatement> assemble(MIPSprogram p, boolean extendedAssemblerEnabled,
-                              boolean warningsAreErrors) throws ProcessingException {
-        ArrayList<MIPSprogram> programFiles = new ArrayList<>();
+    public ArrayList<ProgramStatement> assemble(MipsProgram p, boolean extendedAssemblerEnabled,
+                                                boolean warningsAreErrors) throws ProcessingException {
+        ArrayList<MipsProgram> programFiles = new ArrayList<>();
         programFiles.add(p);
         return this.assemble(programFiles, extendedAssemblerEnabled, warningsAreErrors);
     }
@@ -136,7 +136,7 @@ public class Assembler {
      * statement. Returns null if incoming array list is null or empty.
      * @see ProgramStatement
      **/
-    public ArrayList<ProgramStatement> assemble(ArrayList<MIPSprogram> tokenizedProgramFiles, boolean extendedAssemblerEnabled)
+    public ArrayList<ProgramStatement> assemble(ArrayList<MipsProgram> tokenizedProgramFiles, boolean extendedAssemblerEnabled)
             throws ProcessingException {
         return assemble(tokenizedProgramFiles, extendedAssemblerEnabled, false);
     }
@@ -160,8 +160,8 @@ public class Assembler {
      * statement. Returns null if incoming array list is null or empty.
      * @see ProgramStatement
      **/
-    public ArrayList<ProgramStatement> assemble(ArrayList<MIPSprogram> tokenizedProgramFiles, boolean extendedAssemblerEnabled,
-                              boolean warningsAreErrors) throws ProcessingException {
+    public ArrayList<ProgramStatement> assemble(ArrayList<MipsProgram> tokenizedProgramFiles, boolean extendedAssemblerEnabled,
+                                                boolean warningsAreErrors) throws ProcessingException {
 
         if (tokenizedProgramFiles == null || tokenizedProgramFiles.size() == 0)
             return null;

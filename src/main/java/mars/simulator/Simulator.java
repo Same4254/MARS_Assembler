@@ -115,7 +115,7 @@ public class Simulator extends Observable {
      * @throws ProcessingException Throws exception if run-time exception occurs.
      **/
 
-    public boolean simulate(MIPSprogram p, int pc, int maxSteps, int[] breakPoints, AbstractAction actor) throws ProcessingException {
+    public boolean simulate(MipsProgram p, int pc, int maxSteps, int[] breakPoints, AbstractAction actor) throws ProcessingException {
         simulatorThread = new SimThread(p, pc, maxSteps, breakPoints, actor);
         simulatorThread.start();
 
@@ -203,7 +203,7 @@ public class Simulator extends Observable {
      */
 
     class SimThread extends SwingWorker {
-        private MIPSprogram p;
+        private MipsProgram p;
         private int pc, maxSteps;
         private int[] breakPoints;
         private boolean done;
@@ -223,7 +223,7 @@ public class Simulator extends Observable {
          * @param breakPoints array of breakpoints (instruction addresses) specified by user
          * @param starter     the GUI component responsible for this call, usually GO or STEP.  null if none.
          */
-        SimThread(MIPSprogram p, int pc, int maxSteps, int[] breakPoints, AbstractAction starter) {
+        SimThread(MipsProgram p, int pc, int maxSteps, int[] breakPoints, AbstractAction starter) {
             super(Globals.getGui() != null);
             this.p = p;
             this.pc = pc;
@@ -278,7 +278,7 @@ public class Simulator extends Observable {
                 statement = Globals.memory.getStatement(RegisterFile.getProgramCounter());
             } catch (AddressErrorException e) {
                 ErrorList el = new ErrorList();
-                el.add(new ErrorMessage((MIPSprogram) null, 0, 0, "invalid program counter value: " + Binary.intToHexString(RegisterFile.getProgramCounter())));
+                el.add(new ErrorMessage((MipsProgram) null, 0, 0, "invalid program counter value: " + Binary.intToHexString(RegisterFile.getProgramCounter())));
                 this.pe = new ProcessingException(el, e);
                 // Next statement is a hack.  Previous statement sets EPC register to ProgramCounter-4
                 // because it assumes the bad address comes from an operand so the ProgramCounter has already been
@@ -444,7 +444,7 @@ public class Simulator extends Observable {
                     statement = Globals.memory.getStatement(RegisterFile.getProgramCounter());
                 } catch (AddressErrorException e) {
                     ErrorList el = new ErrorList();
-                    el.add(new ErrorMessage((MIPSprogram) null, 0, 0, "invalid program counter value: " + Binary.intToHexString(RegisterFile.getProgramCounter())));
+                    el.add(new ErrorMessage((MipsProgram) null, 0, 0, "invalid program counter value: " + Binary.intToHexString(RegisterFile.getProgramCounter())));
                     this.pe = new ProcessingException(el, e);
                     // Next statement is a hack.  Previous statement sets EPC register to ProgramCounter-4
                     // because it assumes the bad address comes from an operand so the ProgramCounter has already been

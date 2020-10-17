@@ -55,7 +55,7 @@ public class Globals {
     /**
      * the program currently being worked with.  Used by GUI only, not command line.
      **/
-    public static MIPSprogram program;
+    public static MipsProgram program;
     /**
      * Symbol table for file currently being assembled.
      **/
