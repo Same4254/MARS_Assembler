@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE registerDatapath [
+<!DOCTYPE register_data [
         <!ELEMENT register_data (equivalence, function_equivalence, register_equivalence, datapath_map)>
         <!ELEMENT equivalence (bits+, mnemonic+)>
         <!ELEMENT bits (#PCDATA)>

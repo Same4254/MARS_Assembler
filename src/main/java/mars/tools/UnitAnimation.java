@@ -251,7 +251,7 @@ class UnitAnimation extends JPanel
 
     }
 
-    //set the binnary opcode value of the basic instructions of MIPS instruction set
+    //set the binary opcode value of the basic instructions of MIPS instruction set
     public void loadHashMapValues() {
         if (datapatTypeUsed == register) {
             importXmlStringData("/registerDatapath.xml", registerEquivalenceTable, "register_equivalence", "bits", "mnemonic");
