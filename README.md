@@ -4,13 +4,12 @@
 MARS has been jointly developed by [Pete Sanderson][4] (programming) and [Ken Vollmar][5] (details and paperwork).
 
 ## Download
-You can download the latest version at the [official website][6].
+There's no download link yet, you must compile the project by yourself.
+You can download the original version at the [official website][6].
 
 ## Purpose of this repository
 This repo has the goal of refactoring the code to meet the requirements of Java 8.
 I don't think I'll accept any pull request, this is something I did just for fun and not because I want to constantly update the program.
-
-If you want to contribute to the original project, you should talk with [them][8].
 
 ## Features included in this custom version
 - OS look & feel (not Java look & feel)
@@ -19,9 +18,9 @@ If you want to contribute to the original project, you should talk with [them][8
 
 ## How to run / compile MARS
 - In order to **run** MARS v4.XX, you must **install [JRE 1.8][9] (Java 8)**
-- In order to **compile** MARS v4.XX, you must **install Java SE 8 (or later) SDK** 
+- In order to **compile** MARS v4.XX, you must **install Java SE 8 (or later) SDK** and **Maven**
  
- Note: This project makes use of the [Intellij IDEA IDE][10]
+ Note: This project currently makes use of the [Intellij IDEA IDE][10]
 
 ## License
 [MIT][2]. Check the [LICENSE][3] file. All the credits go to the original developers.
@@ -33,6 +32,5 @@ If you want to contribute to the original project, you should talk with [them][8
   [5]: http://courses.missouristate.edu/KenVollmar/
   [6]: http://courses.missouristate.edu/KenVollmar/MARS/download.htm
   [7]: http://courses.missouristate.edu/KenVollmar/MARS/Help/MarsHelpIntro.html
-  [8]: http://twitter.com/aesptux
   [9]: https://www.java.com
   [10]: https://www.jetbrains.com/idea/
