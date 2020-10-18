@@ -67,6 +67,12 @@ public class ScreenMagnifier implements MarsTool {
     // Permits stand-alone execution.
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            // handle exception
+        }
+
         new Thread(
                 new Runnable() {
                     public void run() {

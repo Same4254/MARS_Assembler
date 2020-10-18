@@ -58,6 +58,12 @@ public class DigitalLabSim extends AbstractMarsToolAndApplication {
     }
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            // handle exception
+        }
+
         new DigitalLabSim(heading, null).go();
     }
 

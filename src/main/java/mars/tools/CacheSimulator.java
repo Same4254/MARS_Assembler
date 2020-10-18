@@ -124,6 +124,12 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
      * is no driver program to invoke the Cache Simulator.
      */
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            // handle exception
+        }
+
         new CacheSimulator("Data Cache Simulator stand-alone", heading).go();
     }
 

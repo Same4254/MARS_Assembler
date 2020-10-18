@@ -416,7 +416,6 @@ public class MarsLaunch {
             }
             // Check for stand-alone integer, which is the max execution steps option
             try {
-                Integer.decode(args[i]);
                 maxSteps = Integer.decode(args[i]); // if we got here, it has to be OK
                 continue;
             } catch (NumberFormatException nfe) {
@@ -480,13 +479,13 @@ public class MarsLaunch {
             if (Globals.debug) {
                 out.println("--------  TOKENIZING BEGINS  -----------");
             }
-            ArrayList MIPSprogramsToAssemble =
+            ArrayList<MipsProgram> MipsProgramsToAssemble =
                     code.prepareFilesForAssembly(filesToAssemble, mainFile.getAbsolutePath(), null);
             if (Globals.debug) {
                 out.println("--------  ASSEMBLY BEGINS  -----------");
             }
             // Added logic to check for warnings and print if any. DPS 11/28/06
-            ErrorList warnings = code.assemble(MIPSprogramsToAssemble, pseudo, warningsAreErrors);
+            ErrorList warnings = code.assemble(MipsProgramsToAssemble, pseudo, warningsAreErrors);
             if (warnings != null && warnings.warningsOccurred()) {
                 out.println(warnings.generateWarningReport());
             }

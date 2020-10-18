@@ -55,6 +55,12 @@ public class IntroToTools extends AbstractMarsToolAndApplication {
      * "pure" means there is no driver program to invoke the application.
      */
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            // handle exception
+        }
+
         new IntroToTools(HEADING + " stand-alone", null).go();
     }
 
