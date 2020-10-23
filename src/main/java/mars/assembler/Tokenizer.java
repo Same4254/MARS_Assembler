@@ -181,8 +181,7 @@ public class Tokenizer {
      **/
 
     public TokenList tokenizeExampleInstruction(String example) throws ProcessingException {
-        TokenList result = new TokenList();
-        result = tokenizeLine(sourceMipsProgram, 0, example, false);
+        TokenList result = tokenizeLine(sourceMipsProgram, 0, example, false);
         if (errors.errorsOccurred()) {
             throw new ProcessingException(errors);
         }

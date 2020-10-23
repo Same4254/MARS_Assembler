@@ -642,33 +642,11 @@ public class Binary {
      * a string represents an octal number if the string is in the forms:
      * Signopt 0 OctalDigits
      *
-     * @param v String containing numeric digits (could be decimal, octal, or hex)
+     * @param str String containing numeric digits (could be decimal, octal, or hex)
      * @return Returns <tt>true</tt> if string represents an octal number, else returns <tt>false</tt>.
      **/
-    public static boolean isOctal(String v) {
-        // Don't mistake "0" or a string that starts "0x" for an octal string
-        try {
-            // we don't care what value Binary.stringToInt(v) returns, just whether it threw exception
-            int dontCare = Binary.stringToInt(v);
-
-            if (isHex(v))
-                return false; // String starts with "0" but continues "0x", so not octal
-
-            if ((v.charAt(0) == '-') &&   // sign is optional but if present can only be -
-                    (v.charAt(1) == '0') &&
-                    (v.length() > 1))  // Has to have more digits than the leading zero
-                return true;  // Form is Sign 0.... and the entire string is parseable as a number
-
-            else if ((v.charAt(0) == '0') &&
-                    (v.length() > 1))  // Has to have more digits than the leading zero
-                return true;  // Form is 0.... and the entire string is parseable as a number
-
-        } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
-            return false;
-        }
-
-        return false; // default
+    public static boolean isOctal(String str) {
+        return str.matches("^(-)?0[0-7]*$");
     }
-
 
 }
