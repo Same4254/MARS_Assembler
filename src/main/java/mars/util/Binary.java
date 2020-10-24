@@ -52,8 +52,7 @@ public class Binary {
      * @param value  The int value to convert.
      * @param length The number of bit positions, starting at least significant, to process.
      * @return String consisting of '1' and '0' characters corresponding to the requested binary sequence.
-     **/
-
+     */
     public static String intToBinaryString(int value, int length) {
         char[] result = new char[length];
         int index = length - 1;
@@ -64,14 +63,14 @@ public class Binary {
         return new String(result);
     }
 
+
     /**
      * Translate int value into a String consisting of '1's and '0's.  Assumes all 32 bits are
      * to be translated.
      *
      * @param value The int value to convert.
      * @return String consisting of '1' and '0' characters corresponding to the requested binary sequence.
-     **/
-
+     */
     public static String intToBinaryString(int value) {
         return intToBinaryString(value, 32);
     }
@@ -83,8 +82,7 @@ public class Binary {
      * @param value  The long value to convert.
      * @param length The number of bit positions, starting at least significant, to process.
      * @return String consisting of '1' and '0' characters corresponding to the requested binary sequence.
-     **/
-
+     */
     public static String longToBinaryString(long value, int length) {
         char[] result = new char[length];
         int index = length - 1;
@@ -95,14 +93,14 @@ public class Binary {
         return new String(result);
     }
 
+
     /**
      * Translate long value into a String consisting of '1's and '0's.  Assumes all 64 bits are
      * to be translated.
      *
      * @param value The long value to convert.
      * @return String consisting of '1' and '0' characters corresponding to the requested binary sequence.
-     **/
-
+     */
     public static String longToBinaryString(long value) {
         return longToBinaryString(value, 64);
     }
@@ -115,8 +113,7 @@ public class Binary {
      *
      * @param value The String value to convert.
      * @return int whose binary value corresponds to decoded String.
-     **/
-
+     */
     public static int binaryStringToInt(String value) {
         int result = value.charAt(0) - 48;
         for (int i = 1; i < value.length(); i++) {
@@ -125,6 +122,7 @@ public class Binary {
         return result;
     }
 
+
     /**
      * Translate String consisting of '1's and '0's into a long value having that binary representation.
      * The String is assumed to be at most 64 characters long.  No error checking is performed.
@@ -132,8 +130,7 @@ public class Binary {
      *
      * @param value The String value to convert.
      * @return long whose binary value corresponds to decoded String.
-     **/
-
+     */
     public static long binaryStringToLong(String value) {
         long result = value.charAt(0) - '0';
         for (int i = 1; i < value.length(); i++) {
@@ -151,7 +148,7 @@ public class Binary {
      * @param value The String value to convert.
      * @return String containing '0', '1', ...'F' characters which form hexadecimal
      * equivalent of decoded String.
-     **/
+     */
     public static String binaryStringToHexString(String value) {
         int digits = (value.length() + 3) / 4;
         char[] hexChars = new char[digits + 2];
@@ -175,6 +172,7 @@ public class Binary {
         return new String(hexChars);
     }
 
+
     /**
      * Translate String consisting of hexadecimal digits into String consisting of
      * corresponding binary digits ('1's and '0's).  No length limit.
@@ -184,7 +182,7 @@ public class Binary {
      *              characters which form hexadecimal.  Letters may be either upper or lower case.
      *              Works either with or without leading "Ox".
      * @return String with equivalent value in binary.
-     **/
+     */
     public static String hexStringToBinaryString(String value) {
         StringBuilder result = new StringBuilder();
         // slice off leading Ox or 0X
@@ -252,6 +250,7 @@ public class Binary {
         return result.toString();
     }
 
+
     /**
      * Translate String consisting of '1's and '0's into char equivalent of the corresponding
      * hexadecimal digit.  String limited to length 4.
@@ -260,8 +259,7 @@ public class Binary {
      * @param value The String value to convert.
      * @return char '0', '1', ...'F' which form hexadecimal equivalent of decoded String.
      * If string length > 4, returns '0'.
-     **/
-
+     */
     public static char binaryStringToHexDigit(String value) {
         if (value.length() > 4)
             return '0';
@@ -274,6 +272,7 @@ public class Binary {
         }
         return chars[result];
     }
+
 
     /**
      * Prefix a hexadecimal-indicating string "0x" to the string which is
@@ -293,6 +292,7 @@ public class Binary {
         t.insert(0, leadingX);
         return t.toString();
     }
+
 
     /**
      * Returns a 6 character string representing the 16-bit hexadecimal equivalent of the
@@ -327,7 +327,6 @@ public class Binary {
      * @param value The long value to convert.
      * @return String containing '0', '1', ...'F' which form hexadecimal equivalent of long.
      */
-
     public static String longToHexString(long value) {
         return binaryStringToHexString(longToBinaryString(value));
     }
@@ -343,6 +342,7 @@ public class Binary {
     public static String unsignedIntToIntString(int d) {
         return (d >= 0) ? Integer.toString(d) : Long.toString(UNSIGNED_BASE + d);
     }
+
 
     /**
      * Produce ASCII string equivalent of integer value, interpreting it as 4 one-byte
@@ -362,6 +362,7 @@ public class Binary {
         return result.toString();
     }
 
+
     /**
      * Attempt to validate given string whose characters represent a 32 bit integer.
      * Integer.decode() is insufficient because it will not allow incorporation of
@@ -372,7 +373,6 @@ public class Binary {
      * @return returns int value represented by given string
      * @throws NumberFormatException if string cannot be translated into an int
      */
-
     public static int stringToInt(String s) throws NumberFormatException {
         String work = s;
         int result = 0;
@@ -438,7 +438,6 @@ public class Binary {
      * @return returns long value represented by given string
      * @throws NumberFormatException if string cannot be translated into a long
      */
-
     public static long stringToLong(String s) throws NumberFormatException {
         String work = s;
         long result = 0;
@@ -479,8 +478,7 @@ public class Binary {
      *
      * @param longValue The long value from which to extract bits.
      * @return int containing high order 32 bits of argument
-     **/
-
+     */
     public static int highOrderLongToInt(long longValue) {
         return (int) (longValue >> 32);  // high order 32 bits
     }
@@ -492,10 +490,11 @@ public class Binary {
      *
      * @param longValue The long value from which to extract bits.
      * @return int containing low order 32 bits of argument
-     **/
+     */
     public static int lowOrderLongToInt(long longValue) {
         return (int) (longValue << 32 >> 32);  // low order 32 bits
     }
+
 
     /**
      * Returns long (64 bit integer) combining the bit values of two given 32 bit
@@ -504,7 +503,7 @@ public class Binary {
      * @param highOrder Integer to form the high-order 32 bits of result.
      * @param lowOrder  Integer to form the high-order 32 bits of result.
      * @return long containing concatenated 32 bit int values.
-     **/
+     */
     public static long twoIntsToLong(int highOrder, int lowOrder) {
         return (((long) highOrder) << 32) | (((long) lowOrder) & 0xFFFFFFFFL);
     }
@@ -516,8 +515,7 @@ public class Binary {
      * @param value The value to read the bit from.
      * @param bit   bit position in range 0 (least significant) to 31 (most)
      * @return 0 if the bit position contains 0, and 1 otherwise.
-     **/
-
+     */
     public static int bitValue(int value, int bit) {
         return 1 & (value >> bit);
     }
@@ -529,12 +527,12 @@ public class Binary {
      * @param value The value to read the bit from.
      * @param bit   bit position in range 0 (least significant) to 63 (most)
      * @return 0 if the bit position contains 0, and 1 otherwise.
-     **/
-
+     */
     public static int bitValue(long value, int bit) {
 
         return (int) (1L & (value >> bit));
     }
+
 
     /**
      * Sets the specified bit of the specified value to 1, and returns the result.
@@ -542,8 +540,7 @@ public class Binary {
      * @param value The value in which the bit is to be set.
      * @param bit   bit position in range 0 (least significant) to 31 (most)
      * @return value possibly modified with given bit set to 1.
-     **/
-
+     */
     public static int setBit(int value, int bit) {
         return value | (1 << bit);
     }
@@ -555,13 +552,11 @@ public class Binary {
      * @param value The value in which the bit is to be set.
      * @param bit   bit position in range 0 (least significant) to 31 (most)
      * @return value possibly modified with given bit set to 0.
-     **/
-
+     */
     public static int clearBit(int value, int bit) {
         return value & ~(1 << bit);
     }
 
-    // setByte and getByte added by DPS on 12 July 2006
 
     /**
      * Sets the specified byte of the specified value to the low order 8 bits of
@@ -571,8 +566,7 @@ public class Binary {
      * @param bite    byte position in range 0 (least significant) to 3 (most)
      * @param replace value to place into that byte position - use low order 8 bits
      * @return value modified value.
-     **/
-
+     */
     public static int setByte(int value, int bite, int replace) {
         return value & ~(0xFF << (bite << 3)) | ((replace & 0xFF) << (bite << 3));
     }
@@ -584,13 +578,11 @@ public class Binary {
      * @param value The value in which the byte is to be retrieved.
      * @param bite  byte position in range 0 (least significant) to 3 (most)
      * @return zero-extended byte value in low order byte.
-     **/
-
+     */
     public static int getByte(int value, int bite) {
         return value << ((3 - bite) << 3) >>> 24;
     }
 
-    // KENV 1/4/05
 
     /**
      * Parsing method to see if a string represents a hex number.
@@ -602,7 +594,7 @@ public class Binary {
      *
      * @param v String containing numeric digits (could be decimal, octal, or hex)
      * @return Returns <tt>true</tt> if string represents a hex number, else returns <tt>false</tt>.
-     **/
+     */
     public static boolean isHex(String v) {
         try {
             // don't care about return value, just whether it threw exception.
@@ -634,8 +626,6 @@ public class Binary {
     }
 
 
-    // KENV 1/4/05
-
     /**
      * Parsing method to see if a string represents an octal number.
      * As per http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Integer.html#decode(java.lang.String),
@@ -648,5 +638,5 @@ public class Binary {
     public static boolean isOctal(String str) {
         return str.matches("^(-)?0[0-7]*$");
     }
-
+    
 }
