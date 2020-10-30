@@ -637,7 +637,9 @@ public class VenusUI extends JFrame {
         menuBar.add(run);
         menuBar.add(settings);
         JMenu toolMenu = new ToolLoader().buildToolsMenu();
-        if (toolMenu != null) menuBar.add(toolMenu);
+        if (toolMenu != null) {
+            menuBar.add(toolMenu);
+        }
         menuBar.add(help);
 
         // experiment with popup menu for settings. 3 Aug 2006 PS

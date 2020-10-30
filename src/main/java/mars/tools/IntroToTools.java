@@ -38,6 +38,13 @@ public class IntroToTools extends AbstractMarsToolAndApplication {
     private static final String HEADING = "Introduction to MARS Tools and Applications";
 
     /**
+     * Used by newInstance()
+     */
+    public IntroToTools() {
+        super(NAME, HEADING);
+    }
+
+    /**
      * Simple constructor, likely used to run a stand-alone memory reference visualizer.
      *
      * @param title   title shown in the title bar
