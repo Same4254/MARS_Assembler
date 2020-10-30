@@ -3,11 +3,8 @@ package mars.util;
 import mars.Globals;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 	
 	/*

@@ -3,7 +3,6 @@ package mars.venus;
 import mars.*;
 
 import javax.swing.*;
-import javax.xml.stream.Location;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
