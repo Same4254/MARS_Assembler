@@ -91,30 +91,38 @@ public class SyntaxUtilities {
     public static SyntaxStyle[] getDefaultSyntaxStyles() {
         SyntaxStyle[] styles = new SyntaxStyle[Token.ID_COUNT];
 
+        // test colors
+//        Color violet = new Color(0x660E7A);
+//        Color darkBlue = new Color(0x000080);
+//        Color grey = new Color(0x808080);
+//        Color darkGreen = new Color(0x808000);
+//        Color green = new Color(0x008000);
+//        Color lightBlue = new Color(0x0073BF);
+
         final Color DEFAULT_COLOR = Color.BLACK;
-        final Color DEFAULT_COMMENT_COLOR = new Color(0x00CC33);
+        final Color DEFAULT_COMMENT_COLOR = new Color(0x808080);
         final Color DEFAULT_COMMENT2_COLOR = new Color(0x990033);           // TODO: what is it?
-        final Color DEFAULT_MIPS_INSTRUCTION_COLOR = Color.BLUE;
-        final Color DEFAULT_DIRECTIVES_COLOR = Color.MAGENTA;
-        final Color DEFAULT_REGISTERS_COLOR = Color.RED;
-        final Color DEFAULT_CHAR_COLOR = new Color(0x00CC33);
-        final Color DEFAULT_STRING_COLOR = new Color(0x00CC33);
+        final Color DEFAULT_MIPS_INSTRUCTION_COLOR =  new Color(0x660E7A);
+        final Color DEFAULT_DIRECTIVES_COLOR = new Color(0x0073BF);
+        final Color DEFAULT_REGISTERS_COLOR = new Color(0x000080);
+        final Color DEFAULT_CHAR_COLOR = new Color(0x008000);
+        final Color DEFAULT_STRING_COLOR = new Color(0x008000);
         final Color DEFAULT_LABEL_COLOR = Color.BLACK;
         final Color DEFAULT_OPERATOR_COLOR = Color.BLACK;
         final Color DEFAULT_INVALID_COLOR = Color.RED;
-        final Color DEFAULT_MACRO_ARG_COLOR = new Color(0x969600);
+        final Color DEFAULT_MACRO_ARG_COLOR = new Color(0x808000);
 
         // SyntaxStyle constructor params: color, italic?, bold?
         // All need to be assigned even if not used by language (no gaps in array)
         styles[Token.NULL] = new SyntaxStyle(DEFAULT_COLOR, false, false);
         styles[Token.COMMENT1] = new SyntaxStyle(DEFAULT_COMMENT_COLOR, true, false);
         styles[Token.COMMENT2] = new SyntaxStyle(DEFAULT_COMMENT2_COLOR, true, false);
-        styles[Token.KEYWORD1] = new SyntaxStyle(DEFAULT_MIPS_INSTRUCTION_COLOR, false, false);
+        styles[Token.KEYWORD1] = new SyntaxStyle(DEFAULT_MIPS_INSTRUCTION_COLOR, false, true);
         styles[Token.KEYWORD2] = new SyntaxStyle(DEFAULT_DIRECTIVES_COLOR, false, false);
         styles[Token.KEYWORD3] = new SyntaxStyle(DEFAULT_REGISTERS_COLOR, false, false);
-        styles[Token.LITERAL1] = new SyntaxStyle(DEFAULT_STRING_COLOR, false, false);
-        styles[Token.LITERAL2] = new SyntaxStyle(DEFAULT_CHAR_COLOR, false, false);
-        styles[Token.LABEL] = new SyntaxStyle(DEFAULT_LABEL_COLOR, true, false);
+        styles[Token.LITERAL1] = new SyntaxStyle(DEFAULT_STRING_COLOR, false, true);
+        styles[Token.LITERAL2] = new SyntaxStyle(DEFAULT_CHAR_COLOR, false, true);
+        styles[Token.LABEL] = new SyntaxStyle(DEFAULT_LABEL_COLOR, true, true);
         styles[Token.OPERATOR] = new SyntaxStyle(DEFAULT_OPERATOR_COLOR, false, true);
         styles[Token.INVALID] = new SyntaxStyle(DEFAULT_INVALID_COLOR, false, false);
         styles[Token.MACRO_ARG] = new SyntaxStyle(DEFAULT_MACRO_ARG_COLOR, false, false);

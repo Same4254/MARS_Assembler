@@ -85,7 +85,6 @@ public abstract class AbstractFontSettingDialog extends JDialog {
         initialFontFamily = currentFont.getFamily();
         initialFontStyle = EditorFont.styleIntToStyleString(currentFont.getStyle());
         initialFontSize = EditorFont.sizeIntToSizeString(currentFont.getSize());
-
         String[] commonFontFamilies = EditorFont.getCommonFamilies();
         String[] allFontFamilies = EditorFont.getAllFamilies();
         // The makeVectorData() method will combine these two into one Vector
