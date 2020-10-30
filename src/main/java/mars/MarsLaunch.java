@@ -231,6 +231,8 @@ public class MarsLaunch {
             // handle exception
         }
 
+        EditorFont.registerCustomFonts();
+
         // System.setProperty("apple.laf.useScreenMenuBar", "true"); // Puts MARS menu on Mac OS menu bar
         new MarsSplashScreen(splashDuration).showSplash();
         SwingUtilities.invokeLater(

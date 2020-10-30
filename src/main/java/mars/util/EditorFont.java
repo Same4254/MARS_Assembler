@@ -3,6 +3,10 @@ package mars.util;
 import mars.Globals;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 	
 	/*
@@ -59,6 +63,43 @@ public class EditorFont {
     private static final String[] allCommonFamilies = {"Arial", "Courier New", "Georgia",
             "Lucida Sans Typewriter", "Times New Roman", "Verdana"};
 
+    private static final String[] customFonts = {
+            Globals.fontsPath + "FiraCode/FiraCode-Bold.ttf",
+            Globals.fontsPath + "FiraCode/FiraCode-Light.ttf",
+            Globals.fontsPath + "FiraCode/FiraCode-Medium.ttf",
+            Globals.fontsPath + "FiraCode/FiraCode-Regular.ttf",
+            Globals.fontsPath + "FiraCode/FiraCode-Retina.ttf",
+            Globals.fontsPath + "FiraCode/FiraCode-SemiBold.ttf"
+    };
+
+    /**
+     * Once called, it will be possible to use custom fonts throughout the program
+     */
+    public static void registerCustomFonts() {
+        ArrayList<File> customFontsFile = getCustomFontsFiles();
+
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            for (File fontFile : customFontsFile) {
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
+            }
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**     *
+     * @return an ArrayList of File pointing to custom fonts
+     */
+    public static ArrayList<File> getCustomFontsFiles() {
+        ArrayList<File> fontFiles = new ArrayList<>();
+        for (String font : customFonts) {
+            URL url = EditorFont.class.getResource(font);
+            fontFiles.add(new File(url.getFile()));
+        }
+        return fontFiles;
+    }
+
 
     /**
      * Obtain an array of common font family names.  These are guaranteed to
@@ -78,7 +119,6 @@ public class EditorFont {
      *
      * @return Array of strings, each is an available font family name.
      */
-
     public static String[] getAllFamilies() {
         return GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
     }

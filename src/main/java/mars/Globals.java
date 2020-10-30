@@ -85,6 +85,9 @@ public class Globals {
      */
     // The leading "/" in filepath prevents package name from being pre-pended.
     public static final String imagesPath = "/images/";
+
+    public static final String fontsPath = "/fonts/";
+
     /**
      * Path to folder that contains help text
      */
