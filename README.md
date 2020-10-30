@@ -13,8 +13,11 @@ I don't think I'll accept any pull request, this is something I did just for fun
 
 ## Features included in this custom version
 - OS look & feel (not Java look & feel)
-- updated logo icon
-- smaller executable size
+- Updated logo icon
+- New syntax highlighting (inspired by JetBrains IDEs)
+- "Fira Code" as default font
+- Different panels position
+- Smaller executable size
 
 ## How to run / compile MARS
 - In order to **run** MARS v4.XX, you must **install [JRE 1.8][9] (Java 8)**
