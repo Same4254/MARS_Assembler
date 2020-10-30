@@ -103,7 +103,7 @@ public class SyntaxUtilities {
         final Color DEFAULT_COMMENT_COLOR = new Color(0x808080);
         final Color DEFAULT_COMMENT2_COLOR = new Color(0x990033);           // TODO: what is it?
         final Color DEFAULT_MIPS_INSTRUCTION_COLOR =  new Color(0x660E7A);
-        final Color DEFAULT_DIRECTIVES_COLOR = new Color(0x0073BF);
+        final Color DEFAULT_DIRECTIVES_COLOR = new Color(0x808000);
         final Color DEFAULT_REGISTERS_COLOR = Color.BLUE;
         final Color DEFAULT_CHAR_COLOR = new Color(0x008000);
         final Color DEFAULT_STRING_COLOR = new Color(0x008000);
@@ -118,7 +118,7 @@ public class SyntaxUtilities {
         styles[Token.COMMENT1] = new SyntaxStyle(DEFAULT_COMMENT_COLOR, true, false);
         styles[Token.COMMENT2] = new SyntaxStyle(DEFAULT_COMMENT2_COLOR, true, false);
         styles[Token.KEYWORD1] = new SyntaxStyle(DEFAULT_MIPS_INSTRUCTION_COLOR, false, true);
-        styles[Token.KEYWORD2] = new SyntaxStyle(DEFAULT_DIRECTIVES_COLOR, false, true);
+        styles[Token.KEYWORD2] = new SyntaxStyle(DEFAULT_DIRECTIVES_COLOR, false, false);
         styles[Token.KEYWORD3] = new SyntaxStyle(DEFAULT_REGISTERS_COLOR, false, false);
         styles[Token.LITERAL1] = new SyntaxStyle(DEFAULT_STRING_COLOR, false, true);
         styles[Token.LITERAL2] = new SyntaxStyle(DEFAULT_CHAR_COLOR, false, true);
