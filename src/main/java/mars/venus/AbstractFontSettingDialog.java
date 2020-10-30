@@ -260,11 +260,11 @@ public abstract class AbstractFontSettingDialog extends JDialog {
     }
 
     // Required listener to handle the separator bar.
-    private class BlockComboListener implements ActionListener {
-        JComboBox combo;
+    private static class BlockComboListener implements ActionListener {
+        JComboBox<String> combo;
         Object currentItem;
 
-        BlockComboListener(JComboBox combo) {
+        BlockComboListener(JComboBox<String> combo) {
             this.combo = combo;
             combo.setSelectedIndex(0);
             currentItem = combo.getSelectedItem();

@@ -6,6 +6,7 @@ import mars.mips.dump.*;
 import mars.mips.hardware.*;
 import mars.simulator.*;
 
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -44,7 +45,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @author Pete Sanderson
  * @version December 2009
  **/
-
 public class MarsLaunch {
 
     /**
@@ -166,10 +166,10 @@ public class MarsLaunch {
         }
     }
 
-    /////////////////////////////////////////////////////////////
-    // Perform any specified dump operations.  See "dump" option.
-    //
 
+    /**
+     * Perform any specified dump operations.  See "dump" option.
+     */
     private void dumpSegments() {
 
         if (dumpTriples == null)
@@ -219,10 +219,10 @@ public class MarsLaunch {
     }
 
 
-    /////////////////////////////////////////////////////////////////
-    // There are no command arguments, so run in interactive mode by
-    // launching the GUI-fronted integrated development environment.
-
+    /**
+     * There are no command arguments, so run in interactive mode by
+     * launching the GUI-fronted integrated development environment.
+     */
     private void launchIDE() {
 
         try {
@@ -232,6 +232,10 @@ public class MarsLaunch {
         }
 
         EditorFont.registerCustomFonts();
+
+        // TODO: make "Fira Code" the default font but don't set it every time you start the app
+        Font font = EditorFont.createFontFromStringValues("Fira Code", "Plain", "18");
+        Globals.getSettings().setEditorFont(font);
 
         // System.setProperty("apple.laf.useScreenMenuBar", "true"); // Puts MARS menu on Mac OS menu bar
         new MarsSplashScreen(splashDuration).showSplash();
@@ -246,13 +250,14 @@ public class MarsLaunch {
     }
 
 
-    //////////////////////////////////////////////////////////////////////
-    // Parse command line arguments.  The initial parsing has already been
-    // done, since each space-separated argument is already in a String array
-    // element.  Here, we check for validity, set switch variables as appropriate
-    // and build data structures.  For help option (h), display the help.
-    // Returns true if command args parse OK, false otherwise.
-
+    /**
+     * Parse command line arguments. The initial parsing has already been
+     * done, since each space-separated argument is already in a String array
+     * element. Here, we check for validity, set switch variables as appropriate
+     * and build data structures.  For help option (h), display the help.
+     * @param args command line arguments
+     * @return true if command args parse OK, false otherwise.
+     */
     private boolean parseCommandArgs(String[] args) {
         String noCopyrightSwitch = "nc";
         String displayMessagesToErrSwitch = "me";
@@ -442,10 +447,10 @@ public class MarsLaunch {
     }
 
 
-    //////////////////////////////////////////////////////////////////////
-    // Carry out the mars command: assemble then optionally run
-    // Returns false if no simulation (run) occurs, true otherwise.
-
+    /**
+     * Carry out the mars command: assemble then optionally run
+     * @return false if no simulation (run) occurs, true otherwise.
+     */
     private boolean runCommand() {
         boolean programRan = false;
         if (filenameList.size() == 0) {
@@ -518,11 +523,14 @@ public class MarsLaunch {
     }
 
 
-    //////////////////////////////////////////////////////////////////////
-    // Check for memory address subrange.  Has to be two integers separated
-    // by "-"; no embedded spaces.  e.g. 0x00400000-0x00400010
-    // If number is not multiple of 4, will be rounded up to next higher.
-
+    /**
+     * Check for memory address subrange.  Has to be two integers separated
+     * by "-"; no embedded spaces.  e.g. 0x00400000-0x00400010
+     * If number is not multiple of 4, will be rounded up to next higher.
+     * @param arg
+     * @return
+     * @throws NumberFormatException
+     */
     private String[] checkMemoryAddressRange(String arg) throws NumberFormatException {
         String[] memoryRange = null;
         if (arg.indexOf(rangeSeparator) > 0 &&
@@ -543,9 +551,10 @@ public class MarsLaunch {
         return memoryRange;
     }
 
-    /////////////////////////////////////////////////////////////////
-    // Required for counting instructions executed, if that option is specified.
-    // DPS 19 July 2012
+
+    /**
+     * Required for counting instructions executed, if that option is specified.
+     */
     private void establishObserver() {
         if (countInstructions) {
             Observer instructionCounter =
@@ -576,9 +585,10 @@ public class MarsLaunch {
         }
     }
 
-    //////////////////////////////////////////////////////////////////////
-    // Displays any specified runtime properties. Initially just instruction count
-    // DPS 19 July 2012
+
+    /**
+     * Displays any specified runtime properties. Initially just instruction count
+     */
     private void displayMiscellaneousPostMortem() {
         if (countInstructions) {
             out.println("\n" + instructionCount);
@@ -586,9 +596,9 @@ public class MarsLaunch {
     }
 
 
-    //////////////////////////////////////////////////////////////////////
-    // Displays requested register or registers
-
+    /**
+     * Displays requested register or registers
+     */
     private void displayRegistersPostMortem() {
         int value;  // handy local to use throughout the next couple loops
         String strValue;
@@ -653,8 +663,12 @@ public class MarsLaunch {
         }
     }
 
-    //////////////////////////////////////////////////////////////////////
-    // Formats int value for display: decimal, hex, ascii
+
+    /**
+     * Formats int value for display: decimal, hex, ascii
+     * @param value
+     * @return
+     */
     private String formatIntForDisplay(int value) {
         String strValue;
         switch (displayFormat) {
@@ -670,9 +684,10 @@ public class MarsLaunch {
         return strValue;
     }
 
-    //////////////////////////////////////////////////////////////////////
-    // Displays requested memory range or ranges
 
+    /**
+     * Displays requested memory range or ranges
+     */
     private void displayMemoryPostMortem() {
         int value;
         // Display requested memory range contents
@@ -712,10 +727,14 @@ public class MarsLaunch {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////
-    //  If option to display MARS messages to standard err (System.err) is
-    //  present, it must be processed before all others.  Since messages may
-    //  be output as early as during the command parse.
+
+    /**
+     * If option to display MARS messages to standard err (System.err) is
+     * present, it must be processed before all others.  Since messages may
+     * be output as early as during the command parse.
+     * @param args
+     * @param displayMessagesToErrSwitch
+     */
     private void processDisplayMessagesToErrSwitch(String[] args, String displayMessagesToErrSwitch) {
         for (int i = 0; i < args.length; i++) {
             if (args[i].toLowerCase().equals(displayMessagesToErrSwitch)) {
@@ -724,10 +743,13 @@ public class MarsLaunch {
             }
         }
     }
-    ///////////////////////////////////////////////////////////////////////
-    //  Decide whether copyright should be displayed, and display
-    //  if so.
 
+
+    /**
+     * Decide whether copyright should be displayed, and display if so.
+     * @param args
+     * @param noCopyrightSwitch
+     */
     private void displayCopyright(String[] args, String noCopyrightSwitch) {
         boolean print = true;
         for (int i = 0; i < args.length; i++) {
@@ -739,9 +761,9 @@ public class MarsLaunch {
     }
 
 
-    ///////////////////////////////////////////////////////////////////////
-    //  Display command line help text
-
+    /**
+     * Display command line help text
+     */
     private void displayHelp() {
         String[] segmentNames = MemoryDump.getSegmentNames();
         StringBuilder segments = new StringBuilder();
