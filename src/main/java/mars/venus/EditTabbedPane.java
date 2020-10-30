@@ -56,8 +56,7 @@ public class EditTabbedPane extends JTabbedPane {
 
     /**
      * Constructor for the EditTabbedPane class.
-     **/
-
+     */
     public EditTabbedPane(VenusUI appFrame, Editor editor, MainPane mainPane) {
         this.mainUI = appFrame;
         this.editor = editor;
@@ -274,7 +273,7 @@ public class EditTabbedPane extends JTabbedPane {
         return false;
     }
 
-    // Save file associatd with specified edit pane.
+    // Save file associated with specified edit pane.
     // Returns true if save operation worked, else false.
     private boolean saveFile(EditPane editPane) {
         if (editPane != null) {
