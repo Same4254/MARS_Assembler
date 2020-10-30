@@ -728,6 +728,8 @@ public class VenusUI extends JFrame {
         toolBar.add(Help);
         toolBar.add(new JToolBar.Separator());
 
+        toolBar.setFloatable(false);
+
         return toolBar;
     }
 
