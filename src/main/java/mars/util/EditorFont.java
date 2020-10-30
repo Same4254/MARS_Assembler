@@ -5,6 +5,7 @@ import mars.Globals;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,28 +77,19 @@ public class EditorFont {
      * Once called, it will be possible to use custom fonts throughout the program
      */
     public static void registerCustomFonts() {
-        ArrayList<File> customFontsFile = getCustomFontsFiles();
-
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            for (File fontFile : customFontsFile) {
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, fontFile));
+            for (String font : customFonts) {
+                // Embedded resources should NOT be read from a File object.
+                // The File object is used for reading files in the local file system.
+                // Once your file is jarred, it becomes a resource and should be read as such.
+                // You can read it as a InputStream by using getClass().getResourceAsStream()
+                InputStream stream = EditorFont.class.getResourceAsStream(font);
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, stream));
             }
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * @return an ArrayList of File pointing to custom fonts
-     */
-    public static ArrayList<File> getCustomFontsFiles() {
-        ArrayList<File> fontFiles = new ArrayList<>();
-        for (String font : customFonts) {
-            URL url = EditorFont.class.getResource(font);
-            fontFiles.add(new File(url.getFile()));
-        }
-        return fontFiles;
     }
 
 

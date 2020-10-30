@@ -234,7 +234,6 @@ public class MarsLaunch {
         EditorFont.registerCustomFonts();
 
         // TODO: make "Fira Code" the default font but don't set it every time you start the app
-        //       Update: actually it's not set in the Maven artifact
         Font font = EditorFont.createFontFromStringValues("Fira Code", "Plain", "18");
         Globals.getSettings().setEditorFont(font);
 
