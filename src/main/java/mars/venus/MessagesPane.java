@@ -206,7 +206,7 @@ public class MessagesPane extends JTabbedPane {
                 textLine = assemble.getLineOfOffset(textPosition);
                 lineStart = assemble.getLineStartOffset(textLine);
                 lineEnd = assemble.getLineEndOffset(textLine);
-                assemble.setSelectionColor(Color.YELLOW);
+                assemble.setSelectionColor(Color.RED);
                 assemble.select(lineStart, lineEnd);
                 assemble.getCaret().setSelectionVisible(true);
                 assemble.repaint();
