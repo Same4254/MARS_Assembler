@@ -64,12 +64,12 @@ public class EditorFont {
             "Lucida Sans Typewriter", "Times New Roman", "Verdana"};
 
     private static final String[] customFonts = {
-            Globals.fontsPath + "FiraCode/FiraCode-Bold.ttf",
-            Globals.fontsPath + "FiraCode/FiraCode-Light.ttf",
-            Globals.fontsPath + "FiraCode/FiraCode-Medium.ttf",
-            Globals.fontsPath + "FiraCode/FiraCode-Regular.ttf",
-            Globals.fontsPath + "FiraCode/FiraCode-Retina.ttf",
-            Globals.fontsPath + "FiraCode/FiraCode-SemiBold.ttf"
+            Globals.customFontsPath + "FiraCode/FiraCode-Bold.ttf",
+            Globals.customFontsPath + "FiraCode/FiraCode-Light.ttf",
+            Globals.customFontsPath + "FiraCode/FiraCode-Medium.ttf",
+            Globals.customFontsPath + "FiraCode/FiraCode-Regular.ttf",
+            Globals.customFontsPath + "FiraCode/FiraCode-Retina.ttf",
+            Globals.customFontsPath + "FiraCode/FiraCode-SemiBold.ttf"
     };
 
     /**
@@ -88,7 +88,7 @@ public class EditorFont {
         }
     }
 
-    /**     *
+    /**
      * @return an ArrayList of File pointing to custom fonts
      */
     public static ArrayList<File> getCustomFontsFiles() {
