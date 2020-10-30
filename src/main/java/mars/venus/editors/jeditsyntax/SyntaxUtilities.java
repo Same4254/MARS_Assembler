@@ -118,11 +118,11 @@ public class SyntaxUtilities {
         styles[Token.COMMENT1] = new SyntaxStyle(DEFAULT_COMMENT_COLOR, true, false);
         styles[Token.COMMENT2] = new SyntaxStyle(DEFAULT_COMMENT2_COLOR, true, false);
         styles[Token.KEYWORD1] = new SyntaxStyle(DEFAULT_MIPS_INSTRUCTION_COLOR, false, true);
-        styles[Token.KEYWORD2] = new SyntaxStyle(DEFAULT_DIRECTIVES_COLOR, false, false);
+        styles[Token.KEYWORD2] = new SyntaxStyle(DEFAULT_DIRECTIVES_COLOR, false, true);
         styles[Token.KEYWORD3] = new SyntaxStyle(DEFAULT_REGISTERS_COLOR, false, false);
         styles[Token.LITERAL1] = new SyntaxStyle(DEFAULT_STRING_COLOR, false, true);
         styles[Token.LITERAL2] = new SyntaxStyle(DEFAULT_CHAR_COLOR, false, true);
-        styles[Token.LABEL] = new SyntaxStyle(DEFAULT_LABEL_COLOR, true, true);
+        styles[Token.LABEL] = new SyntaxStyle(DEFAULT_LABEL_COLOR, true, false);
         styles[Token.OPERATOR] = new SyntaxStyle(DEFAULT_OPERATOR_COLOR, false, true);
         styles[Token.INVALID] = new SyntaxStyle(DEFAULT_INVALID_COLOR, false, false);
         styles[Token.MACRO_ARG] = new SyntaxStyle(DEFAULT_MACRO_ARG_COLOR, false, false);

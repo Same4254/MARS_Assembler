@@ -3,6 +3,7 @@ package mars.venus;
 import mars.*;
 
 import javax.swing.*;
+import javax.xml.stream.Location;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
@@ -119,7 +120,7 @@ public class VenusUI extends JFrame {
         double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         // basically give up some screen space if running at 800 x 600
         double messageWidthPct = (screenWidth < 1000.0) ? 0.67 : 0.73;
-        double messageHeightPct = (screenWidth < 1000.0) ? 0.12 : 0.15;
+        double messageHeightPct = (screenWidth < 1000.0) ? 0.20 : 0.25;
         double mainWidthPct = (screenWidth < 1000.0) ? 0.67 : 0.73;
         double mainHeightPct = (screenWidth < 1000.0) ? 0.60 : 0.65;
         double registersWidthPct = (screenWidth < 1000.0) ? 0.18 : 0.22;
@@ -171,12 +172,12 @@ public class VenusUI extends JFrame {
         mainPane.setPreferredSize(mainPanePreferredSize);
         messagesPane = new MessagesPane();
         messagesPane.setPreferredSize(messagesPanePreferredSize);
-        splitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, mainPane, messagesPane);
-        splitter.setOneTouchExpandable(true);
-        splitter.resetToPreferredSizes();
-        horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, registersPane, splitter);
+
+        horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, registersPane, mainPane);
         horizonSplitter.setOneTouchExpandable(true);
-        horizonSplitter.resetToPreferredSizes();
+
+        splitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, horizonSplitter, messagesPane);
+        splitter.setOneTouchExpandable(true);
 
         // due to dependencies, do not set up menu/toolbar until now.
         this.createActionObjects();
@@ -190,8 +191,7 @@ public class VenusUI extends JFrame {
         jp.add(RunSpeedPanel.getInstance());
         JPanel center = new JPanel(new BorderLayout());
         center.add(jp, BorderLayout.NORTH);
-        center.add(horizonSplitter);
-
+        center.add(splitter);
 
         this.getContentPane().add(center);
 
@@ -225,6 +225,7 @@ public class VenusUI extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         this.pack();
+        splitter.setDividerLocation(1-messageHeightPct);
         this.setVisible(true);
     }
 
