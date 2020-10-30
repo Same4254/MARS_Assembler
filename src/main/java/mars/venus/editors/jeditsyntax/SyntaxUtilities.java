@@ -104,7 +104,7 @@ public class SyntaxUtilities {
         final Color DEFAULT_COMMENT2_COLOR = new Color(0x990033);           // TODO: what is it?
         final Color DEFAULT_MIPS_INSTRUCTION_COLOR =  new Color(0x660E7A);
         final Color DEFAULT_DIRECTIVES_COLOR = new Color(0x0073BF);
-        final Color DEFAULT_REGISTERS_COLOR = new Color(0x000080);
+        final Color DEFAULT_REGISTERS_COLOR = Color.BLUE;
         final Color DEFAULT_CHAR_COLOR = new Color(0x008000);
         final Color DEFAULT_STRING_COLOR = new Color(0x008000);
         final Color DEFAULT_LABEL_COLOR = Color.BLACK;
