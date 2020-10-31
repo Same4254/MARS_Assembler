@@ -37,15 +37,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /**
  * Top level container for Venus GUI.
- *
- * @author Sanderson and Team JSpim
- **/
-
-/* Heavily modified by Pete Sanderson, July 2004, to incorporate JSPIMMenu and JSPIMToolbar
- * not as subclasses of JMenuBar and JToolBar, but as instances of them.  They are both
- * here primarily so both can share the Action objects.
  */
-
 public class VenusUI extends JFrame {
     VenusUI mainUI;
     public JMenuBar menu;
@@ -194,7 +186,7 @@ public class VenusUI extends JFrame {
 
     private JSplitPane getWorkArea() {
         initRegistersPane();
-        initMainPane();
+        initMainPane();         // this must follow initRegistersPane()
         initMessagesPane();
 
         JSplitPane horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, registersPane, mainPane);
@@ -225,7 +217,7 @@ public class VenusUI extends JFrame {
         messagesPane = new MessagesPane();
     }
 
-    /*
+    /**
      * Action objects are used instead of action listeners because one can be easily shared between
      * a menu item and a toolbar button.  Does nice things like disable both if the action is
      * disabled, etc.
@@ -452,11 +444,10 @@ public class VenusUI extends JFrame {
         }
     }
 
-    /*
+    /**
      * build the menus and connect them to action objects (which serve as action listeners
      * shared between menu item and corresponding toolbar icon).
      */
-
     private JMenuBar setUpMenuBar() {
 
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -643,11 +634,10 @@ public class VenusUI extends JFrame {
         return menuBar;
     }
 
-    /*
+    /**
      * build the toolbar and connect items to action objects (which serve as action listeners
      * shared between toolbar icon and corresponding menu item).
      */
-
     JToolBar setUpToolBar() {
         JToolBar toolBar = new JToolBar();
 
@@ -728,8 +718,8 @@ public class VenusUI extends JFrame {
         return toolBar;
     }
 
-
-    /* Determine from FileStatus what the menu state (enabled/disabled)should
+    /**
+     * Determine from FileStatus what the menu state (enabled/disabled)should
      * be then call the appropriate method to set it.  Current states are:
      *
      * setMenuStateInitial: set upon startup and after File->Close
@@ -772,7 +762,6 @@ public class VenusUI extends JFrame {
         }
     }
 
-
     void setMenuStateInitial() {
         fileNewAction.setEnabled(true);
         fileOpenAction.setEnabled(true);
@@ -808,9 +797,11 @@ public class VenusUI extends JFrame {
         editRedoAction.updateRedoState();
     }
 
-    /* Added DPS 9-Aug-2011, for newly-opened files.  Retain
-        existing Run menu state (except Assemble, which is always true).
-         Thus if there was a valid assembly it is retained. */
+    /**
+     * For newly-opened files.
+     * Retain existing Run menu state (except Assemble, which is always true).
+     * Thus if there was a valid assembly it is retained.
+     */
     void setMenuStateNotEdited() {
         /* Note: undo and redo are handled separately by the undo manager*/
         fileNewAction.setEnabled(true);
@@ -849,7 +840,6 @@ public class VenusUI extends JFrame {
         editRedoAction.updateRedoState();
     }
 
-
     void setMenuStateEditing() {
         /* Note: undo and redo are handled separately by the undo manager*/
         fileNewAction.setEnabled(true);
@@ -884,7 +874,8 @@ public class VenusUI extends JFrame {
         editRedoAction.updateRedoState();
     }
 
-    /* Use this when "File -> New" is used
+    /**
+     * Use this when "File -> New" is used
      */
     void setMenuStateEditingNew() {
         /* Note: undo and redo are handled separately by the undo manager*/
@@ -920,7 +911,8 @@ public class VenusUI extends JFrame {
         editRedoAction.updateRedoState();
     }
 
-    /* Use this upon successful assemble or reset
+    /**
+     * Use this upon successful assemble or reset
      */
     void setMenuStateRunnable() {
         /* Note: undo and redo are handled separately by the undo manager */
@@ -955,7 +947,8 @@ public class VenusUI extends JFrame {
         editRedoAction.updateRedoState();
     }
 
-    /* Use this while program is running
+    /**
+     * Use this while program is running
      */
     void setMenuStateRunning() {
         /* Note: undo and redo are handled separately by the undo manager */
@@ -990,7 +983,8 @@ public class VenusUI extends JFrame {
         editRedoAction.setEnabled(false);//updateRedoState(); // DPS 10 Jan 2008
     }
 
-    /* Use this upon completion of execution
+    /**
+     * Use this upon completion of execution
      */
     void setMenuStateTerminated() {
         /* Note: undo and redo are handled separately by the undo manager */
@@ -1025,13 +1019,11 @@ public class VenusUI extends JFrame {
         editRedoAction.updateRedoState();
     }
 
-
     /**
      * Get current menu state.  State values are constants in FileStatus class.  DPS 23 July 2008
      *
      * @return current menu state.
-     **/
-
+     */
     public static int getMenuState() {
         return menuState;
     }
@@ -1040,8 +1032,7 @@ public class VenusUI extends JFrame {
      * To set whether the register values are reset.
      *
      * @param b Boolean true if the register values have been reset.
-     **/
-
+     */
     public static void setReset(boolean b) {
         reset = b;
     }
@@ -1050,8 +1041,7 @@ public class VenusUI extends JFrame {
      * To set whether MIPS program execution has started.
      *
      * @param b true if the MIPS program execution has started.
-     **/
-
+     */
     public static void setStarted(boolean b) {
         started = b;
     }
@@ -1060,8 +1050,7 @@ public class VenusUI extends JFrame {
      * To find out whether the register values are reset.
      *
      * @return Boolean true if the register values have been reset.
-     **/
-
+     */
     public static boolean getReset() {
         return reset;
     }
@@ -1070,7 +1059,7 @@ public class VenusUI extends JFrame {
      * To find out whether MIPS program is currently executing.
      *
      * @return true if MIPS program is currently executing.
-     **/
+     */
     public static boolean getStarted() {
         return started;
     }
@@ -1079,8 +1068,7 @@ public class VenusUI extends JFrame {
      * Get reference to Editor object associated with this GUI.
      *
      * @return Editor for the GUI.
-     **/
-
+     */
     public Editor getEditor() {
         return editor;
     }
@@ -1089,8 +1077,7 @@ public class VenusUI extends JFrame {
      * Get reference to messages pane associated with this GUI.
      *
      * @return MessagesPane object associated with the GUI.
-     **/
-
+     */
     public MainPane getMainPane() {
         return mainPane;
     }
@@ -1099,8 +1086,7 @@ public class VenusUI extends JFrame {
      * Get reference to messages pane associated with this GUI.
      *
      * @return MessagesPane object associated with the GUI.
-     **/
-
+     */
     public MessagesPane getMessagesPane() {
         return messagesPane;
     }
@@ -1109,8 +1095,7 @@ public class VenusUI extends JFrame {
      * Get reference to registers pane associated with this GUI.
      *
      * @return RegistersPane object associated with the GUI.
-     **/
-
+     */
     public RegistersPane getRegistersPane() {
         return registersPane;
     }
@@ -1119,8 +1104,7 @@ public class VenusUI extends JFrame {
      * Get reference to settings menu item for display base of memory/register values.
      *
      * @return the menu item
-     **/
-
+     */
     public JCheckBoxMenuItem getValueDisplayBaseMenuItem() {
         return settingsValueDisplayBase;
     }
@@ -1129,8 +1113,7 @@ public class VenusUI extends JFrame {
      * Get reference to settings menu item for display base of memory/register values.
      *
      * @return the menu item
-     **/
-
+     */
     public JCheckBoxMenuItem getAddressDisplayBaseMenuItem() {
         return settingsAddressDisplayBase;
     }
@@ -1160,22 +1143,5 @@ public class VenusUI extends JFrame {
     public void dispatchEventToMenu(KeyEvent evt) {
         this.menu.dispatchEvent(evt);
     }
-
-    // pop up menu experiment 3 Aug 2006.  Keep for possible later revival.
-    private void setupPopupMenu() {
-        JPopupMenu popup;
-        popup = new JPopupMenu();
-        // cannot put the same menu item object on two different menus.
-        // If you want to duplicate functionality, need a different item.
-        // Should be able to share listeners, but if both menu items are
-        // JCheckBoxMenuItem, how to keep their checked status in synch?
-        // If you popup this menu and check the box, the right action occurs
-        // but its counterpart on the regular menu is not checked.
-        popup.add(new JCheckBoxMenuItem(settingsLabelAction));
-        //Add listener to components that can bring up popup menus.
-        MouseListener popupListener = new PopupListener(popup);
-        this.addMouseListener(popupListener);
-    }
-
 
 }
