@@ -327,7 +327,7 @@ public class HelpHelpAction extends GuiAction {
     }
 
 
-    private class MyCellRenderer extends JLabel implements ListCellRenderer {
+    private class MyCellRenderer extends JLabel implements ListCellRenderer<Object> {
         // This is the only method defined by ListCellRenderer. 
         // We just reconfigure the JLabel each time we're called. 
         public Component getListCellRendererComponent(

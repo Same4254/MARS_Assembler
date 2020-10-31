@@ -195,7 +195,7 @@ public class MarsLaunch {
                 continue;
             }
             DumpFormatLoader loader = new DumpFormatLoader();
-            ArrayList dumpFormats = loader.loadDumpFormats();
+            ArrayList<DumpFormat> dumpFormats = loader.loadDumpFormats();
             DumpFormat format = DumpFormatLoader.findDumpFormatGivenCommandDescriptor(dumpFormats, triple[1]);
             if (format == null) {
                 out.println("Error while attempting to save dump, format " + triple[1] + " was not found!");

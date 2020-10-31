@@ -539,16 +539,16 @@ public class LabelsWindow extends JInternalFrame {
     //  Comparator object provided as the argument constructor.  This works because it
     //  is implemented by returning the result of the Ascending comparator when
     //  arguments are reversed.
-    private class DescendingComparator implements java.util.Comparator {
-        private Comparator opposite;
+    private class DescendingComparator implements Comparator<Symbol> {
+        private Comparator<Symbol> opposite;
 
-        private DescendingComparator(Comparator opposite) {
+        private DescendingComparator(Comparator<Symbol> opposite) {
             this.opposite = opposite;
         }
 
 
 
-        public int compare(Object a, Object b) {
+        public int compare(Symbol a, Symbol b) {
             return opposite.compare(b, a);
         }
     }

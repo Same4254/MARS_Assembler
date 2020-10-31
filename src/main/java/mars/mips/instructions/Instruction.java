@@ -146,5 +146,5 @@ public abstract class Instruction {
             System.out.println("CONFIGURATION ERROR: Instruction example \"" + exampleFormat + "\" contains invalid token(s).");
         }
     }
-    
+
 }

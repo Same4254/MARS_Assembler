@@ -60,7 +60,7 @@ public class FileDumpMemoryAction extends GuiAction {
     private int[] segmentListHighArray;
 
     private JComboBox<String> segmentListSelector;
-    private JComboBox formatListSelector;
+    private JComboBox<DumpFormat> formatListSelector;
 
     public FileDumpMemoryAction(String name, Icon icon, String descrip,
                                 Integer mnemonic, KeyStroke accel, VenusUI gui) {
@@ -175,8 +175,8 @@ public class FileDumpMemoryAction extends GuiAction {
         contents.add(segmentPanel, BorderLayout.WEST);
 
         // Next, create list of all available dump formats.
-        ArrayList dumpFormats = (new DumpFormatLoader()).loadDumpFormats();
-        formatListSelector = new JComboBox<>(dumpFormats.toArray());
+        ArrayList<DumpFormat> dumpFormats = (new DumpFormatLoader()).loadDumpFormats();
+        formatListSelector = new JComboBox<>((DumpFormat[]) dumpFormats.toArray());
         formatListSelector.setRenderer(new DumpFormatComboBoxRenderer(formatListSelector));
         formatListSelector.setSelectedIndex(0);
         JPanel formatPanel = new JPanel(new BorderLayout());
