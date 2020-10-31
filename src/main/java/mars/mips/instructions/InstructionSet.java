@@ -2795,7 +2795,7 @@ public class InstructionSet {
         ArrayList<Instruction> matchingInstructions = null;
         // Linear search for now....
         for (int i = 0; i < instructionList.size(); i++) {
-            if (instructionList.get(i).getName().equalsIgnoreCase(name)) {
+            if (instructionList.get(i).getMnemonic().equalsIgnoreCase(name)) {
                 if (matchingInstructions == null)
                     matchingInstructions = new ArrayList<>();
                 matchingInstructions.add(instructionList.get(i));
@@ -2818,7 +2818,7 @@ public class InstructionSet {
         // Linear search for now....
         if (name != null) {
             for (int i = 0; i < instructionList.size(); i++) {
-                if (instructionList.get(i).getName().toLowerCase().startsWith(name.toLowerCase())) {
+                if (instructionList.get(i).getMnemonic().toLowerCase().startsWith(name.toLowerCase())) {
                     if (matchingInstructions == null)
                         matchingInstructions = new ArrayList<>();
                     matchingInstructions.add(instructionList.get(i));

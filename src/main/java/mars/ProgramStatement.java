@@ -619,7 +619,7 @@ public class ProgramStatement {
             statementList.addString(invalidOperator);
             return statementList;
         } else {
-            statementList.addString(instr.getName() + " ");
+            statementList.addString(instr.getMnemonic() + " ");
         }
         for (int i = 0; i < numOperands; i++) {
             // add separator if not at end of token list AND neither current nor 

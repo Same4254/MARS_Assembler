@@ -454,7 +454,7 @@ public class MIPSTokenMarker extends TokenMarker {
             // add Instruction mnemonics
             ArrayList<Instruction> instructionSet = mars.Globals.instructionSet.getInstructionList();
             for (int i = 0; i < instructionSet.size(); i++) {
-                cKeywords.add(instructionSet.get(i).getName(), Token.KEYWORD1);
+                cKeywords.add(instructionSet.get(i).getMnemonic(), Token.KEYWORD1);
             }
             // add assembler directives
             ArrayList<Directives> directiveSet = mars.assembler.Directives.getDirectiveList();
