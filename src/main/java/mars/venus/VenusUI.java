@@ -56,8 +56,6 @@ public class VenusUI extends JFrame {
     Coprocessor1Window coprocessor1Tab;
     Coprocessor0Window coprocessor0Tab;
     MessagesPane messagesPane;
-    JSplitPane splitter, horizonSplitter;
-    JPanel north;
 
     private int frameState; // see windowActivated() and windowDeactivated()
     private static int menuState = FileStatus.NO_FILE;
@@ -106,28 +104,13 @@ public class VenusUI extends JFrame {
     /**
      * Constructor for the Class. Sets up a window object for the UI
      *
-     * @param s Name of the window to be created.
-     **/
-
-    public VenusUI(String s) {
-        super(s);
+     * @param windowName Name of the window to be created.
+     */
+    public VenusUI(String windowName) {
+        super(windowName);
         mainUI = this;
         Globals.setGui(this);
         this.editor = new Editor(this);
-
-        double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-        // basically give up some screen space if running at 800 x 600
-        double messageWidthPct = (screenWidth < 1000.0) ? 0.67 : 0.73;
-        double messageHeightPct = (screenWidth < 1000.0) ? 0.20 : 0.25;
-        double mainWidthPct = (screenWidth < 1000.0) ? 0.67 : 0.73;
-        double mainHeightPct = (screenWidth < 1000.0) ? 0.60 : 0.65;
-        double registersWidthPct = (screenWidth < 1000.0) ? 0.18 : 0.22;
-        double registersHeightPct = (screenWidth < 1000.0) ? 0.72 : 0.80;
-
-        Dimension messagesPanePreferredSize = new Dimension((int) (screenWidth * messageWidthPct), (int) (screenHeight * messageHeightPct));
-        Dimension mainPanePreferredSize = new Dimension((int) (screenWidth * mainWidthPct), (int) (screenHeight * mainHeightPct));
-        Dimension registersPanePreferredSize = new Dimension((int) (screenWidth * registersWidthPct), (int) (screenHeight * registersHeightPct));
 
         // the "restore" size (window control button that toggles with maximize)
         // I want to keep it large, with enough room for user to get handles
@@ -157,26 +140,7 @@ public class VenusUI extends JFrame {
         // roughly in bottom-up order; some are created in component constructors and thus are
         // not visible here.
 
-        registersTab = new RegistersWindow();
-        coprocessor1Tab = new Coprocessor1Window();
-        coprocessor0Tab = new Coprocessor0Window();
-        registersPane = new RegistersPane(mainUI, registersTab, coprocessor1Tab, coprocessor0Tab);
-        registersPane.setPreferredSize(registersPanePreferredSize);
-
-        //Insets defaultTabInsets = (Insets)UIManager.get("TabbedPane.tabInsets");
-        //UIManager.put("TabbedPane.tabInsets", new Insets(1, 1, 1, 1));
-        mainPane = new MainPane(mainUI, editor, registersTab, coprocessor1Tab, coprocessor0Tab);
-        //UIManager.put("TabbedPane.tabInsets", defaultTabInsets);
-
-        mainPane.setPreferredSize(mainPanePreferredSize);
-        messagesPane = new MessagesPane();
-        messagesPane.setPreferredSize(messagesPanePreferredSize);
-
-        horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, registersPane, mainPane);
-        horizonSplitter.setOneTouchExpandable(true);
-
-        splitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, horizonSplitter, messagesPane);
-        splitter.setOneTouchExpandable(true);
+        JSplitPane workArea = getWorkArea();
 
         // due to dependencies, do not set up menu/toolbar until now.
         this.createActionObjects();
@@ -188,9 +152,10 @@ public class VenusUI extends JFrame {
         JPanel jp = new JPanel(new FlowLayout(FlowLayout.LEFT));
         jp.add(toolbar);
         jp.add(RunSpeedPanel.getInstance());
+
         JPanel center = new JPanel(new BorderLayout());
         center.add(jp, BorderLayout.NORTH);
-        center.add(splitter);
+        center.add(workArea);
 
         this.getContentPane().add(center);
 
@@ -224,10 +189,41 @@ public class VenusUI extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         this.pack();
-        splitter.setDividerLocation(1-messageHeightPct);
         this.setVisible(true);
     }
 
+    private JSplitPane getWorkArea() {
+        initRegistersPane();
+        initMainPane();
+        initMessagesPane();
+
+        JSplitPane horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, registersPane, mainPane);
+        horizonSplitter.setOneTouchExpandable(true);
+
+        JSplitPane verticalSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, horizonSplitter, messagesPane);
+        verticalSplitter.setOneTouchExpandable(true);
+
+        registersPane.setMinimumSize(new Dimension());
+        mainPane.setMinimumSize(new Dimension());
+        messagesPane.setMinimumSize(new Dimension());
+
+        return verticalSplitter;
+    }
+
+    private void initRegistersPane() {
+        registersTab = new RegistersWindow();
+        coprocessor1Tab = new Coprocessor1Window();
+        coprocessor0Tab = new Coprocessor0Window();
+        registersPane = new RegistersPane(mainUI, registersTab, coprocessor1Tab, coprocessor0Tab);
+    }
+
+    private void initMainPane() {
+        mainPane = new MainPane(mainUI, editor, registersTab, coprocessor1Tab, coprocessor0Tab);
+    }
+
+    private void initMessagesPane() {
+        messagesPane = new MessagesPane();
+    }
 
     /*
      * Action objects are used instead of action listeners because one can be easily shared between
