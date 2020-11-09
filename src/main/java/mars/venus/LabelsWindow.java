@@ -252,7 +252,7 @@ public class LabelsWindow extends JInternalFrame {
     //  Suggested by Ken Vollmar, implemented by Pete Sanderson
     //  July 2007.
 
-    private class LabelDisplayMouseListener extends MouseAdapter {
+    private static class LabelDisplayMouseListener extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
             JTable table = (JTable) e.getSource();
             int row = table.rowAtPoint(e.getPoint());
@@ -507,7 +507,7 @@ public class LabelsWindow extends JInternalFrame {
     ////////////////////////////////////////////////////////////////////////////
     //
     //  Comparator class used to sort in ascending order a List of symbols alphabetically by name
-    private class LabelNameAscendingComparator implements java.util.Comparator<Symbol> {
+    private static class LabelNameAscendingComparator implements Comparator<Symbol> {
         public int compare(Symbol a, Symbol b) {
             return a.getName().toLowerCase().compareTo(b.getName().toLowerCase());
         }
@@ -523,7 +523,7 @@ public class LabelsWindow extends JInternalFrame {
     //  Remember, if not equal then any value with correct sign will work.
     //  If both have same sign, a-b will yield correct result.
     //  If signs differ, b will yield correct result (think about it).
-    private class LabelAddressAscendingComparator implements java.util.Comparator<Symbol> {
+    private static class LabelAddressAscendingComparator implements java.util.Comparator<Symbol> {
         public int compare(Symbol a, Symbol b) {
             int addrA = a.getAddress();
             int addrB = b.getAddress();
@@ -539,14 +539,12 @@ public class LabelsWindow extends JInternalFrame {
     //  Comparator object provided as the argument constructor.  This works because it
     //  is implemented by returning the result of the Ascending comparator when
     //  arguments are reversed.
-    private class DescendingComparator implements Comparator<Symbol> {
+    private static class DescendingComparator implements Comparator<Symbol> {
         private Comparator<Symbol> opposite;
 
         private DescendingComparator(Comparator<Symbol> opposite) {
             this.opposite = opposite;
         }
-
-
 
         public int compare(Symbol a, Symbol b) {
             return opposite.compare(b, a);
