@@ -603,9 +603,8 @@ public class MarsLaunch {
         String strValue;
         // Display requested register contents
         out.println();
-        Iterator regIter = registerDisplayList.iterator();
-        while (regIter.hasNext()) {
-            String reg = regIter.next().toString();
+        for (String s : registerDisplayList) {
+            String reg = s.toString();
             if (RegisterFile.getUserRegister(reg) != null) {
                 // integer register
                 if (verbose)
