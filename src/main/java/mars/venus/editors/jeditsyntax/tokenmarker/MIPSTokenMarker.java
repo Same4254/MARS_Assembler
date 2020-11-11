@@ -19,7 +19,6 @@ import mars.venus.editors.jeditsyntax.PopupHelpItem;
 import javax.swing.text.Segment;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 /**

@@ -397,8 +397,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
      */
     void resetModifiedSourceCode() {
         if (executeMods != null && !executeMods.isEmpty()) {
-            for (Enumeration<ModifiedCode> elements = executeMods.elements(); elements.hasMoreElements(); ) {
-                ModifiedCode mc = elements.nextElement();
+            for (ModifiedCode mc : executeMods.values()) {
                 tableModel.setValueAt(mc.getCode(), mc.getRow(), CODE_COLUMN);
                 tableModel.setValueAt(mc.getBasic(), mc.getRow(), BASIC_COLUMN);
                 tableModel.setValueAt(mc.getSource(), mc.getRow(), SOURCE_COLUMN);

@@ -27,7 +27,6 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Vector;
 
 /**
@@ -1668,9 +1667,7 @@ public class JEditTextArea extends JComponent {
                     centerHeight);
 
             // Lay out all status components, in order
-            Enumeration status = leftOfScrollBar.elements();
-            while (status.hasMoreElements()) {
-                Component comp = (Component) status.nextElement();
+            for (Component comp : leftOfScrollBar) {
                 Dimension dim = comp.getPreferredSize();
                 comp.setBounds(ileft,
                         itop + centerHeight,
