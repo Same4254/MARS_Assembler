@@ -616,8 +616,8 @@ public class ExtendedInstruction extends Instruction {
         // if Delayed branching is enabled.  Otherwise generate nothing.  If generating nothing,
         // then don't count the nop in the instruction length.   DPS 23-Jan-2008
         int instructionCount = 0;
-        for (int i = 0; i < translationList.size(); i++) {
-            if (((String) translationList.get(i)).contains("DBNOP") && !Globals.getSettings().getBooleanSetting(Settings.DELAYED_BRANCHING_ENABLED))
+        for (Object o : translationList) {
+            if (((String) o).contains("DBNOP") && !Globals.getSettings().getBooleanSetting(Settings.DELAYED_BRANCHING_ENABLED))
                 continue;
             instructionCount++;
         }

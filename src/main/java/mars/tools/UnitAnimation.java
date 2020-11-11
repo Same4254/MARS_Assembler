@@ -116,8 +116,8 @@ class UnitAnimation extends JPanel
             }
             String[] list = listTargetVertex.split("#");
             targetVertex = new ArrayList<>();
-            for (int i = 0; i < list.length; i++) {
-                targetVertex.add(Integer.parseInt(list[i]));
+            for (String s : list) {
+                targetVertex.add(Integer.parseInt(s));
                 //	System.out.println("Adding " + i + " " +  Integer.parseInt(list[i])+ " in target");
             }
             String[] listColor = listOfColors.split("#");
@@ -350,17 +350,16 @@ class UnitAnimation extends JPanel
             int size = vertexList.size();
             Vertex vertex;
             ArrayList<Integer> targetList;
-            for (int i = 0; i < vertexList.size(); i++) {
-                vertex = vertexList.get(i);
+            for (Vertex value : vertexList) {
+                vertex = value;
                 targetList = vertex.getTargetVertex();
                 Vector<Vertex> vertexOfTargets = new Vector<>();
-                for (int k = 0; k < targetList.size(); k++) {
-                    vertexOfTargets.add(vertexList.get(targetList.get(k)));
+                for (Integer integer : targetList) {
+                    vertexOfTargets.add(vertexList.get(integer));
                 }
                 outputGraph.add(vertexOfTargets);
             }
-            for (int i = 0; i < outputGraph.size(); i++) {
-                Vector<Vertex> vert = outputGraph.get(i);
+            for (Vector<Vertex> vert : outputGraph) {
             }
 
             vertexList.get(0).setActive(true);
@@ -444,17 +443,16 @@ class UnitAnimation extends JPanel
             int size = vertexList.size();
             Vertex vertex;
             ArrayList<Integer> targetList;
-            for (int i = 0; i < vertexList.size(); i++) {
-                vertex = vertexList.get(i);
+            for (Vertex value : vertexList) {
+                vertex = value;
                 targetList = vertex.getTargetVertex();
                 Vector<Vertex> vertexOfTargets = new Vector<>();
-                for (int k = 0; k < targetList.size(); k++) {
-                    vertexOfTargets.add(vertexList.get(targetList.get(k)));
+                for (Integer integer : targetList) {
+                    vertexOfTargets.add(vertexList.get(integer));
                 }
                 outputGraph.add(vertexOfTargets);
             }
-            for (int i = 0; i < outputGraph.size(); i++) {
-                Vector<Vertex> vert = outputGraph.get(i);
+            for (Vector<Vertex> vert : outputGraph) {
             }
 
             vertexList.get(0).setActive(true);
@@ -710,8 +708,8 @@ class UnitAnimation extends JPanel
                         for (int k = 0; k < j; k++) {
                             tempVertex = outputGraph.get(vert.getNumIndex()).get(k);
                             boolean hasThisVertex = false;
-                            for (int m = 0; m < vertexTraversed.size(); m++) {
-                                if (tempVertex.getNumIndex() == vertexTraversed.get(m).getNumIndex()) {
+                            for (Vertex vertex : vertexTraversed) {
+                                if (tempVertex.getNumIndex() == vertex.getNumIndex()) {
                                     hasThisVertex = true;
                                     break;
                                 }
@@ -730,8 +728,8 @@ class UnitAnimation extends JPanel
                         for (int k = 0; k < j; k++) {
                             tempVertex = outputGraph.get(vert.getNumIndex()).get(k);
                             boolean hasThisVertex = false;
-                            for (int m = 0; m < vertexTraversed.size(); m++) {
-                                if (tempVertex.getNumIndex() == vertexTraversed.get(m).getNumIndex()) {
+                            for (Vertex vertex : vertexTraversed) {
+                                if (tempVertex.getNumIndex() == vertex.getNumIndex()) {
                                     hasThisVertex = true;
                                     break;
                                 }
@@ -757,8 +755,8 @@ class UnitAnimation extends JPanel
                         for (int k = 0; k < j; k++) {
                             tempVertex = outputGraph.get(vert.getNumIndex()).get(k);
                             boolean hasThisVertex = false;
-                            for (int m = 0; m < vertexTraversed.size(); m++) {
-                                if (tempVertex.getNumIndex() == vertexTraversed.get(m).getNumIndex()) {
+                            for (Vertex vertex : vertexTraversed) {
+                                if (tempVertex.getNumIndex() == vertex.getNumIndex()) {
                                     hasThisVertex = true;
                                     break;
                                 }
@@ -778,8 +776,8 @@ class UnitAnimation extends JPanel
                         for (int k = 0; k < j; k++) {
                             tempVertex = outputGraph.get(vert.getNumIndex()).get(k);
                             boolean hasThisVertex = false;
-                            for (int m = 0; m < vertexTraversed.size(); m++) {
-                                if (tempVertex.getNumIndex() == vertexTraversed.get(m).getNumIndex()) {
+                            for (Vertex vertex : vertexTraversed) {
+                                if (tempVertex.getNumIndex() == vertex.getNumIndex()) {
                                     hasThisVertex = true;
                                     break;
                                 }

@@ -109,9 +109,9 @@ public class SymbolTable {
      * @return The memory address of the label given, or NOT_FOUND if not found in symbol table.
      **/
     public int getAddress(String s) {
-        for (int i = 0; i < table.size(); i++) {
-            if (table.get(i).getName().equals(s)) {
-                return table.get(i).getAddress();
+        for (Symbol symbol : table) {
+            if (symbol.getName().equals(s)) {
+                return symbol.getAddress();
             }
         }
         return NOT_FOUND;
@@ -139,9 +139,9 @@ public class SymbolTable {
      **/
 
     public Symbol getSymbol(String s) {
-        for (int i = 0; i < table.size(); i++) {
-            if (table.get(i).getName().equals(s)) {
-                return table.get(i);
+        for (Symbol symbol : table) {
+            if (symbol.getName().equals(s)) {
+                return symbol;
             }
         }
         return null;
@@ -161,9 +161,9 @@ public class SymbolTable {
         } catch (NumberFormatException e) {
             return null;
         }
-        for (int i = 0; i < table.size(); i++) {
-            if (table.get(i).getAddress() == address) {
-                return table.get(i);
+        for (Symbol symbol : table) {
+            if (symbol.getAddress() == address) {
+                return symbol;
             }
         }
         return null;
@@ -190,9 +190,9 @@ public class SymbolTable {
 
     public ArrayList<Symbol> getDataSymbols() {
         ArrayList<Symbol> list = new ArrayList<>();
-        for (int i = 0; i < table.size(); i++) {
-            if (table.get(i).getType()) {
-                list.add(table.get(i));
+        for (Symbol symbol : table) {
+            if (symbol.getType()) {
+                list.add(symbol);
             }
         }
         return list;
@@ -207,9 +207,9 @@ public class SymbolTable {
 
     public ArrayList<Symbol> getTextSymbols() {
         ArrayList<Symbol> list = new ArrayList<>();
-        for (int i = 0; i < table.size(); i++) {
-            if (!table.get(i).getType()) {
-                list.add(table.get(i));
+        for (Symbol symbol : table) {
+            if (!symbol.getType()) {
+                list.add(symbol);
             }
         }
         return list;
@@ -223,8 +223,8 @@ public class SymbolTable {
 
     public ArrayList<Symbol> getAllSymbols() {
         ArrayList<Symbol> list = new ArrayList<>();
-        for (int i = 0; i < table.size(); i++) {
-            list.add(table.get(i));
+        for (Symbol symbol : table) {
+            list.add(symbol);
         }
         return list;
     }

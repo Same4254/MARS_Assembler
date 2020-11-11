@@ -381,8 +381,8 @@ public class SettingsEditorAction extends GuiAction {
             syntaxStylesAction = false;
             int count = 0;
             // Count the number of actual styles specified
-            for (int i = 0; i < labels.length; i++) {
-                if (labels[i] != null) {
+            for (String s : labels) {
+                if (s != null) {
                     count++;
                 }
             }

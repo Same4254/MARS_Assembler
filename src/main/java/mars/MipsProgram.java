@@ -277,8 +277,7 @@ public class MipsProgram {
             filenames.add(0, exceptionHandler);
             leadFilePosition = 1;
         }
-        for (int i = 0; i < filenames.size(); i++) {
-            String filename = filenames.get(i);
+        for (String filename : filenames) {
             MipsProgram preparee = (filename.equals(leadFilename)) ? this : new MipsProgram();
             preparee.readSource(filename);
             preparee.tokenize();

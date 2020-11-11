@@ -701,8 +701,7 @@ public class ProgramStatement {
             int valueBase = (Globals.getSettings().getBooleanSetting(Settings.DISPLAY_VALUES_IN_HEX)) ? mars.venus.NumberDisplayBaseChooser.HEXADECIMAL : mars.venus.NumberDisplayBaseChooser.DECIMAL;
 
             StringBuffer result = new StringBuffer();
-            for (int i = 0; i < list.size(); i++) {
-                ListElement e = list.get(i);
+            for (ListElement e : list) {
                 switch (e.type) {
                     case 0:
                         result.append(e.sValue);
@@ -712,7 +711,7 @@ public class ProgramStatement {
                         break;
                     case 2:
                         if (valueBase == mars.venus.NumberDisplayBaseChooser.HEXADECIMAL) {
-                            result.append(mars.util.Binary.intToHexString(e.iValue)); // 13-July-2011, was: intToHalfHexString()
+                            result.append(Binary.intToHexString(e.iValue)); // 13-July-2011, was: intToHalfHexString()
                         } else {
                             result.append(mars.venus.NumberDisplayBaseChooser.formatNumber(e.iValue, valueBase));
                         }

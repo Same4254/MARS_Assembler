@@ -254,9 +254,9 @@ public class EditorFont {
         String[] availableFamilies = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         Arrays.sort(availableFamilies); // not sure if necessary; is the list already alphabetical?
         int k = 0;
-        for (int i = 0; i < allCommonFamilies.length; i++) {
-            if (Arrays.binarySearch(availableFamilies, allCommonFamilies[i]) >= 0) {
-                result[k++] = allCommonFamilies[i];
+        for (String allCommonFamily : allCommonFamilies) {
+            if (Arrays.binarySearch(availableFamilies, allCommonFamily) >= 0) {
+                result[k++] = allCommonFamily;
             }
         }
         // If not all are found, creat a new array with only the ones that are.

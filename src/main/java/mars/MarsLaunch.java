@@ -175,8 +175,7 @@ public class MarsLaunch {
         if (dumpTriples == null)
             return;
 
-        for (int i = 0; i < dumpTriples.size(); i++) {
-            String[] triple = dumpTriples.get(i);
+        for (String[] triple : dumpTriples) {
             File file = new File(triple[2]);
             Integer[] segInfo = MemoryDump.getSegmentBounds(triple[0]);
             // If not segment name, see if it is address range instead.  DPS 14-July-2008
@@ -470,8 +469,8 @@ public class MarsLaunch {
                     ArrayList<String> moreFilesToAssemble = FilenameFinder.getFilenameList(filenameList, FilenameFinder.MATCH_ALL_EXTENSIONS);
                     // Remove any duplicates then merge the two lists.
                     for (int index2 = 0; index2 < moreFilesToAssemble.size(); index2++) {
-                        for (int index1 = 0; index1 < filesToAssemble.size(); index1++) {
-                            if (filesToAssemble.get(index1).equals(moreFilesToAssemble.get(index2))) {
+                        for (String s : filesToAssemble) {
+                            if (s.equals(moreFilesToAssemble.get(index2))) {
                                 moreFilesToAssemble.remove(index2);
                                 index2--; // adjust for left shift in moreFilesToAssemble...
                                 break;    // break out of inner loop...
@@ -736,8 +735,8 @@ public class MarsLaunch {
      * @param displayMessagesToErrSwitch
      */
     private void processDisplayMessagesToErrSwitch(String[] args, String displayMessagesToErrSwitch) {
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].toLowerCase().equals(displayMessagesToErrSwitch)) {
+        for (String arg : args) {
+            if (arg.toLowerCase().equals(displayMessagesToErrSwitch)) {
                 out = System.err;
                 return;
             }
@@ -752,8 +751,8 @@ public class MarsLaunch {
      */
     private void displayCopyright(String[] args, String noCopyrightSwitch) {
         boolean print = true;
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].toLowerCase().equals(noCopyrightSwitch)) {
+        for (String arg : args) {
+            if (arg.toLowerCase().equals(noCopyrightSwitch)) {
                 return;
             }
         }

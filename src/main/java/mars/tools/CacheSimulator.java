@@ -890,8 +890,8 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
         }
 
         public void reset() {
-            for (int i = 0; i < blocks.length; i++) {
-                blocks[i].setBackground(defaultColor);
+            for (JTextField block : blocks) {
+                block.setBackground(defaultColor);
             }
         }
 

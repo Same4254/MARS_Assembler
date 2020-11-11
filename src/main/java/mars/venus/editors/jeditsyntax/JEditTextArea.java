@@ -2146,8 +2146,7 @@ public class JEditTextArea extends JComponent {
         if (helpItems != null) {
             popupMenu = new JPopupMenu();
             int length = PopupHelpItem.maxExampleLength(helpItems) + 2;
-            for (int i = 0; i < helpItems.size(); i++) {
-                PopupHelpItem item = helpItems.get(i);
+            for (PopupHelpItem item : helpItems) {
                 JMenuItem menuItem = new JMenuItem("<html><tt>" + item.getExamplePaddedToLength(length).replaceAll(" ", "&nbsp;") + "</tt>" + item.getDescription() + "</html>");
                 if (item.getExact()) {
                     // The instruction name is completed so the role of the popup changes

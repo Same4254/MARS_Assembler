@@ -150,8 +150,8 @@ public class DataSegmentWindow extends JInternalFrame implements Observer {
         navButtons.add(nextButton);
         features.add(navButtons);
         features.add(baseAddressSelector);
-        for (int i = 0; i < choosers.length; i++) {
-            features.add(choosers[i]);
+        for (NumberDisplayBaseChooser chooser : choosers) {
+            features.add(chooser);
         }
         asciiDisplayCheckBox = new JCheckBox("ASCII", asciiDisplay);
         asciiDisplayCheckBox.setToolTipText("Display data segment values in ASCII (overrides Hexadecimal Values setting)");
@@ -207,8 +207,8 @@ public class DataSegmentWindow extends JInternalFrame implements Observer {
                 (int) addressCell.getX() + 1,
                 (int) addressCell.getY() + 1, 1, false);
         MouseListener[] mouseListeners = dataTable.getMouseListeners();
-        for (int i = 0; i < mouseListeners.length; i++) {
-            mouseListeners[i].mousePressed(fakeMouseEvent);
+        for (MouseListener mouseListener : mouseListeners) {
+            mouseListener.mousePressed(fakeMouseEvent);
         }
     }
 

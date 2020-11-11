@@ -74,8 +74,8 @@ public class ToolLoader {
             menu.setMnemonic(KeyEvent.VK_T);
             // traverse array list and build menu
             MarsToolClassAndInstance listItem;
-            for (int i = 0; i < marsToolList.size(); i++) {
-                listItem = marsToolList.get(i);
+            for (MarsToolClassAndInstance marsToolClassAndInstance : marsToolList) {
+                listItem = marsToolClassAndInstance;
                 menu.add(new ToolAction(listItem.marsToolClass, listItem.marsToolInstance.getName()));
             }
         }
@@ -113,8 +113,7 @@ public class ToolLoader {
         // pathname.
         //candidates.addAll(mars.Globals.getExternalTools());  // this by itself is not enough...
         HashMap<String, String> tools = new HashMap<>();
-        for (int i = 0; i < candidates.size(); i++) {
-            String file = candidates.get(i);
+        for (String file : candidates) {
             // Do not add class if already encountered (happens if run in MARS development directory)
             if (tools.containsKey(file)) {
                 continue;

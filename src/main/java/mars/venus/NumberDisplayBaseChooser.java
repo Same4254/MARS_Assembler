@@ -72,8 +72,8 @@ public class NumberDisplayBaseChooser extends JCheckBox {
                             settingMenuItem.setSelected(choose.isSelected());
                             ActionListener[] listeners = settingMenuItem.getActionListeners();
                             ActionEvent event = new ActionEvent(settingMenuItem, 0, "chooser");
-                            for (int i = 0; i < listeners.length; i++) {
-                                listeners[i].actionPerformed(event);
+                            for (ActionListener listener : listeners) {
+                                listener.actionPerformed(event);
                             }
                         }
                         // Better to use notify, but I am tired...

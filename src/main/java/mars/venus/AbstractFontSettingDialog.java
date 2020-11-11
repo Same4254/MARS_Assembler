@@ -218,12 +218,12 @@ public abstract class AbstractFontSettingDialog extends JDialog {
     private Vector<String> makeVectorData(String[][] str) {
         boolean needSeparator = false;
         Vector<String> data = new Vector<>();
-        for (int i = 0; i < str.length; i++) {
+        for (String[] strings : str) {
             if (needSeparator) {
                 data.addElement(SEPARATOR);
             }
-            for (int j = 0; j < str[i].length; j++) {
-                data.addElement(str[i][j]);
+            for (String string : strings) {
+                data.addElement(string);
                 needSeparator = true;
             }
         }

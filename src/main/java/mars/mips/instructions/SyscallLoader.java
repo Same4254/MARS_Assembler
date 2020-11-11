@@ -67,8 +67,7 @@ class SyscallLoader {
         ArrayList<String> candidates = FilenameFinder.getFilenameList(this.getClass().getClassLoader(),
                 SYSCALLS_DIRECTORY_PATH, CLASS_EXTENSION);
         HashMap<String, String> syscalls = new HashMap<>();
-        for (int i = 0; i < candidates.size(); i++) {
-            String file = candidates.get(i);
+        for (String file : candidates) {
             // Do not add class if already encountered (happens if run in MARS development directory)
             if (syscalls.containsKey(file)) {
                 continue;
@@ -107,11 +106,11 @@ class SyscallLoader {
         ArrayList<SyscallNumberOverride> overrides = new Globals().getSyscallOverrides();
         SyscallNumberOverride override;
         Syscall syscall;
-        for (int index = 0; index < overrides.size(); index++) {
-            override = overrides.get(index);
+        for (SyscallNumberOverride syscallNumberOverride : overrides) {
+            override = syscallNumberOverride;
             boolean match = false;
-            for (int i = 0; i < syscallList.size(); i++) {
-                syscall = syscallList.get(i);
+            for (Syscall value : syscallList) {
+                syscall = value;
                 if (override.getName().equals(syscall.getName())) {
                     // we have a match to service name, assign new number
                     syscall.setNumber(override.getNumber());
@@ -159,8 +158,8 @@ class SyscallLoader {
         if (syscallList == null) {
             loadSyscalls();
         }
-        for (int index = 0; index < syscallList.size(); index++) {
-            service = syscallList.get(index);
+        for (Syscall syscall : syscallList) {
+            service = syscall;
             if (service.getNumber() == number) {
                 match = service;
             }

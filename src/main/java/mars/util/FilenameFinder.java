@@ -117,9 +117,9 @@ public class FilenameFinder {
                     }
                 } else {  // have array of File objects; convert to names and add to list
                     FileFilter filter = getFileFilter(fileExtension, "", NO_DIRECTORIES);
-                    for (int i = 0; i < files.length; i++) {
-                        if (filter.accept(files[i])) {
-                            filenameList.add(files[i].getName());
+                    for (File file : files) {
+                        if (filter.accept(file)) {
+                            filenameList.add(file.getName());
                         }
                     }
                 }
@@ -190,8 +190,8 @@ public class FilenameFinder {
         if (fileExtensions == null || fileExtensions.size() == 0) {
             filenameList = getFilenameList(classLoader, directoryPath, "");
         } else {
-            for (int i = 0; i < fileExtensions.size(); i++) {
-                fileExtension = checkFileExtension(fileExtensions.get(i));
+            for (String extension : fileExtensions) {
+                fileExtension = checkFileExtension(extension);
                 filenameList.addAll(getFilenameList(classLoader, directoryPath, fileExtension));
             }
         }
@@ -218,9 +218,9 @@ public class FilenameFinder {
         if (directory.isDirectory()) {
             File[] allFiles = directory.listFiles();
             FileFilter filter = getFileFilter(fileExtension, "", NO_DIRECTORIES);
-            for (int i = 0; i < allFiles.length; i++) {
-                if (filter.accept(allFiles[i])) {
-                    filenameList.add(allFiles[i].getAbsolutePath());
+            for (File allFile : allFiles) {
+                if (filter.accept(allFile)) {
+                    filenameList.add(allFile.getAbsolutePath());
                 }
             }
         }
@@ -247,8 +247,8 @@ public class FilenameFinder {
         if (fileExtensions == null || fileExtensions.size() == 0) {
             filenameList = getFilenameList(directoryPath, "");
         } else {
-            for (int i = 0; i < fileExtensions.size(); i++) {
-                fileExtension = checkFileExtension(fileExtensions.get(i));
+            for (String extension : fileExtensions) {
+                fileExtension = checkFileExtension(extension);
                 filenameList.addAll(getFilenameList(directoryPath, fileExtension));
             }
         }
@@ -270,8 +270,8 @@ public class FilenameFinder {
         fileExtension = checkFileExtension(fileExtension);
         ArrayList<String> filenameList = new ArrayList<>();
         FileFilter filter = getFileFilter(fileExtension, "", NO_DIRECTORIES);
-        for (int i = 0; i < nameList.size(); i++) {
-            File file = new File(nameList.get(i));
+        for (String s : nameList) {
+            File file = new File(s);
             if (filter.accept(file)) {
                 filenameList.add(file.getAbsolutePath());
             }
@@ -298,8 +298,8 @@ public class FilenameFinder {
         if (fileExtensions == null || fileExtensions.size() == 0) {
             filenameList = getFilenameList(nameList, "");
         } else {
-            for (int i = 0; i < fileExtensions.size(); i++) {
-                fileExtension = checkFileExtension(fileExtensions.get(i));
+            for (String extension : fileExtensions) {
+                fileExtension = checkFileExtension(extension);
                 filenameList.addAll(getFilenameList(nameList, fileExtension));
             }
         }
@@ -488,8 +488,8 @@ public class FilenameFinder {
             }
             String fileExtension = getExtension(file);
             if (fileExtension != null) {
-                for (int i = 0; i < extensions.size(); i++) {
-                    String extension = checkFileExtension((String) extensions.get(i));
+                for (Object o : extensions) {
+                    String extension = checkFileExtension((String) o);
                     if (extension.equals(MATCH_ALL_EXTENSIONS) ||
                             fileExtension.equals(extension)) {
                         return true;

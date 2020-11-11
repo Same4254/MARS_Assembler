@@ -182,10 +182,10 @@ public class Assembler {
         // TO SECOND PASS. THIS ASSURES ALL SYMBOL TABLES ARE CORRECTLY BUILT.
         // THERE IS ONE GLOBAL SYMBOL TABLE (for identifiers declared .globl) PLUS
         // ONE LOCAL SYMBOL TABLE FOR EACH SOURCE FILE.
-        for (int fileIndex = 0; fileIndex < tokenizedProgramFiles.size(); fileIndex++) {
+        for (MipsProgram programFile : tokenizedProgramFiles) {
             if (errors.errorLimitExceeded())
                 break;
-            this.fileCurrentlyBeingAssembled = tokenizedProgramFiles.get(fileIndex);
+            this.fileCurrentlyBeingAssembled = programFile;
             // List of labels declared ".globl". new list for each file assembled
             this.globalDeclarationList = new TokenList();
             // Parser begins by default in text segment until directed otherwise.
@@ -260,14 +260,14 @@ public class Assembler {
             System.out.println("Assembler second pass begins");
         // SECOND PASS OF ASSEMBLER GENERATES BASIC ASSEMBLER THEN MACHINE CODE.
         // Generates basic assembler statements...
-        for (int fileIndex = 0; fileIndex < tokenizedProgramFiles.size(); fileIndex++) {
+        for (MipsProgram tokenizedProgramFile : tokenizedProgramFiles) {
             if (errors.errorLimitExceeded())
                 break;
-            this.fileCurrentlyBeingAssembled = tokenizedProgramFiles.get(fileIndex);
+            this.fileCurrentlyBeingAssembled = tokenizedProgramFile;
             ArrayList<ProgramStatement> parsedList = fileCurrentlyBeingAssembled.getParsedList();
             ProgramStatement statement;
-            for (int i = 0; i < parsedList.size(); i++) {
-                statement = parsedList.get(i);
+            for (ProgramStatement programStatement : parsedList) {
+                statement = programStatement;
                 statement.buildBasicStatementFromBasicInstruction(errors);
                 if (errors.errorsOccurred()) {
                     throw new ProcessingException(errors);
@@ -355,10 +355,10 @@ public class Assembler {
         // Generates machine code statements from the list of basic assembler statements
         // and writes the statement to memory.
         ProgramStatement statement;
-        for (int i = 0; i < this.machineList.size(); i++) {
+        for (ProgramStatement programStatement : this.machineList) {
             if (errors.errorLimitExceeded())
                 break;
-            statement = this.machineList.get(i);
+            statement = programStatement;
             statement.buildMachineStatementFromBasicStatement(errors);
             if (Globals.debug)
                 System.out.println(statement);
@@ -1424,8 +1424,8 @@ public class Assembler {
         // undefined labels.
         private void generateErrorMessages(ErrorList errors) {
             DataSegmentForwardReference entry;
-            for (int i = 0; i < forwardReferenceList.size(); i++) {
-                entry = forwardReferenceList.get(i);
+            for (DataSegmentForwardReference dataSegmentForwardReference : forwardReferenceList) {
+                entry = dataSegmentForwardReference;
                 errors.add(new ErrorMessage(entry.token.getSourceMipsProgram(), entry.token
                         .getSourceLine(), entry.token.getStartPos(), "Symbol \""
                         + entry.token.getValue() + "\" not found in symbol table."));

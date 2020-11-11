@@ -142,8 +142,8 @@ public class Coprocessor0Window extends JPanel implements Observer {
      */
     public void updateRegisters(int base) {
         registers = Coprocessor0.getRegisters();
-        for (int i = 0; i < registers.length; i++) {
-            this.updateRegisterValue(registers[i].getNumber(), registers[i].getValue(), base);
+        for (Register register : registers) {
+            this.updateRegisterValue(register.getNumber(), register.getValue(), base);
         }
     }
 

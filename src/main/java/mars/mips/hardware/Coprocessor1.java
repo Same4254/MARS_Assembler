@@ -78,11 +78,11 @@ public class Coprocessor1 {
      **/
 
     public static void showRegisters() {
-        for (int i = 0; i < registers.length; i++) {
+        for (Register register : registers) {
 
-            System.out.println("Name: " + registers[i].getName());
-            System.out.println("Number: " + registers[i].getNumber());
-            System.out.println("Value: " + registers[i].getValue());
+            System.out.println("Name: " + register.getName());
+            System.out.println("Number: " + register.getNumber());
+            System.out.println("Value: " + register.getValue());
             System.out.println();
         }
     }
@@ -346,11 +346,11 @@ public class Coprocessor1 {
 
     public static int updateRegister(int num, int val) {
         int old = 0;
-        for (int i = 0; i < registers.length; i++) {
-            if (registers[i].getNumber() == num) {
+        for (Register register : registers) {
+            if (register.getNumber() == num) {
                 old = (Globals.getSettings().getBackSteppingEnabled())
-                        ? Globals.program.getBackStepper().addCoprocessor1Restore(num, registers[i].setValue(val))
-                        : registers[i].setValue(val);
+                        ? Globals.program.getBackStepper().addCoprocessor1Restore(num, register.setValue(val))
+                        : register.setValue(val);
                 break;
             }
         }
@@ -379,9 +379,9 @@ public class Coprocessor1 {
 
     public static int getRegisterNumber(String n) {
         int j = -1;
-        for (int i = 0; i < registers.length; i++) {
-            if (registers[i].getName().equals(n)) {
-                j = registers[i].getNumber();
+        for (Register register : registers) {
+            if (register.getName().equals(n)) {
+                j = register.getNumber();
                 break;
             }
         }
@@ -425,8 +425,7 @@ public class Coprocessor1 {
      **/
 
     public static void resetRegisters() {
-        for (int i = 0; i < registers.length; i++)
-            registers[i].resetValue();
+        for (Register register : registers) register.resetValue();
         clearConditionFlags();
     }
 
@@ -436,8 +435,8 @@ public class Coprocessor1 {
      * will add the given Observer to each one.
      */
     public static void addRegistersObserver(Observer observer) {
-        for (int i = 0; i < registers.length; i++) {
-            registers[i].addObserver(observer);
+        for (Register register : registers) {
+            register.addObserver(observer);
         }
     }
 
@@ -447,8 +446,8 @@ public class Coprocessor1 {
      * will delete the given Observer from each one.
      */
     public static void deleteRegistersObserver(Observer observer) {
-        for (int i = 0; i < registers.length; i++) {
-            registers[i].deleteObserver(observer);
+        for (Register register : registers) {
+            register.deleteObserver(observer);
         }
     }
 
