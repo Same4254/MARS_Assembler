@@ -1207,7 +1207,7 @@ public class Memory extends Observable {
     /////////////////////////////////////////////////////////////////////////
     // Private class whose objects will represent an observable-observer pair
     // for a given memory address or range.
-    private class MemoryObservable extends Observable implements Comparable {
+    private class MemoryObservable extends Observable implements Comparable<MemoryObservable> {
         private int lowAddress, highAddress;
 
         public MemoryObservable(Observer obs, int startAddr, int endAddr) {
@@ -1227,15 +1227,12 @@ public class Memory extends Observable {
 
         // Useful to have for future refactoring, if it actually becomes worthwhile to sort
         // these or put 'em in a tree (rather than sequential search through list).
-        public int compareTo(Object obj) {
-            if (!(obj instanceof MemoryObservable)) {
-                throw new ClassCastException();
-            }
-            MemoryObservable mo = (MemoryObservable) obj;
-            if (this.lowAddress < mo.lowAddress || this.lowAddress == mo.lowAddress && this.highAddress < mo.highAddress) {
+        @Override
+        public int compareTo(MemoryObservable o) {
+            if (this.lowAddress < o.lowAddress || this.lowAddress == o.lowAddress && this.highAddress < o.highAddress) {
                 return -1;
             }
-            if (this.lowAddress > mo.lowAddress || this.lowAddress == mo.lowAddress && this.highAddress > mo.highAddress) {
+            if (this.lowAddress > o.lowAddress || this.lowAddress == o.lowAddress && this.highAddress > o.highAddress) {
                 return -1;
             }
             return 0;  // they have to be equal at this point.
@@ -1254,7 +1251,7 @@ public class Memory extends Observable {
     // is from command mode, Globals.program is null but still want ability to observe.
     private void notifyAnyObservers(int type, int address, int length, int value) {
         if ((Globals.program != null || Globals.getGui() == null) && this.observables.size() > 0) {
-            Iterator it = this.observables.iterator();
+            Iterator<MemoryObservable> it = this.observables.iterator();
             MemoryObservable mo;
             while (it.hasNext()) {
                 mo = (MemoryObservable) it.next();

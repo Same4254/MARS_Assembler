@@ -111,7 +111,7 @@ public class SettingsMemoryConfigurationAction extends GuiAction {
         private Component buildConfigChooser() {
             JPanel chooserPanel = new JPanel(new GridLayout(4, 1));
             ButtonGroup choices = new ButtonGroup();
-            Iterator configurationsIterator = MemoryConfigurations.getConfigurationsIterator();
+            Iterator<MemoryConfiguration> configurationsIterator = MemoryConfigurations.getConfigurationsIterator();
             while (configurationsIterator.hasNext()) {
                 MemoryConfiguration config = (MemoryConfiguration) configurationsIterator.next();
                 ConfigurationButton button = new ConfigurationButton(config);

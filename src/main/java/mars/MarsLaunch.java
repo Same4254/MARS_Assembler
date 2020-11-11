@@ -689,7 +689,7 @@ public class MarsLaunch {
     private void displayMemoryPostMortem() {
         int value;
         // Display requested memory range contents
-        Iterator memIter = memoryDisplayList.iterator();
+        Iterator<String> memIter = memoryDisplayList.iterator();
         int addressStart = 0, addressEnd = 0;
         while (memIter.hasNext()) {
             try { // This will succeed; error would have been caught during command arg parse
@@ -771,7 +771,7 @@ public class MarsLaunch {
                 segments.append(", ");
             }
         }
-        ArrayList dumpFormats = (new DumpFormatLoader()).loadDumpFormats();
+        ArrayList<DumpFormat> dumpFormats = (new DumpFormatLoader()).loadDumpFormats();
         StringBuilder formats = new StringBuilder();
         for (int i = 0; i < dumpFormats.size(); i++) {
             formats.append(((DumpFormat) dumpFormats.get(i)).getCommandDescriptor());

@@ -298,9 +298,9 @@ public class HelpHelpAction extends GuiAction {
 
     ////////////////////////////////////////////////////////////////////////////
     private JScrollPane createMipsInstructionHelpPane(String instructionClassName) {
-        ArrayList instructionList = Globals.instructionSet.getInstructionList();
+        ArrayList<Instruction> instructionList = Globals.instructionSet.getInstructionList();
         Vector<String> exampleList = new Vector<>(instructionList.size());
-        Iterator it = instructionList.iterator();
+        Iterator<Instruction> it = instructionList.iterator();
         Instruction instr;
         String blanks = "                        ";  // 24 blanks
         Class instructionClass;

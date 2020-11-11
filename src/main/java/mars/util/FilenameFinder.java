@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
@@ -99,7 +100,7 @@ public class FilenameFinder {
         //
         URI uri;
         try {
-            Enumeration urls = classLoader.getResources(directoryPath);
+            Enumeration<URL> urls = classLoader.getResources(directoryPath);
 
             while (urls.hasMoreElements()) {
                 uri = new URI(urls.nextElement().toString());
@@ -333,7 +334,7 @@ public class FilenameFinder {
      * @return a FileFilter object that accepts files with given extensions, and directories if so indicated.
      */
 
-    public static FileFilter getFileFilter(ArrayList extensions, String description, boolean acceptDirectories) {
+    public static FileFilter getFileFilter(ArrayList<String> extensions, String description, boolean acceptDirectories) {
         return new MarsFileFilter(extensions, description, acceptDirectories);
     }
 
@@ -346,7 +347,7 @@ public class FilenameFinder {
      * @return a FileFilter object that accepts files with given extensions, and directories if so indicated.
      */
 
-    public static FileFilter getFileFilter(ArrayList extensions, String description) {
+    public static FileFilter getFileFilter(ArrayList<String> extensions, String description) {
         return getFileFilter(extensions, description, true);
     }
 
@@ -445,11 +446,11 @@ public class FilenameFinder {
 
     private static class MarsFileFilter extends FileFilter {
 
-        private ArrayList extensions;
+        private ArrayList<String> extensions;
         private String fullDescription;
         private boolean acceptDirectories;
 
-        private MarsFileFilter(ArrayList extensions, String description, boolean acceptDirectories) {
+        private MarsFileFilter(ArrayList<String> extensions, String description, boolean acceptDirectories) {
             this.extensions = extensions;
             this.fullDescription = buildFullDescription(description, extensions);
             this.acceptDirectories = acceptDirectories;
@@ -459,7 +460,7 @@ public class FilenameFinder {
         // We will attach it to description of the extensions.  For example, if the extensions
         // given are s and asm and the description is "Assembler Programs" the full description
         // generated here will be "Assembler Programs (*.s; *.asm)"
-        private String buildFullDescription(String description, ArrayList extensions) {
+        private String buildFullDescription(String description, ArrayList<String> extensions) {
             StringBuilder result = new StringBuilder((description == null) ? "" : description);
             if (extensions.size() > 0) {
                 result.append("  (");

@@ -608,7 +608,7 @@ public class ExtendedInstruction extends Instruction {
      * Returns length in bytes of corresponding binary instruction(s).
      * Returns 0 if the ArrayList is null or empty.
      */
-    private int getInstructionLength(ArrayList translationList) {
+    private int getInstructionLength(ArrayList<String> translationList) {
         if (translationList == null || translationList.size() == 0) {
             return 0;
         }
@@ -616,8 +616,8 @@ public class ExtendedInstruction extends Instruction {
         // if Delayed branching is enabled.  Otherwise generate nothing.  If generating nothing,
         // then don't count the nop in the instruction length.   DPS 23-Jan-2008
         int instructionCount = 0;
-        for (Object o : translationList) {
-            if (((String) o).contains("DBNOP") && !Globals.getSettings().getBooleanSetting(Settings.DELAYED_BRANCHING_ENABLED))
+        for (String o : translationList) {
+            if (o.contains("DBNOP") && !Globals.getSettings().getBooleanSetting(Settings.DELAYED_BRANCHING_ENABLED))
                 continue;
             instructionCount++;
         }

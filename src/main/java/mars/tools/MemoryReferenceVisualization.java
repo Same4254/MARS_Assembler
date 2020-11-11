@@ -752,7 +752,7 @@ public class MemoryReferenceVisualization extends AbstractMarsToolAndApplication
     // Each object represents beginning of a counter value range (non-negative integer) and
     // color for rendering the range.  High end of the range is defined as low end of the
     // next range minus 1.  For last range, high end is Integer.MAX_VALUE.
-    private class CounterColor implements Comparable {
+    private class CounterColor implements Comparable<CounterColor> {
         private int colorRangeStart;
         private Color associatedColor;
 
@@ -762,12 +762,8 @@ public class MemoryReferenceVisualization extends AbstractMarsToolAndApplication
         }
 
         // Necessary for sorting in ascending order of range low end.
-        public int compareTo(Object other) {
-            if (other instanceof CounterColor) {
-                return this.colorRangeStart - ((CounterColor) other).colorRangeStart;
-            } else {
-                throw new ClassCastException();
-            }
+        public int compareTo(CounterColor other) {
+            return this.colorRangeStart - other.colorRangeStart;
         }
     }
 
