@@ -971,27 +971,29 @@ public class Assembler {
                         storeRealNumber(valueToken, directive, errors);
                     }
                 }
-            } // WHAT ABOUT .KDATA SEGMENT?
-            /***************************************************************************
-             * /****** NOTE of 11/20/06. Below will always throw exception b/c
-             * you cannot use Memory.set() with text segment addresses and the
-             * "not valid address" produced here is misleading. Added data
-             * segment check prior to this point, so this "else" will never be
-             * executed. I'm leaving it in just in case MARS in the future adds
-             * capability of writing to the text segment (e.g. ability to
-             * de-assemble a binary value into its corresponding MIPS
-             * instruction)
-             *
-             * else { // not in data segment...which we assume to mean in text
-             * segment. try { for (int i=0; i < repetitions; i++) {
-             * Globals.memory.set(this.textAddress.get(),
-             * Binary.stringToInt(valueToken.getValue()), lengthInBytes);
-             * this.textAddress.increment(lengthInBytes); } } catch
-             * (AddressErrorException e) { errors.add(new
-             * ErrorMessage(token.getSourceMIPSprogram(), token.getSourceLine(),
-             * token.getStartPos(), "\""+this.textAddress.get()+
-             * "\" is not a valid text segment address")); } }
-             ************************************************************************/
+            }
+
+//            WHAT ABOUT .KDATA SEGMENT?
+//
+//            NOTE of 11/20/06. Below will always throw exception b/c
+//            you cannot use Memory.set() with text segment addresses and the
+//            "not valid address" produced here is misleading. Added data
+//            segment check prior to this point, so this "else" will never be
+//            executed. I'm leaving it in just in case MARS in the future adds
+//            capability of writing to the text segment (e.g. ability to
+//            de-assemble a binary value into its corresponding MIPS
+//            instruction)
+//
+//            else { // not in data segment...which we assume to mean in text
+//            segment. try { for (int i=0; i < repetitions; i++) {
+//            Globals.memory.set(this.textAddress.get(),
+//            Binary.stringToInt(valueToken.getValue()), lengthInBytes);
+//            this.textAddress.increment(lengthInBytes); } } catch
+//            (AddressErrorException e) { errors.add(new
+//            ErrorMessage(token.getSourceMIPSprogram(), token.getSourceLine(),
+//            token.getStartPos(), "\""+this.textAddress.get()+
+//            "\" is not a valid text segment address")); } }
+
             return;
         }
 
@@ -1007,7 +1009,6 @@ public class Assembler {
         }
     }
 
-    // //////////////////////////////////////////////////////////////////////////////
     // Store integer value given integer (word, half, byte) directive.
     // Called by storeNumeric()
     // NOTE: The token itself may be a label, in which case the correct action is
@@ -1035,16 +1036,15 @@ public class Assembler {
             if (this.inDataSegment) {
                 writeToDataSegment(value, lengthInBytes, token, errors);
             }
-            /******
-             * NOTE of 11/20/06. "try" below will always throw exception b/c you
-             * cannot use Memory.set() with text segment addresses and the
-             * "not valid address" produced here is misleading. Added data
-             * segment check prior to this point, so this "else" will never be
-             * executed. I'm leaving it in just in case MARS in the future adds
-             * capability of writing to the text segment (e.g. ability to
-             * de-assemble a binary value into its corresponding MIPS
-             * instruction)
-             ********/
+
+//            NOTE of 11/20/06. "try" below will always throw exception b/c you
+//            cannot use Memory.set() with text segment addresses and the
+//            "not valid address" produced here is misleading. Added data
+//            segment check prior to this point, so this "else" will never be
+//            executed. I'm leaving it in just in case MARS in the future adds
+//            capability of writing to the text segment (e.g. ability to
+//            de-assemble a binary value into its corresponding MIPS
+//            instruction)
             else {
                 try {
                     Globals.memory.set(this.textAddress.get(), value, lengthInBytes);

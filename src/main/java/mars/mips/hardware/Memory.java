@@ -620,11 +620,6 @@ public class Memory extends Observable {
         }
     }
 
-
-    /********************************  THE GETTER METHODS  ******************************/
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-
     /**
      * Starting at the given word address, read the given number of bytes (max 4).
      * This one does not check for word boundaries, and copies one byte at a time.
@@ -974,9 +969,6 @@ public class Memory extends Observable {
         else
             return new ProgramStatement(get(address, WORD_LENGTH_BYTES), address);
     }
-
-
-    /*********************************  THE UTILITIES  *************************************/
 
     /**
      * Utility to determine if given address is word-aligned.

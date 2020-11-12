@@ -65,7 +65,7 @@ public class HexTextDumpFormat extends AbstractDumpFormat {
      * @param lastAddress  last (highest) memory address to dump.  In bytes but
      *                     must be on word boundary.  Will dump the word that starts at this address.
      * @throws AddressErrorException if firstAddress is invalid or not on a word boundary.
-     * @throws IOException           if error occurs during file output.
+     * @throws FileNotFoundException if error occurs during file output.
      */
     public void dumpMemoryRange(File file, int firstAddress, int lastAddress)
             throws AddressErrorException, FileNotFoundException {

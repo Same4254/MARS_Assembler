@@ -170,19 +170,6 @@ public class OperandFormat {
             }
         }
 
-        /********  nice little debugging code to see which operand format
-         ********  the operands for this source code instruction matched.
-         System.out.print("Candidate: ");
-         for (int i=1; i<spec.size(); i++) {
-         System.out.print(cand.get(i).getValue()+" ");
-         }
-         System.out.print("Matched Spec: ");
-         for (int i=1; i<spec.size(); i++) {
-         System.out.print(spec.get(i).getValue()+" ");
-         }
-         System.out.println();
-         */
-
         return true;
     }
 

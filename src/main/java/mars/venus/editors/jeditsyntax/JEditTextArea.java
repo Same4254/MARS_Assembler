@@ -45,7 +45,7 @@ import java.util.Vector;
  * </ul>
  * It is also faster and doesn't have as many problems. It can be used
  * in other applications; the only other part of jEdit it depends on is
- * the syntax package.<p>
+ * the syntax package.
  * <p>
  * To use it in your app, treat it like any other component, for example:
  * <pre>JEditTextArea ta = new JEditTextArea();
@@ -80,15 +80,13 @@ public class JEditTextArea extends JComponent {
         this(TextAreaDefaults.getDefaults(), lineNumbers);
     }
 
+    private JScrollBar lineNumbersVertical;
+
     /**
      * Creates a new JEditTextArea with the specified settings.
      *
      * @param defaults The default settings
      */
-
-    private JScrollBar lineNumbersVertical;//************************************
-
-
     public JEditTextArea(TextAreaDefaults defaults, JComponent lineNumbers) {
         // Enable the necessary events
         enableEvents(AWTEvent.KEY_EVENT_MASK);
@@ -162,16 +160,6 @@ public class JEditTextArea extends JComponent {
         // We don't seem to get the initial focus event?
         focusedComponent = this;
     }
-
-
-/**
- * Returns if this component can be traversed by pressing
- * the Tab key. This returns false.
- */
-//        public final boolean isManagingFocus()
-//       {
-//          return true;
-//       }
 
     /**
      * Returns the object responsible for painting this text area.

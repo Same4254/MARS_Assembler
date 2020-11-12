@@ -879,7 +879,6 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
      * http://www.javakb.com/Uwe/Forum.aspx/java-gui/1451/Java-TableCellRenderer-for-a-boolean-checkbox-field
      * Slightly customized.  DPS 31-Dec-2009
      */
-
     class CheckBoxTableCellRenderer extends JCheckBox implements TableCellRenderer {
 
         javax.swing.border.Border noFocusBorder;
@@ -891,33 +890,32 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
             setHorizontalAlignment(SwingConstants.CENTER);
             setVerticalAlignment(SwingConstants.CENTER);
 
-            /**********************************************
-             Use this if you want to add "instant" recognition of breakpoint changes
-             during simulation run.  Currently, the simulator gets array of breakpoints
-             only when "Go" is selected.  Thus the system does not respond to breakpoints
-             added/removed during unlimited/timed execution.  In order for it to do so,
-             we need to be informed of such changes and the ItemListener below will do this.
-             Then the item listener needs to inform the SimThread object so it can request
-             a fresh breakpoint array.  That would make SimThread an observer.  Synchronization
-             will come into play in the SimThread class?  It could get complicated, which
-             is why I'm dropping it for release 3.8.  DPS 31-dec-2009
 
-             addItemListener(
-             new ItemListener(){
-             public void itemStateChanged(ItemEvent e) {
-             String what = "state changed";
-             if (e.getStateChange()==ItemEvent.SELECTED) what = "selected";
-             if (e.getStateChange()==ItemEvent.DESELECTED) what = "deselected";
-             System.out.println("Item "+what);
-             }});
-
-             For a different approach, see RunClearBreakpointsAction.java.  This menu item registers
-             as a TableModelListener by calling the TextSegmentWindow's registerTableModelListener
-             method.  Then it is notified when the table model changes, and this occurs whenever
-             the user clicks on a breakpoint checkbox!  Using this approach, the SimThread registers
-             similarly.  A "GUI guard" is not needed in SimThread because it extends SwingWorker and
-             thus is only invoked when the IDE is present (never when running MARS in command mode).
-             *****************************************************/
+//            Use this if you want to add "instant" recognition of breakpoint changes
+//            during simulation run.  Currently, the simulator gets array of breakpoints
+//            only when "Go" is selected.  Thus the system does not respond to breakpoints
+//            added/removed during unlimited/timed execution.  In order for it to do so,
+//            we need to be informed of such changes and the ItemListener below will do this.
+//            Then the item listener needs to inform the SimThread object so it can request
+//            a fresh breakpoint array.  That would make SimThread an observer.  Synchronization
+//            will come into play in the SimThread class?  It could get complicated, which
+//            is why I'm dropping it for release 3.8.  DPS 31-dec-2009
+//
+//            addItemListener(
+//            new ItemListener(){
+//            public void itemStateChanged(ItemEvent e) {
+//            String what = "state changed";
+//            if (e.getStateChange()==ItemEvent.SELECTED) what = "selected";
+//            if (e.getStateChange()==ItemEvent.DESELECTED) what = "deselected";
+//            System.out.println("Item "+what);
+//            }});
+//
+//            For a different approach, see RunClearBreakpointsAction.java.  This menu item registers
+//            as a TableModelListener by calling the TextSegmentWindow's registerTableModelListener
+//            method.  Then it is notified when the table model changes, and this occurs whenever
+//            the user clicks on a breakpoint checkbox!  Using this approach, the SimThread registers
+//            similarly.  A "GUI guard" is not needed in SimThread because it extends SwingWorker and
+//            thus is only invoked when the IDE is present (never when running MARS in command mode).
         }
 
         public Component getTableCellRendererComponent(JTable table, Object value,

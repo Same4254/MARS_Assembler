@@ -14,7 +14,7 @@ import javax.swing.*;
 // specified period of time and at a specified rate. 
 
 /**
- * {@code RepeatButton} is a <code>JButton</code> which contains a timer
+ * {@code RepeatButton} is a {@code JButton} which contains a timer
  * for firing events while the button is held down.  There is a default
  * initial delay of 300ms before the first event is fired and a 60ms delay
  * between subsequent events.  When the user holds the button down and moves

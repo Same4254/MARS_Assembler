@@ -15,11 +15,6 @@ public class FunctionUnitVisualization extends JFrame {
     private int currentUnit;
 
     /**
-     * Launch the application.
-     */
-
-
-    /**
      * Create the frame.
      */
     public FunctionUnitVisualization(String instruction, int functionalUnit) {
@@ -49,6 +44,9 @@ public class FunctionUnitVisualization extends JFrame {
 
     }
 
+    /**
+     * Launch the application.
+     */
     public void run() {
         try {
             FunctionUnitVisualization frame = new FunctionUnitVisualization(instruction, currentUnit);

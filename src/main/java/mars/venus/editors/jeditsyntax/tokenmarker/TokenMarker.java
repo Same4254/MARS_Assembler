@@ -17,7 +17,7 @@
  /**
   * A token marker that splits lines of text into tokens. Each token carries
   * a length field and an indentification tag that can be mapped to a color
-  * for painting that token.<p>
+  * for painting that token.
   * <p>
   * For performance reasons, the linked list of tokens is reused after each
   * line is tokenized. Therefore, the return value of {@code markTokens}
@@ -107,7 +107,7 @@
       * An abstract method that splits a line up into tokens. It
       * should parse the line, and call {@code addToken()} to
       * add syntax tokens to the token list. Then, it should return
-      * the initial token type for the next line.<p>
+      * the initial token type for the next line.
       * <p>
       * For example if the current line contains the start of a
       * multiline comment that doesn't end on that line, this method
@@ -126,7 +126,7 @@
       * Returns if the token marker supports tokens that span multiple
       * lines. If this is true, the object using this token marker is
       * required to pass all lines in the document to the
-      * {@code markTokens()} method (in turn).<p>
+      * {@code markTokens()} method (in turn).
       * <p>
       * The default implementation returns true; it should be overridden
       * to return false on simpler token markers for increased speed.
@@ -267,7 +267,7 @@
      /**
       * Ensures that the {@code lineInfo} array can contain the
       * specified index. This enlarges it if necessary. No action is
-      * taken if the array is large enough already.<p>
+      * taken if the array is large enough already.
       * <p>
       * It should be unnecessary to call this under normal
       * circumstances; {@code insertLine()} should take care of

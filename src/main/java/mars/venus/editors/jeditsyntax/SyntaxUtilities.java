@@ -85,7 +85,7 @@ public class SyntaxUtilities {
 
     /**
      * Returns the default style table. This can be passed to the
-     * {@code setStyles()} method of <code>SyntaxDocument</code>
+     * {@code setStyles()} method of {@code SyntaxDocument}
      * to use the default syntax styles.
      */
     public static SyntaxStyle[] getDefaultSyntaxStyles() {
@@ -131,7 +131,7 @@ public class SyntaxUtilities {
 
     /**
      * Returns the CURRENT style table. This can be passed to the
-     * {@code setStyles()} method of <code>SyntaxDocument</code>
+     * {@code setStyles()} method of {@code SyntaxDocument}
      * to use the current syntax styles.  If changes have been made
      * via MARS Settings menu, the current settings will not be the
      * same as the default settings.
@@ -154,6 +154,9 @@ public class SyntaxUtilities {
         return styles;
     }
 
+    public static boolean popupShowing = false;
+    public static Popup popup;
+
     /**
      * Paints the specified line onto the graphics context. Note that this
      * method munges the offset and count values of the segment.
@@ -168,9 +171,6 @@ public class SyntaxUtilities {
      * @param y The y co-ordinate
      * @return The x co-ordinate, plus the width of the painted string
      */
-    public static boolean popupShowing = false;
-    public static Popup popup;
-
     public static int paintSyntaxLine(Segment line, Token tokens,
                                       SyntaxStyle[] styles, TabExpander expander, Graphics gfx,
                                       int x, int y) {

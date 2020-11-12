@@ -254,51 +254,48 @@ public class ProgramStatement {
 
                 int tempNumeric = Binary.stringToInt(tokenValue);
 
-                /***************************************************************************
-                 *  MODIFICATION AND COMMENT, DPS 3-July-2008
-                 *
-                 * The modifications of January 2005 documented below are being rescinded.
-                 * All hexadecimal immediate values are considered 32 bits in length and
-                 * their classification as INTEGER_5, INTEGER_16, INTEGER_16U (new)
-                 * or INTEGER_32 depends on their 32 bit value.  So 0xFFFF will be
-                 * equivalent to 0x0000FFFF instead of 0xFFFFFFFF.  This change, along with
-                 * the introduction of INTEGER_16U (adopted from Greg Gibeling of Berkeley),
-                 * required extensive changes to instruction templates especially for
-                 * pseudo-instructions.
-                 *
-                 * This modification also appears inbuildBasicStatementFromBasicInstruction()
-                 * in mars.ProgramStatement.
-                 *
-                 *  ///// Begin modification 1/4/05 KENV   ///////////////////////////////////////////
-                 *  // We have decided to interpret non-signed (no + or -) 16-bit hexadecimal immediate
-                 *  // operands as signed values in the range -32768 to 32767. So 0xffff will represent
-                 *  // -1, not 65535 (bit 15 as sign bit), 0x8000 will represent -32768 not 32768.
-                 *  // NOTE: 32-bit hexadecimal immediate operands whose values fall into this range
-                 *  // will be likewise affected, but they are used only in pseudo-instructions.  The
-                 *  // code in ExtendedInstruction.java to split this number into upper 16 bits for "lui"
-                 *  // and lower 16 bits for "ori" works with the original source code token, so it is
-                 *  // not affected by this tweak.  32-bit immediates in data segment directives
-                 *  // are also processed elsewhere so are not affected either.
-                 *  ////////////////////////////////////////////////////////////////////////////////
-                 *
-                 *        if (tokenType != TokenTypes.INTEGER_16U) { // part of the Berkeley mod...
-                 *           if ( Binary.isHex(tokenValue) &&
-                 *             (tempNumeric >= 32768) &&
-                 *             (tempNumeric <= 65535) )  // Range 0x8000 ... 0xffff
-                 *           {
-                 *              // Subtract the 0xffff bias, because strings in the
-                 *              // range "0x8000" ... "0xffff" are used to represent
-                 *              // 16-bit negative numbers, not positive numbers.
-                 *              tempNumeric = tempNumeric - 65536;
-                 *              // Note: no action needed for range 0xffff8000 ... 0xffffffff
-                 *           }
-                 *        }
-                 **************************  END DPS 3-July-2008 COMMENTS *******************************/
+
+//                MODIFICATION AND COMMENT, DPS 3-July-2008
+//
+//                The modifications of January 2005 documented below are being rescinded.
+//                All hexadecimal immediate values are considered 32 bits in length and
+//                their classification as INTEGER_5, INTEGER_16, INTEGER_16U (new)
+//                or INTEGER_32 depends on their 32 bit value.  So 0xFFFF will be
+//                equivalent to 0x0000FFFF instead of 0xFFFFFFFF.  This change, along with
+//                the introduction of INTEGER_16U (adopted from Greg Gibeling of Berkeley),
+//                required extensive changes to instruction templates especially for
+//                pseudo-instructions.
+//
+//                This modification also appears inbuildBasicStatementFromBasicInstruction()
+//                in mars.ProgramStatement.
+//
+//                ///// Begin modification 1/4/05 KENV
+//                // We have decided to interpret non-signed (no + or -) 16-bit hexadecimal immediate
+//                // operands as signed values in the range -32768 to 32767. So 0xffff will represent
+//                // -1, not 65535 (bit 15 as sign bit), 0x8000 will represent -32768 not 32768.
+//                // NOTE: 32-bit hexadecimal immediate operands whose values fall into this range
+//                // will be likewise affected, but they are used only in pseudo-instructions.  The
+//                // code in ExtendedInstruction.java to split this number into upper 16 bits for "lui"
+//                // and lower 16 bits for "ori" works with the original source code token, so it is
+//                // not affected by this tweak.  32-bit immediates in data segment directives
+//                // are also processed elsewhere so are not affected either.
+//
+//                if (tokenType != TokenTypes.INTEGER_16U) { // part of the Berkeley mod...
+//                if ( Binary.isHex(tokenValue) &&
+//                (tempNumeric >= 32768) &&
+//                (tempNumeric <= 65535) )  // Range 0x8000 ... 0xffff
+//                {
+//                // Subtract the 0xffff bias, because strings in the
+//                // range "0x8000" ... "0xffff" are used to represent
+//                // 16-bit negative numbers, not positive numbers.
+//                tempNumeric = tempNumeric - 65536;
+//                // Note: no action needed for range 0xffff8000 ... 0xffffffff
+//                }
+//                }
 
                 basic.append(tempNumeric);
                 basicStatementList.addValue(tempNumeric);
                 this.operands[this.numOperands++] = tempNumeric;
-                ///// End modification 1/7/05 KENV   ///////////////////////////////////////////
             } else {
                 basicStatementElement = tokenValue;
                 basic.append(basicStatementElement);
