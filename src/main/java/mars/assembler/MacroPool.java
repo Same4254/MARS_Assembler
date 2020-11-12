@@ -32,9 +32,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /**
  * Stores information of macros defined by now. <br>
  * Will be used in first pass of assembling MIPS source code. When reached
- * <code>.macro</code> directive, parser calls
+ * {@code .macro} directive, parser calls
  * {@link #beginMacro(Token)} and skips source code lines until
- * reaches <code>.end_macro</code> directive. then calls
+ * reaches {@code .end_macro} directive. then calls
  * {@link MacroPool#commitMacro(Token)} and the macro information stored in a
  * {@link Macro} instance will be added to {@link #macroList}. <br>
  * Each {@link MipsProgram} will have one {@link MacroPool}<br>
@@ -77,13 +77,13 @@ public class MacroPool {
     }
 
     /**
-     * This method will be called by parser when reached <code>.macro</code>
+     * This method will be called by parser when reached {@code .macro}
      * directive.<br>
      * Instantiates a new {@link Macro} object and stores it in {@link #current}
      * . {@link #current} will be added to {@link #macroList} by
      * {@link #commitMacro(Token)}
      *
-     * @param nameToken Token containing name of macro after <code>.macro</code> directive
+     * @param nameToken Token containing name of macro after {@code .macro} directive
      */
 
     public void beginMacro(Token nameToken) {
@@ -95,11 +95,11 @@ public class MacroPool {
     }
 
     /**
-     * This method will be called by parser when reached <code>.end_macro</code>
+     * This method will be called by parser when reached {@code .end_macro}
      * directive. <br>
      * Adds/Replaces {@link #current} macro into the {@link #macroList}.
      *
-     * @param endToken Token containing <code>.end_macro</code> directive in source code
+     * @param endToken Token containing {@code .end_macro} directive in source code
      */
 
     public void commitMacro(Token endToken) {
@@ -134,7 +134,7 @@ public class MacroPool {
 
     /**
      * @param value
-     * @return true if any macros have been defined with name <code>value</code>
+     * @return true if any macros have been defined with name {@code value}
      * by now, not concerning arguments count.
      */
     public boolean matchesAnyMacroName(String value) {

@@ -298,7 +298,7 @@ public class RegisterFile {
      * this method uses global settings from the registry.  Command-mode must operate
      * using only the command switches, not registry settings.  It can be called
      * from tools running stand-alone, and this is done in
-     * <code>AbstractMarsToolAndApplication</code>.
+     * {@code AbstractMarsToolAndApplication}.
      **/
 
     public static void resetRegisters() {

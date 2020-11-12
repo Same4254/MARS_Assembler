@@ -292,8 +292,8 @@ public class DefaultInputHandler extends InputHandler {
      * form <i>modifiers</i>+<i>shortcut</i> where <i>modifiers</i>
      * is any combination of A for Alt, C for Control, S for Shift
      * or M for Meta, and <i>shortcut</i> is either a single character,
-     * or a keycode name from the <code>KeyEvent</code> class, without
-     * the <code>VK_</code> prefix.
+     * or a keycode name from the {@code KeyEvent} class, without
+     * the {@code VK_} prefix.
      *
      * @param keyStroke A string description of the key stroke
      */

@@ -692,7 +692,7 @@ public class JEditTextArea extends JComponent {
 
     /**
      * Returns the document's token marker. Equivalent to calling
-     * <code>getDocument().getTokenMarker()</code>.
+     * {@code getDocument().getTokenMarker()}.
      */
     public final TokenMarker getTokenMarker() {
         return document.getTokenMarker();
@@ -700,7 +700,7 @@ public class JEditTextArea extends JComponent {
 
     /**
      * Sets the document's token marker. Equivalent to caling
-     * <code>getDocument().setTokenMarker()</code>.
+     * {@code getDocument().setTokenMarker()}.
      *
      * @param tokenMarker The token marker
      */
@@ -710,7 +710,7 @@ public class JEditTextArea extends JComponent {
 
     /**
      * Returns the length of the document. Equivalent to calling
-     * <code>getDocument().getLength()</code>.
+     * {@code getDocument().getLength()}.
      */
     public final int getDocumentLength() {
         return document.getLength();
@@ -1270,7 +1270,7 @@ public class JEditTextArea extends JComponent {
     }
 
     /**
-     * Similar to <code>setSelectedText()</code>, but overstrikes the
+     * Similar to {@code setSelectedText()}, but overstrikes the
      * appropriate number of characters if overwrite mode is enabled.
      *
      * @param str The string

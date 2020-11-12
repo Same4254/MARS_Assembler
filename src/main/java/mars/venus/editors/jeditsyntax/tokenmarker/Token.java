@@ -12,7 +12,7 @@ package mars.venus.editors.jeditsyntax.tokenmarker;
 /**
  * A linked list of tokens. Each token has three fields - a token
  * identifier, which is a byte value that can be looked up in the
- * array returned by <code>SyntaxDocument.getColors()</code>
+ * array returned by {@code SyntaxDocument.getColors()}
  * to get a color value, a length value which is the length of the
  * token in the text, and a pointer to the next token in the list.
  *

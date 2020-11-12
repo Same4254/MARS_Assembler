@@ -28,7 +28,7 @@ import java.awt.event.MouseEvent;
  */
 public class SyntaxUtilities {
     /**
-     * Checks if a subregion of a <code>Segment</code> is equal to a
+     * Checks if a subregion of a {@code Segment} is equal to a
      * string.
      *
      * @param ignoreCase True if case should be ignored, false otherwise
@@ -56,7 +56,7 @@ public class SyntaxUtilities {
     }
 
     /**
-     * Checks if a subregion of a <code>Segment</code> is equal to a
+     * Checks if a subregion of a {@code Segment} is equal to a
      * character array.
      *
      * @param ignoreCase True if case should be ignored, false otherwise
@@ -85,7 +85,7 @@ public class SyntaxUtilities {
 
     /**
      * Returns the default style table. This can be passed to the
-     * <code>setStyles()</code> method of <code>SyntaxDocument</code>
+     * {@code setStyles()} method of <code>SyntaxDocument</code>
      * to use the default syntax styles.
      */
     public static SyntaxStyle[] getDefaultSyntaxStyles() {
@@ -131,7 +131,7 @@ public class SyntaxUtilities {
 
     /**
      * Returns the CURRENT style table. This can be passed to the
-     * <code>setStyles()</code> method of <code>SyntaxDocument</code>
+     * {@code setStyles()} method of <code>SyntaxDocument</code>
      * to use the current syntax styles.  If changes have been made
      * via MARS Settings menu, the current settings will not be the
      * same as the default settings.

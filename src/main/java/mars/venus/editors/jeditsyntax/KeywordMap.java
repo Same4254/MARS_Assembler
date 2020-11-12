@@ -15,18 +15,18 @@ import mars.venus.editors.jeditsyntax.tokenmarker.Token;
 import javax.swing.text.Segment;
 
 /**
- * A <code>KeywordMap</code> is similar to a hashtable in that it maps keys
+ * A {@code KeywordMap} is similar to a hashtable in that it maps keys
  * to values. However, the `keys' are Swing segments. This allows lookups of
  * text substrings without the overhead of creating a new string object.
  * <p>
- * This class is used by <code>CTokenMarker</code> to map keywords to ids.
+ * This class is used by {@code CTokenMarker} to map keywords to ids.
  *
  * @author Slava Pestov, Mike Dillon
  * @version $Id: KeywordMap.java,v 1.16 1999/12/13 03:40:30 sp Exp $
  */
 public class KeywordMap {
     /**
-     * Creates a new <code>KeywordMap</code>.
+     * Creates a new {@code KeywordMap}.
      *
      * @param ignoreCase True if keys are case insensitive
      */
@@ -36,7 +36,7 @@ public class KeywordMap {
     }
 
     /**
-     * Creates a new <code>KeywordMap</code>.
+     * Creates a new {@code KeywordMap}.
      *
      * @param ignoreCase True if the keys are case insensitive
      * @param mapLength  The number of `buckets' to create.

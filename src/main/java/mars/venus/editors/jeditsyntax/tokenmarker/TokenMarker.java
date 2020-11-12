@@ -20,7 +20,7 @@
   * for painting that token.<p>
   * <p>
   * For performance reasons, the linked list of tokens is reused after each
-  * line is tokenized. Therefore, the return value of <code>markTokens</code>
+  * line is tokenized. Therefore, the return value of {@code markTokens}
   * should only be used for immediate painting. Notably, it cannot be
   * cached.
   * <p>
@@ -32,7 +32,7 @@
   */
  public abstract class TokenMarker {
      /**
-      * A wrapper for the lower-level <code>markTokensImpl</code> method
+      * A wrapper for the lower-level {@code markTokensImpl} method
       * that is called to split a line up into tokens.
       *
       * @param line      The line
@@ -105,7 +105,7 @@
 
      /**
       * An abstract method that splits a line up into tokens. It
-      * should parse the line, and call <code>addToken()</code> to
+      * should parse the line, and call {@code addToken()} to
       * add syntax tokens to the token list. Then, it should return
       * the initial token type for the next line.<p>
       * <p>
@@ -126,7 +126,7 @@
       * Returns if the token marker supports tokens that span multiple
       * lines. If this is true, the object using this token marker is
       * required to pass all lines in the document to the
-      * <code>markTokens()</code> method (in turn).<p>
+      * {@code markTokens()} method (in turn).<p>
       * <p>
       * The default implementation returns true; it should be overridden
       * to return false on simpler token markers for increased speed.
@@ -137,7 +137,7 @@
 
      /**
       * Informs the token marker that lines have been inserted into
-      * the document. This inserts a gap in the <code>lineInfo</code>
+      * the document. This inserts a gap in the {@code lineInfo}
       * array.
       *
       * @param index The first line number
@@ -159,7 +159,7 @@
      /**
       * Informs the token marker that line have been deleted from
       * the document. This removes the lines in question from the
-      * <code>lineInfo</code> array.
+      * {@code lineInfo} array.
       *
       * @param index The first line number
       * @param lines The number of lines
@@ -222,7 +222,7 @@
 
      /**
       * The first token in the list. This should be used as the return
-      * value from <code>markTokens()</code>.
+      * value from {@code markTokens()}.
       */
      protected Token firstToken;
 
@@ -234,14 +234,14 @@
 
      /**
       * An array for storing information about lines. It is enlarged and
-      * shrunk automatically by the <code>insertLines()</code> and
-      * <code>deleteLines()</code> methods.
+      * shrunk automatically by the {@code insertLines()} and
+      * {@code deleteLines()} methods.
       */
      protected LineInfo[] lineInfo;
 
      /**
       * The number of lines in the model being tokenized. This can be
-      * less than the length of the <code>lineInfo</code> array.
+      * less than the length of the {@code lineInfo} array.
       */
      protected int length;
 
@@ -256,8 +256,8 @@
      protected boolean nextLineRequested;
 
      /**
-      * Creates a new <code>TokenMarker</code>. This DOES NOT create
-      * a lineInfo array; an initial call to <code>insertLines()</code>
+      * Creates a new {@code TokenMarker}. This DOES NOT create
+      * a lineInfo array; an initial call to {@code insertLines()}
       * does that.
       */
      protected TokenMarker() {
@@ -265,12 +265,12 @@
      }
 
      /**
-      * Ensures that the <code>lineInfo</code> array can contain the
+      * Ensures that the {@code lineInfo} array can contain the
       * specified index. This enlarges it if necessary. No action is
       * taken if the array is large enough already.<p>
       * <p>
       * It should be unnecessary to call this under normal
-      * circumstances; <code>insertLine()</code> should take care of
+      * circumstances; {@code insertLine()} should take care of
       * enlarging the line info array automatically.
       *
       * @param index The array index
