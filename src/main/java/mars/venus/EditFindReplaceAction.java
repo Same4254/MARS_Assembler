@@ -106,7 +106,7 @@ public class EditFindReplaceAction extends GuiAction {
         // Top part of the dialog, to contain the two input text fields.
         private Component buildInputPanel() {
             findInputField = new JTextField(30);
-            if (searchString.length() > 0) {
+            if (!searchString.isEmpty()) {
                 findInputField.setText(searchString);
                 findInputField.selectAll();
             }
@@ -207,7 +207,7 @@ public class EditFindReplaceAction extends GuiAction {
         //  document.  If found, the matching text is selected.
         private void performFind() {
             resultsLabel.setText("");
-            if (findInputField.getText().length() > 0) {
+            if (!findInputField.getText().isEmpty()) {
                 EditPane editPane = mainUI.getMainPane().getEditPane();
                 // Being cautious. Should not be null because find/replace tool button disabled if no file open
                 if (editPane != null) {
@@ -231,7 +231,7 @@ public class EditFindReplaceAction extends GuiAction {
         // buttons of different apps I've checked.
         private void performReplace() {
             resultsLabel.setText("");
-            if (findInputField.getText().length() > 0) {
+            if (!findInputField.getText().isEmpty()) {
                 EditPane editPane = mainUI.getMainPane().getEditPane();
                 // Being cautious. Should not be null b/c find/replace tool button disabled if no file open
                 if (editPane != null) {
@@ -265,7 +265,7 @@ public class EditFindReplaceAction extends GuiAction {
         // position 0.
         private void performReplaceAll() {
             resultsLabel.setText("");
-            if (findInputField.getText().length() > 0) {
+            if (!findInputField.getText().isEmpty()) {
                 EditPane editPane = mainUI.getMainPane().getEditPane();
                 // Being cautious. Should not be null b/c find/replace tool button disabled if no file open
                 if (editPane != null) {

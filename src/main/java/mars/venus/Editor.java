@@ -166,7 +166,7 @@ public class Editor {
      * @param status Edit status of file.  See FileStatus static constants.
      */
     public void setTitle(String path, String name, int status) {
-        if (status == FileStatus.NO_FILE || name == null || name.length() == 0) {
+        if (status == FileStatus.NO_FILE || name == null || name.isEmpty()) {
             mainUI.setTitle(mainUIbaseTitle);
         } else {
             String edited = (status == FileStatus.NEW_EDITED || status == FileStatus.EDITED) ? "*" : " ";

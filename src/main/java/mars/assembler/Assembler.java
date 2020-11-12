@@ -163,7 +163,7 @@ public class Assembler {
     public ArrayList<ProgramStatement> assemble(ArrayList<MipsProgram> tokenizedProgramFiles, boolean extendedAssemblerEnabled,
                                                 boolean warningsAreErrors) throws ProcessingException {
 
-        if (tokenizedProgramFiles == null || tokenizedProgramFiles.size() == 0)
+        if (tokenizedProgramFiles == null || tokenizedProgramFiles.isEmpty())
             return null;
         textAddress = new UserKernelAddressSpace(Memory.textBaseAddress,
                 Memory.kernelTextBaseAddress);
@@ -497,7 +497,7 @@ public class Assembler {
 
                     // If token list getProcessedLine() is not empty, then .eqv was performed and it contains the modified source.
                     // Put it into the line to be parsed, so it will be displayed properly in text segment display. DPS 23 Jan 2013
-                    if (tokenList2.getProcessedLine().length() > 0)
+                    if (!tokenList2.getProcessedLine().isEmpty())
                         substituted = tokenList2.getProcessedLine();
 
                     // recursively parse lines of expanded macro
@@ -878,7 +878,7 @@ public class Assembler {
         Directives direct = this.dataDirective;
         if (direct == Directives.WORD || direct == Directives.HALF || direct == Directives.BYTE
                 || direct == Directives.FLOAT || direct == Directives.DOUBLE) {
-            if (tokens.size() > 0) {
+            if (!tokens.isEmpty()) {
                 storeNumeric(tokens, direct, errors);
             }
         } else if (direct == Directives.ASCII || direct == Directives.ASCIIZ) {

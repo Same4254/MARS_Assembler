@@ -711,7 +711,7 @@ public abstract class AbstractMarsToolAndApplication extends JFrame implements M
             String exceptionHandler = null;
             if (Globals.getSettings().getBooleanSetting(Settings.EXCEPTION_HANDLER_ENABLED) &&
                     Globals.getSettings().getExceptionHandler() != null &&
-                    Globals.getSettings().getExceptionHandler().length() > 0) {
+                    !Globals.getSettings().getExceptionHandler().isEmpty()) {
                 exceptionHandler = Globals.getSettings().getExceptionHandler();
             }
 

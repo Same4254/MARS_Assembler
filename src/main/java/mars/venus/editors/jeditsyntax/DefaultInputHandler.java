@@ -328,7 +328,7 @@ public class DefaultInputHandler extends InputHandler {
                 return KeyStroke.getKeyStroke(ch);
             else
                 return KeyStroke.getKeyStroke(ch, modifiers);
-        } else if (key.length() == 0) {
+        } else if (key.isEmpty()) {
             System.err.println("Invalid key stroke: " + keyStroke);
             return null;
         } else {
