@@ -404,10 +404,9 @@ public class MipsProgram {
 
     /**
      * Instantiates a new {@link MacroPool} and sends reference of this
-     * {@link MipsProgram} to it
+     * MipsProgram to it
      *
      * @return instatiated MacroPool
-     * @author M.H.Sekhavat <sekhavat17@gmail.com>
      */
     public MacroPool createMacroPool() {
         macroPool = new MacroPool(this);

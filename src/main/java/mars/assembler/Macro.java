@@ -122,7 +122,7 @@ public class Macro {
     }
 
     /**
-     * @param obj {@link Macro} object to check if their name and count of
+     * @param obj Macro object to check if their name and count of
      *            arguments are same
      */
     @Override
