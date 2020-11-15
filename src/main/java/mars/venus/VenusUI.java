@@ -186,7 +186,7 @@ public class VenusUI extends JFrame {
 
     private JSplitPane getWorkArea() {
         initRegistersPane();
-        initMainPane();         // this must follow initRegistersPane()
+        initMainPane();
         initMessagesPane();
 
         JSplitPane horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, registersPane, mainPane);
@@ -209,6 +209,9 @@ public class VenusUI extends JFrame {
         registersPane = new RegistersPane(mainUI, registersTab, coprocessor1Tab, coprocessor0Tab);
     }
 
+    /**
+     * Must follow initRegistersPane()
+     */
     private void initMainPane() {
         mainPane = new MainPane(mainUI, editor, registersTab, coprocessor1Tab, coprocessor0Tab);
     }

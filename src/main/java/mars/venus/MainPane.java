@@ -41,23 +41,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * exist in them.
  *
  * @author Sanderson and Bumgarner
- **/
-
+ */
 public class MainPane extends JTabbedPane {
-    EditPane editTab;
-    ExecutePane executeTab;
-    EditTabbedPane editTabbedPane;
+
+    private ExecutePane executeTab;
+    private EditTabbedPane editTabbedPane;
 
     private VenusUI mainUI;
-
-    /**
-     * Constructor for the MainPane class.
-     **/
 
     public MainPane(VenusUI appFrame, Editor editor, RegistersWindow regs,
                     Coprocessor1Window cop1Regs, Coprocessor0Window cop0Regs) {
         this.mainUI = appFrame;
-        this.setTabPlacement(JTabbedPane.TOP); //LEFT);
+        this.setTabPlacement(JTabbedPane.TOP);
         if (this.getUI() instanceof BasicTabbedPaneUI) {
             BasicTabbedPaneUI ui = (BasicTabbedPaneUI) this.getUI();
         }
@@ -108,15 +103,6 @@ public class MainPane extends JTabbedPane {
     }
 
     /**
-     * Returns component containing editor display
-     *
-     * @return the editor tabbed pane
-     */
-    public JComponent getEditTabbedPane() {
-        return editTabbedPane;
-    }
-
-    /**
      * returns component containing execution-time display
      *
      * @return the execute pane
@@ -126,13 +112,12 @@ public class MainPane extends JTabbedPane {
     }
 
     /**
-     * returns component containing execution-time display.
-     * Same as getExecutePane().
+     * Returns component containing editor display
      *
-     * @return the execute pane
+     * @return the editor tabbed pane
      */
-    public ExecutePane getExecuteTab() {
-        return executeTab;
+    public JComponent getEditTabbedPane() {
+        return editTabbedPane;
     }
 
 }
