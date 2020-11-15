@@ -77,13 +77,6 @@ public class FilePrintAction extends GuiAction {
         try {
             line = new StringBuilder(in.readLine());
             while (line != null) {
-                if (editPane.showingLineNumbers()) {
-                    lineNumber++;
-                    lineNumberString = new StringBuilder(lineNumber + ": ");
-                    while (lineNumberString.length() < lineNumberDigits) {
-                        lineNumberString.append(" ");
-                    }
-                }
                 line = new StringBuilder(lineNumberString.toString() + line + "\n");
                 out.write(line.toString().toCharArray(), 0, line.length());
                 line = new StringBuilder(in.readLine());

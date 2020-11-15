@@ -42,7 +42,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 (MIT license, http://www.opensource.org/licenses/mit-license.html)
  */
-
+@Deprecated
 public class GenericTextArea extends JTextArea implements MARSTextEditingArea {
 
 

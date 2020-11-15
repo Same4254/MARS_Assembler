@@ -22,6 +22,7 @@ import javax.swing.*;
  * @since 4.0
  */
 
+@Deprecated
 public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditingArea, CaretListener {
 
     private EditPane editPane;
@@ -67,11 +68,6 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
     public Font getFont() {
         return getPainter().getFont();
     }
-
-
-// 		public void repaint() {		 getPainter().repaint();		 }
-// 		 public Dimension getSize() { return painter.getSize(); }
-// 		 public void setSize(Dimension d) { painter.setSize(d);}
 
 
     /**
