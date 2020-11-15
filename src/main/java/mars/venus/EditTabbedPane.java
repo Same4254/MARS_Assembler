@@ -151,7 +151,6 @@ public class EditTabbedPane extends JTabbedPane {
         editPane.tellEditingComponentToRequestFocusInWindow();
     }
 
-
     /**
      * Carries out all necessary operations to implement
      * the Open operation from the File menu.  This
@@ -172,7 +171,6 @@ public class EditTabbedPane extends JTabbedPane {
     public boolean openFile(File file) {
         return fileOpener.openFile(file);
     }
-
 
     /**
      * Carries out all necessary operations to implement
@@ -271,8 +269,11 @@ public class EditTabbedPane extends JTabbedPane {
         return false;
     }
 
-    // Save file associated with specified edit pane.
-    // Returns true if save operation worked, else false.
+    /**
+     * Save file associated with specified edit pane.
+     * @param editPane
+     * @return true if save operation worked, else false.
+     */
     private boolean saveFile(EditPane editPane) {
         if (editPane != null) {
             if (editPane.isNew()) {
@@ -296,7 +297,6 @@ public class EditTabbedPane extends JTabbedPane {
         }
         return false;
     }
-
 
     /**
      * Pops up a dialog box to do "Save As" operation.  If necessary
@@ -322,8 +322,11 @@ public class EditTabbedPane extends JTabbedPane {
         return false;
     }
 
-    // perform Save As for selected edit pane.  If the save is performed,
-    // return its File object.  Otherwise return null.
+    /**
+     * Perform Save As for selected edit pane
+     * @param editPane
+     * @return its File object if the save is performed, null otherwise
+     */
     private File saveAsFile(EditPane editPane) {
         File theFile = null;
         if (editPane != null) {
@@ -389,7 +392,6 @@ public class EditTabbedPane extends JTabbedPane {
         return theFile;
     }
 
-
     /**
      * Saves all files currently open in the editor.
      *
@@ -428,7 +430,6 @@ public class EditTabbedPane extends JTabbedPane {
         return result;
     }
 
-
     /**
      * Remove the pane and update menu status
      */
@@ -448,18 +449,22 @@ public class EditTabbedPane extends JTabbedPane {
         if (getTabCount() == 0) mainUI.haveMenuRequestFocus();
     }
 
-
-    // Handy little utility to update the title on the current tab and the frame title bar
-    // and also to update the MARS menu state (controls which actions are enabled).
+    /**
+     * Handy little utility to update the title on the current tab and the frame title bar
+     * and also to update the MARS menu state (controls which actions are enabled).
+     * @param editPane
+     */
     private void updateTitlesAndMenuState(EditPane editPane) {
         editor.setTitle(editPane.getPathname(), editPane.getFilename(), editPane.getFileStatus());
         editPane.updateStaticFileStatus(); //  for legacy code that depends on the static FileStatus (pre 4.0)
         Globals.getGui().setMenuState(editPane.getFileStatus());
     }
 
-    // Handy little utility to update the title on the current tab and the frame title bar
-    // and also to update the MARS menu state (controls which actions are enabled).
-    // DPS 9-Aug-2011
+    /**
+     * Handy little utility to update the title on the current tab and the frame title bar
+     * and also to update the MARS menu state (controls which actions are enabled).
+     * @param editPane
+     */
     private void updateTitles(EditPane editPane) {
         editor.setTitle(editPane.getPathname(), editPane.getFilename(), editPane.getFileStatus());
         boolean assembled = FileStatus.isAssembled();
@@ -509,14 +514,12 @@ public class EditTabbedPane extends JTabbedPane {
         }
     }
 
-
     private int confirm(String name) {
         return JOptionPane.showConfirmDialog(mainUI,
                 "Changes to " + name + " will be lost unless you save.  Do you wish to save all changes now?",
                 "Save program changes?",
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
     }
-
 
     private class FileOpener {
         private File mostRecentlyOpenedFile;
