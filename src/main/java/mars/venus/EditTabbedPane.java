@@ -54,9 +54,7 @@ public class EditTabbedPane extends JTabbedPane {
     private Editor editor;
     private FileOpener fileOpener;
 
-    /**
-     * Constructor for the EditTabbedPane class.
-     */
+
     public EditTabbedPane(VenusUI appFrame, Editor editor, MainPane mainPane) {
         this.mainUI = appFrame;
         this.editor = editor;
