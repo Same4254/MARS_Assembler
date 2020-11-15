@@ -29,7 +29,6 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
     private UndoableEditListener undoableEditListener;
     private boolean isCompoundEdit = false;
     private CompoundEdit compoundEdit;
-    private JEditBasedTextArea sourceCode;
 
 
     public JEditBasedTextArea(EditPane editPain, JComponent lineNumbers) {
@@ -37,7 +36,6 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
         this.editPane = editPain;
         this.undoManager = new UndoManager();
         this.compoundEdit = new CompoundEdit();
-        this.sourceCode = this;
 
         // Needed to support unlimited undo/redo capability
         undoableEditListener =
@@ -242,15 +240,15 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
      * @return TEXT_FOUND or TEXT_NOT_FOUND, depending on the result.
      */
     public int doFindText(String find, boolean caseSensitive) {
-        int findPosn = sourceCode.getCaretPosition();
+        int findPosn = this.getCaretPosition();
         int nextPosn = 0;
-        nextPosn = nextIndex(sourceCode.getText(), find, findPosn, caseSensitive);
+        nextPosn = nextIndex(this.getText(), find, findPosn, caseSensitive);
         if (nextPosn >= 0) {
-            sourceCode.requestFocus(); // guarantees visibility of the blue highlight 
-            sourceCode.setSelectionStart(nextPosn); // position cursor at word start
-            sourceCode.setSelectionEnd(nextPosn + find.length());
+            this.requestFocus(); // guarantees visibility of the blue highlight
+            this.setSelectionStart(nextPosn); // position cursor at word start
+            this.setSelectionEnd(nextPosn + find.length());
             // Need to repeat start due to quirk in JEditTextArea implementation of setSelectionStart.
-            sourceCode.setSelectionStart(nextPosn);
+            this.setSelectionStart(nextPosn);
             return TEXT_FOUND;
         } else {
             return TEXT_NOT_FOUND;
@@ -310,26 +308,26 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
         int posn;
         // Will perform a "find" and return, unless positioned at the end of
         // a selected "find" result.  
-        if (find == null || !find.equals(sourceCode.getSelectedText()) ||
-                sourceCode.getSelectionEnd() != sourceCode.getCaretPosition()) {
+        if (find == null || !find.equals(this.getSelectedText()) ||
+                this.getSelectionEnd() != this.getCaretPosition()) {
             return doFindText(find, caseSensitive);
         }
         // We are positioned at end of selected "find".  Rreplace and find next.
-        nextPosn = sourceCode.getSelectionStart();
-        sourceCode.grabFocus();
-        sourceCode.setSelectionStart(nextPosn); // posn cursor at word start
-        sourceCode.setSelectionEnd(nextPosn + find.length()); //select found text
+        nextPosn = this.getSelectionStart();
+        this.grabFocus();
+        this.setSelectionStart(nextPosn); // posn cursor at word start
+        this.setSelectionEnd(nextPosn + find.length()); //select found text
         // Need to repeat start due to quirk in JEditTextArea implementation of setSelectionStart.
-        sourceCode.setSelectionStart(nextPosn);
+        this.setSelectionStart(nextPosn);
         isCompoundEdit = true;
         compoundEdit = new CompoundEdit();
-        sourceCode.replaceSelection(replace);
+        this.replaceSelection(replace);
         compoundEdit.end();
         undoManager.addEdit(compoundEdit);
         editPane.updateUndoState();
         editPane.updateRedoState();
         isCompoundEdit = false;
-        sourceCode.setCaretPosition(nextPosn + replace.length());
+        this.setCaretPosition(nextPosn + replace.length());
         if (doFindText(find, caseSensitive) == TEXT_NOT_FOUND) {
             return TEXT_REPLACED_NOT_FOUND_NEXT;
         } else {
@@ -354,7 +352,7 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
         compoundEdit = null; // new one will be created upon first replacement
         isCompoundEdit = true; // undo manager's action listener needs this
         while (nextPosn >= 0) {
-            nextPosn = nextIndex(sourceCode.getText(), find, findPosn, caseSensitive);
+            nextPosn = nextIndex(this.getText(), find, findPosn, caseSensitive);
             if (nextPosn >= 0) {
                 // nextIndex() will wrap around, which causes infinite loop if
                 // find string is a substring of replacement string.  This 
@@ -362,15 +360,15 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
                 if (nextPosn < findPosn) {
                     break;
                 }
-                sourceCode.grabFocus();
-                sourceCode.setSelectionStart(nextPosn); // posn cursor at word start
-                sourceCode.setSelectionEnd(nextPosn + find.length()); //select found text
+                this.grabFocus();
+                this.setSelectionStart(nextPosn); // posn cursor at word start
+                this.setSelectionEnd(nextPosn + find.length()); //select found text
                 // Need to repeat start due to quirk in JEditTextArea implementation of setSelectionStart.
-                sourceCode.setSelectionStart(nextPosn);
+                this.setSelectionStart(nextPosn);
                 if (compoundEdit == null) {
                     compoundEdit = new CompoundEdit();
                 }
-                sourceCode.replaceSelection(replace);
+                this.replaceSelection(replace);
                 findPosn = nextPosn + replace.length(); // set for next search
                 replaceCount++;
             }
@@ -385,11 +383,5 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
         }
         return replaceCount;
     }
-    // 
-    /////////////////////////////  End Find/Replace methods //////////////////////////   	
-
-    //
-    //////////////////////////////////////////////////////////////////   	
-
 
 }
