@@ -165,7 +165,12 @@ public class Editor {
             String edited = (status == FileStatus.NEW_EDITED || status == FileStatus.EDITED) ? "*" : " ";
             String titleName = (status == FileStatus.NEW_EDITED || status == FileStatus.NEW_NOT_EDITED) ? name : path;
             mainUI.setTitle(titleName + edited + " - " + mainUIbaseTitle);
-            editTabbedPane.setTitleAt(editTabbedPane.getSelectedIndex(), name + edited);
+            if (editTabbedPane.getSelectedIndex() != -1) {
+                editTabbedPane.setTitleAt(editTabbedPane.getSelectedIndex(), name + edited);
+            } else {
+                System.out.println("editabbed pane has a problem setting the title");
+            }
+
         }
     }
 

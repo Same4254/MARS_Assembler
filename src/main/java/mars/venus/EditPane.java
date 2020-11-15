@@ -80,17 +80,14 @@ public class EditPane extends JPanel implements Observer {
         Globals.getSettings().addObserver(this);
         this.fileStatus = new FileStatus();
 
-
         initTextArea();
-        scrollPane = new RTextScrollPane(textArea);
-        scrollPane.setFont(Globals.getSettings().getEditorFont());
-
+        initScrollPane();
 
         this.add(scrollPane, BorderLayout.CENTER);
 
         // If source code is modified, will set flag to trigger/request file save.
         // TODO: to implement with RSyntaxTextArea
-//        sourceCode.getDocument().addDocumentListener(
+//        textArea.getDocument().addDocumentListener(
 //                new DocumentListener() {
 //                    public void insertUpdate(DocumentEvent evt) {
 //                        // IF statement added DPS 9-Aug-2011
@@ -149,12 +146,21 @@ public class EditPane extends JPanel implements Observer {
         this.add(editInfo, BorderLayout.SOUTH);
     }
 
-    public void initTextArea() {
+    private void initTextArea() {
         textArea = new RSyntaxTextArea();
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_X86);
         textArea.setFont(Globals.getSettings().getEditorFont());
         textArea.setCurrentLineHighlightColor(new Color(0xFFFAE3));
+    }
 
+    /**
+     * Must be called after initTextArea()
+     */
+    private void initScrollPane() {
+        scrollPane = new RTextScrollPane(textArea);
+        scrollPane.getGutter().setLineNumberFont(Globals.getSettings().getEditorFont());
+        scrollPane.getGutter().setLineNumberColor(new Color(0x999999));
+        scrollPane.getGutter().setBackground(new Color(0xF0F0F0));
     }
 
 
@@ -178,8 +184,7 @@ public class EditPane extends JPanel implements Observer {
      * call this after setting the text.
      */
     public void discardAllUndoableEdits() {
-        // TODO: to implement
-        //sourceCode.discardAllUndoableEdits();
+        textArea.discardAllEdits();
     }
 
     /**
@@ -251,7 +256,6 @@ public class EditPane extends JPanel implements Observer {
      * Get the editing status for this EditPane's associated document.
      * This will be one of the constants from class FileStatus.
      */
-
     public int getFileStatus() {
         return this.fileStatus.getFileStatus();
     }
@@ -298,7 +302,6 @@ public class EditPane extends JPanel implements Observer {
     /**
      * Delegates to text area's requestFocusInWindow method.
      */
-
     public void tellEditingComponentToRequestFocusInWindow() {
         textArea.requestFocusInWindow();
     }
@@ -339,9 +342,6 @@ public class EditPane extends JPanel implements Observer {
      */
     public void copyText() {
         textArea.copy();
-        // TODO: to implement with RSyntaxTextArea
-//        sourceCode.setCaretVisible(true);
-//        sourceCode.setSelectionVisible(true);
     }
 
     /**
@@ -349,8 +349,6 @@ public class EditPane extends JPanel implements Observer {
      */
     public void cutText() {
         textArea.cut();
-        // TODO: to implement with RSyntaxTextArea
-        //sourceCode.setCaretVisible(true);
     }
 
     /**
@@ -358,8 +356,6 @@ public class EditPane extends JPanel implements Observer {
      */
     public void pasteText() {
         textArea.paste();
-        // TODO: to implement with RSyntaxTextArea
-        //sourceCode.setCaretVisible(true);
     }
 
     /**
@@ -367,9 +363,6 @@ public class EditPane extends JPanel implements Observer {
      */
     public void selectAllText() {
         textArea.selectAll();
-        // TODO: to implement with RSyntaxTextArea
-//        sourceCode.setCaretVisible(true);
-//        sourceCode.setSelectionVisible(true);
     }
 
     /**
@@ -377,7 +370,6 @@ public class EditPane extends JPanel implements Observer {
      */
     public void undo() {
         textArea.undoLastAction();
-        //sourceCode.undo();
     }
 
     /**
@@ -385,7 +377,6 @@ public class EditPane extends JPanel implements Observer {
      */
     public void redo() {
         textArea.redoLastAction();
-        //sourceCode.redo();
     }
 
     /**
