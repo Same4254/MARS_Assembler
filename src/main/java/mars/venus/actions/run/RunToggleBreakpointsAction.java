@@ -1,8 +1,11 @@
-package mars.venus;
+package mars.venus.actions.run;
 
-import javax.swing.table.*;
+import mars.*;
+import mars.venus.VenusUI;
+import mars.venus.actions.GuiAction;
+
+import java.awt.event.*;
 import javax.swing.*;
-import java.awt.*;
 	
 	/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -32,21 +35,29 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 (MIT license, http://www.opensource.org/licenses/mit-license.html)
  */
 
-/*
- * Use this to render Monospaced and right-aligned data in JTables.
- * I am using it to render integer addresses and values that are stored as
- * Strings containing either the decimal or hexidecimal version
- * of the integer value.
+/**
+ * Action class for the Run menu item to clear execution breakpoints that have been set.
+ * It is a listener and is notified whenever a breakpoint is added or removed, thus will
+ * set its enabled status true or false depending on whether breakpoints remain after that action.
  */
-public class MonoRightCellRenderer extends DefaultTableCellRenderer {
-    public static final Font MONOSPACED_PLAIN_12POINT = new Font("Monospaced", Font.PLAIN, 12);
+public class RunToggleBreakpointsAction extends GuiAction {
 
-    public Component getTableCellRendererComponent(JTable table, Object value,
-                                                   boolean isSelected, boolean hasFocus, int row, int column) {
-        JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value,
-                isSelected, hasFocus, row, column);
-        cell.setFont(MONOSPACED_PLAIN_12POINT);
-        cell.setHorizontalAlignment(SwingConstants.RIGHT);
-        return cell;
+    /**
+     * Create the object and register with text segment window as a listener on its table model.
+     * The table model has not been created yet, so text segment window will hang onto this
+     * registration info and transfer it to the table model upon creation (which happens with
+     * each successful assembly).
+     */
+    public RunToggleBreakpointsAction(String name, Icon icon, String descrip,
+                                      Integer mnemonic, KeyStroke accel, VenusUI gui) {
+        super(name, icon, descrip, mnemonic, accel, gui);
     }
+
+    /**
+     * When this option is selected, tell text segment window to clear breakpoints in its table model.
+     */
+    public void actionPerformed(ActionEvent e) {
+        Globals.getGui().getMainPane().getExecutePane().getTextSegmentWindow().toggleBreakpoints();
+    }
+
 }

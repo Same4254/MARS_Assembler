@@ -1,11 +1,14 @@
-package mars.venus;
+package mars.venus.actions.settings;
 
-import javax.swing.table.*;
+import mars.*;
+import mars.venus.VenusUI;
+import mars.venus.actions.GuiAction;
+
+import java.awt.event.*;
 import javax.swing.*;
-import java.awt.*;
 	
 	/*
-Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
+Copyright (c) 2003-2010,  Pete Sanderson and Kenneth Vollmar
 
 Developed by Pete Sanderson (psanderson@otterbein.edu)
 and Kenneth Vollmar (kenvollmar@missouristate.edu)
@@ -32,21 +35,20 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 (MIT license, http://www.opensource.org/licenses/mit-license.html)
  */
 
-/*
- * Use this to render Monospaced and right-aligned data in JTables.
- * I am using it to render integer addresses and values that are stored as
- * Strings containing either the decimal or hexidecimal version
- * of the integer value.
+/**
+ * Action class for the Settings menu item to control use of popup dialog for input syscalls.
  */
-public class MonoRightCellRenderer extends DefaultTableCellRenderer {
-    public static final Font MONOSPACED_PLAIN_12POINT = new Font("Monospaced", Font.PLAIN, 12);
+public class SettingsPopupInputAction extends GuiAction {
 
-    public Component getTableCellRendererComponent(JTable table, Object value,
-                                                   boolean isSelected, boolean hasFocus, int row, int column) {
-        JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value,
-                isSelected, hasFocus, row, column);
-        cell.setFont(MONOSPACED_PLAIN_12POINT);
-        cell.setHorizontalAlignment(SwingConstants.RIGHT);
-        return cell;
+
+    public SettingsPopupInputAction(String name, Icon icon, String descrip,
+                                    Integer mnemonic, KeyStroke accel, VenusUI gui) {
+        super(name, icon, descrip, mnemonic, accel, gui);
     }
+
+    public void actionPerformed(ActionEvent e) {
+        boolean usePopup = ((JCheckBoxMenuItem) e.getSource()).isSelected();
+        Globals.getSettings().setBooleanSetting(Settings.POPUP_SYSCALL_INPUT, usePopup);
+    }
+
 }

@@ -1,6 +1,12 @@
 package mars.venus;
 
 import mars.*;
+import mars.venus.actions.edit.*;
+import mars.venus.actions.file.*;
+import mars.venus.actions.help.HelpAboutAction;
+import mars.venus.actions.help.HelpHelpAction;
+import mars.venus.actions.run.*;
+import mars.venus.actions.settings.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,15 +45,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * Top level container for Venus GUI.
  */
 public class VenusUI extends JFrame {
-    VenusUI mainUI;
+    public VenusUI mainUI;
     public JMenuBar menu;
-    JToolBar toolbar;
-    MainPane mainPane;
-    RegistersPane registersPane;
-    RegistersWindow registersTab;
-    Coprocessor1Window coprocessor1Tab;
-    Coprocessor0Window coprocessor0Tab;
-    MessagesPane messagesPane;
+    public JToolBar toolbar;
+    public MainPane mainPane;
+    public RegistersPane registersPane;
+    public RegistersWindow registersTab;
+    public Coprocessor1Window coprocessor1Tab;
+    public Coprocessor0Window coprocessor0Tab;
+    public MessagesPane messagesPane;
 
     private int frameState; // see windowActivated() and windowDeactivated()
     private static int menuState = FileStatus.NO_FILE;
@@ -55,7 +61,7 @@ public class VenusUI extends JFrame {
     // PLEASE PUT THESE TWO (& THEIR METHODS) SOMEWHERE THEY BELONG, NOT HERE
     private static boolean reset = true; // registers/memory reset for execution
     private static boolean started = false;  // started execution
-    Editor editor;
+    public Editor editor;
 
     // components of the menubar
     private JMenu file, run, window, help, edit, settings;
@@ -80,8 +86,8 @@ public class VenusUI extends JFrame {
 
     private Action fileNewAction, fileOpenAction, fileCloseAction, fileCloseAllAction, fileSaveAction;
     private Action fileSaveAsAction, fileSaveAllAction, fileDumpMemoryAction, filePrintAction, fileExitAction;
-    EditUndoAction editUndoAction;
-    EditRedoAction editRedoAction;
+    public EditUndoAction editUndoAction;
+    public EditRedoAction editRedoAction;
     private Action editCutAction, editCopyAction, editPasteAction, editFindReplaceAction, editSelectAllAction;
     private Action runAssembleAction, runGoAction, runStepAction, runBackstepAction, runResetAction,
             runStopAction, runPauseAction, runClearBreakpointsAction, runToggleBreakpointsAction;
@@ -732,7 +738,7 @@ public class VenusUI extends JFrame {
      * setMenuStateRunning: set upon Run->Go
      * setMenuStateTerminated: set upon completion of simulated execution
      */
-    void setMenuState(int status) {
+    public void setMenuState(int status) {
         menuState = status;
         switch (status) {
             case FileStatus.NO_FILE:

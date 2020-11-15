@@ -1,8 +1,9 @@
-package mars.venus;
+package mars.venus.actions;
 
-import javax.swing.table.*;
+import mars.tools.*;
+
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.*;
 	
 	/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -32,21 +33,42 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 (MIT license, http://www.opensource.org/licenses/mit-license.html)
  */
 
-/*
- * Use this to render Monospaced and right-aligned data in JTables.
- * I am using it to render integer addresses and values that are stored as
- * Strings containing either the decimal or hexidecimal version
- * of the integer value.
+/**
+ * Connects a MarsTool class (class that implements MarsTool interface) to
+ * the Mars menu system by supplying the response to that tool's menu item
+ * selection.
+ *
+ * @author Pete Sanderson
+ * @version August 2005
  */
-public class MonoRightCellRenderer extends DefaultTableCellRenderer {
-    public static final Font MONOSPACED_PLAIN_12POINT = new Font("Monospaced", Font.PLAIN, 12);
 
-    public Component getTableCellRendererComponent(JTable table, Object value,
-                                                   boolean isSelected, boolean hasFocus, int row, int column) {
-        JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value,
-                isSelected, hasFocus, row, column);
-        cell.setFont(MONOSPACED_PLAIN_12POINT);
-        cell.setHorizontalAlignment(SwingConstants.RIGHT);
-        return cell;
+public class ToolAction extends AbstractAction {
+    private Class toolClass; //MarsTool tool;
+
+    /**
+     * Simple constructor.
+     *
+     * @param toolClass Class object for the associated MarsTool subclass
+     * @param toolName  Name of this tool, for the menu.
+     */
+    public ToolAction(Class toolClass, String toolName) {
+        super(toolName, null);
+        this.toolClass = toolClass;
+    }
+
+
+    /**
+     * Response when tool's item selected from menu.  Invokes tool's action() method.
+     *
+     * @param e the ActionEvent that triggered this call
+     */
+    public void actionPerformed(ActionEvent e) {
+        try {
+            // An exception should not occur here because we got here only after
+            // already successfully creating an instance from the same Class object 
+            // in ToolLoader's loadMarsTools() method.
+            ((MarsTool) this.toolClass.newInstance()).action();
+        } catch (Exception ex) {
+        }
     }
 }

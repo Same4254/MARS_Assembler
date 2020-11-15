@@ -4,6 +4,7 @@ import mars.*;
 import mars.util.*;
 import mars.assembler.*;
 import mars.mips.hardware.*;
+import mars.venus.actions.run.RunAssembleAction;
 
 import java.io.*;
 import java.util.*;

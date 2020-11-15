@@ -218,7 +218,7 @@ public class DataSegmentWindow extends JInternalFrame implements Observer {
      *
      * @param address data segment address of word to be selected.
      */
-    void highlightCellForAddress(int address) {
+    public void highlightCellForAddress(int address) {
         Point rowColumn = displayCellForAddress(address);
         if (rowColumn == null || rowColumn.x < 0 || rowColumn.y < 0) {
             return;

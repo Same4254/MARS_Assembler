@@ -1,8 +1,9 @@
-package mars.venus;
+package mars.venus.actions;
 
-import javax.swing.table.*;
+import mars.venus.VenusUI;
+
+import java.awt.event.*;
 import javax.swing.*;
-import java.awt.*;
 	
 	/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -32,21 +33,27 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 (MIT license, http://www.opensource.org/licenses/mit-license.html)
  */
 
-/*
- * Use this to render Monospaced and right-aligned data in JTables.
- * I am using it to render integer addresses and values that are stored as
- * Strings containing either the decimal or hexidecimal version
- * of the integer value.
+/**
+ * parent class for Action subclasses to be defined for every menu/toolbar
+ * option.
  */
-public class MonoRightCellRenderer extends DefaultTableCellRenderer {
-    public static final Font MONOSPACED_PLAIN_12POINT = new Font("Monospaced", Font.PLAIN, 12);
 
-    public Component getTableCellRendererComponent(JTable table, Object value,
-                                                   boolean isSelected, boolean hasFocus, int row, int column) {
-        JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value,
-                isSelected, hasFocus, row, column);
-        cell.setFont(MONOSPACED_PLAIN_12POINT);
-        cell.setHorizontalAlignment(SwingConstants.RIGHT);
-        return cell;
+public class GuiAction extends AbstractAction {
+    protected VenusUI mainUI;
+
+    protected GuiAction(String name, Icon icon, String descrip,
+                        Integer mnemonic, KeyStroke accel, VenusUI gui) {
+        super(name, icon);
+        putValue(SHORT_DESCRIPTION, descrip);
+        putValue(MNEMONIC_KEY, mnemonic);
+        putValue(ACCELERATOR_KEY, accel);
+        mainUI = gui;
+    }
+
+    /**
+     * does nothing by default.  Should be over-ridden by subclass
+     */
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

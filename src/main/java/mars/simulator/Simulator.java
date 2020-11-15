@@ -5,6 +5,8 @@ import mars.venus.*;
 import mars.util.*;
 import mars.mips.hardware.*;
 import mars.mips.instructions.*;
+import mars.venus.actions.run.RunGoAction;
+import mars.venus.actions.run.RunStepAction;
 
 import java.util.*;
 import javax.swing.*;
