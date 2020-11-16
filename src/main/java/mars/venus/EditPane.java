@@ -61,29 +61,22 @@ public class EditPane extends JPanel implements Observer {
     RTextScrollPane scrollPane;
     RSyntaxTextArea textArea;
 
-    //private MARSTextEditingArea sourceCode;
-    private String currentDirectoryPath;
     private JLabel caretPositionLabel;
-    private static int count = 0;
-    private boolean isCompoundEdit = false;
-    private CompoundEdit compoundEdit;
     private FileStatus fileStatus;
     private VenusUI mainUI;
 
     public EditPane(VenusUI appFrame) {
         super(new BorderLayout());
         mainUI = appFrame;
-        // user.dir, user's current working directory, is guaranteed to have a value
-        currentDirectoryPath = System.getProperty("user.dir");
 
         // We want to be notified of editor font changes! See update() below.
         Globals.getSettings().addObserver(this);
-        this.fileStatus = new FileStatus();
+        fileStatus = new FileStatus();
 
         initTextArea();
         initScrollPane();
 
-        this.add(scrollPane, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
 
         // If source code is modified, will set flag to trigger/request file save.
         // TODO: to implement with RSyntaxTextArea
@@ -136,7 +129,7 @@ public class EditPane extends JPanel implements Observer {
 //                    }
 //                });
 
-        this.setSourceCode("", false);
+        setSourceCode("", false);
 
         JPanel editInfo = new JPanel(new BorderLayout());
         caretPositionLabel = new JLabel();
@@ -173,6 +166,7 @@ public class EditPane extends JPanel implements Observer {
     public void setSourceCode(String text, boolean editable) {
         textArea.setText(text);
         textArea.setEditable(editable);
+        textArea.setCaretPosition(0);
     }
 
     /**
@@ -187,46 +181,11 @@ public class EditPane extends JPanel implements Observer {
         textArea.discardAllEdits();
     }
 
-    /**
-     * Form string with source code line numbers.
-     * Resulting string is HTML, for which JLabel will happily honor <br> to do
-     * multiline label (it ignores '\n').  The line number list is a JLabel with
-     * one line number per line.
-     */
-    private static final String spaces = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-
-    public String getLineNumbersList(javax.swing.text.Document doc) {
-        StringBuffer lineNumberList = new StringBuffer("<html>");
-        int lineCount = doc.getDefaultRootElement().getElementCount(); //this.getSourceLineCount();
-        int digits = Integer.toString(lineCount).length();
-        for (int i = 1; i <= lineCount; i++) {
-            String lineStr = Integer.toString(i);
-            int leadingSpaces = digits - lineStr.length();
-            if (leadingSpaces == 0) {
-                lineNumberList.append(lineStr).append("&nbsp;<br>");
-            } else {
-                lineNumberList.append(spaces, 0, leadingSpaces * 6)
-                        .append(lineStr)
-                        .append("&nbsp;<br>");
-            }
-        }
-        lineNumberList.append("<br></html>");
-        return lineNumberList.toString();
-    }
 
 
     /**
      * Calculate and return number of lines in source code text.
-     * Do this by counting newline characters then adding one if last line does
-     * not end with newline character.
      */
-
-    /*  IMPLEMENTATION NOTE:
-     * Tried repeatedly to use StringTokenizer to count lines but got bad results
-     * on empty lines (consecutive delimiters) even when returning delimiter as token.
-     * BufferedReader on StringReader seems to work better.
-     */
-    @Deprecated
     public int getSourceLineCount() {
         return textArea.getLineCount();
     }
@@ -234,9 +193,9 @@ public class EditPane extends JPanel implements Observer {
     /**
      * Get source code text
      *
-     * @return Sting containing source code
+     * @return String containing source code
      */
-    public String getSource() {
+    public String getSourceCode() {
         return textArea.getText();
     }
 
@@ -326,22 +285,23 @@ public class EditPane extends JPanel implements Observer {
         //return sourceCode.getUndoManager();
         return null;
     }
-   	
-      /*       Note: these are invoked only when copy/cut/paste are used from the
-   	               toolbar or menu or the defined menu Alt codes.  When
-   						Ctrl-C, Ctrl-X or Ctrl-V are used, this code is NOT invoked
-   						but the operation works correctly!
-   				The "set visible" operations are used because clicking on the toolbar
-   				icon causes both the selection highlighting AND the blinking cursor
-   				to disappear!  This does not happen when using menu selection or 
-   				Ctrl-C/X/V
-   	*/
+
+    //    TODO: implement
+    //    Note: The following methods are invoked only when copy/cut/paste are
+    //    used from the toolbar or menu or the defined menu Alt codes.
+    //    When Ctrl-C, Ctrl-X or Ctrl-V are used, this code is NOT invoked but
+    //    the operation works correctly!
+    //    The "set visible" operations are used because clicking on the toolbar
+    //    icon causes both the selection highlighting AND the blinking cursor
+    //    to disappear! This does not happen when using menu selection or
+    //    Ctrl-C/X/V
 
     /**
      * Copy selected text into clipboard
      */
     public void copyText() {
         textArea.copy();
+        textArea.getCaret().setVisible(true);
     }
 
     /**
@@ -349,6 +309,7 @@ public class EditPane extends JPanel implements Observer {
      */
     public void cutText() {
         textArea.cut();
+        textArea.getCaret().setVisible(true);
     }
 
     /**
@@ -356,6 +317,7 @@ public class EditPane extends JPanel implements Observer {
      */
     public void pasteText() {
         textArea.paste();
+        textArea.getCaret().setVisible(true);
     }
 
     /**

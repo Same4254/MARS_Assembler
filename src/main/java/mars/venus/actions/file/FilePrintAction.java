@@ -68,7 +68,7 @@ public class FilePrintAction extends GuiAction {
         } catch (HardcopyWriter.PrintCanceledException pce) {
             return;
         }
-        BufferedReader in = new BufferedReader(new StringReader(editPane.getSource()));
+        BufferedReader in = new BufferedReader(new StringReader(editPane.getSourceCode()));
         int lineNumberDigits = Integer.toString(editPane.getSourceLineCount()).length();
         StringBuilder line;
         StringBuilder lineNumberString = new StringBuilder();

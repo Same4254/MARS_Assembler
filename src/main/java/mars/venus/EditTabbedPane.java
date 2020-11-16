@@ -285,7 +285,7 @@ public class EditTabbedPane extends JTabbedPane {
             File theFile = new File(editPane.getPathname());
             try {
                 BufferedWriter outFileStream = new BufferedWriter(new FileWriter(theFile));
-                outFileStream.write(editPane.getSource(), 0, editPane.getSource().length());
+                outFileStream.write(editPane.getSourceCode(), 0, editPane.getSourceCode().length());
                 outFileStream.close();
             } catch (java.io.IOException c) {
                 JOptionPane.showMessageDialog(null, "Save operation could not be completed due to an error:\n" + c,
@@ -380,7 +380,7 @@ public class EditTabbedPane extends JTabbedPane {
             // overwrite it, so go for it!
             try {
                 BufferedWriter outFileStream = new BufferedWriter(new FileWriter(theFile));
-                outFileStream.write(editPane.getSource(), 0, editPane.getSource().length());
+                outFileStream.write(editPane.getSourceCode(), 0, editPane.getSourceCode().length());
                 outFileStream.close();
             } catch (java.io.IOException c) {
                 JOptionPane.showMessageDialog(null, "Save As operation could not be completed due to an error:\n" + c,
