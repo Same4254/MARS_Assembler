@@ -1,7 +1,6 @@
 package mars.venus;
 
 import mars.*;
-import mars.venus.editors.MARSTextEditingArea;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -9,12 +8,7 @@ import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.*;
-import javax.swing.undo.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 public class EditPane extends JPanel implements Observer {
@@ -44,7 +38,6 @@ public class EditPane extends JPanel implements Observer {
         initScrollPane();
 
         add(scrollPane, BorderLayout.CENTER);
-
 
 
         // If source code is modified, will set flag to trigger/request file save.
@@ -130,10 +123,6 @@ public class EditPane extends JPanel implements Observer {
         textArea.discardAllEdits();
         textArea.setCaretPosition(0);
     }
-
-
-
-
 
     /**
      * Calculate and return number of lines in source code text.
@@ -439,8 +428,9 @@ public class EditPane extends JPanel implements Observer {
      * @param caseSensitive true for case sensitive. false to ignore case
      * @return Returns true if text was replaced, false otherwise
      */
-    // TODO: for some reason it doesn't work so well
     public boolean replace(String find, String replace, boolean caseSensitive) {
+        // TODO: for some reason it doesn't work so well
+
         SearchContext context = new SearchContext();
         context.setSearchFor(find);
         context.setReplaceWith(replace);
@@ -477,11 +467,10 @@ public class EditPane extends JPanel implements Observer {
      */
     public void update(Observable fontChanger, Object arg) {
         textArea.setFont(Globals.getSettings().getEditorFont());
-        // TODO: implement remaining operations with RSyntaxTextArea
-//        sourceCode.setLineHighlightEnabled(Globals.getSettings().getBooleanSetting(Settings.EDITOR_CURRENT_LINE_HIGHLIGHTING));
-//        sourceCode.setCaretBlinkRate(Globals.getSettings().getCaretBlinkRate());
-//        sourceCode.setTabSize(Globals.getSettings().getEditorTabSize());
-//        sourceCode.updateSyntaxStyles();
+        // TODO: update highlight enabled/disabled
+        // TODO: update caret blink rate
+        // TODO: update tab size
+        // TODO: update syntax style
         textArea.revalidate();
     }
 
