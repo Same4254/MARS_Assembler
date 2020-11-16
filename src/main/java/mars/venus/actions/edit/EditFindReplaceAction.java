@@ -215,8 +215,8 @@ public class EditFindReplaceAction extends GuiAction {
                 // Being cautious. Should not be null because find/replace tool button disabled if no file open
                 if (editPane != null) {
                     searchString = findInputField.getText();
-                    int posn = editPane.doFindText(searchString, caseSensitiveCheckBox.isSelected());
-                    if (posn == MARSTextEditingArea.TEXT_NOT_FOUND) {
+                    boolean found = editPane.doFindText(searchString, caseSensitiveCheckBox.isSelected());
+                    if (!found) {
                         resultsLabel.setText(findButton.getText() + ": " + RESULTS_TEXT_NOT_FOUND);
                     } else {
                         resultsLabel.setText(findButton.getText() + ": " + RESULTS_TEXT_FOUND);
@@ -239,22 +239,20 @@ public class EditFindReplaceAction extends GuiAction {
                 // Being cautious. Should not be null b/c find/replace tool button disabled if no file open
                 if (editPane != null) {
                     searchString = findInputField.getText();
-                    int posn = editPane.doReplace(searchString, replaceInputField.getText(), caseSensitiveCheckBox.isSelected());
-                    String result = replaceButton.getText() + ": ";
-                    switch (posn) {
 
-                        case MARSTextEditingArea.TEXT_NOT_FOUND:
-                            result += RESULTS_TEXT_NOT_FOUND;
-                            break;
-                        case MARSTextEditingArea.TEXT_FOUND:
-                            result += RESULTS_TEXT_FOUND;
-                            break;
-                        case MARSTextEditingArea.TEXT_REPLACED_NOT_FOUND_NEXT:
-                            result += RESULTS_TEXT_REPLACED_LAST;
-                            break;
-                        case MARSTextEditingArea.TEXT_REPLACED_FOUND_NEXT:
-                            result += RESULTS_TEXT_REPLACED;
-                            break;
+                    boolean replaced = editPane.doReplace(searchString, replaceInputField.getText(), caseSensitiveCheckBox.isSelected());
+                    boolean foundNext = editPane.doFindText(searchString, caseSensitiveCheckBox.isSelected());
+
+                    String result = replaceButton.getText() + ": ";
+                    if (!replaced) {
+                        // not replaced
+                        result += RESULTS_TEXT_NOT_FOUND;
+                    } else if (!foundNext) {
+                        // replaced but nothing else found
+                        result += RESULTS_TEXT_REPLACED_LAST;
+                    } else {
+                        // replaced and found next
+                        result += RESULTS_TEXT_REPLACED;
                     }
                     resultsLabel.setText(result);
                 }

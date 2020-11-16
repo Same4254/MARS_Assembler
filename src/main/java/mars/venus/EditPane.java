@@ -418,15 +418,14 @@ public class EditPane extends JPanel implements Observer {
      * @param caseSensitive true if search is to be case-sensitive, false otherwise
      * @return TEXT_FOUND or TEXT_NOT_FOUND, depending on the result.
      */
-    public int doFindText(String find, boolean caseSensitive) {
+    public boolean doFindText(String find, boolean caseSensitive) {
         SearchContext context = new SearchContext();
         context.setSearchFor(find);
         context.setSearchForward(true);
         context.setMatchCase(caseSensitive);
         context.setWholeWord(false);
 
-        boolean found = SearchEngine.find(textArea, context).wasFound();
-        return found ? MARSTextEditingArea.TEXT_FOUND : MARSTextEditingArea.TEXT_NOT_FOUND;
+        return SearchEngine.find(textArea, context).wasFound();
     }
 
     /**
@@ -445,7 +444,7 @@ public class EditPane extends JPanel implements Observer {
      * successful and there is at least one additional match.
      */
     // TODO: for some reason it doesn't work so well
-    public int doReplace(String find, String replace, boolean caseSensitive) {
+    public boolean doReplace(String find, String replace, boolean caseSensitive) {
         SearchContext context = new SearchContext();
         context.setSearchFor(find);
         context.setReplaceWith(replace);
@@ -453,19 +452,7 @@ public class EditPane extends JPanel implements Observer {
         context.setMatchCase(caseSensitive);
         context.setWholeWord(false);
 
-        boolean replaced = SearchEngine.replace(textArea, context).wasFound();
-        if (!replaced) {
-            return MARSTextEditingArea.TEXT_NOT_FOUND;
-        }
-
-        // TODO: this method should do just a replace and not also a find.
-        //       The name of the method is misleading.
-        int found = doFindText(find, caseSensitive);
-        if (found == MARSTextEditingArea.TEXT_FOUND) {
-            return MARSTextEditingArea.TEXT_REPLACED_FOUND_NEXT;
-        } else {
-            return MARSTextEditingArea.TEXT_REPLACED_NOT_FOUND_NEXT;
-        }
+        return SearchEngine.replace(textArea, context).wasFound();
     }
 
 
