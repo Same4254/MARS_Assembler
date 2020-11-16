@@ -13,15 +13,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
 
 public class EditPane extends JPanel implements PropertyChangeListener {
 
-    private RTextScrollPane scrollPane;
-    private RSyntaxTextArea textArea;
+    private final RTextScrollPane scrollPane;
+    private final RSyntaxTextArea textArea;
 
-    private FileStatus fileStatus;
-    private VenusUI mainUI;
+    private final FileStatus fileStatus;
+    private final VenusUI mainUI;
 
     // TODO: implement caret position
 
@@ -83,12 +82,10 @@ public class EditPane extends JPanel implements PropertyChangeListener {
         textArea.setFont(Globals.getSettings().getEditorFont());
         textArea.setCurrentLineHighlightColor(new Color(0xFFFAE3));
         textArea.setEditable(false);
+        textArea.setBorder(BorderFactory.createEmptyBorder(0, 7, 0, 0));
         return textArea;
     }
 
-    /**
-     * Must be called after initTextArea()
-     */
     private RTextScrollPane createScrollPane(RSyntaxTextArea textArea) {
         RTextScrollPane scrollPane = new RTextScrollPane(textArea);
         scrollPane.getGutter().setLineNumberFont(Globals.getSettings().getEditorFont());
