@@ -11,6 +11,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.undo.UndoableEdit;
 
 import mars.simulator.Simulator;
+import mars.venus.editor.EditPane;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.Position.Bias;

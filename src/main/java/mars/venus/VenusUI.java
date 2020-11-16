@@ -663,6 +663,7 @@ public class VenusUI extends JFrame {
         Print = new JButton(filePrintAction);
         Print.setText("");
 
+
         Undo = new JButton(editUndoAction);
         Undo.setText("");
         Redo = new JButton(editRedoAction);

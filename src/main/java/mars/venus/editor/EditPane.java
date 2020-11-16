@@ -1,6 +1,8 @@
-package mars.venus;
+package mars.venus.editor;
 
 import mars.*;
+import mars.venus.FileStatus;
+import mars.venus.VenusUI;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -9,9 +11,11 @@ import org.fife.ui.rtextarea.SearchEngine;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 
-public class EditPane extends JPanel implements Observer {
+public class EditPane extends JPanel implements PropertyChangeListener {
 
     private RTextScrollPane scrollPane;
     private RSyntaxTextArea textArea;
@@ -26,8 +30,8 @@ public class EditPane extends JPanel implements Observer {
 
         mainUI = appFrame;
 
-        // We want to be notified of editor font changes! See update() below.
-        Globals.getSettings().addObserver(this);
+        Globals.getSettings().addPropertyChangeListener(this);
+
         fileStatus = new FileStatus();
 
         initTextArea();
@@ -96,7 +100,6 @@ public class EditPane extends JPanel implements Observer {
         scrollPane.getGutter().setBackground(new Color(0xF0F0F0));
     }
 
-
     /**
      * For initializing the source code when opening an ASM file
      *
@@ -126,7 +129,6 @@ public class EditPane extends JPanel implements Observer {
         return textArea.getText();
     }
 
-
     /**
      * Set the editing status for this EditPane's associated document.
      * For the argument, use one of the constants from class FileStatus.
@@ -136,7 +138,6 @@ public class EditPane extends JPanel implements Observer {
     public void setFileStatus(int fileStatus) {
         this.fileStatus.setFileStatus(fileStatus);
     }
-
 
     /**
      * Get the editing status for this EditPane's associated document.
@@ -153,14 +154,12 @@ public class EditPane extends JPanel implements Observer {
         return this.fileStatus.getFilename();
     }
 
-
     /**
      * Delegates to corresponding FileStatus method
      */
     public String getPathname() {
         return this.fileStatus.getPathname();
     }
-
 
     /**
      * Delegates to corresponding FileStatus method
@@ -176,7 +175,6 @@ public class EditPane extends JPanel implements Observer {
         return this.fileStatus.hasUnsavedEdits();
     }
 
-
     /**
      * Delegates to corresponding FileStatus method
      */
@@ -184,14 +182,12 @@ public class EditPane extends JPanel implements Observer {
         return this.fileStatus.isNew();
     }
 
-
     /**
      * Delegates to text area's requestFocusInWindow method.
      */
     public void tellEditingComponentToRequestFocusInWindow() {
         textArea.requestFocusInWindow();
     }
-
 
     /**
      * Delegates to corresponding FileStatus method
@@ -320,7 +316,6 @@ public class EditPane extends JPanel implements Observer {
         return SearchEngine.replace(textArea, context).wasFound();
     }
 
-
     /**
      * Replaces all occurrences of text in a string.
      *
@@ -339,17 +334,15 @@ public class EditPane extends JPanel implements Observer {
         return SearchEngine.replaceAll(textArea, context).getCount();
     }
 
-    /**
-     * Update, if source code is visible, when Font setting changes.
-     * This method is specified by the Observer interface.
-     */
-    public void update(Observable fontChanger, Object arg) {
-        textArea.setFont(Globals.getSettings().getEditorFont());
-        // TODO: update highlight enabled/disabled
-        // TODO: update caret blink rate
-        // TODO: update tab size
-        // TODO: update syntax style
-        textArea.revalidate();
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        switch (evt.getPropertyName()) {
+            case "editorFont": textArea.setFont((Font)evt.getNewValue()); break;
+            // TODO: update highlight enabled/disabled
+            // TODO: update caret blink rate
+            // TODO: update tab size
+            // TODO: update syntax style
+        }
     }
 
 }

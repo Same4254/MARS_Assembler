@@ -1,7 +1,7 @@
 package mars.venus.editors.generic;
 
 import mars.Globals;
-import mars.venus.EditPane;
+import mars.venus.editor.EditPane;
 import mars.venus.editors.MARSTextEditingArea;
 
 import javax.swing.*;

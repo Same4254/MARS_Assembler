@@ -4,6 +4,8 @@ import mars.*;
 import mars.util.*;
 import mars.venus.editors.jeditsyntax.*;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.util.prefs.*;
 import java.awt.Color;
@@ -56,6 +58,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
 public class Settings extends Observable {
+
+    private PropertyChangeSupport propertyChange;
+
     /* Properties file used to hold default settings. */
     private static String settingsFile = "Settings";
     /////////////////////////////  PROPERTY ARRAY INDEXES /////////////////////////////
@@ -392,6 +397,16 @@ public class Settings extends Observable {
         // initialization which caused problems.  Now this will only occur on demand from
         // Venus, which happens only when running as GUI.
         initialize();
+
+        propertyChange = new PropertyChangeSupport(this);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        propertyChange.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        propertyChange.removePropertyChangeListener(pcl);
     }
 
 
@@ -1235,6 +1250,7 @@ public class Settings extends Observable {
      * @param font Font object to be used by text editor.
      */
     public void setEditorFont(Font font) {
+        propertyChange.firePropertyChange("editorFont", getEditorFont(), font);
         setFontByPosition(EDITOR_FONT, font);
     }
 

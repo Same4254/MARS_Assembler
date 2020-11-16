@@ -1,6 +1,6 @@
 package mars.venus.actions.edit;
 
-import mars.venus.EditPane;
+import mars.venus.editor.EditPane;
 import mars.venus.VenusUI;
 import mars.venus.actions.GuiAction;
 

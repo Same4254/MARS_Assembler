@@ -1,6 +1,7 @@
 package mars.venus;
 
 import mars.*;
+import mars.venus.editor.EditPane;
 
 import javax.swing.*;
 import javax.swing.event.*;

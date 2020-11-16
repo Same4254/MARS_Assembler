@@ -2,7 +2,7 @@ package mars.venus.editors.jeditsyntax;
 
 import mars.venus.editors.jeditsyntax.tokenmarker.*;
 import mars.venus.editors.MARSTextEditingArea;
-import mars.venus.EditPane;
+import mars.venus.editor.EditPane;
 import mars.*;
 
 import java.awt.*;
