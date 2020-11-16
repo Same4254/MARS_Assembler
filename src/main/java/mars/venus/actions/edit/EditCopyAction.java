@@ -45,6 +45,6 @@ public class EditCopyAction extends GuiAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        mainUI.getMainPane().getEditPane().copyText();
+        mainUI.getMainPane().getEditPane().copyToClipboard();
     }
 }

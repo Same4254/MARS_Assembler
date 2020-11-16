@@ -45,6 +45,6 @@ public class EditCutAction extends GuiAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        mainUI.getMainPane().getEditPane().cutText();
+        mainUI.getMainPane().getEditPane().cutToClipboard();
     }
 }

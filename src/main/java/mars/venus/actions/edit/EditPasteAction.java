@@ -45,6 +45,6 @@ public class EditPasteAction extends GuiAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        mainUI.getMainPane().getEditPane().pasteText();
+        mainUI.getMainPane().getEditPane().pasteFromClipboard();
     }
 }

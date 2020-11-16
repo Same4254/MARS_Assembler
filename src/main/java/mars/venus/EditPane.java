@@ -1,69 +1,29 @@
 package mars.venus;
 
-import jdk.nashorn.internal.objects.Global;
-import jdk.nashorn.internal.runtime.regexp.joni.Syntax;
 import mars.*;
-import mars.venus.editors.MARSTextEditingArea;
-import mars.venus.editors.generic.GenericTextArea;
-import mars.venus.editors.jeditsyntax.JEditBasedTextArea;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.undo.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
-import java.io.*;
-
-/*
-Copyright (c) 2003-2011,  Pete Sanderson and Kenneth Vollmar
-
-Developed by Pete Sanderson (psanderson@otterbein.edu)
-and Kenneth Vollmar (kenvollmar@missouristate.edu)
-
-Permission is hereby granted, free of charge, to any person obtaining 
-a copy of this software and associated documentation files (the 
-"Software"), to deal in the Software without restriction, including 
-without limitation the rights to use, copy, modify, merge, publish, 
-distribute, sublicense, and/or sell copies of the Software, and to 
-permit persons to whom the Software is furnished to do so, subject 
-to the following conditions:
-
-The above copyright notice and this permission notice shall be 
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR 
-ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-(MIT license, http://www.opensource.org/licenses/mit-license.html)
- */
-
-/**
- * Represents one file opened for editing.  Maintains required internal structures.
- * Before Mars 4.0, there was only one editor pane, a tab, and only one file could
- * be open at a time.  With 4.0 came the multifile (pane, tab) editor, and existing
- * duties were split between EditPane and the new EditTabbedPane class.
- *
- * @author Sanderson and Bumgarner
- */
 
 public class EditPane extends JPanel implements Observer {
 
-    RTextScrollPane scrollPane;
-    RSyntaxTextArea textArea;
+    private RTextScrollPane scrollPane;
+    private RSyntaxTextArea textArea;
 
     private JLabel caretPositionLabel;
     private FileStatus fileStatus;
     private VenusUI mainUI;
+
+
 
     public EditPane(VenusUI appFrame) {
         super(new BorderLayout());
@@ -78,56 +38,44 @@ public class EditPane extends JPanel implements Observer {
 
         add(scrollPane, BorderLayout.CENTER);
 
+
+
         // If source code is modified, will set flag to trigger/request file save.
-        // TODO: to implement with RSyntaxTextArea
 //        textArea.getDocument().addDocumentListener(
 //                new DocumentListener() {
-//                    public void insertUpdate(DocumentEvent evt) {
-//                        // IF statement added DPS 9-Aug-2011
-//                        // This method is triggered when file contents added to document
-//                        // upon opening, even though not edited by user.  The IF
-//                        // statement will sense this situation and immediately return.
-//                        if (FileStatus.get() == FileStatus.OPENING) {
-//                            setFileStatus(FileStatus.NOT_EDITED);
-//                            FileStatus.set(FileStatus.NOT_EDITED);
-//                            return;
-//                        }
-//                        // End of 9-Aug-2011 modification.
-//                        if (getFileStatus() == FileStatus.NEW_NOT_EDITED) {
-//                            setFileStatus(FileStatus.NEW_EDITED);
-//                        }
-//                        if (getFileStatus() == FileStatus.NOT_EDITED) {
-//                            setFileStatus(FileStatus.EDITED);
-//                        }
-//                        if (getFileStatus() == FileStatus.NEW_EDITED) {
-//                            mainUI.editor.setTitle("", getFilename(), getFileStatus());
-//                        } else {
-//                            mainUI.editor.setTitle(getPathname(), getFilename(), getFileStatus());
-//                        }
-//
-//                        FileStatus.setEdited(true);
+//                    @Override
+//                    public void insertUpdate(DocumentEvent e) {
 //                        switch (FileStatus.get()) {
-//                            case FileStatus.NEW_NOT_EDITED:
-//                                FileStatus.set(FileStatus.NEW_EDITED);
-//                                break;
-//                            case FileStatus.NEW_EDITED:
-//                                break;
-//                            default:
-//                                FileStatus.set(FileStatus.EDITED);
+//                            case FileStatus.OPENING: FileStatus.set(FileStatus.NOT_EDITED); break;
+//                            case FileStatus.NEW_NOT_EDITED: FileStatus.set(FileStatus.NEW_EDITED); break;
+//                            default: FileStatus.set(FileStatus.EDITED);
 //                        }
+//                        FileStatus.setEdited(true);
 //
-//                        Globals.getGui().getMainPane().getExecutePane().clearPane(); // DPS 9-Aug-2011
+//                        //    TODO: to implement but not in this way
+//                        //    if (getFileStatus() == FileStatus.NEW_EDITED) {
+//                        //        mainUI.editor.setTitle("", getFilename(), getFileStatus());
+//                        //    } else {
+//                        //        mainUI.editor.setTitle(getPathname(), getFilename(), getFileStatus());
+//                        //    }
+//                        //    Globals.getGui().getMainPane().getExecutePane().clearPane();
 //
+//                        System.out.println("insert update");
 //                    }
 //
-//                    public void removeUpdate(DocumentEvent evt) {
-//                        this.insertUpdate(evt);
+//                    @Override
+//                    public void removeUpdate(DocumentEvent e) {
+//                        insertUpdate(e);
+//                        System.out.println("remove update");
 //                    }
 //
-//                    public void changedUpdate(DocumentEvent evt) {
-//                        this.insertUpdate(evt);
+//                    @Override
+//                    public void changedUpdate(DocumentEvent e) {
+//                        insertUpdate(e);
+//                        System.out.println("changed update");
 //                    }
-//                });
+//                }
+//        );
 
         setSourceCode("", false);
 
@@ -169,17 +117,7 @@ public class EditPane extends JPanel implements Observer {
         textArea.setCaretPosition(0);
     }
 
-    /**
-     * Get rid of any accumulated undoable edits.  It is useful to call
-     * this method after opening a file into the text area.  The
-     * act of setting its text content upon reading the file will generate
-     * an undoable edit.  Normally you don't want a freshly-opened file
-     * to appear with its Undo action enabled.  But it will unless you
-     * call this after setting the text.
-     */
-    public void discardAllUndoableEdits() {
-        textArea.discardAllEdits();
-    }
+
 
 
 
@@ -273,72 +211,63 @@ public class EditPane extends JPanel implements Observer {
         fileStatus.updateStaticFileStatus();
     }
 
-
-    /**
-     * get the manager in charge of Undo and Redo operations
-     *
-     * @return the UnDo manager
-     */
-    @Deprecated
-    public UndoManager getUndoManager() {
-        // TODO: cannot implement
-        //return sourceCode.getUndoManager();
-        return null;
-    }
-
-    //    TODO: implement
-    //    Note: The following methods are invoked only when copy/cut/paste are
-    //    used from the toolbar or menu or the defined menu Alt codes.
-    //    When Ctrl-C, Ctrl-X or Ctrl-V are used, this code is NOT invoked but
-    //    the operation works correctly!
-    //    The "set visible" operations are used because clicking on the toolbar
-    //    icon causes both the selection highlighting AND the blinking cursor
-    //    to disappear! This does not happen when using menu selection or
-    //    Ctrl-C/X/V
-
-    /**
-     * Copy selected text into clipboard
-     */
-    public void copyText() {
+    public void copyToClipboard() {
         textArea.copy();
+
+        // The "set visible" operation is used because clicking on the toolbar
+        // icon causes the blinking cursor to disappear!
+        // This does not happen when using menu selection or Ctrl-C/X/V
         textArea.getCaret().setVisible(true);
     }
 
-    /**
-     * cut currently-selected text into clipboard
-     */
-    public void cutText() {
+    public void cutToClipboard() {
         textArea.cut();
+
+        // The "set visible" operation is used because clicking on the toolbar
+        // icon causes the blinking cursor to disappear!
+        // This does not happen when using menu selection or Ctrl-C/X/V
         textArea.getCaret().setVisible(true);
     }
 
-    /**
-     * paste clipboard contents at cursor position
-     */
-    public void pasteText() {
+    public void pasteFromClipboard() {
         textArea.paste();
+
+        // The "set visible" operation is used because clicking on the toolbar
+        // icon causes the blinking cursor to disappear!
+        // This does not happen when using menu selection or Ctrl-C/X/V
         textArea.getCaret().setVisible(true);
     }
 
-    /**
-     * select all text
-     */
     public void selectAllText() {
         textArea.selectAll();
     }
 
-    /**
-     * Undo previous edit
-     */
+    public boolean canRedo() {
+        return textArea.canRedo();
+    }
+
+    public boolean canUndo() {
+        return textArea.canUndo();
+    }
+
     public void undo() {
         textArea.undoLastAction();
     }
 
-    /**
-     * Redo previous edit
-     */
     public void redo() {
         textArea.redoLastAction();
+    }
+
+    /**
+     * Get rid of any accumulated undoable edits.  It is useful to call
+     * this method after opening a file into the text area.  The
+     * act of setting its text content upon reading the file will generate
+     * an undoable edit.  Normally you don't want a freshly-opened file
+     * to appear with its Undo action enabled.  But it will unless you
+     * call this after setting the text.
+     */
+    public void discardAllUndoableEdits() {
+        textArea.discardAllEdits();
     }
 
     /**

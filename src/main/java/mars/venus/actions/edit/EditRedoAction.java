@@ -61,7 +61,7 @@ public class EditRedoAction extends GuiAction {
 
     public void updateRedoState() {
         EditPane editPane = mainUI.getMainPane().getEditPane();
-        setEnabled(editPane != null && editPane.getUndoManager().canRedo());
+        setEnabled(editPane != null && editPane.canRedo());
     }
 }
 	
