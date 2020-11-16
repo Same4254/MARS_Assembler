@@ -1,9 +1,12 @@
 package mars.venus;
 
 import mars.*;
+import mars.venus.editors.MARSTextEditingArea;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
+import org.fife.ui.rtextarea.SearchContext;
+import org.fife.ui.rtextarea.SearchEngine;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -416,19 +419,21 @@ public class EditPane extends JPanel implements Observer {
      * @return TEXT_FOUND or TEXT_NOT_FOUND, depending on the result.
      */
     public int doFindText(String find, boolean caseSensitive) {
+        SearchContext context = new SearchContext();
+        context.setSearchFor(find);
+        context.setSearchForward(true);
+        context.setMatchCase(caseSensitive);
+        context.setWholeWord(false);
 
-
-        // TODO: to implement with RSyntaxTextArea
-        return 0;
-        //return sourceCode.doFindText(find, caseSensitive);
+        boolean found = SearchEngine.find(textArea, context).wasFound();
+        return found ? MARSTextEditingArea.TEXT_FOUND : MARSTextEditingArea.TEXT_NOT_FOUND;
     }
 
     /**
      * Finds and replaces next occurrence of text in a string in a forward search.
      * If cursor is initially at end
      * of matching selection, will immediately replace then find and select the
-     * next occurrence if any.  Otherwise it performs a find operation.  The replace
-     * can be undone with one undo operation.
+     * next occurrence if any.  Otherwise it performs a find operation.
      *
      * @param find          the text to locate in the string
      * @param replace       the text to replace the find text with - if the find text exists
@@ -439,17 +444,33 @@ public class EditPane extends JPanel implements Observer {
      * no additional matches.  Returns TEXT_REPLACED_FOUND_NEXT if replacement is
      * successful and there is at least one additional match.
      */
+    // TODO: for some reason it doesn't work so well
     public int doReplace(String find, String replace, boolean caseSensitive) {
-        // TODO: to implement with RSyntaxTextArea
-        //return sourceCode.doReplace(find, replace, caseSensitive);
-        return 0;
+        SearchContext context = new SearchContext();
+        context.setSearchFor(find);
+        context.setReplaceWith(replace);
+        context.setSearchForward(true);
+        context.setMatchCase(caseSensitive);
+        context.setWholeWord(false);
+
+        boolean replaced = SearchEngine.replace(textArea, context).wasFound();
+        if (!replaced) {
+            return MARSTextEditingArea.TEXT_NOT_FOUND;
+        }
+
+        // TODO: this method should do just a replace and not also a find.
+        //       The name of the method is misleading.
+        int found = doFindText(find, caseSensitive);
+        if (found == MARSTextEditingArea.TEXT_FOUND) {
+            return MARSTextEditingArea.TEXT_REPLACED_FOUND_NEXT;
+        } else {
+            return MARSTextEditingArea.TEXT_REPLACED_NOT_FOUND_NEXT;
+        }
     }
 
 
     /**
-     * Finds and replaces <B>ALL</B> occurrences of text in a string in a forward search.
-     * All replacements are bundled into one CompoundEdit, so one Undo operation will
-     * undo all of them.
+     * Replaces all occurrences of text in a string.
      *
      * @param find          the text to locate in the string
      * @param replace       the text to replace the find text with - if the find text exists
@@ -457,9 +478,13 @@ public class EditPane extends JPanel implements Observer {
      * @return the number of occurrences that were matched and replaced.
      */
     public int doReplaceAll(String find, String replace, boolean caseSensitive) {
-        // TODO: to implement with RSyntaxTextArea
-        //return sourceCode.doReplaceAll(find, replace, caseSensitive);
-        return 0;
+        SearchContext context = new SearchContext();
+        context.setSearchFor(find);
+        context.setReplaceWith(replace);
+        context.setMatchCase(caseSensitive);
+        context.setWholeWord(false);
+
+        return SearchEngine.replaceAll(textArea, context).getCount();
     }
 
 

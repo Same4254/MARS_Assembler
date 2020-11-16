@@ -225,32 +225,6 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
     // as written by Chris Dickenson in 2005
     //
 
-
-    /**
-     * Finds next occurrence of text in a forward search of a string. Search begins
-     * at the current cursor location, and wraps around when the end of the string
-     * is reached.
-     *
-     * @param find          the text to locate in the string
-     * @param caseSensitive true if search is to be case-sensitive, false otherwise
-     * @return TEXT_FOUND or TEXT_NOT_FOUND, depending on the result.
-     */
-    public int doFindText(String find, boolean caseSensitive) {
-        int findPosn = this.getCaretPosition();
-        int nextPosn = 0;
-        nextPosn = nextIndex(this.getText(), find, findPosn, caseSensitive);
-        if (nextPosn >= 0) {
-            this.requestFocus(); // guarantees visibility of the blue highlight
-            this.setSelectionStart(nextPosn); // position cursor at word start
-            this.setSelectionEnd(nextPosn + find.length());
-            // Need to repeat start due to quirk in JEditTextArea implementation of setSelectionStart.
-            this.setSelectionStart(nextPosn);
-            return TEXT_FOUND;
-        } else {
-            return TEXT_NOT_FOUND;
-        }
-    }
-
     /**
      * Returns next posn of word in text - forward search.  If end of string is
      * reached during the search, will wrap around to the beginning one time.
@@ -282,6 +256,15 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
         return textPosn;
     }
 
+
+    /**
+     * Replaced by EditPane.doFindText()
+     */
+    @Deprecated
+    @Override
+    public int doFindText(String find, boolean caseSensitive) {
+        return 0;
+    }
 
     /**
      * Finds and replaces next occurrence of text in a string in a forward search.
@@ -320,7 +303,7 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
         this.replaceSelection(replace);
         compoundEdit.end();
         undoManager.addEdit(compoundEdit);
-        editPane.updateUndoState();
+        editPane.updateUndoState();             // TODO: implement this in Editpane
         editPane.updateRedoState();
         isCompoundEdit = false;
         this.setCaretPosition(nextPosn + replace.length());
@@ -374,7 +357,7 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
         if (compoundEdit != null) {
             compoundEdit.end();
             undoManager.addEdit(compoundEdit);
-            editPane.updateUndoState();
+            editPane.updateUndoState();         // TODO: implement this in Editpane
             editPane.updateRedoState();
         }
         return replaceCount;
