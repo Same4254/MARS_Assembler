@@ -245,7 +245,8 @@ public class MessagesPane extends JTabbedPane {
         // does not properly with the JEditTextArea editor in this situation (it works
         // fine for the original generic editor).  So we just won't do it. DPS 9-Aug-2010
         if (editPane != null && currentPane != null) {
-            currentPane.selectLine(line, column);
+            // TODO: method removed find another way to implent it
+            //currentPane.selectLine(line, column);
         }
     }
 

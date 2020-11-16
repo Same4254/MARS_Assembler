@@ -144,7 +144,6 @@ public class EditTabbedPane extends JTabbedPane {
         mainUI.setReset(true);
         mainPane.getExecutePane().clearPane();
         mainPane.setSelectedComponent(this);
-        editPane.displayCaretPosition(new Point(1, 1));
         this.setSelectedComponent(editPane);
         updateTitlesAndMenuState(editPane);
         editPane.tellEditingComponentToRequestFocusInWindow();

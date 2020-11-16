@@ -16,18 +16,14 @@ public class EditPane extends JPanel implements Observer {
     private RTextScrollPane scrollPane;
     private RSyntaxTextArea textArea;
 
-    private boolean caretPositionEnabled;
-
-    //private JLabel caretPositionLabel;
     private FileStatus fileStatus;
     private VenusUI mainUI;
 
-
+    // TODO: implement caret position
 
     public EditPane(VenusUI appFrame) {
         super(new BorderLayout());
 
-        caretPositionEnabled = true;
         mainUI = appFrame;
 
         // We want to be notified of editor font changes! See update() below.
@@ -80,18 +76,8 @@ public class EditPane extends JPanel implements Observer {
         setSourceCode("", false);
 
         JPanel editInfo = new JPanel(new BorderLayout());
-//        caretPositionLabel = new JLabel();
-//        caretPositionLabel.setToolTipText("Tracks the current position of the text editing cursor.");
-        displayCaretPosition(new Point());
-//        editInfo.add(caretPositionLabel, BorderLayout.WEST);
         this.add(editInfo, BorderLayout.SOUTH);
     }
-
-    public void showCaretPosition(boolean enabled) {
-        caretPositionEnabled = enabled;
-    }
-
-
 
     private void initTextArea() {
         textArea = new RSyntaxTextArea();
@@ -292,113 +278,6 @@ public class EditPane extends JPanel implements Observer {
     }
 
     /**
-     * Update the caret position label on the editor's border to
-     * display the current line and column.  The position is given
-     * as text stream offset and will be converted into line and column.
-     *
-     * @param pos Offset into the text stream of caret.
-     */
-    public void displayCaretPosition(int pos) {
-        displayCaretPosition(convertStreamPositionToLineColumn(pos));
-    }
-
-    /**
-     * Display cursor coordinates
-     *
-     * @param p Point object with x-y (column, line number) coordinates of cursor
-     */
-    public void displayCaretPosition(Point p) {
-//        caretPositionLabel.setText("Line: " + p.y + " Column: " + p.x);
-    }
-
-    /**
-     * Given byte stream position in text being edited, calculate its column and line
-     * number coordinates.
-     *
-     * @param position position of character
-     * @return position Its column and line number coordinate as a Point.
-     */
-    public Point convertStreamPositionToLineColumn(int position) {
-        String textStream = textArea.getText();
-        int line = 1;
-        int column = 1;
-        for (int i = 0; i < position; i++) {
-            if (textStream.charAt(i) == '\n') {
-                line++;
-                column = 1;
-            } else {
-                column++;
-            }
-        }
-        return new Point(column, line);
-    }
-
-    /**
-     * Given line and column (position in the line) numbers, calculate
-     * its byte stream position in text being edited.
-     *
-     * @param line   Line number in file (starts with 1)
-     * @param column Position within that line (starts with 1)
-     * @return corresponding stream position.  Returns -1 if there is no corresponding position.
-     */
-    public int convertLineColumnToStreamPosition(int line, int column) {
-        String textStream = textArea.getText();
-        int textLength = textStream.length();
-        int textLine = 1;
-        int textColumn = 1;
-        for (int i = 0; i < textLength; i++) {
-            if (textLine == line && textColumn == column) {
-                return i;
-            }
-            if (textStream.charAt(i) == '\n') {
-                textLine++;
-                textColumn = 1;
-            } else {
-                textColumn++;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Select the specified editor text line.  Lines are numbered starting with 1, consistent
-     * with line numbers displayed by the editor.
-     *
-     * @param line The desired line number of this TextPane's text.  Numbering starts at 1, and
-     *             nothing will happen if the parameter value is less than 1
-     */
-    public void selectLine(int line) {
-        if (line > 0) {
-            int lineStartPosition = convertLineColumnToStreamPosition(line, 1);
-            int lineEndPosition = convertLineColumnToStreamPosition(line + 1, 1) - 1;
-            if (lineEndPosition < 0) { // DPS 19 Sept 2012.  Happens if "line" is last line of file.
-
-                lineEndPosition = textArea.getText().length() - 1;
-            }
-            if (lineStartPosition >= 0) {
-                textArea.select(lineStartPosition, lineEndPosition);
-                //sourceCode.setSelectionVisible(true);     // TODO: to implement with RSyntaxTextArea
-            }
-        }
-    }
-
-
-    /**
-     * Select the specified editor text line.  Lines are numbered starting with 1, consistent
-     * with line numbers displayed by the editor.
-     *
-     * @param line   The desired line number of this TextPane's text.  Numbering starts at 1, and
-     *               nothing will happen if the parameter value is less than 1
-     * @param column Desired column at which to place the cursor.
-     */
-    public void selectLine(int line, int column) {
-        selectLine(line);
-        // Made one attempt at setting cursor; didn't work but here's the attempt
-        // (imagine using it in the one-parameter overloaded method above)
-        //sourceCode.setCaretPosition(lineStartPosition+column-1);        
-    }
-
-    /**
      * Finds next occurrence of text in a forward search of a string. Search begins
      * at the current cursor location, and wraps around when the end of the string
      * is reached.
@@ -459,7 +338,6 @@ public class EditPane extends JPanel implements Observer {
 
         return SearchEngine.replaceAll(textArea, context).getCount();
     }
-
 
     /**
      * Update, if source code is visible, when Font setting changes.

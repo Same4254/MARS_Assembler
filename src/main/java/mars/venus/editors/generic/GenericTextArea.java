@@ -77,7 +77,7 @@ public class GenericTextArea extends JTextArea implements MARSTextEditingArea {
         this.getCaret().addChangeListener(
                 new ChangeListener() {
                     public void stateChanged(ChangeEvent e) {
-                        editPane.displayCaretPosition(getCaretPosition());
+                        //editPane.displayCaretPosition(getCaretPosition());
                     }
                 });
 
