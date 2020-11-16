@@ -19,7 +19,9 @@ public class EditPane extends JPanel implements Observer {
     private RTextScrollPane scrollPane;
     private RSyntaxTextArea textArea;
 
-    private JLabel caretPositionLabel;
+    private boolean caretPositionEnabled;
+
+    //private JLabel caretPositionLabel;
     private FileStatus fileStatus;
     private VenusUI mainUI;
 
@@ -27,6 +29,8 @@ public class EditPane extends JPanel implements Observer {
 
     public EditPane(VenusUI appFrame) {
         super(new BorderLayout());
+
+        caretPositionEnabled = true;
         mainUI = appFrame;
 
         // We want to be notified of editor font changes! See update() below.
@@ -80,12 +84,18 @@ public class EditPane extends JPanel implements Observer {
         setSourceCode("", false);
 
         JPanel editInfo = new JPanel(new BorderLayout());
-        caretPositionLabel = new JLabel();
-        caretPositionLabel.setToolTipText("Tracks the current position of the text editing cursor.");
+//        caretPositionLabel = new JLabel();
+//        caretPositionLabel.setToolTipText("Tracks the current position of the text editing cursor.");
         displayCaretPosition(new Point());
-        editInfo.add(caretPositionLabel, BorderLayout.WEST);
+//        editInfo.add(caretPositionLabel, BorderLayout.WEST);
         this.add(editInfo, BorderLayout.SOUTH);
     }
+
+    public void showCaretPosition(boolean enabled) {
+        caretPositionEnabled = enabled;
+    }
+
+
 
     private void initTextArea() {
         textArea = new RSyntaxTextArea();
@@ -114,6 +124,7 @@ public class EditPane extends JPanel implements Observer {
     public void setSourceCode(String text, boolean editable) {
         textArea.setText(text);
         textArea.setEditable(editable);
+        textArea.discardAllEdits();
         textArea.setCaretPosition(0);
     }
 
@@ -305,7 +316,7 @@ public class EditPane extends JPanel implements Observer {
      * @param p Point object with x-y (column, line number) coordinates of cursor
      */
     public void displayCaretPosition(Point p) {
-        caretPositionLabel.setText("Line: " + p.y + " Column: " + p.x);
+//        caretPositionLabel.setText("Line: " + p.y + " Column: " + p.x);
     }
 
     /**
@@ -405,6 +416,8 @@ public class EditPane extends JPanel implements Observer {
      * @return TEXT_FOUND or TEXT_NOT_FOUND, depending on the result.
      */
     public int doFindText(String find, boolean caseSensitive) {
+
+
         // TODO: to implement with RSyntaxTextArea
         return 0;
         //return sourceCode.doFindText(find, caseSensitive);

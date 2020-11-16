@@ -621,10 +621,6 @@ public class EditTabbedPane extends JTabbedPane {
                     line = Globals.program.getSourceLine(lineNumber++);
                 }
                 editPane.setSourceCode(fileContents.toString(), true);
-                // The above operation generates an undoable edit, setting the initial
-                // text area contents, that should not be seen as undoable by the Undo
-                // action.  Let's get rid of it.
-                editPane.discardAllUndoableEdits();
                 editPane.setFileStatus(FileStatus.NOT_EDITED);
 
                 addTab(editPane.getFilename(), editPane);
