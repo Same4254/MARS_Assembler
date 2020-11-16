@@ -28,17 +28,16 @@ public class EditPane extends JPanel implements PropertyChangeListener {
     public EditPane(VenusUI appFrame) {
         super(new BorderLayout());
 
+        // TODO: delete as soon as possible
         mainUI = appFrame;
-
-        Globals.getSettings().addPropertyChangeListener(this);
 
         fileStatus = new FileStatus();
 
-        initTextArea();
-        initScrollPane();
-
+        textArea = createTextArea();
+        scrollPane = createScrollPane(textArea);
         add(scrollPane, BorderLayout.CENTER);
 
+        Globals.getSettings().addPropertyChangeListener(this);
 
         // If source code is modified, will set flag to trigger/request file save.
 //        textArea.getDocument().addDocumentListener(
@@ -76,28 +75,26 @@ public class EditPane extends JPanel implements PropertyChangeListener {
 //                    }
 //                }
 //        );
-
-        setSourceCode("", false);
-
-        JPanel editInfo = new JPanel(new BorderLayout());
-        this.add(editInfo, BorderLayout.SOUTH);
     }
 
-    private void initTextArea() {
-        textArea = new RSyntaxTextArea();
+    private RSyntaxTextArea createTextArea() {
+        RSyntaxTextArea textArea = new RSyntaxTextArea();
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_X86);
         textArea.setFont(Globals.getSettings().getEditorFont());
         textArea.setCurrentLineHighlightColor(new Color(0xFFFAE3));
+        textArea.setEditable(false);
+        return textArea;
     }
 
     /**
      * Must be called after initTextArea()
      */
-    private void initScrollPane() {
-        scrollPane = new RTextScrollPane(textArea);
+    private RTextScrollPane createScrollPane(RSyntaxTextArea textArea) {
+        RTextScrollPane scrollPane = new RTextScrollPane(textArea);
         scrollPane.getGutter().setLineNumberFont(Globals.getSettings().getEditorFont());
         scrollPane.getGutter().setLineNumberColor(new Color(0x999999));
         scrollPane.getGutter().setBackground(new Color(0xF0F0F0));
+        return scrollPane;
     }
 
     /**
@@ -341,8 +338,6 @@ public class EditPane extends JPanel implements PropertyChangeListener {
             case "caretBlinkRate": textArea.getCaret().setBlinkRate((int)evt.getNewValue()); break;
             case "editorTabSize": textArea.setTabSize((int)evt.getNewValue());
             // TODO: update highlight enabled/disabled
-            // TODO: update caret blink rate
-            // TODO: update tab size
             // TODO: update syntax style
         }
     }
