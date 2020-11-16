@@ -1219,6 +1219,7 @@ public class Settings extends Observable {
      * @param rate blink rate in milliseconds
      */
     public void setCaretBlinkRate(int rate) {
+        propertyChange.firePropertyChange("caretBlinkRate", getCaretBlinkRate(), rate);
         setStringSetting(CARET_BLINK_RATE, String.valueOf(rate));
     }
 
