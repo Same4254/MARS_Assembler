@@ -339,6 +339,7 @@ public class EditPane extends JPanel implements PropertyChangeListener {
         switch (evt.getPropertyName()) {
             case "editorFont": textArea.setFont((Font)evt.getNewValue()); break;
             case "caretBlinkRate": textArea.getCaret().setBlinkRate((int)evt.getNewValue()); break;
+            case "editorTabSize": textArea.setTabSize((int)evt.getNewValue());
             // TODO: update highlight enabled/disabled
             // TODO: update caret blink rate
             // TODO: update tab size

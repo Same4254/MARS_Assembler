@@ -1229,6 +1229,7 @@ public class Settings extends Observable {
      * @param size tab size in characters.
      */
     public void setEditorTabSize(int size) {
+        propertyChange.firePropertyChange("editorTabSize", getEditorTabSize(), size);
         setStringSetting(EDITOR_TAB_SIZE, String.valueOf(size));
     }
 
