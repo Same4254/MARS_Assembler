@@ -257,10 +257,7 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
     }
 
 
-    /**
-     * Replaced by EditPane.doFindText()
-     */
-    @Deprecated
+    @Deprecated // use EditPane.doFindText()
     @Override
     public int doFindText(String find, boolean caseSensitive) {
         return 0;
@@ -282,36 +279,9 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
      * no additional matches.  Returns TEXT_REPLACED_FOUND_NEXT if reaplacement is
      * successful and there is at least one additional match.
      */
+    @Deprecated // use EditPane.doReplace()
     public int doReplace(String find, String replace, boolean caseSensitive) {
-        int nextPosn = 0;
-        int posn;
-        // Will perform a "find" and return, unless positioned at the end of
-        // a selected "find" result.  
-        if (find == null || !find.equals(this.getSelectedText()) ||
-                this.getSelectionEnd() != this.getCaretPosition()) {
-            return doFindText(find, caseSensitive);
-        }
-        // We are positioned at end of selected "find".  Rreplace and find next.
-        nextPosn = this.getSelectionStart();
-        this.grabFocus();
-        this.setSelectionStart(nextPosn); // posn cursor at word start
-        this.setSelectionEnd(nextPosn + find.length()); //select found text
-        // Need to repeat start due to quirk in JEditTextArea implementation of setSelectionStart.
-        this.setSelectionStart(nextPosn);
-        isCompoundEdit = true;
-        compoundEdit = new CompoundEdit();
-        this.replaceSelection(replace);
-        compoundEdit.end();
-        undoManager.addEdit(compoundEdit);
-        editPane.updateUndoState();             // TODO: implement this in Editpane
-        editPane.updateRedoState();
-        isCompoundEdit = false;
-        this.setCaretPosition(nextPosn + replace.length());
-        if (doFindText(find, caseSensitive) == TEXT_NOT_FOUND) {
-            return TEXT_REPLACED_NOT_FOUND_NEXT;
-        } else {
-            return TEXT_REPLACED_FOUND_NEXT;
-        }
+        return 0;
     }
 
     /**
@@ -324,43 +294,9 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
      * @param caseSensitive true for case sensitive. false to ignore case
      * @return the number of occurrences that were matched and replaced.
      */
+    @Deprecated // use EditPane.doReplaceAll
     public int doReplaceAll(String find, String replace, boolean caseSensitive) {
-        int nextPosn = 0;
-        int findPosn = 0; // *** begin at start of text
-        int replaceCount = 0;
-        compoundEdit = null; // new one will be created upon first replacement
-        isCompoundEdit = true; // undo manager's action listener needs this
-        while (nextPosn >= 0) {
-            nextPosn = nextIndex(this.getText(), find, findPosn, caseSensitive);
-            if (nextPosn >= 0) {
-                // nextIndex() will wrap around, which causes infinite loop if
-                // find string is a substring of replacement string.  This 
-                // statement will prevent that.
-                if (nextPosn < findPosn) {
-                    break;
-                }
-                this.grabFocus();
-                this.setSelectionStart(nextPosn); // posn cursor at word start
-                this.setSelectionEnd(nextPosn + find.length()); //select found text
-                // Need to repeat start due to quirk in JEditTextArea implementation of setSelectionStart.
-                this.setSelectionStart(nextPosn);
-                if (compoundEdit == null) {
-                    compoundEdit = new CompoundEdit();
-                }
-                this.replaceSelection(replace);
-                findPosn = nextPosn + replace.length(); // set for next search
-                replaceCount++;
-            }
-        }
-        isCompoundEdit = false;
-        // Will be true if any replacements were performed
-        if (compoundEdit != null) {
-            compoundEdit.end();
-            undoManager.addEdit(compoundEdit);
-            editPane.updateUndoState();         // TODO: implement this in Editpane
-            editPane.updateRedoState();
-        }
-        return replaceCount;
+        return 0;
     }
 
 }

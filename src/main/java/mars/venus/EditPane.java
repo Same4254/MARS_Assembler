@@ -416,9 +416,9 @@ public class EditPane extends JPanel implements Observer {
      *
      * @param find          the text to locate in the string
      * @param caseSensitive true if search is to be case-sensitive, false otherwise
-     * @return TEXT_FOUND or TEXT_NOT_FOUND, depending on the result.
+     * @return true if text was found, false otherwise
      */
-    public boolean doFindText(String find, boolean caseSensitive) {
+    public boolean findText(String find, boolean caseSensitive) {
         SearchContext context = new SearchContext();
         context.setSearchFor(find);
         context.setSearchForward(true);
@@ -437,14 +437,10 @@ public class EditPane extends JPanel implements Observer {
      * @param find          the text to locate in the string
      * @param replace       the text to replace the find text with - if the find text exists
      * @param caseSensitive true for case sensitive. false to ignore case
-     * @return Returns TEXT_FOUND if not initially at end of selected match and matching
-     * occurrence is found.  Returns TEXT_NOT_FOUND if the text is not matched.
-     * Returns TEXT_REPLACED_NOT_FOUND_NEXT if replacement is successful but there are
-     * no additional matches.  Returns TEXT_REPLACED_FOUND_NEXT if replacement is
-     * successful and there is at least one additional match.
+     * @return Returns true if text was replaced, false otherwise
      */
     // TODO: for some reason it doesn't work so well
-    public boolean doReplace(String find, String replace, boolean caseSensitive) {
+    public boolean replace(String find, String replace, boolean caseSensitive) {
         SearchContext context = new SearchContext();
         context.setSearchFor(find);
         context.setReplaceWith(replace);
@@ -464,7 +460,7 @@ public class EditPane extends JPanel implements Observer {
      * @param caseSensitive true for case sensitive. false to ignore case
      * @return the number of occurrences that were matched and replaced.
      */
-    public int doReplaceAll(String find, String replace, boolean caseSensitive) {
+    public int replaceAll(String find, String replace, boolean caseSensitive) {
         SearchContext context = new SearchContext();
         context.setSearchFor(find);
         context.setReplaceWith(replace);

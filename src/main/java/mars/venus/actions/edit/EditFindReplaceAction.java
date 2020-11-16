@@ -4,7 +4,6 @@ import mars.*;
 import mars.venus.EditPane;
 import mars.venus.VenusUI;
 import mars.venus.actions.GuiAction;
-import mars.venus.editors.MARSTextEditingArea;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -215,7 +214,7 @@ public class EditFindReplaceAction extends GuiAction {
                 // Being cautious. Should not be null because find/replace tool button disabled if no file open
                 if (editPane != null) {
                     searchString = findInputField.getText();
-                    boolean found = editPane.doFindText(searchString, caseSensitiveCheckBox.isSelected());
+                    boolean found = editPane.findText(searchString, caseSensitiveCheckBox.isSelected());
                     if (!found) {
                         resultsLabel.setText(findButton.getText() + ": " + RESULTS_TEXT_NOT_FOUND);
                     } else {
@@ -240,19 +239,20 @@ public class EditFindReplaceAction extends GuiAction {
                 if (editPane != null) {
                     searchString = findInputField.getText();
 
-                    boolean replaced = editPane.doReplace(searchString, replaceInputField.getText(), caseSensitiveCheckBox.isSelected());
-                    boolean foundNext = editPane.doFindText(searchString, caseSensitiveCheckBox.isSelected());
+                    boolean replaced = editPane.replace(searchString, replaceInputField.getText(), caseSensitiveCheckBox.isSelected());
+                    boolean foundNext = editPane.findText(searchString, caseSensitiveCheckBox.isSelected());
 
                     String result = replaceButton.getText() + ": ";
-                    if (!replaced) {
-                        // not replaced
-                        result += RESULTS_TEXT_NOT_FOUND;
-                    } else if (!foundNext) {
-                        // replaced but nothing else found
-                        result += RESULTS_TEXT_REPLACED_LAST;
+                    if (replaced) {
+                        editPane.updateUndoState();
+                        editPane.updateRedoState();
+                        if (foundNext) {
+                            result += RESULTS_TEXT_REPLACED;
+                        } else {
+                            result += RESULTS_TEXT_REPLACED_LAST;
+                        }
                     } else {
-                        // replaced and found next
-                        result += RESULTS_TEXT_REPLACED;
+                        result += RESULTS_TEXT_NOT_FOUND;
                     }
                     resultsLabel.setText(result);
                 }
@@ -271,10 +271,12 @@ public class EditFindReplaceAction extends GuiAction {
                 // Being cautious. Should not be null b/c find/replace tool button disabled if no file open
                 if (editPane != null) {
                     searchString = findInputField.getText();
-                    int replaceCount = editPane.doReplaceAll(searchString, replaceInputField.getText(), caseSensitiveCheckBox.isSelected());
+                    int replaceCount = editPane.replaceAll(searchString, replaceInputField.getText(), caseSensitiveCheckBox.isSelected());
                     if (replaceCount == 0) {
                         resultsLabel.setText(replaceAllButton.getText() + ": " + RESULTS_TEXT_NOT_FOUND);
                     } else {
+                        editPane.updateUndoState();
+                        editPane.updateRedoState();
                         resultsLabel.setText(replaceAllButton.getText() + ": " + RESULTS_TEXT_REPLACED_ALL + " " + replaceCount + " occurrence" + (replaceCount == 1 ? "" : "s"));
                     }
                 }
