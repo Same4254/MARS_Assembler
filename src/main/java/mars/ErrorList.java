@@ -2,6 +2,7 @@ package mars;
 
 import java.util.*;
 import java.io.*;
+
 /*
 Copyright (c) 2003-2012,  Pete Sanderson and Kenneth Vollmar
 
@@ -31,13 +32,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
- * Maintains list of generated error messages, regardless of source (tokenizing, parsing,
- * assembly, execution).
- *
- * @author Pete Sanderson
- * @version August 2003
- **/
-
+ * Maintains list of generated error messages, regardless of source
+ * (tokenizing, parsing, assembly, execution).
+ */
 public class ErrorList {
     private ArrayList<ErrorMessage> messages;
     private int errorCount;
@@ -49,40 +46,30 @@ public class ErrorList {
     public static final String POSITION_PREFIX = " column ";
     public static final String MESSAGE_SEPARATOR = ": ";
 
-
-    /**
-     * Constructor for ErrorList
-     **/
-
     public ErrorList() {
         messages = new ArrayList<>();
         errorCount = 0;
         warningCount = 0;
     }
 
-    /**
-     * Get ArrayList of error messages.
-     *
-     * @return ArrayList of ErrorMessage objects
-     */
     public ArrayList<ErrorMessage> getErrorMessages() {
         return messages;
     }
 
     /**
-     * Determine whether error has occured or not.
+     * Determine whether error has occurred or not.
      *
-     * @return <tt>true</tt> if an error has occurred (does not include warnings), <tt>false</tt> otherwise.
-     **/
+     * @return true if an error has occurred (does not include warnings), false otherwise.
+     */
     public boolean errorsOccurred() {
         return (errorCount != 0);
     }
 
     /**
-     * Determine whether warning has occured or not.
+     * Determine whether warning has occurred or not.
      *
-     * @return <tt>true</tt> if an warning has occurred, <tt>false</tt> otherwise.
-     **/
+     * @return true if an warning has occurred, false otherwise.
+     */
     public boolean warningsOccurred() {
         return (warningCount != 0);
     }
@@ -91,7 +78,7 @@ public class ErrorList {
      * Add new error message to end of list.
      *
      * @param mess ErrorMessage object to be added to end of error list.
-     **/
+     */
     public void add(ErrorMessage mess) {
         add(mess, messages.size());
     }
@@ -101,7 +88,7 @@ public class ErrorList {
      *
      * @param mess  ErrorMessage object to be added to end of error list.
      * @param index position in error list
-     **/
+     */
     public void add(ErrorMessage mess, int index) {
         if (errorCount > getErrorLimit()) {
             return;
@@ -119,13 +106,11 @@ public class ErrorList {
         }
     }
 
-
     /**
      * Count of number of error messages in list.
      *
      * @return Number of error messages in list.
-     **/
-
+     */
     public int errorCount() {
         return this.errorCount;
     }
@@ -134,8 +119,7 @@ public class ErrorList {
      * Count of number of warning messages in list.
      *
      * @return Number of warning messages in list.
-     **/
-
+     */
     public int warningCount() {
         return this.warningCount;
     }
@@ -144,8 +128,7 @@ public class ErrorList {
      * Check to see if error limit has been exceeded.
      *
      * @return True if error limit exceeded, false otherwise.
-     **/
-
+     */
     public boolean errorLimitExceeded() {
         return this.errorCount > getErrorLimit();
     }
@@ -155,8 +138,7 @@ public class ErrorList {
      * by one assemble operation.
      *
      * @return error limit.
-     **/
-
+     */
     public int getErrorLimit() {
         return Globals.maximumErrorMessages;
     }
@@ -165,7 +147,7 @@ public class ErrorList {
      * Produce error report.
      *
      * @return String containing report.
-     **/
+     */
     public String generateErrorReport() {
         return generateReport(ErrorMessage.ERROR);
     }
@@ -174,7 +156,7 @@ public class ErrorList {
      * Produce warning report.
      *
      * @return String containing report.
-     **/
+     */
     public String generateWarningReport() {
         return generateReport(ErrorMessage.WARNING);
     }
@@ -183,12 +165,17 @@ public class ErrorList {
      * Produce report containing both warnings and errors, warnings first.
      *
      * @return String containing report.
-     **/
+     */
     public String generateErrorAndWarningReport() {
         return generateWarningReport() + generateErrorReport();
     }
 
-    // Produces either error or warning report.
+    /**
+     * Produces either error or warning report.
+     *
+     * @param isWarning
+     * @return
+     */
     private String generateReport(boolean isWarning) {
         StringBuffer report = new StringBuffer();
         String reportLine;
@@ -196,7 +183,7 @@ public class ErrorList {
             if ((isWarning && m.isWarning()) || (!isWarning && !m.isWarning())) {
                 reportLine = ((isWarning) ? WARNING_MESSAGE_PREFIX : ERROR_MESSAGE_PREFIX) + FILENAME_PREFIX;
                 if (m.getFilename().length() > 0)
-                    reportLine = reportLine + (new File(m.getFilename()).getPath()); //.getName());
+                    reportLine = reportLine + (new File(m.getFilename()).getPath());
                 if (m.getLine() > 0)
                     reportLine = reportLine + LINE_PREFIX + m.getMacroExpansionHistory() + m.getLine();
                 if (m.getPosition() > 0)
@@ -207,5 +194,6 @@ public class ErrorList {
         }
         return report.toString();
     }
-}  // ErrorList
+
+}
 
