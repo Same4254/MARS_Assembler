@@ -466,7 +466,7 @@ public class FilenameFinder {
                 result.append("  (");
             }
             for (int i = 0; i < extensions.size(); i++) {
-                String extension = (String) extensions.get(i);
+                String extension = extensions.get(i);
                 if (extension != null && extension.length() > 0) {
                     result.append((i == 0) ? "" : "; ").append("*").append((extension.charAt(0) == '.') ? "" : ".").append(extension);
                 }

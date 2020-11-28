@@ -307,7 +307,7 @@ public class HelpHelpAction extends GuiAction {
         String blanks = "                        ";  // 24 blanks
         Class instructionClass;
         while (it.hasNext()) {
-            instr = (Instruction) it.next();
+            instr = it.next();
             try {
                 if (Class.forName(instructionClassName).isInstance(instr)) {
                     exampleList.add(instr.getExampleFormat()

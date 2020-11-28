@@ -589,7 +589,7 @@ public class MarsLaunch {
         // Display requested register contents
         out.println();
         for (String s : registerDisplayList) {
-            String reg = s.toString();
+            String reg = s;
             if (RegisterFile.getUserRegister(reg) != null) {
                 // integer register
                 if (verbose)
@@ -755,7 +755,7 @@ public class MarsLaunch {
         ArrayList<DumpFormat> dumpFormats = (new DumpFormatLoader()).loadDumpFormats();
         StringBuilder formats = new StringBuilder();
         for (int i = 0; i < dumpFormats.size(); i++) {
-            formats.append(((DumpFormat) dumpFormats.get(i)).getCommandDescriptor());
+            formats.append(dumpFormats.get(i).getCommandDescriptor());
             if (i < dumpFormats.size() - 1) {
                 formats.append(", ");
             }

@@ -116,7 +116,7 @@ public class SettingsMemoryConfigurationAction extends GuiAction {
             ButtonGroup choices = new ButtonGroup();
             Iterator<MemoryConfiguration> configurationsIterator = MemoryConfigurations.getConfigurationsIterator();
             while (configurationsIterator.hasNext()) {
-                MemoryConfiguration config = (MemoryConfiguration) configurationsIterator.next();
+                MemoryConfiguration config = configurationsIterator.next();
                 ConfigurationButton button = new ConfigurationButton(config);
                 button.addActionListener(this);
                 if (button.isSelected()) {

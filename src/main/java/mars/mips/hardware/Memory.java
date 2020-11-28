@@ -1246,7 +1246,7 @@ public class Memory extends Observable {
             Iterator<MemoryObservable> it = this.observables.iterator();
             MemoryObservable mo;
             while (it.hasNext()) {
-                mo = (MemoryObservable) it.next();
+                mo = it.next();
                 if (mo.match(address)) {
                     mo.notifyObserver(new MemoryAccessNotice(type, address, length, value));
                 }
