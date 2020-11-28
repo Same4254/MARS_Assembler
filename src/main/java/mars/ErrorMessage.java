@@ -3,6 +3,7 @@ package mars;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.ArrayList;
+
 /*
 Copyright (c) 2003-2012,  Pete Sanderson and Kenneth Vollmar
 
@@ -33,48 +34,35 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /**
  * Represents occurrence of an error detected during tokenizing, assembly or simulation.
- *
- * @author Pete Sanderson
- * @version August 2003
- **/
-
+ */
 public class ErrorMessage {
-    private boolean isWarning; // allow for warnings too (added Nov 2006)
-    private String filename; // name of source file  (added Oct 2006)
-    private int line;     // line in source code where error detected
-    private int position; // position in source line where error detected
+    private boolean isWarning;  // allow for warnings too (added Nov 2006)
+    private String filename;    // name of source file  (added Oct 2006)
+    private int line;           // line in source code where error detected
+    private int position;       // position in source line where error detected
     private String message;
     private String macroExpansionHistory;
 
-    /**
-     * Constant to indicate this message is warning not error
-     */
+    /** Constant to indicate this message is warning not error */
     public static final boolean WARNING = true;
 
-    /**
-     * Constant to indicate this message is error not warning
-     */
+    /** Constant to indicate this message is error not warning */
     public static final boolean ERROR = false;
 
     /**
-     * Constructor for ErrorMessage.
-     *
      * @param filename String containing name of source file in which this error appears.
      * @param line     Line number in source program being processed when error occurred.
      * @param position Position within line being processed when error occurred.  Normally is starting
      *                 position of source token.
      * @param message  String containing appropriate error message.
      * @deprecated Newer constructors replace the String filename parameter with a MIPSprogram parameter to provide more information.
-     **/
-    // Added filename October 2006 
+     */
     @Deprecated
     public ErrorMessage(String filename, int line, int position, String message) {
         this(ERROR, filename, line, position, message, "");
     }
 
     /**
-     * Constructor for ErrorMessage.
-     *
      * @param filename              String containing name of source file in which this error appears.
      * @param line                  Line number in source program being processed when error occurred.
      * @param position              Position within line being processed when error occurred.  Normally is starting
@@ -82,16 +70,13 @@ public class ErrorMessage {
      * @param message               String containing appropriate error message.
      * @param macroExpansionHistory
      * @deprecated Newer constructors replace the String filename parameter with a MIPSprogram parameter to provide more information.
-     **/
-    // Added macroExpansionHistory Dec 2012
+     */
     @Deprecated
     public ErrorMessage(String filename, int line, int position, String message, String macroExpansionHistory) {
         this(ERROR, filename, line, position, message, macroExpansionHistory);
     }
 
     /**
-     * Constructor for ErrorMessage.
-     *
      * @param isWarning             set to WARNING if message is a warning not error, else set to ERROR or omit.
      * @param filename              String containing name of source file in which this error appears.
      * @param line                  Line number in source program being processed when error occurred.
@@ -100,7 +85,7 @@ public class ErrorMessage {
      * @param message               String containing appropriate error message.
      * @param macroExpansionHistory provided so message for macro can include both definition and usage line numbers
      * @deprecated Newer constructors replace the String filename parameter with a MIPSprogram parameter to provide more information.
-     **/
+     */
     @Deprecated
     public ErrorMessage(boolean isWarning, String filename, int line, int position, String message, String macroExpansionHistory) {
         this.isWarning = isWarning;
@@ -111,35 +96,31 @@ public class ErrorMessage {
         this.macroExpansionHistory = macroExpansionHistory;
     }
 
-
     /**
-     * Constructor for ErrorMessage.  Assumes line number is calculated after any .include files expanded, and
+     * Assumes line number is calculated after any .include files expanded, and
      * if there were, it will adjust filename and line number so message reflects original file and line number.
      *
-     * @param sourceMipsProgram MIPSprogram object of source file in which this error appears.
+     * @param sourceMipsProgram MipsProgram object of source file in which this error appears.
      * @param line              Line number in source program being processed when error occurred.
      * @param position          Position within line being processed when error occurred.  Normally is starting
      *                          position of source token.
      * @param message           String containing appropriate error message.
-     **/
-
+     */
     public ErrorMessage(MipsProgram sourceMipsProgram, int line, int position, String message) {
         this(ERROR, sourceMipsProgram, line, position, message);
     }
 
-
     /**
-     * Constructor for ErrorMessage.  Assumes line number is calculated after any .include files expanded, and
-     * if there were, it will adjust filename and line number so message reflects original file and line number.
+     * Assumes line number is calculated after any .include files expanded, and if there were,
+     * it will adjust filename and line number so message reflects original file and line number.
      *
      * @param isWarning         set to WARNING if message is a warning not error, else set to ERROR or omit.
-     * @param sourceMipsProgram MIPSprogram object of source file in which this error appears.
+     * @param sourceMipsProgram MipsProgram object of source file in which this error appears.
      * @param line              Line number in source program being processed when error occurred.
      * @param position          Position within line being processed when error occurred.  Normally is starting
      *                          position of source token.
      * @param message           String containing appropriate error message.
-     **/
-
+     */
     public ErrorMessage(boolean isWarning, MipsProgram sourceMipsProgram, int line, int position, String message) {
         this.isWarning = isWarning;
         if (sourceMipsProgram == null) {
@@ -161,12 +142,11 @@ public class ErrorMessage {
     }
 
     /**
-     * Constructor for ErrorMessage, to be used for runtime exceptions.
+     * Used for runtime exceptions.
      *
      * @param statement The ProgramStatement object for the instruction causing the runtime error
      * @param message   String containing appropriate error message.
-     **/
-    // Added January 2013
+     */
     public ErrorMessage(ProgramStatement statement, String message) {
         this.isWarning = ERROR;
         this.filename = (statement.getSourceMIPSprogram() == null)
@@ -222,7 +202,6 @@ public class ErrorMessage {
      *
      * @return Returns String containing name of source file containing the error.
      */
-    // Added October 2006
     public String getFilename() {
         return filename;
     }
@@ -232,7 +211,6 @@ public class ErrorMessage {
      *
      * @return Returns line number in source program where error occurred.
      */
-
     public int getLine() {
         return line;
     }
@@ -242,7 +220,6 @@ public class ErrorMessage {
      *
      * @return Returns position within line of source program where error occurred.
      */
-
     public int getPosition() {
         return position;
     }
@@ -252,7 +229,6 @@ public class ErrorMessage {
      *
      * @return Returns String containing textual error message.
      */
-
     public String getMessage() {
         return message;
     }
@@ -262,7 +238,6 @@ public class ErrorMessage {
      *
      * @return Returns true if this message reflects warning, false if error.
      */
-    // Method added 28 Nov 2006
     public boolean isWarning() {
         return this.isWarning;
     }
@@ -272,18 +247,16 @@ public class ErrorMessage {
      *
      * @return string describing macro expansion
      */
-    // Method added by Mohammad Sekavat Dec 2012
     public String getMacroExpansionHistory() {
         if (macroExpansionHistory == null || macroExpansionHistory.length() == 0)
             return "";
         return macroExpansionHistory + "->";
     }
 
-    // Added by Mohammad Sekavat Dec 2012
     private static String getExpansionHistory(MipsProgram sourceMipsProgram) {
         if (sourceMipsProgram == null || sourceMipsProgram.getLocalMacroPool() == null)
             return "";
         return sourceMipsProgram.getLocalMacroPool().getExpansionHistory();
     }
 
-}  // ErrorMessage
+}
