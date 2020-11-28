@@ -32,10 +32,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
- * Produces MARS splash screen.<br>
- * Adapted from http://www.java-tips.org/content/view/1267/2/<br>
+ * Produces MARS splash screen.
+ * Adapted from http://www.java-tips.org/content/view/1267/2/
  */
-
 public class MarsSplashScreen extends JWindow {
 
     private int duration;
@@ -112,6 +111,5 @@ public class MarsSplashScreen extends JWindow {
                 g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
         }
     }
-
 
 }
