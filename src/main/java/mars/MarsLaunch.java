@@ -41,39 +41,36 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /**
  * Launch the Mars application
- *
- * @author Pete Sanderson
- * @version December 2009
- **/
+ */
 public class MarsLaunch {
 
     private boolean simulate;
     private int displayFormat;
-    private boolean verbose;  // display register name or address along with contents
-    private boolean assembleProject; // assemble only the given file or all files in its directory
-    private boolean pseudo;  // pseudo instructions allowed in source code or not.
-    private boolean delayedBranching;  // MIPS delayed branching is enabled.
-    private boolean warningsAreErrors; // Whether assembler warnings should be considered errors.
-    private boolean startAtMain; // Whether to start execution at statement labeled 'main'
-    private boolean countInstructions; // Whether to count and report number of instructions executed
-    private boolean selfModifyingCode; // Whether to allow self-modifying code (e.g. write to text segment)
+    private boolean verbose;            // display register name or address along with contents
+    private boolean assembleProject;    // assemble only the given file or all files in its directory
+    private boolean pseudo;             // pseudo instructions allowed in source code or not.
+    private boolean delayedBranching;   // MIPS delayed branching is enabled.
+    private boolean warningsAreErrors;  // Whether assembler warnings should be considered errors.
+    private boolean startAtMain;        // Whether to start execution at statement labeled 'main'
+    private boolean countInstructions;  // Whether to count and report number of instructions executed
+    private boolean selfModifyingCode;  // Whether to allow self-modifying code (e.g. write to text segment)
     private static final String rangeSeparator = "-";
-    private static final int splashDuration = 2000; // time in MS to show splash screen
-    private static final int memoryWordsPerLine = 4; // display 4 memory words, tab separated, per line
-    private static final int DECIMAL = 0; // memory and register display format
-    private static final int HEXADECIMAL = 1;// memory and register display format
-    private static final int ASCII = 2;// memory and register display format
+    private static final int splashDuration = 2000;     // time in MS to show splash screen
+    private static final int memoryWordsPerLine = 4;    // display 4 memory words, tab separated, per line
+    private static final int DECIMAL = 0;               // memory and register display format
+    private static final int HEXADECIMAL = 1;           // memory and register display format
+    private static final int ASCII = 2;                 // memory and register display format
     private ArrayList<String> registerDisplayList;
     private ArrayList<String> memoryDisplayList;
     private ArrayList<String> filenameList;
     private MipsProgram code;
     private int maxSteps;
     private int instructionCount;
-    private PrintStream out; // stream for display of command line output
+    private PrintStream out;                        // stream for display of command line output
     private ArrayList<String[]> dumpTriples = null; // each element holds 3 arguments for dump option
-    private ArrayList<String> programArgumentList; // optional program args for MIPS program (becomes argc, argv)
-    private int assembleErrorExitCode;  // MARS command exit code to return if assemble error occurs
-    private int simulateErrorExitCode;// MARS command exit code to return if simulation error occurs
+    private ArrayList<String> programArgumentList;  // optional program args for MIPS program (becomes argc, argv)
+    private int assembleErrorExitCode;              // MARS command exit code to return if assemble error occurs
+    private int simulateErrorExitCode;              // MARS command exit code to return if simulation error occurs
 
     /**
      * Main takes a number of command line arguments.<br>
@@ -164,7 +161,6 @@ public class MarsLaunch {
         }
     }
 
-
     /**
      * Perform any specified dump operations.  See "dump" option.
      */
@@ -215,7 +211,6 @@ public class MarsLaunch {
         }
     }
 
-
     /**
      * There are no command arguments, so run in interactive mode by
      * launching the GUI-fronted integrated development environment.
@@ -234,18 +229,15 @@ public class MarsLaunch {
         Font font = EditorFont.createFontFromStringValues("Fira Code", "Plain", "18");
         Globals.getSettings().setEditorFont(font);
 
-        // System.setProperty("apple.laf.useScreenMenuBar", "true"); // Puts MARS menu on Mac OS menu bar
         new MarsSplashScreen(splashDuration).showSplash();
         SwingUtilities.invokeLater(
                 new Runnable() {
                     public void run() {
-                        //Turn off metal's use of bold fonts
-                        //UIManager.put("swing.boldMetal", Boolean.FALSE);
+                        // Turn off metal's use of bold fonts
                         new VenusUI("MARS " + Globals.version);
                     }
                 });
     }
-
 
     /**
      * Parse command line arguments. The initial parsing has already been
@@ -381,19 +373,19 @@ public class MarsLaunch {
                 pseudo = false;
                 continue;
             }
-            if (args[i].toLowerCase().equals("we")) { // added 14-July-2008 DPS
+            if (args[i].toLowerCase().equals("we")) {
                 warningsAreErrors = true;
                 continue;
             }
-            if (args[i].toLowerCase().equals("sm")) { // added 17-Dec-2009 DPS
+            if (args[i].toLowerCase().equals("sm")) {
                 startAtMain = true;
                 continue;
             }
-            if (args[i].toLowerCase().equals("smc")) { // added 5-Jul-2013 DPS
+            if (args[i].toLowerCase().equals("smc")) {
                 selfModifyingCode = true;
                 continue;
             }
-            if (args[i].toLowerCase().equals("ic")) { // added 19-Jul-2012 DPS
+            if (args[i].toLowerCase().equals("ic")) {
                 countInstructions = true;
                 continue;
             }
@@ -443,7 +435,6 @@ public class MarsLaunch {
         return argsOK;
     }
 
-
     /**
      * Carry out the mars command: assemble then optionally run
      * @return false if no simulation (run) occurs, true otherwise.
@@ -488,12 +479,12 @@ public class MarsLaunch {
             if (Globals.debug) {
                 out.println("--------  ASSEMBLY BEGINS  -----------");
             }
-            // Added logic to check for warnings and print if any. DPS 11/28/06
+            // Added logic to check for warnings and print if any.
             ErrorList warnings = code.assemble(MipsProgramsToAssemble, pseudo, warningsAreErrors);
             if (warnings != null && warnings.warningsOccurred()) {
                 out.println(warnings.generateWarningReport());
             }
-            RegisterFile.initializeProgramCounter(startAtMain); // DPS 3/9/09
+            RegisterFile.initializeProgramCounter(startAtMain);
             if (simulate) {
                 // store program args (if any) in MIPS memory
                 new ProgramArgumentList(programArgumentList).storeProgramArguments();
@@ -518,7 +509,6 @@ public class MarsLaunch {
         }
         return programRan;
     }
-
 
     /**
      * Check for memory address subrange.  Has to be two integers separated
@@ -547,7 +537,6 @@ public class MarsLaunch {
         }
         return memoryRange;
     }
-
 
     /**
      * Required for counting instructions executed, if that option is specified.
@@ -582,7 +571,6 @@ public class MarsLaunch {
         }
     }
 
-
     /**
      * Displays any specified runtime properties. Initially just instruction count
      */
@@ -591,7 +579,6 @@ public class MarsLaunch {
             out.println("\n" + instructionCount);
         }
     }
-
 
     /**
      * Displays requested register or registers
@@ -659,7 +646,6 @@ public class MarsLaunch {
         }
     }
 
-
     /**
      * Formats int value for display: decimal, hex, ascii
      * @param value
@@ -680,7 +666,6 @@ public class MarsLaunch {
         return strValue;
     }
 
-
     /**
      * Displays requested memory range or ranges
      */
@@ -690,9 +675,10 @@ public class MarsLaunch {
         Iterator<String> memIter = memoryDisplayList.iterator();
         int addressStart = 0, addressEnd = 0;
         while (memIter.hasNext()) {
-            try { // This will succeed; error would have been caught during command arg parse
-                addressStart = Binary.stringToInt(memIter.next().toString());
-                addressEnd = Binary.stringToInt(memIter.next().toString());
+            try {
+                // This will succeed; error would have been caught during command arg parse
+                addressStart = Binary.stringToInt(memIter.next());
+                addressEnd = Binary.stringToInt(memIter.next());
             } catch (NumberFormatException nfe) {
             }
             int valuesDisplayed = 0;
@@ -706,7 +692,7 @@ public class MarsLaunch {
                     }
                 }
                 try {
-                    // Allow display of binary text segment (machine code) DPS 14-July-2008
+                    // Allow display of binary text segment (machine code)
                     if (Memory.inTextSegment(addr) || Memory.inKernelTextSegment(addr)) {
                         Integer iValue = Globals.memory.getRawWordOrNull(addr);
                         value = (iValue == null) ? 0 : iValue;
@@ -722,7 +708,6 @@ public class MarsLaunch {
             out.println();
         }
     }
-
 
     /**
      * If option to display MARS messages to standard err (System.err) is
@@ -740,7 +725,6 @@ public class MarsLaunch {
         }
     }
 
-
     /**
      * Decide whether copyright should be displayed, and display if so.
      * @param args
@@ -755,7 +739,6 @@ public class MarsLaunch {
         }
         out.println("MARS " + Globals.version + "  Copyright " + Globals.copyrightYears + " " + Globals.copyrightHolders + "\n");
     }
-
 
     /**
      * Display command line help text
