@@ -37,11 +37,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class MarsSplashScreen extends JWindow {
 
-    private int duration;
-
-    public MarsSplashScreen(int d) {
-        duration = d;
-    }
+    private static final int duration = 2000;     // 2000 ms
 
     /**
      * A simple little method to show a title screen in the center
