@@ -9,7 +9,7 @@ You can download the original version at the [official website][6].
 
 ## Purpose of this repository
 This repo has the goal of refactoring the code to meet the requirements of Java 8.
-I don't think I'll accept any pull request, this is something I did just for fun and not because I want to constantly update the program.
+I don't think I'll accept any pull request. This is something I did just for fun.
 
 ## Features included in this custom version
 - OS look & feel (not Java look & feel)
