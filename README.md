@@ -19,11 +19,15 @@ I don't think I'll accept any pull request. This is something I did just for fun
 - Different panels position
 - Smaller executable size
 
+## Features included in this custom *custom* version
+- Comment lines with CTRL+/
+- Delete lines with CTRL+d
+
 ## How to run / compile MARS
 - In order to **run** MARS v4.XX, you must **install [JRE 1.8][9] (Java 8)**
 - In order to **compile** MARS v4.XX, you must **install Java SE 8 (or later) SDK** and **Maven**
  
- Note: This project currently makes use of the [Intellij IDEA IDE][10]
+ Note: This project currently makes use of the [Eclipse IDE][10]
 
 ## License
 [MIT][2]. Check the [LICENSE][3] file. All the credits go to the original developers.
@@ -36,4 +40,4 @@ I don't think I'll accept any pull request. This is something I did just for fun
   [6]: http://courses.missouristate.edu/KenVollmar/MARS/download.htm
   [7]: http://courses.missouristate.edu/KenVollmar/MARS/Help/MarsHelpIntro.html
   [9]: https://www.java.com
-  [10]: https://www.jetbrains.com/idea/
+  [10]: https://www.eclipse.org/ide/
