@@ -37,8 +37,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class MarsSplashScreen extends JWindow {
 
-    private static final int duration = 2000;     // 2000 ms
+    private static final int duration = 500;     // 2000 ms
 
+    public MarsSplashScreen() {
+    	
+    }
+    
     /**
      * A simple little method to show a title screen in the center
      * of the screen for the amount of time given in the constructor
@@ -67,7 +71,7 @@ public class MarsSplashScreen extends JWindow {
         JLabel copyrt1 = new JLabel
                 ("<html><br><br>Version " + Globals.version + " Copyright (c) " + Globals.copyrightYears + "</html>", JLabel.CENTER);
         JLabel copyrt2 = new JLabel
-                ("<html><br><br>" + Globals.copyrightHolders + "</html>", JLabel.CENTER);
+                ("<html><br><br>" + Globals.copyrightHolders + "<br><br><br> Frankensteined by Sam Secondo" + "</html>", JLabel.CENTER);
         title.setFont(new Font("Sans-Serif", Font.BOLD, 16));
         title.setForeground(Color.black);
         copyrt1.setFont(new Font("Sans-Serif", Font.BOLD, 14));
