@@ -4,6 +4,7 @@ import java.awt.Insets;
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import mars.Globals;
 import mars.Settings;

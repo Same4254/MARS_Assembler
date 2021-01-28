@@ -15,6 +15,7 @@ import mars.Globals;
 import mars.venus.editors.jeditsyntax.tokenmarker.*;
 
 import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
 import javax.swing.text.*;
 import javax.swing.JComponent;
 import java.awt.event.MouseEvent;
@@ -397,7 +398,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
         Rectangle clipRect = gfx.getClipBounds();
 
 //        gfx.setColor(Globals.getSettings().getMainBackgroundColor());//getBackground());
-        gfx.setColor(getBackground());
+        gfx.setColor(UIManager.getLookAndFeel().getDefaults().getColor("TextArea.background"));//getBackground());
         gfx.fillRect(clipRect.x, clipRect.y, clipRect.width, clipRect.height);
 
         // We don't use yToLine() here because that method doesn't
@@ -611,11 +612,16 @@ public class TextAreaPainter extends JComponent implements TabExpander {
 
         if (selectionStart == selectionEnd) {
             if (lineHighlight) {
-                gfx.setColor(lineHighlightColor);
+            	//There isn't really a line highlight color in the look and feel. So take the intended forground and make it transparent
+            	//Surprisingly Effective
+            	Color c = UIManager.getLookAndFeel().getDefaults().getColor("TextArea.foreground");
+            	Color transparent = new Color(c.getRed(), c.getGreen(), c.getBlue(), 80);
+            	
+                gfx.setColor(transparent);//lineHighlightColor);
                 gfx.fillRect(0, y, getWidth(), height);
             }
         } else {
-            gfx.setColor(selectionColor);
+            gfx.setColor(UIManager.getLookAndFeel().getDefaults().getColor("TextArea.selectionBackground"));
 
             int selectionStartLine = textArea.getSelectionStartLine();
             int selectionEndLine = textArea.getSelectionEndLine();
@@ -682,7 +688,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
             y += fm.getLeading() + fm.getMaxDescent();
             int height = fm.getHeight();
 
-            gfx.setColor(caretColor);
+            gfx.setColor(UIManager.getLookAndFeel().getDefaults().getColor("TextArea.caretForeground"));
 
             if (textArea.isOverwriteEnabled()) {
                 gfx.fillRect(caretX, y + height - 1,

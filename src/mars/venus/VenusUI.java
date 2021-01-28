@@ -256,16 +256,16 @@ public class VenusUI extends JFrame {
         initMainPane();
         initMessagesPane();
 
-        JSplitPane horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mainPane, registersPane);
+        JSplitPane horizonSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, mainPane, messagesPane);
         horizonSplitter.setOneTouchExpandable(true);
 //        horizonSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
 
-        JSplitPane verticalSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, horizonSplitter, messagesPane);
+        JSplitPane verticalSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, horizonSplitter, registersPane);
         verticalSplitter.setOneTouchExpandable(true);
 //        verticalSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
 
         registersPane.setMinimumSize(new Dimension());
-        mainPane.setPreferredSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8), 0));
+        mainPane.setPreferredSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.7)));
         messagesPane.setMinimumSize(new Dimension());
 
         return verticalSplitter;
