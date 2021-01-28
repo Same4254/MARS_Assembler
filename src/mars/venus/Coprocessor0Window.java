@@ -79,7 +79,8 @@ public class Coprocessor0Window extends JPanel implements Observer {
         
         table.setOpaque(true);
         table.setFillsViewportHeight(true);
-        table.setBackground(settings.getMainBackgroundColor());
+        
+//        table.setBackground(settings.getMainBackgroundColor());
         
         this.setLayout(new BorderLayout());  // table display will occupy entire width if widened
         this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));

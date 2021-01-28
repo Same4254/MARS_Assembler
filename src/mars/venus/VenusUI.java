@@ -174,8 +174,6 @@ public class VenusUI extends JFrame {
         // I want to keep it large, with enough room for user to get handles
         //this.setSize((int)(screenWidth*.8),(int)(screenHeight*.8));
 
-//        Globals.initialize(true);
-
         URL im = this.getClass().getResource(Globals.imagesPath + "favicon.png");
         if (im == null) {
             System.out.println("Internal Error: images folder or file not found");
@@ -206,10 +204,10 @@ public class VenusUI extends JFrame {
 
         toolbar = this.setUpToolBar();
         
-        toolbar.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
+//        toolbar.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
 
         JPanel jp = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        jp.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
+//        jp.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
         
         jp.add(toolbar);
         jp.add(RunSpeedPanel.getInstance());
@@ -260,11 +258,11 @@ public class VenusUI extends JFrame {
 
         JSplitPane horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mainPane, registersPane);
         horizonSplitter.setOneTouchExpandable(true);
-        horizonSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
+//        horizonSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
 
         JSplitPane verticalSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, horizonSplitter, messagesPane);
         verticalSplitter.setOneTouchExpandable(true);
-        verticalSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
+//        verticalSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
 
         registersPane.setMinimumSize(new Dimension());
         mainPane.setPreferredSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8), 0));

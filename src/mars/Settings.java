@@ -1,13 +1,25 @@
 package mars;
 
-import mars.*;
-import mars.util.*;
-import mars.venus.editors.jeditsyntax.*;
-
-import java.util.*;
-import java.util.prefs.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.StringTokenizer;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
+import javax.swing.LookAndFeel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
+
+import mars.util.Binary;
+import mars.util.EditorFont;
+import mars.venus.VenusUI;
+import mars.venus.editors.jeditsyntax.SyntaxStyle;
+import mars.venus.editors.jeditsyntax.SyntaxUtilities;
 
 /*
 Copyright (c) 2003-2013,  Pete Sanderson and Kenneth Vollmar
@@ -56,6 +68,33 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
 public class Settings extends Observable {
+	public static final HashMap<String, FlatLaf> nameToLookAndFeel = new HashMap<>(); 
+	
+	public static FlatLaf currentLookAndFeel;
+	
+	static {
+		nameToLookAndFeel.put("Dark", new FlatDarkLaf());
+	}
+	
+	public static void setLookAndFeel(String name) {
+		LookAndFeel laf = nameToLookAndFeel.get(name);
+		if(laf == null)
+			return;
+		
+		System.out.println("Here");
+		
+		try {
+            UIManager.setLookAndFeel(laf);
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+		
+		VenusUI ui = Globals.getGui();
+		
+		SwingUtilities.updateComponentTreeUI(ui);
+		SwingUtilities.updateComponentTreeUI(ui.getEditor().getEditTabbedPane().getFileOpener().getFileChooser());
+	}
+	
     /* Properties file used to hold default settings. */
     private static String settingsFile = "Settings";
     /////////////////////////////  PROPERTY ARRAY INDEXES /////////////////////////////
@@ -927,17 +966,17 @@ public class Settings extends Observable {
     }
 
     //TODO not this
-    public Color getMainBackgroundColor() {
-    	return new Color(25,29,31);
-    }
-    
-    public Color getDarkOffSetMainBackgroundColor() {
-    	return new Color(28,31,34);
-    }
-    
-    public Color getLightOffSetMainBackgroundColor() {
-    	return new Color(44,49,53);
-    }
+//    public Color getMainBackgroundColor() {
+//    	return new Color(25,29,31);
+//    }
+//    
+//    public Color getDarkOffSetMainBackgroundColor() {
+//    	return new Color(28,31,34);
+//    }
+//    
+//    public Color getLightOffSetMainBackgroundColor() {
+//    	return new Color(44,49,53);
+//    }
 
     ////////////////////////////////////////////////////////////////////////
     //  Setting Setters

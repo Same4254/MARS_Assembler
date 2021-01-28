@@ -81,8 +81,12 @@ public class Editor {
     public void setEditTabbedPane(EditTabbedPane editTabbedPane) {
         this.editTabbedPane = editTabbedPane;
     }
+    
+    public EditTabbedPane getEditTabbedPane() {
+		return editTabbedPane;
+	}
 
-    /**
+	/**
      * Get name of current directory for Open operation.
      *
      * @return String containing directory pathname.  Returns null if there is

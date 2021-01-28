@@ -101,7 +101,7 @@ public class RunSpeedPanel extends JPanel {
                 ((int) speedTable[SPEED_INDEX_INTERACTION_LIMIT]) + " inst/sec or less, tables updated " +
                 "after each instruction.");
 
-        setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
+//        setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
     }
 
     /**

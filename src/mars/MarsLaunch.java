@@ -11,6 +11,8 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+
 /*
 Copyright (c) 2003-2012,  Pete Sanderson and Kenneth Vollmar
 
@@ -215,22 +217,6 @@ public class MarsLaunch {
      * launching the GUI-fronted integrated development environment.
      */
     private void launchIDE() {
-
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            // handle exception
-        }
-        
-        Globals.initialize(true);
-    	
-    	UIManager.getLookAndFeelDefaults().put("TabbedPane.contentBorderInsets", new Insets(0,0,0,0));
-        UIManager.getLookAndFeelDefaults().put("TabbedPane.tabAreaInsets", new Insets(0,0,0,0));
-        
-        UIManager.getLookAndFeelDefaults().put("TabbedPane.tabsOverlapBorder", true);
-        
-        UIManager.getLookAndFeelDefaults().put("TabbedPane.selected", Color.red);
-        
         EditorFont.registerCustomFonts();
 
         // TODO: make "Fira Code" the default font but don't set it every time you start the app

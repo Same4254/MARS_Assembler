@@ -396,7 +396,8 @@ public class TextAreaPainter extends JComponent implements TabExpander {
 
         Rectangle clipRect = gfx.getClipBounds();
 
-        gfx.setColor(Globals.getSettings().getMainBackgroundColor());//getBackground());
+//        gfx.setColor(Globals.getSettings().getMainBackgroundColor());//getBackground());
+        gfx.setColor(getBackground());
         gfx.fillRect(clipRect.x, clipRect.y, clipRect.width, clipRect.height);
 
         // We don't use yToLine() here because that method doesn't

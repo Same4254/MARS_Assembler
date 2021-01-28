@@ -608,7 +608,8 @@ public class EditPane extends JPanel implements Observer {
      */
     public void update(Observable fontChanger, Object arg) {
         sourceCode.setFont(Globals.getSettings().getEditorFont());
-        sourceCode.setBackground(Globals.getSettings().getMainBackgroundColor());
+        
+//        sourceCode.setBackground(Globals.getSettings().getMainBackgroundColor());
         
         sourceCode.setLineHighlightEnabled(Globals.getSettings().getBooleanSetting(Settings.EDITOR_CURRENT_LINE_HIGHLIGHTING));
         sourceCode.setCaretBlinkRate(Globals.getSettings().getCaretBlinkRate());

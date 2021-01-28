@@ -71,14 +71,17 @@ public class RegistersWindow extends JPanel implements Observer {
         table.getColumnModel().getColumn(NUMBER_COLUMN).setPreferredWidth(25);
         table.getColumnModel().getColumn(VALUE_COLUMN).setPreferredWidth(60);
         // Display register values (String-ified) right-justified in mono font
+        
         table.getColumnModel().getColumn(NAME_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.LEFT));
         table.getColumnModel().getColumn(NUMBER_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.RIGHT));
         table.getColumnModel().getColumn(VALUE_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.RIGHT));
-//        table.setPreferredScrollableViewportSize(new Dimension(200, 700));
         
-        table.setOpaque(true);
-        table.setFillsViewportHeight(true);
-        table.setBackground(settings.getMainBackgroundColor());
+        table.setPreferredScrollableViewportSize(new Dimension(200, 700));
+        
+//        table.setOpaque(true);
+//        table.setFillsViewportHeight(true);
+        
+//        table.setBackground(settings.getMainBackgroundColor());
         
         this.setLayout(new BorderLayout()); // table display will occupy entire width if widened
         this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
@@ -381,6 +384,7 @@ public class RegistersWindow extends JPanel implements Observer {
     private class MyTippedJTable extends JTable {
         MyTippedJTable(RegTableModel m) {
             super(m);
+            
             this.setRowSelectionAllowed(true); // highlights background color of entire row
             this.setSelectionBackground(Color.GREEN);
         }

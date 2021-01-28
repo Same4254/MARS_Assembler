@@ -79,7 +79,8 @@ public class Coprocessor1Window extends JPanel implements ActionListener, Observ
         
         table.setOpaque(true);
         table.setFillsViewportHeight(true);
-        table.setBackground(settings.getMainBackgroundColor());
+        
+//        table.setBackground(settings.getMainBackgroundColor());
         
         this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
         // Display condition flags in panel below the registers

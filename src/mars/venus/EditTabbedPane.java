@@ -79,7 +79,7 @@ public class EditTabbedPane extends JTabbedPane {
         this.mainPane = mainPane;
         this.editor.setEditTabbedPane(this);
         
-        this.setUI(new TabbedPaneUIBackground(Globals.getSettings().getMainBackgroundColor()));
+//        this.setUI(new TabbedPaneUIBackground(Globals.getSettings().getMainBackgroundColor()));
         
         this.addChangeListener(
             new ChangeListener() {
@@ -130,8 +130,12 @@ public class EditTabbedPane extends JTabbedPane {
             super.paint(g, c);
         }
     }
+    
+    public FileOpener getFileOpener() {
+		return fileOpener;
+	}
 
-    /**
+	/**
      * The current EditPane representing a file.  Returns null if
      * no files open.
      *
@@ -572,7 +576,7 @@ public class EditTabbedPane extends JTabbedPane {
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
     }
 
-    private class FileOpener {
+    public class FileOpener {
         private File mostRecentlyOpenedFile;
         private JFileChooser fileChooser;
         private int fileFilterCount;
@@ -594,8 +598,12 @@ public class EditTabbedPane extends JTabbedPane {
             fileFilterCount = 0; // this will trigger fileChooser file filter load in next line
             setChoosableFileFilters();
         }
+        
+        public JFileChooser getFileChooser() {
+			return fileChooser;
+		}
 
-        /*
+		/*
          * Launch a file chooser for name of file to open.  Return true if file opened, false otherwise
          */
         private boolean openFile() {
