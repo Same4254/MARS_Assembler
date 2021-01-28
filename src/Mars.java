@@ -1,3 +1,10 @@
+import java.awt.Color;
+import java.awt.Insets;
+
+import javax.swing.UIManager;
+
+import mars.Globals;
+
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
 

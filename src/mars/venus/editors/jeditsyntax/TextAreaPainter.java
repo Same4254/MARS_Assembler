@@ -11,6 +11,7 @@
 
 package mars.venus.editors.jeditsyntax;
 
+import mars.Globals;
 import mars.venus.editors.jeditsyntax.tokenmarker.*;
 
 import javax.swing.ToolTipManager;
@@ -395,7 +396,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
 
         Rectangle clipRect = gfx.getClipBounds();
 
-        gfx.setColor(getBackground());
+        gfx.setColor(Globals.getSettings().getMainBackgroundColor());//getBackground());
         gfx.fillRect(clipRect.x, clipRect.y, clipRect.width, clipRect.height);
 
         // We don't use yToLine() here because that method doesn't

@@ -69,6 +69,10 @@ public class MessagesPane extends JTabbedPane {
         this.setMinimumSize(new Dimension(0, 0));
         assemble = new JTextArea();
         run = new JTextArea();
+        
+        assemble.setBackground(Globals.getSettings().getMainBackgroundColor());
+        run.setBackground(Globals.getSettings().getMainBackgroundColor());
+        
         assemble.setEditable(false);
         run.setEditable(false);
         // Set both text areas to mono font.  For assemble
@@ -170,6 +174,9 @@ public class MessagesPane extends JTabbedPane {
         this.addTab("Run I/O", runTab);
         this.setToolTipTextAt(0, "Messages produced by Run menu. Click on assemble error message to select erroneous line");
         this.setToolTipTextAt(1, "Simulated MIPS console input and output");
+        
+        assembleTab.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
+        runTab.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
     }
 
     // Center given button in a box, centered vertically and 6 pixels on left and right

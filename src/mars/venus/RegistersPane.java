@@ -54,9 +54,15 @@ public class RegistersPane extends JTabbedPane {
         regsTab = regs;
         cop1Tab = cop1;
         cop0Tab = cop0;
+        
         regsTab.setVisible(true);
         cop1Tab.setVisible(true);
         cop0Tab.setVisible(true);
+        
+//        regsTab.setFocusable(false);
+//        cop1Tab.setFocusable(false);
+//        cop0Tab.setFocusable(false);
+        
         this.addTab("Registers", regsTab);
         this.addTab("Coproc 1", cop1Tab);
         this.addTab("Coproc 0", cop0Tab);

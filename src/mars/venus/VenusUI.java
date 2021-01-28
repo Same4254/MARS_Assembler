@@ -1,17 +1,77 @@
 package mars.venus;
 
-import mars.*;
-import mars.venus.actions.edit.*;
-import mars.venus.actions.file.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.net.URL;
+
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+
+import mars.Globals;
+import mars.Settings;
+import mars.venus.actions.edit.EditCopyAction;
+import mars.venus.actions.edit.EditCutAction;
+import mars.venus.actions.edit.EditFindReplaceAction;
+import mars.venus.actions.edit.EditPasteAction;
+import mars.venus.actions.edit.EditRedoAction;
+import mars.venus.actions.edit.EditSelectAllAction;
+import mars.venus.actions.edit.EditUndoAction;
+import mars.venus.actions.file.FileCloseAction;
+import mars.venus.actions.file.FileCloseAllAction;
+import mars.venus.actions.file.FileDumpMemoryAction;
+import mars.venus.actions.file.FileExitAction;
+import mars.venus.actions.file.FileNewAction;
+import mars.venus.actions.file.FileOpenAction;
+import mars.venus.actions.file.FilePrintAction;
+import mars.venus.actions.file.FileSaveAction;
+import mars.venus.actions.file.FileSaveAllAction;
+import mars.venus.actions.file.FileSaveAsAction;
 import mars.venus.actions.help.HelpAboutAction;
 import mars.venus.actions.help.HelpHelpAction;
-import mars.venus.actions.run.*;
-import mars.venus.actions.settings.*;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.net.*;
+import mars.venus.actions.run.RunAssembleAction;
+import mars.venus.actions.run.RunBackstepAction;
+import mars.venus.actions.run.RunClearBreakpointsAction;
+import mars.venus.actions.run.RunGoAction;
+import mars.venus.actions.run.RunPauseAction;
+import mars.venus.actions.run.RunResetAction;
+import mars.venus.actions.run.RunStepAction;
+import mars.venus.actions.run.RunStopAction;
+import mars.venus.actions.run.RunToggleBreakpointsAction;
+import mars.venus.actions.settings.SettingsAddressDisplayBaseAction;
+import mars.venus.actions.settings.SettingsAssembleAllAction;
+import mars.venus.actions.settings.SettingsAssembleOnOpenAction;
+import mars.venus.actions.settings.SettingsDelayedBranchingAction;
+import mars.venus.actions.settings.SettingsEditorAction;
+import mars.venus.actions.settings.SettingsExceptionHandlerAction;
+import mars.venus.actions.settings.SettingsExtendedAction;
+import mars.venus.actions.settings.SettingsHighlightingAction;
+import mars.venus.actions.settings.SettingsLabelAction;
+import mars.venus.actions.settings.SettingsMemoryConfigurationAction;
+import mars.venus.actions.settings.SettingsPopupInputAction;
+import mars.venus.actions.settings.SettingsProgramArgumentsAction;
+import mars.venus.actions.settings.SettingsSelfModifyingCodeAction;
+import mars.venus.actions.settings.SettingsStartAtMainAction;
+import mars.venus.actions.settings.SettingsValueDisplayBaseAction;
+import mars.venus.actions.settings.SettingsWarningsAreErrorsAction;
 
 /*
 Copyright (c) 2003-2013,  Pete Sanderson and Kenneth Vollmar
@@ -109,14 +169,13 @@ public class VenusUI extends JFrame {
         mainUI = this;
         Globals.setGui(this);
         this.editor = new Editor(this);
-
+        
         // the "restore" size (window control button that toggles with maximize)
         // I want to keep it large, with enough room for user to get handles
         //this.setSize((int)(screenWidth*.8),(int)(screenHeight*.8));
 
-        Globals.initialize(true);
+//        Globals.initialize(true);
 
-        //  image courtesy of NASA/JPL.
         URL im = this.getClass().getResource(Globals.imagesPath + "favicon.png");
         if (im == null) {
             System.out.println("Internal Error: images folder or file not found");
@@ -146,8 +205,12 @@ public class VenusUI extends JFrame {
         this.setJMenuBar(menu);
 
         toolbar = this.setUpToolBar();
+        
+        toolbar.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
 
         JPanel jp = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        jp.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
+        
         jp.add(toolbar);
         jp.add(RunSpeedPanel.getInstance());
 
@@ -156,7 +219,7 @@ public class VenusUI extends JFrame {
         center.add(workArea);
 
         this.getContentPane().add(center);
-
+        
         FileStatus.reset();
         // The following has side effect of establishing menu state
         FileStatus.set(FileStatus.NO_FILE);
@@ -195,14 +258,16 @@ public class VenusUI extends JFrame {
         initMainPane();
         initMessagesPane();
 
-        JSplitPane horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, registersPane, mainPane);
+        JSplitPane horizonSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mainPane, registersPane);
         horizonSplitter.setOneTouchExpandable(true);
+        horizonSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
 
         JSplitPane verticalSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, horizonSplitter, messagesPane);
         verticalSplitter.setOneTouchExpandable(true);
+        verticalSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
 
         registersPane.setMinimumSize(new Dimension());
-        mainPane.setMinimumSize(new Dimension());
+        mainPane.setPreferredSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8), 0));
         messagesPane.setMinimumSize(new Dimension());
 
         return verticalSplitter;

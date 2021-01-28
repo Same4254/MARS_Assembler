@@ -926,6 +926,18 @@ public class Settings extends Observable {
         return getColorValueByPosition(position, defaultColorSettingsValues);
     }
 
+    //TODO not this
+    public Color getMainBackgroundColor() {
+    	return new Color(25,29,31);
+    }
+    
+    public Color getDarkOffSetMainBackgroundColor() {
+    	return new Color(28,31,34);
+    }
+    
+    public Color getLightOffSetMainBackgroundColor() {
+    	return new Color(44,49,53);
+    }
 
     ////////////////////////////////////////////////////////////////////////
     //  Setting Setters

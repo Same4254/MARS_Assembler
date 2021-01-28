@@ -56,7 +56,7 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
         this.getDocument().addUndoableEditListener(undoableEditListener);
         this.setFont(Globals.getSettings().getEditorFont());
         this.setTokenMarker(new MIPSTokenMarker());
-
+        
         addCaretListener(this);
     }
 
@@ -68,6 +68,10 @@ public class JEditBasedTextArea extends JEditTextArea implements MARSTextEditing
 
     public Font getFont() {
         return getPainter().getFont();
+    }
+    
+    public void setBackground(Color c) {
+    	getPainter().setBackground(c);
     }
 
 

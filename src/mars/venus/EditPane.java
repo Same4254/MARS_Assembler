@@ -77,7 +77,7 @@ public class EditPane extends JPanel implements Observer {
         Globals.getSettings().addObserver(this);
         this.fileStatus = new FileStatus();
         lineNumbers = new JLabel();
-
+        
         if (Globals.getSettings().getBooleanSetting(Settings.GENERIC_TEXT_EDITOR)) {
             this.sourceCode = new GenericTextArea(this, lineNumbers);
         } else {
@@ -608,6 +608,8 @@ public class EditPane extends JPanel implements Observer {
      */
     public void update(Observable fontChanger, Object arg) {
         sourceCode.setFont(Globals.getSettings().getEditorFont());
+        sourceCode.setBackground(Globals.getSettings().getMainBackgroundColor());
+        
         sourceCode.setLineHighlightEnabled(Globals.getSettings().getBooleanSetting(Settings.EDITOR_CURRENT_LINE_HIGHLIGHTING));
         sourceCode.setCaretBlinkRate(Globals.getSettings().getCaretBlinkRate());
         sourceCode.setTabSize(Globals.getSettings().getEditorTabSize());

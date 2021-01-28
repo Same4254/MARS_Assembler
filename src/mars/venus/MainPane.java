@@ -1,11 +1,20 @@
 package mars.venus;
 
-import mars.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Insets;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.plaf.BorderUIResource;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
+
+import mars.Globals;
 
 	
 	/*
@@ -51,12 +60,13 @@ public class MainPane extends JTabbedPane {
 
     public MainPane(VenusUI appFrame, Editor editor, RegistersWindow regs,
                     Coprocessor1Window cop1Regs, Coprocessor0Window cop0Regs) {
+    	
         this.mainUI = appFrame;
         this.setTabPlacement(JTabbedPane.TOP);
         if (this.getUI() instanceof BasicTabbedPaneUI) {
             BasicTabbedPaneUI ui = (BasicTabbedPaneUI) this.getUI();
         }
-
+        
         editTabbedPane = new EditTabbedPane(appFrame, editor, this);
         executeTab = new ExecutePane(appFrame, regs, cop1Regs, cop0Regs);
 
@@ -67,7 +77,7 @@ public class MainPane extends JTabbedPane {
 
         this.addTab(editTabTitle, null, editTabbedPane);
         this.addTab(executeTabTitle, null, executeTab);
-
+        
         this.setToolTipTextAt(0, "Text editor for composing MIPS programs.");
         this.setToolTipTextAt(1, "View and control assembly language program execution.  Enabled upon successful assemble.");
 

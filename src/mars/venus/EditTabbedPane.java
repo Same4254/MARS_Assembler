@@ -1,16 +1,34 @@
 package mars.venus;
 
-import mars.mips.hardware.*;
-import mars.util.*;
-import mars.*;
-
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.*;
-import java.util.*;
-import java.io.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.beans.PropertyChangeListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
+
+import mars.Globals;
+import mars.MipsProgram;
+import mars.ProcessingException;
+import mars.Settings;
+import mars.mips.hardware.RegisterFile;
+import mars.util.FilenameFinder;
 		
 	/*
 Copyright (c) 2003-2010,  Pete Sanderson and Kenneth Vollmar
@@ -54,30 +72,63 @@ public class EditTabbedPane extends JTabbedPane {
     private Editor editor;
     private FileOpener fileOpener;
 
-
     public EditTabbedPane(VenusUI appFrame, Editor editor, MainPane mainPane) {
         this.mainUI = appFrame;
         this.editor = editor;
         this.fileOpener = new FileOpener(editor);
         this.mainPane = mainPane;
         this.editor.setEditTabbedPane(this);
+        
+        this.setUI(new TabbedPaneUIBackground(Globals.getSettings().getMainBackgroundColor()));
+        
         this.addChangeListener(
-                new ChangeListener() {
-                    public void stateChanged(ChangeEvent e) {
-                        EditPane editPane = (EditPane) getSelectedComponent();
-                        if (editPane != null) {
-                            // New IF statement to permit free traversal of edit panes w/o invalidating
-                            // assembly if assemble-all is selected.  DPS 9-Aug-2011
-                            if (Globals.getSettings().getBooleanSetting(mars.Settings.ASSEMBLE_ALL_ENABLED)) {
-                                EditTabbedPane.this.updateTitles(editPane);
-                            } else {
-                                EditTabbedPane.this.updateTitlesAndMenuState(editPane);
-                                EditTabbedPane.this.mainPane.getExecutePane().clearPane();
-                            }
-                            editPane.tellEditingComponentToRequestFocusInWindow();
+            new ChangeListener() {
+                public void stateChanged(ChangeEvent e) {
+                    EditPane editPane = (EditPane) getSelectedComponent();
+                    if (editPane != null) {
+                        // New IF statement to permit free traversal of edit panes w/o invalidating
+                        // assembly if assemble-all is selected.  DPS 9-Aug-2011
+                        if (Globals.getSettings().getBooleanSetting(mars.Settings.ASSEMBLE_ALL_ENABLED)) {
+                            EditTabbedPane.this.updateTitles(editPane);
+                        } else {
+                            EditTabbedPane.this.updateTitlesAndMenuState(editPane);
+                            EditTabbedPane.this.mainPane.getExecutePane().clearPane();
                         }
+                        editPane.tellEditingComponentToRequestFocusInWindow();
                     }
-                });
+                }
+            });
+    }
+    
+    private class TabbedPaneUIBackground extends BasicTabbedPaneUI {
+    	private final Insets borderInsets = new Insets(0, 0, 0, 0);
+        private Color backgroundColor;
+
+        public TabbedPaneUIBackground(Color backgroundColor) {
+            super();
+            this.backgroundColor = backgroundColor;
+        }
+        
+        @Override
+        protected void paintContentBorder(Graphics g, int tabPlacement, int selectedIndex) {
+        }
+        @Override
+        protected Insets getContentBorderInsets(int tabPlacement) {
+            return borderInsets;
+        }
+
+        public void setBackgroundColor(Color backgroundColor) {
+            this.backgroundColor = backgroundColor;
+        }
+
+        @Override
+        public void paint(Graphics g, JComponent c) {
+            Rectangle bounds = tabPane.getBounds();
+            g.setColor(this.backgroundColor);
+            g.fillRect(0, 0, bounds.width, bounds.height);
+
+            super.paint(g, c);
+        }
     }
 
     /**

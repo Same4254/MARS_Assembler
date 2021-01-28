@@ -221,7 +221,16 @@ public class MarsLaunch {
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             // handle exception
         }
-
+        
+        Globals.initialize(true);
+    	
+    	UIManager.getLookAndFeelDefaults().put("TabbedPane.contentBorderInsets", new Insets(0,0,0,0));
+        UIManager.getLookAndFeelDefaults().put("TabbedPane.tabAreaInsets", new Insets(0,0,0,0));
+        
+        UIManager.getLookAndFeelDefaults().put("TabbedPane.tabsOverlapBorder", true);
+        
+        UIManager.getLookAndFeelDefaults().put("TabbedPane.selected", Color.red);
+        
         EditorFont.registerCustomFonts();
 
         // TODO: make "Fira Code" the default font but don't set it every time you start the app
