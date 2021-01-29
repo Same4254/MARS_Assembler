@@ -3,6 +3,10 @@
 
 MARS has been jointly developed by [Pete Sanderson][4] (programming) and [Ken Vollmar][5] (details and paperwork).
 
+## Credit
+ - Thank you to the [original creators][10] for making this open source! The original release can be found [here][6]
+ - Thank you to Brankale for the [code refactor][9]! 
+
 ## The Definition of Beauty
 
 ![Flat Dark](https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/DefaultDark.png?raw=true)
@@ -19,8 +23,9 @@ MARS has been jointly developed by [Pete Sanderson][4] (programming) and [Ken Vo
  Head over to [Releases][8].
 
 ## Purpose of this repository
-This repo has the goal of refactoring the code to meet the requirements of Java 8.
-I don't think I'll accept any pull request. This is something I did just for fun.
+- I am taking a computer architecture course at my university that uses this tool. I did not want to stare at the default Java look and feel...
+- This adds themes and other features I wanted in the IDE.
+- I'll accept pull requests if anyone wants to contribute!!
 
 ## Features included in this custom version
 - OS look & feel (not Java look & feel)
@@ -41,6 +46,9 @@ I don't think I'll accept any pull request. This is something I did just for fun
  - Go to the [Releases][8], and download the latest release jar file.
  - Run the jar file
 
+## How to edit/compile MARS:
+ - Currently, this repo is set up as an eclipse maven project. So it would be easiest to simply pull the project down in that IDE to make changes. Otherwise, the run button does the job nicely ;)
+
 ## License
 [MIT][2]. Check the [LICENSE][3] file. All the credits go to the original developers.
 
@@ -52,3 +60,5 @@ I don't think I'll accept any pull request. This is something I did just for fun
   [6]: http://courses.missouristate.edu/KenVollmar/MARS/download.htm
   [7]: http://courses.missouristate.edu/KenVollmar/MARS/Help/MarsHelpIntro.html
   [8]: https://github.com/Same4254/MARS_Assembler/releases
+  [9]: https://github.com/Brankale/MARS_Assembler
+  [10]: https://github.com/thomasrussellmurphy/MARS_Assembler
