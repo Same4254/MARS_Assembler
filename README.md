@@ -3,9 +3,20 @@
 
 MARS has been jointly developed by [Pete Sanderson][4] (programming) and [Ken Vollmar][5] (details and paperwork).
 
+## The Definition of Beauty
+
+![Flat Dark][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/DefaultDark.png]
+
+![Flat Dark with text][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/DarkWithText.png]
+
+![Dracula][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/Dracula.png]
+
+![Flat Light][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/FlatLight.png]
+
+![Flat Light with text][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/LightWithText.png]
+
 ## Download
-There's no download link yet, you must compile the project by yourself.
-You can download the original version at the [official website][6].
+ Head over to [Releases][8].
 
 ## Purpose of this repository
 This repo has the goal of refactoring the code to meet the requirements of Java 8.
