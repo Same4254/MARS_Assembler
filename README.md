@@ -6,7 +6,7 @@ MARS has been jointly developed by [Pete Sanderson][4] (programming) and [Ken Vo
 ## Credit
  - Thank you to the [original creators][10] for making this open source! The original release can be found [here][6]
  - Thank you to Brankale for the [code refactor][9]! 
- - Thank you to the poeple that made [FlatLaf][https://github.com/JFormDesigner/FlatLaf]! The high quality themes you see in this project were entirely by this group. I cannot express how high quality these Look And Feels are, and just how easy it is to use. **Absolutely brilliant!!!!**
+ - Thank you to the poeple that made [FlatLaf][11]! The high quality themes you see in this project were entirely by this group. I cannot express how high quality these Look And Feels are, and just how easy it is to use. **Absolutely brilliant!!!!**
 
 ## The Definition of Beauty
 
@@ -63,3 +63,4 @@ MARS has been jointly developed by [Pete Sanderson][4] (programming) and [Ken Vo
   [8]: https://github.com/Same4254/MARS_Assembler/releases
   [9]: https://github.com/Brankale/MARS_Assembler
   [10]: https://github.com/thomasrussellmurphy/MARS_Assembler
+  [11]: https://github.com/JFormDesigner/FlatLaf
