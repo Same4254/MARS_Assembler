@@ -23,6 +23,7 @@ I don't think I'll accept any pull request. This is something I did just for fun
 - Comment lines with CTRL+/
 - Delete lines with CTRL+d
 - To change the theme, go to "Settings > Editor...". In this menu you will see a new panel on the right, double click any of the theme names to set it.
+- The Default syntax coloring is, generally, good for light mode themes. In the syntax coloring panel, there is a button to set the syntax coloring to some dark mode colors. These are some colors I thought worked. You can change them as you please.
 
 ## How to run MARS
  - Download any version of Java, later or equal to, Java 8
