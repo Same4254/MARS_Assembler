@@ -5,15 +5,15 @@ MARS has been jointly developed by [Pete Sanderson][4] (programming) and [Ken Vo
 
 ## The Definition of Beauty
 
-![Flat Dark][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/DefaultDark.png]
+![Flat Dark](https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/DefaultDark.png?raw=true)
 
-![Flat Dark with text][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/DarkWithText.png]
+![Flat Dark with text](https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/DarkWithText.png?raw=true)
 
-![Dracula][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/Dracula.png]
+![Dracula](https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/Dracula.png?raw=true)
 
-![Flat Light][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/FlatLight.png]
+![Flat Light](https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/FlatLight.png?raw=true)
 
-![Flat Light with text][https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/LightWithText.png]
+![Flat Light with text](https://github.com/Same4254/MARS_Assembler/blob/master/ExampleImages/LightWithText.png?raw=true)
 
 ## Download
  Head over to [Releases][8].
