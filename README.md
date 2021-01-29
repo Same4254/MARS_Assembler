@@ -22,12 +22,12 @@ I don't think I'll accept any pull request. This is something I did just for fun
 ## Features included in this custom *custom* version
 - Comment lines with CTRL+/
 - Delete lines with CTRL+d
+- To change the theme, go to "Settings > Editor...". In this menu you will see a new panel on the right, double click any of the theme names to set it.
 
-## How to run / compile MARS
-- In order to **run** MARS v4.XX, you must **install [JRE 1.8][9] (Java 8)**
-- In order to **compile** MARS v4.XX, you must **install Java SE 8 (or later) SDK** and **Maven**
- 
- Note: This project currently makes use of the [Eclipse IDE][10]
+## How to run MARS
+ - Download any version of Java, later or equal to, Java 8
+ - Go to the [Releases][8], and download the latest release jar file.
+ - Run the jar file
 
 ## License
 [MIT][2]. Check the [LICENSE][3] file. All the credits go to the original developers.
@@ -39,5 +39,4 @@ I don't think I'll accept any pull request. This is something I did just for fun
   [5]: http://courses.missouristate.edu/KenVollmar/
   [6]: http://courses.missouristate.edu/KenVollmar/MARS/download.htm
   [7]: http://courses.missouristate.edu/KenVollmar/MARS/Help/MarsHelpIntro.html
-  [9]: https://www.java.com
-  [10]: https://www.eclipse.org/ide/
+  [8]: https://github.com/Same4254/MARS_Assembler/releases
