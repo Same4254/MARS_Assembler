@@ -170,6 +170,20 @@ public class VenusUI extends JFrame {
         Globals.setGui(this);
         this.editor = new Editor(this);
         
+        double screenWidth  = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+        double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+        // basically give up some screen space if running at 800 x 600
+        double messageWidthPct = (screenWidth<1000.0)? 0.67 : 0.73;
+        double messageHeightPct = (screenWidth<1000.0)? 0.12 : 0.10;
+        double mainWidthPct = (screenWidth<1000.0)? 0.67 : 0.78;
+        double mainHeightPct = (screenWidth<1000.0)? 0.60 : 0.70;
+        double registersWidthPct = (screenWidth<1000.0)? 0.18 : 0.15;
+        double registersHeightPct = (screenWidth<1000.0)? 0.72 : 0.80;
+     				
+        Dimension messagesPanePreferredSize = new Dimension((int)(screenWidth*messageWidthPct),(int)(screenHeight*messageHeightPct)); 
+        Dimension mainPanePreferredSize = new Dimension((int)(screenWidth*mainWidthPct),(int)(screenHeight*mainHeightPct));
+        Dimension registersPanePreferredSize = new Dimension((int)(screenWidth*registersWidthPct),(int)(screenHeight*registersHeightPct));
+        
         // the "restore" size (window control button that toggles with maximize)
         // I want to keep it large, with enough room for user to get handles
         //this.setSize((int)(screenWidth*.8),(int)(screenHeight*.8));
@@ -195,8 +209,26 @@ public class VenusUI extends JFrame {
         // roughly in bottom-up order; some are created in component constructors and thus are
         // not visible here.
 
-        JSplitPane workArea = getWorkArea();
+        registersTab = new RegistersWindow();
+        coprocessor1Tab = new Coprocessor1Window();
+        coprocessor0Tab = new Coprocessor0Window();
+        registersPane = new RegistersPane(mainUI, registersTab, coprocessor1Tab, coprocessor0Tab);
+        registersPane.setPreferredSize(registersPanePreferredSize);
+        
+        mainPane = new MainPane(mainUI, editor, registersTab, coprocessor1Tab, coprocessor0Tab);
+        mainPane.setPreferredSize(mainPanePreferredSize);
+        
+        messagesPane = new MessagesPane();
+        messagesPane.setPreferredSize(messagesPanePreferredSize);
+        
+        JSplitPane horizonSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, mainPane, messagesPane);
+        horizonSplitter.setOneTouchExpandable(true);
+        horizonSplitter.resetToPreferredSizes();
 
+        JSplitPane verticalSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, horizonSplitter, registersPane);
+        verticalSplitter.setOneTouchExpandable(true);
+        verticalSplitter.resetToPreferredSizes();
+        
         // due to dependencies, do not set up menu/toolbar until now.
         this.createActionObjects();
         menu = this.setUpMenuBar();
@@ -214,8 +246,8 @@ public class VenusUI extends JFrame {
 
         JPanel center = new JPanel(new BorderLayout());
         center.add(jp, BorderLayout.NORTH);
-        center.add(workArea);
-
+        center.add(verticalSplitter);
+        
         this.getContentPane().add(center);
         
         FileStatus.reset();
@@ -251,44 +283,6 @@ public class VenusUI extends JFrame {
         
         Globals.getSettings().updateCustomRenderColorsWithLookAndFeel();
         this.setVisible(true);
-    }
-
-    private JSplitPane getWorkArea() {
-        initRegistersPane();
-        initMainPane();
-        initMessagesPane();
-
-        JSplitPane horizonSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, mainPane, messagesPane);
-        horizonSplitter.setOneTouchExpandable(true);
-//        horizonSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
-
-        JSplitPane verticalSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, horizonSplitter, registersPane);
-        verticalSplitter.setOneTouchExpandable(true);
-//        verticalSplitter.setBackground(Globals.getSettings().getLightOffSetMainBackgroundColor());
-
-        registersPane.setMinimumSize(new Dimension());
-        mainPane.setPreferredSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8), (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.7)));
-        messagesPane.setMinimumSize(new Dimension());
-
-        return verticalSplitter;
-    }
-
-    private void initRegistersPane() {
-        registersTab = new RegistersWindow();
-        coprocessor1Tab = new Coprocessor1Window();
-        coprocessor0Tab = new Coprocessor0Window();
-        registersPane = new RegistersPane(mainUI, registersTab, coprocessor1Tab, coprocessor0Tab);
-    }
-
-    /**
-     * Must follow initRegistersPane()
-     */
-    private void initMainPane() {
-        mainPane = new MainPane(mainUI, editor, registersTab, coprocessor1Tab, coprocessor0Tab);
-    }
-
-    private void initMessagesPane() {
-        messagesPane = new MessagesPane();
     }
 
     /**

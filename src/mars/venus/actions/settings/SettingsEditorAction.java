@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -26,7 +27,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -41,7 +41,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.Caret;
 
-import com.formdev.flatlaf.demo.DemoPrefs;
 import com.formdev.flatlaf.demo.intellijthemes.IJThemesPanel;
 
 import mars.Globals;
@@ -181,17 +180,17 @@ public class SettingsEditorAction extends GuiAction {
             JPanel fontDialogPanel = super.buildDialogPanel();
             JPanel syntaxStylePanel = buildSyntaxStylePanel();
             JPanel otherSettingsPanel = buildOtherSettingsPanel();
-            JPanel themeSettingsPanel = buildThemeSettingsPanel();
+            JPanel themeSettingsPanel = new IJThemesPanel();
             
             fontDialogPanel.setBorder(BorderFactory.createTitledBorder("Editor Font"));
             syntaxStylePanel.setBorder(BorderFactory.createTitledBorder("Syntax Styling"));
             otherSettingsPanel.setBorder(BorderFactory.createTitledBorder("Other Editor Settings"));
             
-            
             dialog.add(fontDialogPanel, BorderLayout.WEST);
             dialog.add(themeSettingsPanel, BorderLayout.EAST);
             dialog.add(syntaxStylePanel, BorderLayout.CENTER);
             dialog.add(otherSettingsPanel, BorderLayout.SOUTH);
+            
             this.dialogPanel = dialog; /////4 Aug 2010
             this.syntaxStylePanel = syntaxStylePanel; /////4 Aug 2010
             this.otherSettingsPanel = otherSettingsPanel; /////4 Aug 2010
@@ -315,18 +314,6 @@ public class SettingsEditorAction extends GuiAction {
             popupGuidanceOptions[initialPopupGuidance].setSelected(true);
         }
         
-        private JPanel buildThemeSettingsPanel() {
-        	return new IJThemesPanel();
-        	
-//        	JPanel themeSettingsPanel = new JPanel();
-//        	themeSettingsPanel.setLayout(new BorderLayout());
-//        	
-//        	JScrollPane scrollPane = new JScrollPane();
-//        	
-//        	themeSettingsPanel.add(scrollPane, BorderLayout.CENTER);
-//        	return themeSettingsPanel;
-        }
-
         // Miscellaneous editor settings (cursor blinking, line highlighting, tab size, etc)
         private JPanel buildOtherSettingsPanel() {
             JPanel otherSettingsPanel = new JPanel();
@@ -505,6 +492,11 @@ public class SettingsEditorAction extends GuiAction {
                 buttonsPanel.add(italic[i]);
                 buttonsPanel.add(useDefault[i]);
             }
+            
+            //A panel just for layout organization
+            JPanel organizerPanel = new JPanel();
+            organizerPanel.setLayout(new BoxLayout(organizerPanel, BoxLayout.Y_AXIS));
+            
             JPanel instructions = new JPanel(new FlowLayout(FlowLayout.CENTER));
             // create deaf, dumb and blind checkbox, for illustration
             JCheckBox illustrate =
@@ -516,11 +508,22 @@ public class SettingsEditorAction extends GuiAction {
                         }
                     };
             illustrate.setSelected(true);
+            
+            JButton darkColoringButton = new JButton("Dark Mode Syntax Coloring");
+            darkColoringButton.addActionListener(new DarkSyntaxColoringActionListener());
+            
             instructions.add(illustrate);
             instructions.add(new JLabel("= use defaults (disables buttons)"));
+            
+            instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+            darkColoringButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+            
+            organizerPanel.add(instructions);
+            organizerPanel.add(darkColoringButton);
+            
             labelPreviewPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
             buttonsPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-            syntaxStylePanel.add(instructions, BorderLayout.NORTH);
+            syntaxStylePanel.add(organizerPanel, BorderLayout.NORTH);
             syntaxStylePanel.add(labelPreviewPanel, BorderLayout.WEST);
             syntaxStylePanel.add(buttonsPanel, BorderLayout.CENTER);
             return syntaxStylePanel;
@@ -569,6 +572,107 @@ public class SettingsEditorAction extends GuiAction {
             sample.setForeground(style.getColor());
         }
 
+        private class DarkSyntaxColoringActionListener implements ActionListener {
+        	private void setColor(int index, Color c) {
+        		JButton button = foregroundButtons[index];
+        		
+        		button.setBackground(c);
+                samples[index].setForeground(c);
+                
+	            currentStyles[index] = new SyntaxStyle(button.getBackground(),
+	                    italic[index].isSelected(), bold[index].isSelected());
+	            syntaxStylesAction = true;
+        	}
+        	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//This is a hack...
+				
+				///*****************
+				if(useDefault[0].isSelected())
+					useDefault[0].doClick();
+				
+				if(!italic[0].isSelected())
+					italic[0].doClick();
+				
+				if(bold[0].isSelected())
+					bold[0].doClick();
+				
+				setColor(0, new Color(182,203,11));
+				
+				///*****************
+				if(useDefault[1].isSelected())
+					useDefault[1].doClick();
+				
+				if(italic[1].isSelected())
+					italic[1].doClick();
+				
+				if(!bold[1].isSelected())
+					bold[1].doClick();
+				
+				setColor(1, new Color(255,198,0));
+				
+				///*****************
+				if(!useDefault[2].isSelected())
+					useDefault[2].doClick();
+				
+				///*****************
+				if(useDefault[3].isSelected())
+					useDefault[3].doClick();
+				
+				if(!italic[3].isSelected())
+					italic[3].doClick();
+				
+				if(bold[3].isSelected())
+					bold[3].doClick();
+				
+				setColor(3, new Color(231,82,66));
+				
+				///*****************
+				if(useDefault[4].isSelected())
+					useDefault[4].doClick();
+				
+				if(italic[4].isSelected())
+					italic[4].doClick();
+				
+				if(!bold[4].isSelected())
+					bold[4].doClick();
+				
+				setColor(4, new Color(0,163,255));
+				
+				///*****************
+				if(useDefault[5].isSelected())
+					useDefault[5].doClick();
+				
+				if(italic[5].isSelected())
+					italic[5].doClick();
+				
+				if(bold[5].isSelected())
+					bold[5].doClick();
+				
+				setColor(5, new Color(211,127,255));
+				
+				///*****************
+				if(useDefault[6].isSelected())
+					useDefault[6].doClick();
+				
+				if(italic[6].isSelected())
+					italic[6].doClick();
+				
+				if(bold[6].isSelected())
+					bold[6].doClick();
+				
+				setColor(6, new Color(244,190,0));
+				
+				///*****************
+				if(!useDefault[7].isSelected())
+					useDefault[7].doClick();
+				
+				///*****************
+				if(!useDefault[7].isSelected())
+					useDefault[7].doClick();
+			}
+        }
 
         ///////////////////////////////////////////////////////////////////////////
         // Toggle bold or italic style on preview button when B or I button clicked
@@ -614,7 +718,7 @@ public class SettingsEditorAction extends GuiAction {
 
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
-                Color newColor = JColorChooser.showDialog(null, "Set Text Color", button.getBackground());
+                Color newColor = JColorChooser.showDialog(editorDialog, "Set Text Color", button.getBackground());
                 if (newColor != null) {
                     button.setBackground(newColor);
                     samples[row].setForeground(newColor);

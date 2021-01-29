@@ -76,7 +76,7 @@ public class RegistersWindow extends JPanel implements Observer {
         table.getColumnModel().getColumn(NUMBER_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.RIGHT));
         table.getColumnModel().getColumn(VALUE_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.RIGHT));
         
-        table.setPreferredScrollableViewportSize(new Dimension(200, 700));
+//        table.setPreferredScrollableViewportSize(new Dimension(200, 700));
         
 //        table.setOpaque(true);
 //        table.setFillsViewportHeight(true);

@@ -79,8 +79,6 @@ public class EditTabbedPane extends JTabbedPane {
         this.mainPane = mainPane;
         this.editor.setEditTabbedPane(this);
         
-//        this.setUI(new TabbedPaneUIBackground(Globals.getSettings().getMainBackgroundColor()));
-        
         this.addChangeListener(
             new ChangeListener() {
                 public void stateChanged(ChangeEvent e) {

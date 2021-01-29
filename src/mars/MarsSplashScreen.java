@@ -62,6 +62,7 @@ public class MarsSplashScreen extends JWindow {
         int height = 215;
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screen = tk.getScreenSize();
+        
         int x = (screen.width - width) / 2;
         int y = (screen.height - height) / 2;
         setBounds(x, y, width, height);
