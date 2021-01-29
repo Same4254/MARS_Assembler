@@ -524,7 +524,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
     protected void paintLine(Graphics gfx, TokenMarker tokenMarker,
                              int line, int x) {//System.out.println("paintLine "+ (++count));
         Font defaultFont = getFont();
-        Color defaultColor = getForeground();
+        Color defaultColor = UIManager.getLookAndFeel().getDefaults().getColor("TextArea.foreground");
 
         currentLineIndex = line;
         int y = textArea.lineToY(line);

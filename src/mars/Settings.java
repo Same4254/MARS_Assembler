@@ -68,28 +68,24 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
 public class Settings extends Observable {
-	public static final HashMap<String, FlatLaf> nameToLookAndFeel = new HashMap<>(); 
-	
-	public static FlatLaf currentLookAndFeel;
-	
-	static {
-		nameToLookAndFeel.put("Dark", new FlatDarkLaf());
-	}
-	
-	public static void setLookAndFeel(String name) {
-		LookAndFeel laf = nameToLookAndFeel.get(name);
-		if(laf == null)
-			return;
-		
-		System.out.println("Here");
-		
-		try {
-            UIManager.setLookAndFeel(laf);
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-		
-		VenusUI ui = Globals.getGui();
+	/**
+	 * 	So, we've set a new look and feel. YAY!
+	 * 	However, we need to update the Global settings for the custom colors that MARS draws
+	 * 	For example, the colors for the alternating rows are custom, and do not use the standard UIManager
+	 * 		for the color. So this function will set the global MARS colors to the LookAndFeel colors
+	 * 
+	 *  This will also perform a hard reset on the UI. This is so that every frame gets the memo that we have changed the look and feel
+	 */
+	public void updateCustomRenderColorsWithLookAndFeel() {
+		//We are working *with* the graphic system in place, not against it
+    	setColorSettingByPosition(Settings.EVEN_ROW_BACKGROUND, (Color) UIManager.get("Table.background"));
+    	setColorSettingByPosition(Settings.EVEN_ROW_FOREGROUND, (Color) UIManager.get("Table.foreground"));
+    	
+    	setColorSettingByPosition(Settings.ODD_ROW_BACKGROUND, (Color) UIManager.get("Table.gridColor"));
+    	setColorSettingByPosition(Settings.ODD_ROW_FOREGROUND, (Color) UIManager.get("Table.foreground"));
+    	
+    	//Hard reset on the UI to update the look and feel
+    	VenusUI ui = Globals.getGui();
 		
 		SwingUtilities.updateComponentTreeUI(ui);
 		SwingUtilities.updateComponentTreeUI(ui.getEditor().getEditTabbedPane().getFileOpener().getFileChooser());

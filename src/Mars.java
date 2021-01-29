@@ -1,10 +1,9 @@
 import java.awt.Color;
-import java.awt.Insets;
 
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.demo.DemoPrefs;
 
 import mars.Globals;
 import mars.Settings;
@@ -41,18 +40,15 @@ public class Mars {
     public static void main(String[] args) {
     	Globals.initialize(true);
     	
+    	//Initialize to some state... The init functions below handle loading the previously selected theme
     	try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception e) {
         	e.printStackTrace();
         }
     	
-    	//We are working *with* the graphic system in place, not against it
-    	Globals.getSettings().setColorSettingByPosition(Settings.EVEN_ROW_BACKGROUND, (Color) UIManager.get("Table.background"));
-    	Globals.getSettings().setColorSettingByPosition(Settings.EVEN_ROW_FOREGROUND, (Color) UIManager.get("Table.foreground"));
-    	
-    	Globals.getSettings().setColorSettingByPosition(Settings.ODD_ROW_BACKGROUND, (Color) UIManager.get("Table.gridColor"));
-    	Globals.getSettings().setColorSettingByPosition(Settings.ODD_ROW_FOREGROUND, (Color) UIManager.get("Table.foreground"));
+    	DemoPrefs.init("mars");
+		DemoPrefs.initLaf(args);
     	
     	//These could work as the alternate row color
 //    	UIManager.put("Table.alternateRowColor", UIManager.get("ToolBar.background"));

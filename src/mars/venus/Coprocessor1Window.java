@@ -103,7 +103,7 @@ public class Coprocessor1Window extends JPanel implements ActionListener, Observ
         for (int i = 0; i < numFlags; i++) {
             conditionFlagCheckBox[i] = new JCheckBox(Integer.toString(i));
             conditionFlagCheckBox[i].addActionListener(this);
-            conditionFlagCheckBox[i].setBackground(Color.WHITE);
+//            conditionFlagCheckBox[i].setBackground(Color.WHITE);
             conditionFlagCheckBox[i].setToolTipText("checked == 1, unchecked == 0");
             checksPane.add(conditionFlagCheckBox[i]);
         }

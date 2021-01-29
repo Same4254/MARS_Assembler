@@ -1,19 +1,58 @@
 package mars.venus.actions.settings;
 
-import mars.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.KeyStroke;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.Caret;
+
+import com.formdev.flatlaf.demo.DemoPrefs;
+import com.formdev.flatlaf.demo.intellijthemes.IJThemesPanel;
+
+import mars.Globals;
+import mars.Settings;
 import mars.venus.AbstractFontSettingDialog;
 import mars.venus.Editor;
 import mars.venus.VenusUI;
 import mars.venus.actions.GuiAction;
-import mars.venus.editors.jeditsyntax.*;
-import mars.venus.editors.jeditsyntax.tokenmarker.*;
-
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.text.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
+import mars.venus.editors.jeditsyntax.SyntaxStyle;
+import mars.venus.editors.jeditsyntax.SyntaxUtilities;
+import mars.venus.editors.jeditsyntax.tokenmarker.MIPSTokenMarker;
 	
 	/*
 Copyright (c) 2003-2011,  Pete Sanderson and Kenneth Vollmar
@@ -138,13 +177,19 @@ public class SettingsEditorAction extends GuiAction {
         // build the dialog here
         protected JPanel buildDialogPanel() {
             JPanel dialog = new JPanel(new BorderLayout());
+            
             JPanel fontDialogPanel = super.buildDialogPanel();
             JPanel syntaxStylePanel = buildSyntaxStylePanel();
             JPanel otherSettingsPanel = buildOtherSettingsPanel();
+            JPanel themeSettingsPanel = buildThemeSettingsPanel();
+            
             fontDialogPanel.setBorder(BorderFactory.createTitledBorder("Editor Font"));
             syntaxStylePanel.setBorder(BorderFactory.createTitledBorder("Syntax Styling"));
             otherSettingsPanel.setBorder(BorderFactory.createTitledBorder("Other Editor Settings"));
+            
+            
             dialog.add(fontDialogPanel, BorderLayout.WEST);
+            dialog.add(themeSettingsPanel, BorderLayout.EAST);
             dialog.add(syntaxStylePanel, BorderLayout.CENTER);
             dialog.add(otherSettingsPanel, BorderLayout.SOUTH);
             this.dialogPanel = dialog; /////4 Aug 2010
@@ -268,6 +313,18 @@ public class SettingsEditorAction extends GuiAction {
             blinkRateSpinSelector.setValue(initialCaretBlinkRate);
             blinkCaret.setBlinkRate(initialCaretBlinkRate);
             popupGuidanceOptions[initialPopupGuidance].setSelected(true);
+        }
+        
+        private JPanel buildThemeSettingsPanel() {
+        	return new IJThemesPanel();
+        	
+//        	JPanel themeSettingsPanel = new JPanel();
+//        	themeSettingsPanel.setLayout(new BorderLayout());
+//        	
+//        	JScrollPane scrollPane = new JScrollPane();
+//        	
+//        	themeSettingsPanel.add(scrollPane, BorderLayout.CENTER);
+//        	return themeSettingsPanel;
         }
 
         // Miscellaneous editor settings (cursor blinking, line highlighting, tab size, etc)
@@ -409,11 +466,11 @@ public class SettingsEditorAction extends GuiAction {
                 if (labels[i] != null) {
                     syntaxStyleIndex[count] = i;
                     samples[count] = new JLabel();
-                    samples[count].setOpaque(true);
+                    samples[count].setOpaque(false);
                     samples[count].setHorizontalAlignment(SwingConstants.CENTER);
                     samples[count].setBorder(BorderFactory.createLineBorder(Color.black));
                     samples[count].setText(sampleText[i]);
-                    samples[count].setBackground(Color.WHITE);
+//                    samples[count].setBackground(Color.WHITE);
                     samples[count].setToolTipText(SAMPLE_TOOL_TIP_TEXT);
                     foregroundButtons[count] = new ColorSelectButton(); // defined in SettingsHighlightingAction
                     foregroundButtons[count].addActionListener(new ForegroundChanger(count));

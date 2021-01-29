@@ -248,6 +248,8 @@ public class VenusUI extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         this.pack();
+        
+        Globals.getSettings().updateCustomRenderColorsWithLookAndFeel();
         this.setVisible(true);
     }
 
