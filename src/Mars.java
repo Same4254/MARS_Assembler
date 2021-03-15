@@ -38,18 +38,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 public class Mars {
     public static void main(String[] args) {
-    	Globals.initialize(true);
-    	
-    	//Initialize to some state... The init functions below handle loading the previously selected theme
-    	try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-    	
-    	DemoPrefs.init("mars");
-		DemoPrefs.initLaf(args);
-    	
     	//These could work as the alternate row color
 //    	UIManager.put("Table.alternateRowColor", UIManager.get("ToolBar.background"));
 //    	UIManager.put("Table.alternateRowColor", UIManager.get("TabbedPane.light"));

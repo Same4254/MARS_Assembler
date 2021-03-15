@@ -4,6 +4,11 @@
   <artifactId>MARS_Assembler</artifactId>
   <version>4.5.1</version>
   <name>Mars_4.5.1</name>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
@@ -49,6 +54,12 @@
 			<groupId>com.miglayout</groupId>
 			<artifactId>miglayout-swing</artifactId>
 			<version>5.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>LATEST</version>
 		</dependency>
 		
   </dependencies>

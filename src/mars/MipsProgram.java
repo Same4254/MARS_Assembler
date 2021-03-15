@@ -202,8 +202,19 @@ public class MipsProgram {
      * @throws ProcessingException Will throw exception if there is any problem reading the file.
      */
     public void readSource(String file) throws ProcessingException {
-        this.filename = file;
         this.sourceList = new ArrayList<>();
+        readSourceAppend(file);
+    }
+    
+    /**
+     * Performs the same functionality as {@link readSource} except the source in the given file is appended to this program's source.
+     * Do NOT attempt to append after anything is tokenized.
+     * 
+     * @param file
+     * @throws ProcessingException
+     */
+    public void readSourceAppend(String file) throws ProcessingException {
+        this.filename = file;
         ErrorList errors = null;
         BufferedReader inputFile;
         String line;

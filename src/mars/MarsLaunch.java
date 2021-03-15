@@ -12,6 +12,7 @@ import java.util.*;
 import javax.swing.*;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.demo.DemoPrefs;
 
 /*
 Copyright (c) 2003-2012,  Pete Sanderson and Kenneth Vollmar
@@ -124,7 +125,18 @@ public class MarsLaunch {
     public MarsLaunch(String[] args) {
         boolean gui = (args.length == 0);
         Globals.initialize(gui);
+        
         if (gui) {
+        	//Initialize to some state... The init functions below handle loading the previously selected theme
+        	try {
+                UIManager.setLookAndFeel(new FlatDarkLaf());
+            } catch (Exception e) {
+            	e.printStackTrace();
+            }
+        	
+        	DemoPrefs.init("mars");
+    		DemoPrefs.initLaf(args);
+        	
             launchIDE();
         } else { // running from command line.
             // assure command mode works in headless environment (generates exception if not)
