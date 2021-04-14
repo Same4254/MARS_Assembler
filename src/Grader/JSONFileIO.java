@@ -6,14 +6,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 import org.json.JSONTokener;
 
 public class JSONFileIO {
-	public static void writeJSONObject(String filePath, JSONObject obj) {
+	public static void writeJSONArray(String filePath, JSONArray arr) {
+		writeJSONArray(new File(filePath), arr);
+	}
+	
+	public static void writeJSONArray(File file, JSONArray arr) {
 		try {
-			FileWriter writer = new FileWriter(filePath);
-			writer.write(obj.toString(4));
+			FileWriter writer = new FileWriter(file);
+			writer.write(arr.toString(4));
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
@@ -21,17 +25,16 @@ public class JSONFileIO {
 		}
 	}
 	
-	public static JSONObject readJSONObject(String filePath) {
-		File f = new File(filePath);
+	public static JSONArray readJSONArray(File file) {
 		FileReader fr = null;
 		try {
-			fr = new FileReader(f);
+			fr = new FileReader(file);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
 		JSONTokener tokener = new JSONTokener(fr);
-		JSONObject obj = new JSONObject(tokener);
+		JSONArray obj = new JSONArray(tokener);
 		
 		try {
 			fr.close();
@@ -40,5 +43,10 @@ public class JSONFileIO {
 		}
 		
 		return obj;
+	}
+	
+	public static JSONArray readJSONObject(String filePath) {
+		File file = new File(filePath);
+		return readJSONArray(file);
 	}
 }

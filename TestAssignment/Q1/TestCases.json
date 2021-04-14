@@ -1,0 +1,6 @@
+[{
+    "PointValue": 5,
+    "GeneratedSolutionRegisters": {},
+    "InputRegisters": {"$t0": 5},
+    "TrackedRegisters": ["$t0"]
+}]

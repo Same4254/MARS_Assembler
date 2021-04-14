@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import mars.ErrorList;
@@ -15,11 +17,12 @@ import mars.mips.hardware.RegisterFile;
 public class TestCase {
 	public static final String POINT_VALUE_JSON_KEY = "PointValue";
 	public static final String INPUT_REGISTERS_JSON_KEY = "InputRegisters";
-	public static final String SOLUTION_REGISTERS_JSON_KEY = "SolutionRegisters";
+	public static final String TRACKED_REGISTERS_JSON_KEY = "TrackedRegisters";
+	public static final String SOLUTION_REGISTERS_JSON_KEY = "GeneratedSolutionRegisters";
 	
 	//TODO Replace with JSONObjects?
 	
-	// When the program runs, initilize these registers to these values
+	// When the program runs, initialize these registers to these values
 	private HashMap<String, Integer> inputRegisterValues;
 	
 	// Write down what the value is for each *tracked* register generated from the solution code 
@@ -31,8 +34,11 @@ public class TestCase {
 	
 	private int pointValue;
 	
+	// Refrence to the collection of test cases that this belongs to
+	private TestCaseCollectionFile testCaseCollection;
+	
 	/**
-	 * Creates a test case that is effectivelly empty.
+	 * Creates a test case that is effectively empty.
 	 *  
 	 * What to do: 
 	 * 	- Populate the initial register values
@@ -55,9 +61,12 @@ public class TestCase {
 	 *  
 	 * @param jsonObject -> the JSONObject to read from
 	 */
-	public TestCase(JSONObject jsonObject) {
+	public TestCase(TestCaseCollectionFile testCaseCollection, JSONObject jsonObject) {
+		this.testCaseCollection = testCaseCollection;
+		
 		this.inputRegisterValues = new HashMap<String, Integer>();
 		this.solutionRegisterValues = new HashMap<String, Integer>();
+		this.trackedRegisters = new HashSet<String>();
 		
 		this.pointValue = jsonObject.getInt(POINT_VALUE_JSON_KEY);
 		
@@ -65,11 +74,13 @@ public class TestCase {
 		for(String key : inputRegistersObj.keySet())
 			inputRegisterValues.put(key, inputRegistersObj.getInt(key));
 		
+		JSONArray trackedRegisterArr = jsonObject.getJSONArray(TRACKED_REGISTERS_JSON_KEY);
+		for(int i = 0; i < trackedRegisterArr.length(); i++)
+			trackedRegisters.add(trackedRegisterArr.getString(i));
+		
 		JSONObject solutionRegisterObj = jsonObject.getJSONObject(SOLUTION_REGISTERS_JSON_KEY);
-		for(String key : solutionRegisterObj.keySet()) {
+		for(String key : solutionRegisterObj.keySet())
 			solutionRegisterValues.put(key, solutionRegisterObj.getInt(key));
-			trackedRegisters.add(key);
-		}
 	}
 	
 	/**
@@ -97,6 +108,12 @@ public class TestCase {
 			inputRegisters.put(e.getKey(), e.getValue());
 		
 		obj.put(INPUT_REGISTERS_JSON_KEY, inputRegisters);
+		
+		JSONArray trackedRegistersJSON = new JSONArray();
+		for(String s : trackedRegisters)
+			trackedRegistersJSON.put(s);
+		
+		obj.put(TRACKED_REGISTERS_JSON_KEY, trackedRegistersJSON);
 		
 		JSONObject registersToCheck = new JSONObject();
 		for(Entry<String, Integer> e : solutionRegisterValues.entrySet())
@@ -170,9 +187,23 @@ public class TestCase {
 		return pointValue;
 	}
 
-	public HashSet<String> getTrackedRegisters() { return trackedRegisters; }
+	public void setTrackedRegisters(HashSet<String> registersToTrack) {
+		if(!trackedRegisters.equals(registersToTrack)) {
+			trackedRegisters.clear();
+			for(String s : registersToTrack) {
+				trackedRegisters.add(s);
+			}
+			
+			solutionRegisterValues.clear();
+		}
+	}
+	
+	public boolean isRegisterTracked(String register) { return trackedRegisters.contains(register); }
+	
 	public HashMap<String, Integer> getInputRegisterValues() { return inputRegisterValues; }
 	
 	public int getPointValue() { return pointValue; }
 	public void setPointValue(int pointValue) { this.pointValue = pointValue; }
+	
+	public TestCaseCollectionFile getTestCaseCollection() { return testCaseCollection; }
 }
